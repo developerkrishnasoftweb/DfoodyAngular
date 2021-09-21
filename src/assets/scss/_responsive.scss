@@ -1,0 +1,824 @@
+/* Medium Layout: 1367px. */
+
+@media only screen and (min-width: 1200px) and (max-width: 1367px) {
+
+}
+
+/* Medium Layout: 1280px. */
+@media only screen and (max-width: 1199px) {
+
+}
+@media only screen and (min-width: 992px) {
+
+}
+@media only screen and (min-width: 1024px) {
+
+
+}
+
+
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .cart-c-box:before {
+        display: none;
+    }
+    .dfdV2 .dfoody-header-box .gmb-contact {
+        display: none;
+    }
+    
+    .dfdV2 .dfoody-header-box .gm-box .dfoody-menu-wrapper {
+        width: 88%;
+    }
+    .delicious-menu-area {
+        overflow: hidden;
+    }
+    .heroV1 {
+        overflow: hidden;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1200px) {
+
+}
+
+
+@media only screen and (max-width: 991px) {
+    .delicious-menu-area {
+        overflow: hidden;
+    }
+    .heroV2 img.hero-graphic-bg {
+        display: none;
+    }
+    .cart-c-box:before {
+        display: none;
+    }
+    ul.pagination li a {
+        font-size: 11px;
+        padding: 13px 0px;
+        min-height: 40px;
+        min-width: 40px;
+    }
+    .cart-area,
+    .checkout-area,
+    .shop-page-area,
+    .food-gallery-area,
+    .contact-area,
+    .about2-area,
+    .reservation-wrapper,
+    .foodmenu-page-wrapper,
+    .blog-page-area {
+        padding: 40px 0px;
+    }
+    .breadcrumb-area {
+        padding: 100px 0px 60px;
+    }
+    
+    .breadcrumb-box h3.page-title {
+        font-size: 24px;
+        line-height: 36px;
+    }
+    
+    ul.breadcrumb-list li, ul.breadcrumb-list li a {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .breadcrumb-area:after {
+        bottom: -1px;
+    }    
+    .about1-text p {
+        font-size: 14px;
+        line-height: 22px;
+        margin-bottom: 20px;
+    }
+    
+    .section-titleV2 h3 {
+        font-size: 28px;
+        line-height: 36px;
+    }
+    .dfdV2 .dfoody-header-box .gmb-contact {
+        display: none;
+    }
+    
+    .dfdV2 .dfoody-header-box .gm-box .dfoody-menu-wrapper {
+        width: 88%;
+    }
+    .dfoody-header-box .gm-box .mt-icons ul.mti-list li a, 
+    .dfoody-header-box .gm-box .mt-icons ul.mti-list li > span {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .dfoody-header-box .gm-box .mt-icons ul.mti-list li a i:before, 
+    .dfoody-header-box .gm-box .mt-icons ul.mti-list li > span i:before {
+        font-size: inherit;
+        padding: 0px;
+        margin: 0px;
+        display: block;
+    }
+
+    .dfoody-header-box .gm-box .mt-icons ul.mti-list li a i, 
+    .dfoody-header-box .gm-box .mt-icons ul.mti-list li > span i {
+        width: 24px !important;
+        height: 24px !important;
+        display: block;
+    }
+
+    .dfoody-header-box .gm-box .shopping-cart .shopping-cart-items li span.cartProduct-remove i {
+        height: 20px !important;
+        width: 20px !important;
+        top: 3px;
+        position: relative;
+    }
+
+
+    .dm-food-tab .dft-nav nav .nav a:after {
+        display: none;
+    }
+    
+    .dm-food-tab .dft-nav nav .nav a {
+        margin: 5px auto;
+    }
+    .about-area {
+        padding-top: 40px;
+    }
+    
+    .about-area img.about-graphic {
+        display: none;
+    }
+    .dft-single-list .dftsl-text h4 {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    
+    .dft-single-list .dftsl-text p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    .dft-single-list .dfsl-price h3 {
+        font-size: 22px;
+    }
+    .blog-area {
+        padding: 40px 0px 40px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .faq-box .card .card-header h5 {
+        font-size: 16px;
+        line-height: 22px;
+        padding: 15px;
+        padding-right: 40px;
+    }
+    
+    .faq-box .card .card-body {
+        padding: 8px 15px 22px;
+    }
+    
+    .faq-box .card .card-body p {
+        font-size: 13px;
+        line-height: 20px;
+    }
+    
+    .faq-box .card {
+        margin-bottom: 25px;
+    }
+    .single-food-box .sbf-info h4 {
+        font-size: 22px;
+        line-height: 30px;
+    }
+    
+    .single-food-box .sbf-info {
+        padding: 15px;
+    }
+    
+    .single-food-box ul.sbfi-ratings li i {
+        font-size: 20px;
+    }
+    
+    .single-food-box ul.sbfi-ratings {
+        margin: 10px auto;
+    }
+    
+    .single-food-box .sbf-info p.price {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    ul.dfoody-menu li a {
+        font-size: 12px;
+        padding: 11px 12px;
+    }
+    .single-blogV1 .sb-text h4 {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    
+    .single-blogV1 .sb-text p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    a.read-more-btn-1 {
+        font-size: 12px;
+    }
+    
+    .single-blogV1 ul.sb-meta li, .single-blogV1 ul.sb-meta li a {
+        font-size: 10px;
+        line-height: 14px;
+    }
+    ul.fw-instagram li {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* Tablet Layout: 768px. */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .df-widget h4 {
+        font-size: 20px;
+        line-height: 24px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    
+    ul.df-cat-list li a {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    
+    ul.df-cat-list li {
+        margin-bottom: 10px;
+    }
+    
+    .single-rp .dfpp-text h5 a {
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .section-titleV1 h3 {
+        font-size: 30px;
+        line-height: 36px;
+    }
+    
+    .section-titleV1 p.sub-title {
+        font-size: 14px;
+        line-height: 20px;
+        margin: 10px auto 5px;
+    }
+    .testimonial-area .section-titleV1 {
+        margin-top: 0px;
+    }
+    
+    .single-testimonial .st-text p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    .hero-area .hero-content .hero-text h2 {
+        font-size: 40px;
+        line-height: 48px;
+        margin-bottom: 15px;
+    }
+    
+    .hero-area .hero-content .hero-text h6 {
+        font-size: 13px;
+    }
+    
+    .hero-area .hero-content .hero-text p {
+        font-size: 14px;
+        line-height: 22px;
+        margin-bottom: 20px;
+    }
+    
+    a.btn-style-a {
+        font-size: 12px;
+        padding: 12px 30px;
+    }
+    
+}
+
+
+/* Mobile Layout: 320px. */
+
+@media only screen and (max-width: 991px) {
+    label.dfoodyMenu-btn {
+        height: 32px;
+        width: 34px;
+        margin: 7px auto 3px;
+        margin-right: 10px;
+    }
+    .dfoodyMenu-btn .dfoodyMenu-btn-icon {
+        width: 18px;
+    }
+    
+    .dfoodyMenu-btn-icon:before,
+    .dfoodyMenu-btn-icon:after {
+        width: 18px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    ul.dfoody-menu li a {
+        color: #fff;
+        &.btn-style-a{
+            color: $primary2Color;
+            &:hover{
+                color: $primaryColor !important;
+            }
+        }
+        &.btn-style-b{
+            color: $primary2Color;
+        }
+    }
+    ul.dfoody-menu li a:hover {
+        color: #000 !important;
+    }
+    ul.dfoody-menu li ul {
+        border-radius: 0px;
+        box-shadow: none;
+    }
+    .testimonial2-area {
+        padding: 40px 0px;
+    }
+    .csa-logo {
+        margin-bottom: 20px;
+    }
+    
+    .csa-text h3 {
+        font-size: 36px;
+        line-height: 44px;
+        margin-bottom: 12px;
+    }
+    
+    .csa-text p {
+        font-size: 14px;
+        line-height: 22px;
+        margin: 12px auto;
+    }
+    
+    .single-countdown {min-width: 24%;}
+    
+    .single-countdown>div {
+        font-size: 44px;
+        line-height: 30px;
+    }
+    
+    .single-countdown #clabel {
+        font-size: 14px;
+        margin: 0px;
+        line-height: 16px;
+    }
+    .error-page-area {
+        padding: 60px 0px 40px;
+    }
+    
+    .error-wrapper .ew-text h3 {
+        font-size: 30px;
+        line-height: 40px;
+    }
+    
+    .error-wrapper .ew-img {
+        margin-bottom: 30px;
+    }
+    table.cart-table tr th {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    table.cart-table tr td p {
+        font-size: 12px;
+        line-height: 14px;
+    }
+    
+    .cart-cuopon-box input[type="text"] {
+        margin-bottom: 15px;
+    }
+    
+    
+    .cart-c-box .ccbt {
+        max-width: 510px;
+        overflow-y: scroll;
+        width: 100%;
+    }
+    table.cart-table tr td {
+        min-width: 80px;
+    }
+
+
+
+    .single-food-gallery {
+        max-width: 350px;
+        margin: 0px auto 30px;
+    }
+    .single-comment .sc-text {
+        padding: 25px;
+    }
+    
+    .single-comment .sc-avatar {
+        display: none;
+    }
+    
+    .single-comment.sc-subcomment .sc-text {
+        padding-left: 50px;
+    }
+    
+    .sb-comment-form {
+        margin-bottom: 40px;
+    }
+    .blog-sidebar {
+        border: 1px solid #212121;
+        padding-top: 40px;
+        border-radius: 5px;
+        max-width: 350px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    .pagination-area {
+        margin-top: 0px;
+        margin-bottom: 60px;
+        padding-top: 0px;
+    }
+    .dft-content .dft-menus {
+        margin-top: 0px;
+        padding: 0px !important;
+    }
+    .ipHeader ul.dfoody-menu li a {
+        color: #000;
+    }
+    .footer-widget-area {
+        padding: 60px 0px 30px;
+    }
+    .about2-img:before {
+        display: none;
+    }
+    
+    .about2-img:after {
+        display: none;
+    }
+    
+    .about2-img {}
+    
+    .dmftV2 .dft-content .dft-img:before {
+        display: none;
+    }
+    
+    .dmftV2 .dft-content .dft-img:after {
+        display: none;
+    }
+    
+    .bfs-btn {
+        font-size: 14px;
+        padding: 12px 25px;
+        margin: 0 auto;
+    }
+    
+    .booking-form .bform {
+        text-align: center;
+    }
+    .testimonial2-img {
+        margin: 0 auto;
+    }
+    #dfoodyMenu {
+        width: 100%;
+        position: fixed;
+        top: 75px;
+        z-index: 999;
+        background-color: #f7ca3e;
+        -webkit-box-shadow: 0px 13px 35px -12px rgba(35, 35, 35, 0.15);
+        -moz-box-shadow: 0px 13px 35px -12px rgba(35, 35, 35, 0.15);
+        box-shadow: 0px 13px 35px -12px rgba(35, 35, 35, 0.15);
+        padding: 15px;
+    }
+    ul.dfoody-menu li ul {
+        background-color: #f7ca3e;
+    }
+    .dfdV2 .dfoody-header-box {
+        padding: 10px 0px;
+    }
+    .f-widget {
+        text-align: center;
+    }
+    
+    .footer-social-widget {
+        text-align: center;
+    }
+    
+    .f-widget .fw-contact {max-width: 260px;text-align: center;margin-left: auto;margin-right: auto;}
+    
+    .f-widget .fw-contact a,.f-widget .fw-contact p {
+        display: inline-block;
+    }
+    
+    .f-widget h4 {
+        margin-top: 40px;
+        margin-bottom: 15px;
+    }
+    
+    .f-widget.f-instawiget {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .testimonial-img {
+        margin: 0 auto;
+    }
+    .hero-area .hero-content .hero-text {
+        margin: 40px auto;
+    }
+    .dfoody-header-box .gm-box {
+        padding-right: 0px;
+    }
+    .dft-img {
+        width: 100%;
+    }
+    .dfoody-top-header {
+        display: none;
+    }
+    
+    
+    .dfoody-header-box .logo-wrapper img {
+        margin: 0px auto;
+        width: 120px;
+        max-width: 120px;
+    }
+    
+    .dfoody-header-box .logo-wrapper a {
+        display: block;
+    }
+    
+    .dfoody-header-box {
+    }
+    
+    .dfoody-header-box .gm-box .mt-icons {
+        margin: 5px auto 0px;
+    }
+    
+    .hero-area {
+        padding: 75px 0px;
+    }
+    a.btn-style-b,
+    a.btn-style-a {
+        font-size: 12px;
+        padding: 12px 30px;
+    }
+
+
+    .hero-area .hero-content .hero-text {
+        text-align: center;
+    }
+    
+    .hero-area .hero-content .hero-text h2 {
+        font-size: 48px;
+        line-height: 60px;
+        margin-bottom: 15px;
+    }
+    
+    .hero-area 
+     .hero-content .hero-text p {
+        margin-bottom: 20px;
+    }
+    
+    .hero-area .hero-content .hero-img {
+        text-align: center;
+        max-width: 400px;
+        margin: 0px auto;
+    }
+
+
+    .heroV1 .hero-content .hero-img {
+        position: absolute;
+        top: -350px;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        max-width: 100%;
+        height: 350px;
+    }
+    
+    .heroV1 .hero-content .hero-img img {
+        height: 100%;
+        width: auto;
+        opacity: .25;
+    }
+    
+}
+
+
+/* Wide Mobile Layout: 480px. */
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+    
+}
+@media only screen and (max-width: 480px) {
+    .hSearchBox {
+        padding: 20px;
+    }
+    
+    .hSearchBox .search-o-group input {
+        width: 210px;
+        font-size: 12px;
+        height: 40px;
+    }
+    
+    .hSearchBox .search-o-group button {
+        height: 40px;
+        font-size: 18px;
+        width: 50px;
+    }
+    label.dfoodyMenu-btn {
+        margin-right: 0px;
+    }
+    
+    .dfoody-header-box .gm-box .mt-icons ul.mti-list li a, 
+    .dfoody-header-box .gm-box .mt-icons ul.mti-list li span.searchIcon {
+        margin-left: -20px;
+    }
+    .csa-nl input[type="submit"] {
+        font-size: 14px;
+        width: 120px;
+    }
+    
+    .csa-nl input {
+        height: 45px;
+        font-size: 14px;
+    }
+    
+    .csa-social ul.footer-social li a {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+        padding-top: 11px;
+    }
+    
+    .single-countdown {
+        min-width: 24%;
+        width: 24%;
+        padding: 15px;
+    }
+    
+    .single-countdown>div {
+        font-size: 26px;
+        line-height: 10px;
+    }
+    
+    .single-countdown #clabel {
+        font-size: 10px;
+        line-height: 14px;
+        marging-top: -10px;
+    }
+    
+    ul.cdown-list li:after {
+        font-size: 36px;
+        right: -7px;
+        top: 5px;
+    }
+    .faq-box .card .card-header h5 {
+        font-size: 16px;
+        line-height: 22px;
+        padding: 15px;
+        padding-right: 40px;
+    }
+    
+    .faq-box .card .card-body {
+        padding: 8px 15px 22px;
+    }
+    
+    .faq-box .card .card-body p {
+        font-size: 13px;
+        line-height: 20px;
+    }
+    
+    .faq-box .card {
+        margin-bottom: 25px;
+    }
+    .cart-cuopon-box input.bfs-btn {
+        margin-left: -0px;
+    }
+    
+    .cart-cuopon-box input[type="text"] {
+        width: 100%;
+    }
+    .single-food-box .sbf-info h4 {
+        font-size: 22px;
+        line-height: 30px;
+    }
+    
+    .single-food-box .sbf-info {
+        padding: 15px;
+    }
+    
+    .single-food-box ul.sbfi-ratings li i {
+        font-size: 20px;
+    }
+    
+    .single-food-box ul.sbfi-ratings {
+        margin: 10px auto;
+    }
+    
+    .single-food-box .sbf-info p.price {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    ul.pagination {
+        display: block;
+    }
+    ul.pagination li:first-child a, 
+    ul.pagination li:last-child a {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    
+    ul.pagination li a {
+        padding: 10px 0px;
+        min-width: 30px;
+        min-height: 30px;
+        margin: 3px 0px;
+    }    
+    .single-blogV1 .sb-text h4 {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    
+    .single-blogV1 .sb-text p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    a.read-more-btn-1 {
+        font-size: 12px;
+    }
+    
+    .single-blogV1 ul.sb-meta li, .single-blogV1 ul.sb-meta li a {
+        font-size: 10px;
+        line-height: 14px;
+    }
+
+
+    .testimonial-area .section-titleV1 {
+        margin-top: 0px;
+    }
+    
+    .single-testimonial .st-text p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .section-titleV1 h3 {
+        font-size: 30px;
+        line-height: 36px;
+    }
+    
+    .section-titleV1 p.sub-title {
+        font-size: 14px;
+        line-height: 20px;
+        margin: 10px auto 5px;
+    }
+    .dft-single-list .dftsl-text h4 {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    
+    .dft-single-list .dftsl-text p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    .dft-single-list .dfsl-price h3 {
+        font-size: 22px;
+    }
+    .hero-area .hero-content .hero-text h2 {
+        font-size: 30px;
+        line-height: 40px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    
+    .hero-area .hero-content .hero-text h6 {
+        font-size: 13px;
+    }
+    
+    .heroV1 .hero-content .hero-text p {
+        font-size: 14px;
+        line-height: 22px;
+        margin-bottom: 20px;
+    }
+    a.btn-style-b,
+    a.btn-style-a {
+        font-size: 12px;
+        padding: 12px 30px;
+    }
+}
+
+
+@media only screen and (max-width: 359px) {
+    .shopping-cart {
+        width: 290px;
+    }
+
+}
+/* Wide Mobile Layout: 480px. */
+
+@media only screen and (min-width: 240px) and (max-width: 480px) {
+    
+}

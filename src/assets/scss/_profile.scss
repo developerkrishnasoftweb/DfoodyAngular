@@ -1,0 +1,196 @@
+.profile-tab{
+    .tab-bar {
+        background: #E8E8E8;
+        box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.2);
+        .nav{
+            .nav-item{
+                .nav-link {
+                    padding: 30px 20px;
+                    position: relative;
+                    color: rgba(53, 53, 53, 0.5);
+                    &.active {
+                        background: transparent;
+                        color: #353535;
+                        &:after{
+                            content: "";
+                            display: block;
+                            width: 100%;
+                            height: 6px;
+                            background: #353535;
+                            border-radius: 5px 5px 0 0;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .tab-pane{
+        position: relative;
+        padding-top: 50px;
+        &:before {
+            content: "";
+            width: 100%;
+            height: 180px;
+            background: #F7C639;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        &:first-child{
+            &:before{
+                display: none;
+            }
+        }
+    }
+}
+
+.profile-details {
+    margin-bottom: 30px;
+    .profile-img {
+        width: 130px;
+        height: 130px;
+        margin-right: 20px;
+        img {
+            border-radius: 100%;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .profile-name {
+        font-size: 26px;
+        color: #000;
+        font-weight: 600;
+        font-family: "Oswald",sans-serif;
+        margin-bottom: 10px;
+    }
+    .profile-email {
+        font-size: 18px;
+        font-weight: 400;
+    }
+}
+
+.profile-form{
+    .form-title {
+        font-size: 26px;
+        color: #F7C639;
+        margin-bottom: 20px;
+    }
+}
+
+.body-box{
+    background: #ffffff;
+    position: relative;
+    box-shadow: 0px 10px 15px rgba(120, 120, 120, 0.030);
+    z-index: 9;
+    .wallet-details {
+        padding: 40px 30px;
+        border-bottom: 2px solid rgba(0,0,0,0.5);
+        display: flex;
+        align-items: center;
+        .wallet-icon {
+            width: 65px;
+            height: 65px;
+            border: 1px solid #000000;
+            border-radius: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+        .wallet-total {
+            font-size: 20px;
+            font-weight: 700;
+            color: #000000;
+            font-family: "Oswald",sans-serif;
+            margin-bottom: 0;
+        }
+    }
+    .wallet-body {
+        padding: 30px;
+        form {
+            margin-bottom: 30px;
+        }
+    }
+    .wallet-table{
+        table.table{
+            thead{
+                th {
+                    border-bottom: 1px solid #e9e6e6;
+                    border-top: 0;
+                    font-weight: 500;
+                    color: #353535;
+                    padding: 15px 10px;
+                }
+            }
+            tr{
+                td {
+                    vertical-align: middle;
+                    color: #353535;
+                    font-weight: 500;
+                    padding: 20px 0;
+                    border-bottom: 1px solid #e9e6e6;
+                    h4.h4 {
+                        font-weight: 500;
+                        margin-bottom: 10px;
+                        font-size: 18px;
+                    }
+                }
+                &:last-child{
+                    td{
+                        border-bottom: 0;
+                    }
+                }
+            }
+            .wallet-details {
+                padding: 0;
+                border: 0;
+            }
+        }
+    }
+    .order-body {
+        padding: 40px 30px;
+        h5 {
+            font-size: 16px;
+            color: #353535;
+        }
+        .order-box {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            .order-thumb {
+                max-width: 200px;
+                margin-right: 20px;
+            }
+            .title {
+                font-size: 16px;
+                color: #353535;
+                font-weight: 500;
+                margin-bottom: 5px;
+            }
+            .des {
+                margin-bottom: 5px;
+            }
+            a {
+                text-transform: uppercase;
+            }
+        }
+        .order-bottom-box{
+            a {
+                padding-left: 60px;
+                padding-right: 60px;
+                &.gray {
+                    border-color: #999999;
+                    color: #999999;
+                    &:hover{
+                        background: #000000;
+                        border-color: #000000;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}

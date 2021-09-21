@@ -1,0 +1,567 @@
+/*----------------------------------------*/
+/*  Header Style
+/*----------------------------------------*/
+
+@media (min-width: 576px){
+  .container {
+      max-width: 650px;
+  }
+}
+
+@media (min-width: 768px){
+  .container {
+    max-width: 990px;
+  }
+}
+
+@media (min-width: 1200px){
+  .container {
+      max-width: 1140px;
+  }
+}
+
+.dfoody-header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transition: .5s ease;
+    z-index: 99;
+    a.btn-style-a,
+    a.btn-style-b{
+      padding: 12px 30px;
+      @media(max-width: 991px){
+        font-size: 14px;
+        padding: 10px 25px;
+      }
+    }
+}
+.dfoody-header.navbar-fixed-top {
+  background-color: $primaryColor;
+}
+
+// Top Bar Style
+.dfoody-top-header {
+  position: relative;
+  padding: 10px 0px;
+  display: none;
+  .gth-content {
+    position: relative;
+    i {
+      margin-right: 5px;
+      color: $elementsColorIII;
+      font-size: 16px;
+    }
+    p {
+      font-size: 14px;
+      letter-spacing: 0px;
+      line-height: 22px;
+      color: #868686;
+      font-weight: 400;
+      a {
+        font-size: 14px;
+        letter-spacing: 0px;
+        line-height: 22px;
+        color: $elementsColorIII;
+        font-weight: 500;
+      }
+    }
+  }
+  .gth-left {
+    text-align: left;
+  }
+  .gth-right {
+    text-align: right;
+    p {
+      color: $elementsColorIII;
+    }
+    
+  }
+}
+
+
+// Main Header Style
+.dfoody-header-box {
+  position: relative;
+  padding: 10px 0px 10px;
+  .logo-wrapper {
+    position: relative;
+    a {
+      position: relative;
+    }
+  }
+  .gm-box {
+    .dfoody-menu-wrapper {
+      width: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .mt-icons {
+      position: relative;
+      // width: 12%;
+      display: flex;
+      // float: right;
+      ul.mti-list {
+        position: relative;
+        padding: 0px;
+        list-style-type: none;
+        min-height: 40px;
+        width: 100%;
+        li {
+          width: 50%;
+          display: inline-block;
+          float: left;
+          text-align: right;
+          position: relative;
+        }
+        li a,
+        li>span {
+            position: relative;
+            display: inline-block;
+            font-size: 24px;
+            padding: 10px 0px;
+            margin: 0 auto;
+            color: #424242;
+            letter-spacing: 0px;
+            cursor: pointer;
+          
+        }
+      }
+    }
+    
+  }
+}
+
+
+.gm-box {
+  position: relative;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.dfoody-menu-wrapper {
+  position: relative;
+  text-align: right;
+  ul.dfoody-menu {
+    position: relative;
+  }
+  
+}
+
+
+.dfdV2 {
+  .dfoody-header-box {
+    padding: 30px 0px;
+    .gmb-contact {
+      position: relative;
+      display: inline-block;
+      width: 20%;
+      float: left;
+      margin: 10px auto;
+      p {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        color: $quaternaryColor;
+        a {
+          color: #f7c538;
+          font-size: 14px;
+          display: inline-block;
+          line-height: 22px;
+        }
+      }
+    
+    }
+    .gm-box {
+      .dfoody-menu-wrapper {
+        width: 68%;
+      }
+    }
+  }
+
+}
+
+
+.hSearchBox {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background-color: $primaryColor;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 4px 3px rgba(0, 0, 0, 0.25);
+  .search-o-group {
+    position: relative;
+    input {
+      font-size: 14px;
+      letter-spacing: 0px;
+      height: 50px;
+      width: 320px;
+      padding: 0px 15px;
+      border: 1px solid #868686;
+    }
+    button {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 50px;
+      width: 60px;
+      background-color: $primary2Color;
+      color: $primaryColor;
+      font-size: 22px;
+      cursor: pointer;
+      border: 1px solid $primary2Color;
+      transition: .5s ease;
+      &:hover {
+        background-color: $elementsColor;
+        border-color: $elementsColor;
+      }
+    }
+  }
+}
+
+
+// .user-dpandel {
+//   display: none;
+// }
+
+.hSearchBox.active {
+  display: block;
+}
+.hSearchBox.active.hide {
+  display: none;
+}
+// .user-dpandel.active {
+//   display: block;
+// }
+
+
+// Dfoody Menu Style Only
+
+
+ul.dfoody-menu {
+  position: relative;
+  li {
+    position: relative;
+    a {
+      padding: 11px 15px;
+      position: relative;
+      display: block;
+      font-size: 14px;
+      letter-spacing: 0px;
+      color: #212121;
+      &:hover {
+        color: #85b72f;
+      }
+    }
+    ul {
+      padding: 10px;
+      background-color: $primaryColor;
+      border-radius: 20px;
+      box-shadow: 0 4px 3px rgba(0, 0, 0, 0.25);
+      li {
+        position: relative;
+        a {
+          min-width: 175px;
+          &:hover {
+            padding-left: 28px;
+          }
+        }
+        
+      }
+    }
+  }
+}
+
+.dfdV2 {
+  ul.dfoody-menu {
+    li {
+      a{
+        &:hover {
+          color: $elementsColor;
+        }
+      }
+    }
+  }
+}
+
+.ipHeader {
+  ul.dfoody-menu {
+    li {
+      a {
+        color: $primaryColor;
+      }
+      ul {
+        li {
+          a {
+            color: $quaternaryColor;
+          }
+        }
+      }
+    }
+  }
+  .dfoody-header-box {
+    .gmb-contact {
+      p {
+        color: $primaryColor;
+      }
+    }
+    .gm-box {
+      .mt-icons {
+        ul.mti-list {
+          li a, 
+          li > span {
+            color: $primaryColor;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Cart Box Style
+
+#addtocart {
+    width: 250px;
+}
+  
+.badge {
+  background-color: #f00;
+  border-radius: 10px;
+  color: $primaryColor;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1;
+  padding: 3px 7px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+  
+.shopping-cart {
+  background: $primaryColor;
+  width: 320px;
+  position: absolute;
+  top: 30px;
+  right: -10px;
+  border-radius: 3px;
+  padding: 20px;
+  overflow: hidden;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  opacity: 0;
+  -webkit-transform-origin: right top 0;
+  -webkit-transform: scale(0);
+  transform-origin: right top 0;
+  transform: scale(0);
+  border-radius: 5px;
+  box-shadow: 0 4px 3px rgba(0, 0, 0, 0.25);
+}
+.shopping-cart.active {
+  opacity: 1;
+  -webkit-transform-origin: right top 0;
+  -webkit-transform: scale(1);
+  transform-origin: right top 0;
+  transform: scale(1);
+}
+.shopping-cart .shopping-cart-header {
+  border-bottom: 1px solid #E8E8E8;
+  padding-bottom: 15px;
+}
+  // .shopping-cart .shopping-cart-header .shopping-cart-total {
+  //   float: right;
+  // }
+.shopping-cart .shopping-cart-items {
+  padding-top: 20px;
+}
+
+.shopping-cart .shopping-cart-items img {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+  
+.shopping-cart:after {
+  bottom: 100%;
+  left: 89%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: #fff;
+  border-width: 8px;
+  margin-left: -8px;
+}
+  
+.cart-icon {
+  color: #515783;
+  font-size: 24px;
+  margin-right: 7px;
+  float: left;
+}
+
+.shopping-cart .shopping-cart-header {
+  position: relative;
+  width: 100%;
+  text-align: left;
+}
+.shopping-cart .shopping-cart-header i {
+  margin-right: 5px;
+}
+
+.shopping-cart .shopping-cart-header span.badge {
+  letter-spacing: 0px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  position: relative;
+  top: -2px;
+  right: 0;
+}
+
+.shopping-cart .shopping-cart-header .shopping-cart-total {
+  font-size: 14px;
+  letter-spacing: 0px;
+  color: $primary2Color;
+  line-height: 20px;
+  font-weight: 400;
+}
+.shopping-cart ul.shopping-cart-items {
+  position: relative;
+  padding: 15px 0px;
+  list-style-type: none;
+}
+
+
+
+.dfoody-header-box .shopping-cart .shopping-cart-items li span {
+  cursor: auto !important;
+}
+
+
+.shopping-cart {
+  ul.shopping-cart-items {
+    li {
+      margin-bottom: 18px;
+      display: block !important;
+      width: 100% !important;
+      padding-left: 80px;
+      float: unset !important;
+      text-align: left !important;
+      span {
+        font-size: 14px !important;
+        line-height: 20px !important;
+        display: block !important;
+        padding: 0px !important;
+        color: $primary2Color !important;
+      }
+      span.item-name {
+        font-size: 16px !important;
+        font-weight: 600;
+        color: $primary2Color !important;
+      }
+      span.item-price {
+        margin: 2px auto !important;
+        color: $primary2Color !important;
+      }
+      
+    }
+  }
+  a.button {
+    font-size: 14px !important;
+    line-height: 22px;
+    background-color: $primary2Color;
+    color: $primaryColor !important;
+    padding: 8px 16px !important;
+    border-radius: 5px;
+    &:hover {
+      background-color: $elementsColor;
+    }
+  }
+
+  .shopping-cart-items {
+    li {
+      span.cartProduct-remove {
+        position: absolute !important;
+        top: calc(50% - 10px);
+        right: 0;
+        background-color: #000;
+        color: $primaryColor!important;
+        height: 20px;
+        width: 20px;
+        text-align: center;
+        border-radius: 5px;
+        cursor: pointer !important;
+        &:hover {
+          background-color: $elementsColor;
+        }
+      }
+    }
+  }
+}
+
+.dfoody-header-box {
+  .gm-box {
+    .mt-icons {
+      ul.mti-list {
+        li span#cart span.badge {
+          background-color: $elementsColorIII;
+          position: absolute;
+          right: -12px;
+          top: -5px;
+          font-size: 11px;
+          font-weight: 400;
+          padding: 6px 0px;
+          width: 22px;
+          height: 22px;
+          text-align: center;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+}
+
+
+.ipHeader.navbar-fixed-top {
+  ul.dfoody-menu {
+    li {
+      a {
+        color: $tertiaryColor;
+      }
+    }
+  }
+}
+
+.ipHeader.navbar-fixed-top {
+  .dfoody-header-box {
+    .gm-box {
+      .mt-icons {
+        ul.mti-list {
+          li a, 
+          li > span {
+            color: $tertiaryColor;
+          }
+        }
+      }
+    }
+  }
+}
+/*----------------------------------------*/
+/*  Header Style END
+/*----------------------------------------*/
+
+
+

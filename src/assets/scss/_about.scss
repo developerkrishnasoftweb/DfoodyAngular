@@ -1,0 +1,518 @@
+/*----------------------------------------*/
+/*  About Style
+/*----------------------------------------*/
+.about-area {
+    position: relative;
+    padding-top: 120px;
+    z-index: 1;
+    overflow: hidden;
+    img.about-graphic {
+        position: absolute;
+        top: 260px;
+        right: 0;
+        height: 400px;
+        z-index: -1;
+    }
+}
+.about1-img {
+    position: relative;
+    &::after{
+        position: absolute;
+        content: '';
+        height: 100%;
+        width: 100%;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        background-image: url('../img/bg/home-about-img-frame.png');
+        background-size: 100% 100%;
+        
+    }
+}
+
+.about1-text {
+    position: relative;
+    .section-titleV1 {
+        text-align: left;
+        p {
+            margin-bottom: 0px;
+        }
+    }
+    
+    p {
+        margin-bottom: 30px;
+    }
+}
+
+/*----------------------------------------*/
+/*  About Style END
+/*----------------------------------------*/
+
+/*----------------------------------------*/
+/*  About Style 2
+/*----------------------------------------*/
+
+.about2-area {
+    padding-bottom: 80px;
+}
+.about2-img {
+    position: relative;
+    z-index: 1;
+    &:before {
+        position: absolute;
+        content: '';
+        width: 300px;
+        height: 360px;
+        top: -45px;
+        left: -60px;
+        border-radius: 30px;
+        background-color: #fff;
+        box-shadow: 7.602px 24.864px 64.4px 5.6px rgba(232, 235, 234, 0.91);
+        z-index: -1;
+    }
+    &:after {
+        position: absolute;
+        content: '';
+        border-radius: 50%;
+        bottom: -50px;
+        right: 105px;
+        background-color: $elementsColor;
+        opacity: 0.4;
+        box-shadow: 7.602px 24.864px 64.4px 5.6px rgba(232, 235, 234, 0.91);
+        width: 145px;
+        height: 145px;
+        z-index: -1;
+    }
+    img {
+        border-radius: 25px;
+    }
+    
+}
+
+.a2text {
+    .section-titleV2 {
+        text-align: left;
+    }
+}
+
+
+/*----------------------------------------*/
+/*  About Style 2 END
+/*----------------------------------------*/
+
+
+/*----------------------------------------*/
+/*  About Page Area Style
+/*----------------------------------------*/
+.breadcrumb-area {
+    position: relative;
+    padding: 180px 0px 160px;
+    img.breadcrumb-bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+    &:before {
+        position: absolute;
+        content: '';
+        height: 100%;
+        width: 100%;
+        background-color: #0e0e0e;
+        top: 0;
+        left: 0;
+        opacity: .75;
+    }
+    &:after {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 80px;
+        bottom: 0;
+        left: 0;
+        background-image: url(../img/bg/breadcrumb-bg-frame.png);
+        background-size: 100% 100%;
+        background-position: bottom center;
+        z-index: 1;
+    }
+}
+
+.breadcrumb-box {
+    position: relative;
+    text-align: center;
+    h3.page-title {
+        font-size: 36px;
+        letter-spacing: 0px;
+        color: #fff;
+        line-height: 44px;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+}
+
+ul.breadcrumb-list {
+    position: relative;
+    padding: 0;
+    list-style-type: none;
+    margin: 5px auto;
+    li {
+        position: relative;
+        display: inline-block;
+        letter-spacing: 0px;
+        color: $elementsColor;
+        padding: 0px 6px;
+        &:after {
+            position: absolute;
+            content: '>';
+            color: #fff;
+            top: 0px;
+            right: -7px;
+            font-size: 20px;
+        }
+        &:last-child:after {
+            display: none;
+        }
+        a {
+            position: relative;
+            display: inline-block;
+            letter-spacing: 0px;
+            color: #fff;
+        }
+    }
+    li,
+    li a {
+        font-size: 16px;
+        letter-spacing: 0px;
+        line-height: 22px;
+        font-weight: 400;
+    }
+}
+
+
+.about2-area {
+    position: relative;
+    padding-top: 80px;
+}
+.aboutp3-img {
+    margin-left: -80px;
+    margin-top: 40px;
+    margin-bottom: 80px;
+    img {
+        min-height: 460px;
+    }
+    &::after {
+        transform: scale(-1, -1);
+    }
+}
+
+
+.aboutp4-img {
+    position: relative;
+    margin-right: -60px;
+    margin-top: 40px;
+    &:before {
+        position: absolute;
+        content: '';
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-image: url(../img/bg/about-page-img2-frame.png);
+        background-size: 100% 100%;
+        z-index: 1;
+    }
+}
+
+
+
+
+/*----------------------------------------*/
+/*  About Page Area Style END
+/*----------------------------------------*/
+
+
+/*----------------------------------------*/
+/*  Why Choose US Style
+/*----------------------------------------*/
+.why-choose-us-area {
+    position: relative;
+    padding: 80px 0px;
+}
+
+
+.single-wcu {
+    position: relative;
+    max-width: 350px;
+    margin: 15px auto;
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: .5s ease;
+    &:hover {
+        background-color: rgb(255, 255, 255);
+        box-shadow: -2.93px 8.51px 67.16px 5.84px rgba(232, 235, 234, 0.69);
+        z-index: 1;
+    }
+    .sw-icon {
+        position: relative;
+        text-align: center;
+        margin-bottom: 10px;
+        img {
+            height: 105px;
+            width: auto;
+        }
+        
+    }
+    .sw-text {
+        h4 {
+            font-size: 26px;
+            color: #212121;
+            line-height: 30px;
+            font-weight: 600;
+            letter-spacing: 0px;
+            margin: 15px auto;
+        }
+        p {
+            font-size: 14px;
+            letter-spacing: 0px;
+            line-height: 22px;
+            margin: 10px auto;
+        }
+    }
+}
+
+
+/*----------------------------------------*/
+/*  Why Choose US Style END
+/*----------------------------------------*/
+
+
+
+/*----------------------------------------*/
+/*  Food Video Area Style
+/*----------------------------------------*/
+.food-video-area {
+    position: relative;
+    padding: 200px 0px;
+    background-image: url(../img/bg/video-area-bg.jpg);
+    background-size: cover;
+    background-position: center center;
+    z-index: 1;
+    background-attachment: fixed;
+    &::before{
+        position: absolute;
+        content: '';
+        height: 100%;
+        width: 100%;
+        background-color: #141414;
+        opacity: .43;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+}
+.fva-2 {
+    background-image: url(../img/bg/video-area-bg2.jpg);
+}
+/*----------------------------------------*/
+/*  Food Video Area Style
+/*----------------------------------------*/
+
+
+/*----------------------------------------*/
+/*  Reservation Area Style
+/*----------------------------------------*/
+#googleMap {
+    height: 430px;
+    width: 100%;
+}
+
+/*----------------------------------------*/
+/*  Reservation Area Style END
+/*----------------------------------------*/
+
+
+
+
+/*----------------------------------------*/
+/*  Coming Soon Style
+/*----------------------------------------*/
+.coming-soon-area {
+    position: relative;
+    background-image: url(../img/section-img/coming-soon.jpg);
+    background-size: cover;
+    background-position: center center;
+    z-index: 1;
+    min-height: 100vh;
+    padding: 80px 0px;
+    text-align: center;
+    &:before {
+        position: absolute;
+        content: '';
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+        background-color: #181818;
+        opacity: .80;
+        top: 0;
+        left: 0;
+    }
+    
+}
+
+
+.csa-logo {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.csa-text {
+    position: relative;
+    max-width: 585px;
+    margin: 15px auto;
+    h3 {
+        font-size: 44px;
+        letter-spacing: 0px;
+        color: #fff;
+        line-height: 48px;
+        margin-bottom: 20px;
+    }
+    p {
+        font-size: 18px;
+        letter-spacing: 0px;
+        color: #fff;
+        line-height: 28px;
+        margin: 30px auto;
+    }
+}
+
+.csa-nl {
+    form.nl-form {
+        input {
+            border: 1px solid #fff;
+        }
+    }
+}
+.csa-countdown {
+    position: relative;
+}
+
+ul.cdown-list {
+    position: relative;
+    padding: 10px 0px;
+    list-style-type: none;
+    margin: 15px auto;
+    li {
+        position: relative;
+        display: inline-block;
+        line-height: unset;
+    }
+}
+
+.single-countdown {
+    position: relative;
+    font-size: 70px;
+    letter-spacing: 0px;
+    color: #fff;
+    line-height: inherit;
+    font-weight: 600;
+    display: block;
+    padding: 25px;
+    min-width: 140px;
+    text-align: center;
+}
+
+.countdown.single-countdown {
+    span {
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: 400;
+        display: block;
+        margin: 0px auto;
+    }
+}
+
+ul.cdown-list {
+    li{
+        &:after {
+            position: absolute;
+            content: ':';
+            right: -13px;
+            top: 18px;
+            color: #fff;
+            font-size: 60px;
+        }
+        &:last-child{
+            &:after {
+                display: none;
+            }
+        }
+    }
+}
+
+
+
+.csa-social {
+    position: relative;
+    ul.footer-social {
+        li {
+            position: relative;
+            a {
+                display: block;
+                position: relative;
+                background-color: #fff;
+                height: 55px;
+                width: 55px;
+                border-radius: 50%;
+                font-size: 26px;
+                padding-top: 15px;
+                margin: 5px;
+                color: $elementsColor;
+                &:hover {
+                    color: #fff;
+                    background-color: $elementsColor;
+                }
+            }
+        }
+    }
+}
+
+
+.csa-nl {
+    position: relative;
+    margin: 0px auto 40px;
+    max-width: 600px;
+}
+
+.csa-nl form {
+    position: relative;
+}
+
+.csa-nl input {
+    height: 60px;
+    width: 100%;
+    background-color: #fff;
+    color: #000;
+    border-radius: 30px;
+    padding: 0px 25px;
+    font-size: 16px;
+    letter-spacing: 0px;
+}
+
+.csa-nl input[type="submit"] {
+    cursor: pointer;
+    width: 180px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: $elementsColor;
+    border: 1px solid $elementsColor !important;
+    z-index: 2;
+}
+/*----------------------------------------*/
+/*  Coming Soon Style END
+/*----------------------------------------*/

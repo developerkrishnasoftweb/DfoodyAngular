@@ -1,0 +1,192 @@
+/*----------------------------------------*/
+/*  Contact Style
+/*----------------------------------------*/
+.contact-area {
+    position: relative;
+    padding: 80px 0px 140px;
+}
+
+.contact-form {
+    position: relative;
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.contact-area .section-titleV2 {
+    text-align: left;
+}
+
+.contact-form .df-control {
+    margin-bottom: 25px;
+}
+
+.contact-form .cinfo {}
+
+
+
+.contact-form .cinfo .single-reserve-contact {
+    text-align: left;
+    margin-left: 0px;
+    margin-bottom: 40px;
+}
+
+#googleMap {
+    height: 430px;
+    width: 100%;
+}
+.cf-msg {
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 30px; 
+    p {
+        margin-bottom: 0;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 0;
+        color: #717484;
+        text-transform: capitalize; 
+    }
+}
+
+/*----------------------------------------*/
+/*  Contact Style END
+/*----------------------------------------*/
+
+
+
+
+
+
+
+
+/*----------------------------------------*/
+/*  Booking Style
+/*----------------------------------------*/
+
+.booking-area {
+    position: relative;
+    padding: 20px 0px 100px;
+}
+
+.booking-form {
+    position: relative;
+    max-width: 920px;
+    margin: 0 auto;
+    img.bform-bg {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        opacity: .10;
+    }
+    .bform {
+        position: relative;
+        padding: 0px;
+        margin: 15px auto;
+        form {
+            .df-control {
+                margin-bottom: 25px;
+            }
+        }
+    }
+}
+
+
+
+.df-control {
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0px;
+    color: #000;
+    height: 55px;
+    padding: 5px 15px;
+    width: 100%;
+    background-color: #f3f3f3;
+    border: 1px solid #f3f3f3;
+}
+
+
+textarea.df-control {
+    height: 165px;
+    padding: 15px;
+}
+
+.bfs-btn {
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: 0px;
+    display: inline-block;
+    color: #282727;
+    background-color: #f7ca3e;
+    padding: 19px 36px;
+    border-radius: 30px;
+    font-weight: 500;
+    border: 1px solid #f7ca3e;
+    cursor: pointer;
+    transition: .5s ease;
+    outline: none !important;
+    &:hover {
+        background-color: #000;
+        color: #fff;
+        border-color: #000;
+    }
+}
+
+
+
+
+
+
+
+.reservation-wrapper {
+    position: relative;
+    .booking-form {
+        position: relative;
+        margin-bottom: 80px;
+    }
+}
+
+
+.single-reserve-contact {
+    position: relative;
+    max-width: 280px;
+    margin: 15px auto;
+    text-align: center;
+    h4 {
+        font-size: 18px;
+        letter-spacing: 0px;
+        color: #212020;
+        font-weight: 500;
+        line-height: 24px;
+        margin-bottom: 15px;
+    }
+    p {
+        font-size: 16px;
+        line-height: 22px;
+        color: #a3a3a3;
+        font-weight: 400;
+        margin: 2px auto;
+    }
+    
+}
+
+
+/*----------------------------------------*/
+/*  Booking Style End
+/*----------------------------------------*/
+.cf-msg {
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 30px; 
+    p {
+        margin-bottom: 0;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 0;
+        color: #717484;
+        text-transform: capitalize; 
+    }
+}

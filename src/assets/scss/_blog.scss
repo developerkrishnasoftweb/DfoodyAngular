@@ -1,0 +1,627 @@
+/*----------------------------------------*/
+/*  Blog Style 1
+/*----------------------------------------*/
+.blog-area {
+    position: relative;
+    padding: 80px 0px 120px;
+    .section-titleV1 {
+        margin-bottom: 40px;
+    }
+}
+
+
+
+.single-blogV1 {
+    position: relative;
+    max-width: 350px;
+    width: 100%;
+    margin: 15px auto;
+    background-color: $primaryColor;
+    border-radius: 10px;
+    box-shadow: -0.326px 0.946px 14.72px 1.28px rgba(232, 235, 234, 0.53);
+    transition: .5s ease;
+    &:hover {
+        box-shadow: 7.251px 37.302px 64.4px 5.6px rgba(232, 235, 234, 0.91);
+        .sb-text {
+            h4 {
+                color: #f8d158;
+            }
+        }
+    }
+    .sb-img {
+        position: relative;
+        padding: 25px;
+        height: 300px;
+        overflow: hidden;
+        width: 100%;
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    }
+    .sb-text {
+        position: relative;
+        padding: 0px 25px 25px;
+        a {
+            display: block;
+            letter-spacing: 0px;
+        }
+        h4 {
+            font-size: 24px;
+            letter-spacing: 0px;
+            color: #212121;
+            line-height: 32px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: .5s ease;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+    }
+    ul.sb-meta {
+        position: relative;
+        padding: 0px;
+        list-style-type: none;
+        margin-bottom: 15px;
+        li {
+            position: relative;
+            display: inline-block;
+            width: calc(50% - 3px);
+            &:first-child {
+                text-align: left;
+            }
+            &:last-child {
+                text-align: right;
+            }
+            a {
+                margin-left: 5px;
+            }
+        }
+        li,
+        li a {
+            font-size: 14px;
+            letter-spacing: 0px;
+            color: $elementsColorIII;
+            display: inline-block;
+            text-transform: uppercase;
+            position: relative;
+        }
+    }
+    a.read-more-btn-1 {
+        display: inline-block;
+    }
+}
+
+a.read-more-btn-1 {
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #212121;
+    line-height: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    i {
+        margin-left: 10px;
+        color: #f8d158;
+        font-size: 16px;
+        transition: .5s ease;
+    }
+    &:hover {
+        color: #f8d158;
+        i {
+            margin-left: 5px;
+        }
+    }
+}
+
+
+
+.pagination-area {
+    position: relative;
+    text-align: center;
+    padding-top: 40px;
+    nav {
+        position: relative;
+        display: inline-block;
+    }
+}
+
+ul.pagination {
+    position: relative;
+    li {
+        position: relative;
+        display: inline-block;
+        width: auto;
+        height: auto;
+        border: none;
+        a {
+            position: relative;
+            font-size: 18px;
+            color: #212121;
+            display: block;
+            padding: 16px 0px;
+            min-width: 55px;
+            min-height: 55px;
+            border-radius: 50%;
+            margin: 5px;
+            text-align: center;
+            border: 1px solid #212121;
+            letter-spacing: 0px;
+            i {
+                margin: 0px 5px;
+            }
+            &:hover {
+                background-color: $elementsColor;
+            }
+        }
+        &:first-child a,
+        &:last-child a {
+            border-radius: 30px !important;
+            padding-left: 25px;
+            padding-right: 25px;
+            background-color: $primary2Color;
+            color: $primaryColor;
+            &:hover {
+                background-color: $elementsColor;
+            }
+        }
+    }
+}
+
+
+/*----------------------------------------*/
+/*  Blog Style 1 END
+/*----------------------------------------*/
+
+
+
+
+
+
+/*----------------------------------------*/
+/*  Blog Page Style 
+/*----------------------------------------*/
+
+.blog-page-area {
+    position: relative;
+    padding: 120px 0px 140px;
+}
+
+
+
+.blog-full-width {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: none;
+    border-radius: 0px;
+    padding: 0px;
+    margin: 0px auto 30px;
+    &:hover {
+        box-shadow: none;
+    }
+    ul.sb-meta {
+        li {
+            width: auto;
+            margin-right: 25px;
+            &:last-child {
+                margin-right: 0px;
+            }
+            span {
+                color: #757575;
+            }
+        }
+    }
+    .sb-img {
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+        height: auto;
+        img {
+            border-radius: 0px;
+        }
+    }
+    .sb-text {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+
+// Blog Sidebar
+
+.blog-sidebar {
+    position: relative;
+}
+
+.df-widget {
+    position: relative;
+    max-width: 350px;
+    width: 100%;
+    margin: 0px auto 30px;
+    h4 {
+        font-size: 24px;
+        letter-spacing: 0px;
+        line-height: 36px;
+        font-weight: 600;
+        color: #272b2e;
+        margin-bottom: 30px;
+        margin-top: 40px;
+    }
+}
+
+
+ul.df-cat-list {
+    position: relative;
+    padding: 0px;
+    list-style-type: none;
+    li {
+        position: relative;
+        margin-bottom: 20px;
+        a {
+            font-size: 20px;
+            letter-spacing: 0px;
+            line-height: 26px;
+            color: #757575;
+            font-weight: 400;
+            &:hover {
+                color: $elementsColor;
+            }
+            
+        }
+    }
+}
+
+
+.single-rp {
+    position: relative;
+    min-height: 70px;
+    margin-bottom: 30px;
+    padding-left: 80px;
+    max-width: 300px;
+    .dfpp-img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 70px;
+        width: 70px;
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    .dfpp-text {
+        position: relative;
+        h5 {
+            a {
+                font-size: 16px;
+                letter-spacing: 0px;
+                color: #212121;
+                font-weight: 500;
+                line-height: 24px;
+                &:hover {
+                    color: $elementsColor;
+                }
+            }
+        }
+        p {
+            font-size: 14px;
+            letter-spacing: 0px;
+            color: $elementsColorIII;
+            font-weight: 500;
+            line-height: 20px;
+        }
+    }
+    
+}
+
+
+ul.df-tag-list {
+    position: relative;
+    padding: 0px;
+    list-style-type: none;
+    li {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 10px;
+        a {
+            position: relative;
+            display: block;
+            font-size: 14px;
+            letter-spacing: 0px;
+            line-height: 22px;
+            color: #212121;
+            border: 1px solid #959595;
+            padding: 8px 15px;
+            border-radius: 25px;
+            min-width: 80px;
+            text-align: center;
+            &:hover {
+                background-color: $elementsColor;
+                color: $primaryColor;
+                border-color: $elementsColor;
+            }
+        }
+    }
+}
+
+
+
+ul.df-gallery-list {
+    position: relative;
+    padding: 0px;
+    list-style-type: none;
+    li {
+        position: relative;
+        width: 90px;
+        height: 90px;
+        display: inline-block;
+        margin: 4px 5px;
+        a {
+            img {
+                border-radius: 5px;
+            }
+        }
+    }
+}
+
+
+.dfs-form {
+    position: relative;
+    max-width: 280px;
+    input[type="text"] {
+        width: 100%;
+        height: 50px;
+        border-radius: 25px;
+        border: 1px solid #d7d7d7;
+        padding: 0px 20px;
+        font-size: 16px;
+        letter-spacing: 0px;
+    }
+    button.dfs-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 50px;
+        width: 65px;
+        font-size: 21px;
+        background-color: #212121;
+        color: $primaryColor;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        outline: none !important;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        transition: .5s ease;
+        &:hover {
+            background-color: $elementsColor;
+        }
+    }
+}
+
+/*----------------------------------------*/
+/*  Blog Page Style END
+/*----------------------------------------*/
+
+
+
+
+/*----------------------------------------*/
+/*  Blog Page comment Style 
+/*----------------------------------------*/
+
+.sb-comment-area {
+    position: relative;
+    margin: 25px auto;
+    h4 {
+        font-size: 26px;
+        letter-spacing: 0px;
+        color: $quaternaryColor;
+        line-height: 34px;
+        margin-bottom: 20px;
+    }
+}
+
+.single-comment {
+    position: relative;
+    background-color: $primaryColor;
+    border-bottom: 1px solid #ececec;
+    &:last-child {
+        border-bottom: none;
+    }
+    .sc-avatar {
+        height: 60px;
+        width: 60px;
+        position: absolute;
+        left: 25px;
+        top: 25px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    .sc-text {
+        position: relative;
+        padding-left: 100px;
+        padding-top: 25px;
+        padding-right: 60px;
+        h5 {
+            font-size: 16px;
+            letter-spacing: 0px;
+            line-height: 24px;
+            font-weight: 600;
+            color: #272b2e;
+            margin-bottom: 3px;
+        }
+        span {
+            font-size: 14px;
+            letter-spacing: 0px;
+            color: $elementsColorIII;
+            line-height: 20px;
+            font-weight: 600;
+            display: block;
+        }
+        p {
+            font-size: 16px;
+            letter-spacing: 0px;
+            line-height: 22px;
+            color: #8e8d8e;
+            margin: 10px auto 25px;
+        }
+        a.btn-style-a-sm {
+            margin-bottom: 30px;
+            background-color: $elementsColor;
+            padding: 10px 25px;
+            border-radius: 30px;
+            display: inline-block;
+            font-size: 14px;
+            letter-spacing: 0px;
+            line-height: 20px;
+            &:hover {
+                background-color: $primary2Color;
+                color: $primaryColor;
+            }
+        }
+    }
+}
+
+// .single-comment.sc-subcomment {
+// }
+
+
+
+// News Comment Area
+
+
+.sb-comment-form {
+    h4 {
+        font-size: 26px;
+        letter-spacing: 0px;
+        color: #101012;
+        line-height: 34px;
+        margin-bottom: 20px;
+    }
+}
+
+
+.single-comment.sc-subcomment {
+    .sc-text {
+        padding-left: 200px;
+        a.btn-style-a-sm {
+            background-color: $primary2Color;
+            color: $primaryColor;
+            &:hover {
+                background-color: $elementsColor;
+                color: $primaryColor;
+            }
+        }
+    }
+    .sc-avatar {
+        left: 120px;
+    }
+    
+}
+.g-input {
+    height: 50px;
+    font-size: 14px;
+    line-height: 20px;
+    background-color: #f3f3f3;
+    border: 1px solid #f3f3f3;
+    padding: 15px;
+    display: block;
+    width: 100%;
+    letter-spacing: 0px;
+    margin-bottom: 20px;
+}
+
+textarea.g-input {
+    height: 200px;
+}
+
+form.scform {
+    position: relative;
+    label {
+        position: relative;
+        font-size: 14px;
+        letter-spacing: 0px;
+        line-height: 20px;
+        color: #8e8d8e;
+        input[type=checkbox] {
+            position: relative;
+            left: 0;
+            top: 2px;
+        }
+    }
+    input.scf-btn {
+        margin: 15px auto;
+        padding: 18px 37px;
+        @include transition(all, .5s, ease);
+        &:hover {
+            background-color: $primary2Color;
+            border: 1px solid $primary2Color;
+            color: $primaryColor;
+        }
+    }
+}
+
+input.scf-btn {
+    font-size: 16px;
+    letter-spacing: 0px;
+    background-color: $elementsColor;
+    border: 1px solid $elementsColor;
+    color: $primaryColor;
+    line-height: 22px;
+    padding: 18px 37px;
+    cursor: pointer;
+    @include transition(all, .5s, ease);
+    &:hover {
+        background-color: $primary2Color;
+        border: 1px solid $primary2Color;
+        color: $primaryColor;
+    }
+}
+
+
+/*----------------------------------------*/
+/*  Blog Page comment Style END
+/*----------------------------------------*/
+
+
+
+/*----------------------------------------*/
+/*  Error Page Style 
+/*----------------------------------------*/
+
+.error-page-area {
+    position: relative;
+    padding: 120px 0px 140px;
+}
+
+.error-wrapper {
+    position: relative;
+    .ew-img {
+        position: relative;
+        max-width: 620px;
+        margin: 0px auto 50px;
+    }
+    .ew-text {
+        position: relative;
+        text-align: center;
+        margin: 25px auto;
+        h3 {
+            font-size: 40px;
+            letter-spacing: 0px;
+            line-height: 48px;
+            font-weight: 500;
+            margin-bottom: 35px;
+        }
+    }
+}
+
+/*----------------------------------------*/
+/*  Error Page Style END
+/*----------------------------------------*/
