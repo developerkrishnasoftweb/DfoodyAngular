@@ -11,7 +11,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { SharedModule } from '@shared/shared.module';
 import { CoreModule } from '@core/core.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { FoodmenuComponent } from './foodmenu/foodmenu.component';
@@ -34,6 +34,7 @@ import { FoodmenuComponent } from './foodmenu/foodmenu.component';
     SharedModule,
     CoreModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule
   ],
   providers: [],

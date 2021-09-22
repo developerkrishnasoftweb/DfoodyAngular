@@ -3,21 +3,49 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Login Now</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetForm()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="login-form">
-                    <form action="#">
+                    <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                         <div class="row">
                             <div class="col-md-12 mb-5">
                                 <label for="email">Email Address<span class="text-denger">*</span></label>
-                                <input type="text" class="df-control" id="email" name="email" placeholder="Email *">
+                                <input type="text" formControlName="email" class="df-control" id="email" name="email"
+                                    placeholder="Email *"
+                                    [ngClass]="{ 'is-invalid': formControl.email.touched && formControl.email.invalid }">
+                                <div *ngIf="formControl.email.touched && formControl.email.invalid">
+                                    <span class="validation-error"
+                                        *ngIf="loginForm.get('email').hasError('required')">
+                                        {{validationMsgEnum.EmailRequired}}
+                                    </span>
+                                    <span class="validation-error"
+                                        *ngIf="!loginForm.get('email').hasError('required') && loginForm.get('email').hasError('maxlength')">
+                                        {{validationMsgEnum.EmailMaxLength}}
+                                    </span>
+                                    <span class="validation-error"
+                                        *ngIf="!loginForm.get('email').hasError('required') && loginForm.get('email').hasError('invalidEmailAddress')">
+                                        {{validationMsgEnum.EmailInvalid}}
+                                    </span>
+                                </div>
                             </div>
                             <div class="col-md-12 mb-5">
                                 <label for="password">Password<span class="text-denger">*</span></label>
-                                <input type="text" class="df-control" id="password" name="password" placeholder="Password *">
+                                <input type="text" class="df-control" formControlName="password" id="password"
+                                    name="password" placeholder="Password *"
+                                    [ngClass]="{ 'is-invalid': formControl.password.touched && formControl.password.invalid }">
+                                <div *ngIf="formControl.password.touched && formControl.password.invalid">
+                                    <span class="validation-error"
+                                        *ngIf="loginForm.get('password').hasError('required')">
+                                        {{validationMsgEnum.PasswordRequired}}
+                                    </span>
+                                    <span class="validation-error"
+                                        *ngIf="!loginForm.get('password').hasError('required') && loginForm.get('password').hasError('maxlength')">
+                                        {{validationMsgEnum.PasswordMaxLength}}
+                                    </span>
+                                </div>
                                 <div class="text-right mt-3"><a href="#">Forgot password?</a></div>
                             </div>
                             <div class="col-md-12 mb-5">

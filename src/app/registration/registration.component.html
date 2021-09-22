@@ -3,25 +3,66 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="consultTitle">Register</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetForm()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="login-form">
-                    <form action="#">
+                <div class="registration-form">
+                    <form id="frmRegistration" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
                         <div class="row">
                             <div class="col-md-12 mb-5">
                                 <label for="fullName">Full Name<span class="text-denger">*</span></label>
-                                <input type="text" class="df-control" id="fullName" name="fullName" placeholder="Full Name *">
+                                <input type="text" formControlName="fullName" class="df-control" id="fullName"
+                                    name="fullName"
+                                    [ngClass]="{ 'is-invalid': formControl.fullName.touched && formControl.fullName.invalid }"
+                                    placeholder="Full Name *">
+                                <div *ngIf="formControl.fullName.touched && formControl.fullName.invalid">
+                                    <span class="validation-error"
+                                        *ngIf="registrationForm.get('fullName').hasError('required')">
+                                        {{validationMsgEnum.FullNameRequired}}
+                                    </span>
+                                    <span class="validation-error"
+                                        *ngIf="!registrationForm.get('fullName').hasError('required') && registrationForm.get('fullName').hasError('maxlength')">
+                                        {{validationMsgEnum.FullNameMaxLength}}
+                                    </span>
+                                </div>
                             </div>
                             <div class="col-md-12 mb-5">
                                 <label for="email">Email Address<span class="text-denger">*</span></label>
-                                <input type="emil" class="df-control" id="email" name="email" placeholder="Email *">
+                                <input type="text" formControlName="email" class="df-control" id="email" name="email"
+                                    placeholder="Email *"
+                                    [ngClass]="{ 'is-invalid': formControl.email.touched && formControl.email.invalid }">
+                                <div *ngIf="formControl.email.touched && formControl.email.invalid">
+                                    <span class="validation-error"
+                                        *ngIf="registrationForm.get('email').hasError('required')">
+                                        {{validationMsgEnum.EmailRequired}}
+                                    </span>
+                                    <span class="validation-error"
+                                        *ngIf="!registrationForm.get('email').hasError('required') && registrationForm.get('email').hasError('maxlength')">
+                                        {{validationMsgEnum.EmailMaxLength}}
+                                    </span>
+                                    <span class="validation-error"
+                                        *ngIf="!registrationForm.get('email').hasError('required') && registrationForm.get('email').hasError('invalidEmailAddress')">
+                                        {{validationMsgEnum.EmailInvalid}}
+                                    </span>
+                                </div>
                             </div>
                             <div class="col-md-12 mb-5">
                                 <label for="password">Password<span class="text-denger">*</span></label>
-                                <input type="text" class="df-control" id="password" name="password" placeholder="Password *">
+                                <input type="text" class="df-control" formControlName="password" id="password"
+                                    name="password" placeholder="Password *"
+                                    [ngClass]="{ 'is-invalid': formControl.password.touched && formControl.password.invalid }">
+                                <div *ngIf="formControl.password.touched && formControl.password.invalid">
+                                    <span class="validation-error"
+                                        *ngIf="registrationForm.get('password').hasError('required')">
+                                        {{validationMsgEnum.PasswordRequired}}
+                                    </span>
+                                    <span class="validation-error"
+                                        *ngIf="!registrationForm.get('password').hasError('required') && registrationForm.get('password').hasError('maxlength')">
+                                        {{validationMsgEnum.PasswordMaxLength}}
+                                    </span>
+                                </div>
                             </div>
                             <div class="col-md-12 mb-5">
                                 <input type="submit" class="bfs-btn d-block w-100" value="Submit Message">
@@ -30,13 +71,15 @@
                     </form>
                     <div class="row mb-5">
                         <div class="col-md-6">
-                            <a href="#" class="social-login"><img src="assets/img/facebook-icon.png" alt=""> Facebook</a>
+                            <a href="#" class="social-login"><img src="assets/img/facebook-icon.png" alt="">
+                                Facebook</a>
                         </div>
                         <div class="col-md-6">
                             <a href="#" class="social-login"><img src="assets/img/google-icon.png" alt=""> Google</a>
                         </div>
                     </div>
-                    <div class="form-bottom text-center">I have an account? <a href="#loginModal" id="register" data-toggle="modal">SignIn</a></div>
+                    <div class="form-bottom text-center">I have an account? <a href="#loginModal" id="register"
+                            data-toggle="modal">SignIn</a></div>
                 </div>
             </div>
         </div>
