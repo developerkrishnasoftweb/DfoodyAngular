@@ -95,5 +95,14 @@ export class ApiService {
    /*  Notes */
    NotesToAssessor = new Api<any>(this.http, `${this.apiEndpointUrl}roa/creditdecision/clientmgmt/v${this.version}/client/notestoassessor/:clientDetailId/:clientSnapshotId`);
    PutNoteToAssessor = new Api<any>(this.http, `${this.apiEndpointUrl}roa/creditdecision/clientmgmt/v${this.version}/client/notestoassessor/:clientDetailId/:clientApplicationNoteDetailId `);
-   
+
+   /*Customer login*/
+   CustomerLogin = new Api<any>(this.http, this.apiEndpointUrl + '/api/Customer/Login/authenticate');
+
+   /*Customer Registration*/
+   CustomerRegistration = new Api<any>(this.http, this.apiEndpointUrl + '​/api​/Register​/Add');
+
+   /*IP Address*/
+   IPAddress = new Api<any>(this.http, 'http://api.ipify.org/?format=json');
+
 }

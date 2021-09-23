@@ -12,19 +12,53 @@
                     <form id="frmRegistration" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
                         <div class="row">
                             <div class="col-md-12 mb-5">
-                                <label for="fullName">Full Name<span class="text-denger">*</span></label>
-                                <input type="text" formControlName="fullName" class="df-control" id="fullName"
-                                    name="fullName"
-                                    [ngClass]="{ 'is-invalid': formControl.fullName.touched && formControl.fullName.invalid }"
-                                    placeholder="Full Name *">
-                                <div *ngIf="formControl.fullName.touched && formControl.fullName.invalid">
+                                <label for="firstName">First Name<span class="text-denger">*</span></label>
+                                <input type="text" formControlName="firstName" class="df-control" id="firstName"
+                                    name="firstName"
+                                    [ngClass]="{ 'is-invalid': formControl.firstName.touched && formControl.firstName.invalid }"
+                                    placeholder="First Name *">
+                                <div *ngIf="formControl.firstName.touched && formControl.firstName.invalid">
                                     <span class="validation-error"
-                                        *ngIf="registrationForm.get('fullName').hasError('required')">
-                                        {{validationMsgEnum.FullNameRequired}}
+                                        *ngIf="registrationForm.get('firstName').hasError('required')">
+                                        {{validationMsgEnum.FirstNameRequired}}
                                     </span>
                                     <span class="validation-error"
-                                        *ngIf="!registrationForm.get('fullName').hasError('required') && registrationForm.get('fullName').hasError('maxlength')">
-                                        {{validationMsgEnum.FullNameMaxLength}}
+                                        *ngIf="!registrationForm.get('firstName').hasError('required') && registrationForm.get('firstName').hasError('maxlength')">
+                                        {{validationMsgEnum.FirstNameMaxLength}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-5">
+                                <label for="lastName">Last Name<span class="text-denger">*</span></label>
+                                <input type="text" formControlName="lastName" class="df-control" id="lastName"
+                                    name="lastName"
+                                    [ngClass]="{ 'is-invalid': formControl.lastName.touched && formControl.lastName.invalid }"
+                                    placeholder="Full Name *">
+                                <div *ngIf="formControl.lastName.touched && formControl.lastName.invalid">
+                                    <span class="validation-error"
+                                        *ngIf="registrationForm.get('lastName').hasError('required')">
+                                        {{validationMsgEnum.LastNameRequired}}
+                                    </span>
+                                    <span class="validation-error"
+                                        *ngIf="!registrationForm.get('lastName').hasError('required') && registrationForm.get('lastName').hasError('maxlength')">
+                                        {{validationMsgEnum.LastNameMaxLength}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-5">
+                                <label for="mobile">Mobile<span class="text-denger">*</span></label>
+                                <input type="text" formControlName="mobile" class="df-control" id="mobile"
+                                    name="mobile"
+                                    [ngClass]="{ 'is-invalid': formControl.mobile.touched && formControl.mobile.invalid }"
+                                    placeholder="Mobile *">
+                                <div *ngIf="formControl.mobile.touched && formControl.mobile.invalid">
+                                    <span class="validation-error"
+                                        *ngIf="registrationForm.get('mobile').hasError('required')">
+                                        {{validationMsgEnum.MobileRequired}}
+                                    </span>
+                                    <span class="validation-error"
+                                        *ngIf="!registrationForm.get('mobile').hasError('required') && (registrationForm.get('mobile').hasError('maxlength') || registrationForm.get('mobile').hasError('minlength'))">
+                                        {{validationMsgEnum.MobileLength}}
                                     </span>
                                 </div>
                             </div>
@@ -50,7 +84,7 @@
                             </div>
                             <div class="col-md-12 mb-5">
                                 <label for="password">Password<span class="text-denger">*</span></label>
-                                <input type="text" class="df-control" formControlName="password" id="password"
+                                <input type="password" class="df-control" formControlName="password" id="password"
                                     name="password" placeholder="Password *"
                                     [ngClass]="{ 'is-invalid': formControl.password.touched && formControl.password.invalid }">
                                 <div *ngIf="formControl.password.touched && formControl.password.invalid">

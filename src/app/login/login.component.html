@@ -33,7 +33,7 @@
                             </div>
                             <div class="col-md-12 mb-5">
                                 <label for="password">Password<span class="text-denger">*</span></label>
-                                <input type="text" class="df-control" formControlName="password" id="password"
+                                <input type="password" class="df-control" formControlName="password" id="password"
                                     name="password" placeholder="Password *"
                                     [ngClass]="{ 'is-invalid': formControl.password.touched && formControl.password.invalid }">
                                 <div *ngIf="formControl.password.touched && formControl.password.invalid">

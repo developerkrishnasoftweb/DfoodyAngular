@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  narAPIEndpointURL:'http://000.000.00.00'
+  narAPIEndpointURL:'http://core.techzicloud.com'
 };
 
 /*

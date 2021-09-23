@@ -21,8 +21,16 @@ export enum ValidationMsg {
     PasswordRequired = "Password is required",
     PasswordMaxLength = "Password must be 20 characters or less",
 
-    //FullName
-    FullNameRequired = "Full Name is required",
-    FullNameMaxLength = "Full Name must be 50 characters or less",
+    //First Name
+    FirstNameRequired = "First Name is required",
+    FirstNameMaxLength = "First Name must be 50 characters or less",
+
+    //Last Name
+    LastNameRequired = "Last Name is required",
+    LastNameMaxLength = "Last Name must be 50 characters or less",
+
+     //FullName
+     MobileRequired = "Mobile Number is required",
+     MobileLength = "Mobile Number must be 10",
 }
 
