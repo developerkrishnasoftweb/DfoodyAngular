@@ -1,4 +1,5 @@
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true">
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <div class="login-form">
-                    <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                         <div class="row">
                             <div class="col-md-12 mb-5">
                                 <label for="email">Email Address<span class="text-denger">*</span></label>
@@ -17,8 +18,7 @@
                                     placeholder="Email *"
                                     [ngClass]="{ 'is-invalid': formControl.email.touched && formControl.email.invalid }">
                                 <div *ngIf="formControl.email.touched && formControl.email.invalid">
-                                    <span class="validation-error"
-                                        *ngIf="loginForm.get('email').hasError('required')">
+                                    <span class="validation-error" *ngIf="loginForm.get('email').hasError('required')">
                                         {{validationMsgEnum.EmailRequired}}
                                     </span>
                                     <span class="validation-error"
@@ -46,22 +46,29 @@
                                         {{validationMsgEnum.PasswordMaxLength}}
                                     </span>
                                 </div>
+                                <span class="validation-error">
+                                    {{apiErrorMsg}}
+                                </span>
                                 <div class="text-right mt-3"><a href="#">Forgot password?</a></div>
                             </div>
+                           
                             <div class="col-md-12 mb-5">
-                                <input type="submit" class="bfs-btn d-block w-100" value="Submit Message">
+                                <input type="submit" [disabled]="isBtnDisabled" class="bfs-btn d-block w-100"
+                                    value="Submit Message">
                             </div>
                         </div>
                     </form>
                     <div class="row mb-5">
                         <div class="col-md-6">
-                            <a href="#" class="social-login"><img src="assets/img/facebook-icon.png" alt=""> Facebook</a>
+                            <a href="#" class="social-login"><img src="assets/img/facebook-icon.png" alt="">
+                                Facebook</a>
                         </div>
                         <div class="col-md-6">
                             <a href="#" class="social-login"><img src="assets/img/google-icon.png" alt=""> Google</a>
                         </div>
                     </div>
-                    <div class="form-bottom text-center">If don't have an account? <a href="#consult" id="login" data-toggle="modal">SignUp</a></div>
+                    <div class="form-bottom text-center">If don't have an account? <a href="#consult" id="login"
+                            data-toggle="modal">SignUp</a></div>
                 </div>
             </div>
         </div>

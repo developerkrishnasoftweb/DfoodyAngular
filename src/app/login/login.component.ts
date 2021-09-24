@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerLoginReqModel } from '@core/models/customer';
 import { CustomerLoginService } from '@core/services/customer/customer-login.service';
+import { UserLoginService } from '@core/services/user-login.service';
 import { ValidationService } from '@core/services/validation.service';
-import { ValidationMsg } from '@core/utils/enum';
+import { HttpResponseStatusCode, ValidationMsg } from '@core/utils/enum';
 
 @Component({
   selector: 'app-login',
@@ -15,15 +16,18 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   validationMsgEnum = ValidationMsg;
+  apiErrorMsg = "";
 
-  constructor(private formBuilder: FormBuilder, 
+  isBtnDisabled: boolean = false;
+
+  constructor(private formBuilder: FormBuilder,
     private customerLoginService: CustomerLoginService) { }
 
   ngOnInit(): void {
     this.createForm();
   }
 
-  get formControl()  { return this.loginForm.controls;}
+  get formControl() { return this.loginForm.controls; }
 
   createForm(): void {
     this.loginForm = this.formBuilder.group({
@@ -37,12 +41,22 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid)
       return;
     const model = this.createResModel();
+    this.isBtnDisabled = true;
     this.customerLoginService.login(model).subscribe(res => {
-      console.log(res);
+      this.isBtnDisabled = false;
+      if (res.email && res.token) {
+        localStorage.setItem('Authorization', res.token);
+      }
+    }, errRes => {
+      this.isBtnDisabled = false;
+      if (errRes.error && errRes.error.error && errRes.error.responseCode === HttpResponseStatusCode.NotFound) {
+        this.apiErrorMsg = errRes.error.responseMessage;
+      }
     });
+
   }
 
-  createResModel() : CustomerLoginReqModel {
+  createResModel(): CustomerLoginReqModel {
     const model = new CustomerLoginReqModel();
     model.userName = this.loginForm.value.email;
     model.password = this.loginForm.value.password;
