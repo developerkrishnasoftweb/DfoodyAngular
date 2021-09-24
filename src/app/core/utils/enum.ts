@@ -6,7 +6,7 @@ export enum HttpResponseStatusCode {
     ServiceUnavailable = 503
 }
 
-export enum ApplicationTypeEnum  {
+export enum ApplicationTypeEnum {
     PersonalLoan = 211,
     Overdraft
 }
@@ -16,6 +16,7 @@ export enum ValidationMsg {
     EmailRequired = "Email address is required",
     EmailInvalid = "Email address is invalid",
     EmailMaxLength = "Email address must be 50 characters or less",
+    EmailAlreadyExist = "This email address already exists",
 
     //Password
     PasswordRequired = "Password is required",
@@ -29,8 +30,11 @@ export enum ValidationMsg {
     LastNameRequired = "Last Name is required",
     LastNameMaxLength = "Last Name must be 50 characters or less",
 
-     //FullName
-     MobileRequired = "Mobile Number is required",
-     MobileLength = "Mobile Number must be 10",
+    //FullName
+    MobileRequired = "Mobile Number is required",
+    MobileLength = "Please, Enter 10 digit Mobile Number",
+    MobileAlreadyExist = "This mobile number already exists",
+
+
 }
 

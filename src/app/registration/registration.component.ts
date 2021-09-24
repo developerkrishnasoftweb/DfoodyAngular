@@ -16,12 +16,17 @@ export class RegistrationComponent implements OnInit {
 
   validationMsgEnum = ValidationMsg;
 
+  isEmailExist: boolean = false;
+  isMobileExist: boolean = false;
+
+  isSubmitDisable: boolean = false;
+
   constructor(private formBuilder: FormBuilder,
     private customerRegistrationService: CustomerRegistrationService) { }
 
   ngOnInit(): void {
     this.createForm();
-    this.getIPAddress();
+    // this.getIPAddress();
   }
 
   get formControl() { return this.registrationForm.controls; }
@@ -29,7 +34,7 @@ export class RegistrationComponent implements OnInit {
   createForm(): void {
     this.registrationForm = this.formBuilder.group({
       email: ['', [Validators.required, ValidationService.emailValidator]],
-      mobile: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
+      mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       firstName: ['', [Validators.required, Validators.maxLength(50)]],
       lastName: ['', [Validators.required, Validators.maxLength(50)]],
       password: ['', [Validators.required, Validators.maxLength(20)]],
@@ -40,9 +45,15 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm.markAllAsTouched();
     if (this.registrationForm.invalid)
       return;
+    else if (this.isEmailExist)
+      return;
     const model = this.createResModel();
+    this.isSubmitDisable = false;
     this.customerRegistrationService.registration(model).subscribe(res => {
       console.log(res);
+      this.isSubmitDisable = true;
+
+
     });
   }
 
@@ -67,5 +78,19 @@ export class RegistrationComponent implements OnInit {
     this.customerRegistrationService.getIPAddress().subscribe(res => {
       console.log('res ', res);
     })
+  }
+
+  //Check email valid or not 
+  checkIsEmailExist() {
+    this.customerRegistrationService.checkIsEmailExist(this.registrationForm.value.email).subscribe(res => {
+      this.isEmailExist = res;
+    });
+  }
+
+   //Check email valid or not 
+   checkIsMobileExist() {
+    this.customerRegistrationService.checkIsMobileExist(this.registrationForm.value.mobile).subscribe(res => {
+      this.isMobileExist = res;
+    });
   }
 }

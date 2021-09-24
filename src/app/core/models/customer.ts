@@ -19,3 +19,4 @@ export class CustomerRegistrationReqModel {
     fcmToken: string;
     langPref: string;
 }
+

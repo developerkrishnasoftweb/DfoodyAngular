@@ -47,8 +47,8 @@
                             </div>
                             <div class="col-md-12 mb-5">
                                 <label for="mobile">Mobile<span class="text-denger">*</span></label>
-                                <input type="text" formControlName="mobile" class="df-control" id="mobile"
-                                    name="mobile"
+                                <input type="text" formControlName="mobile" class="df-control" id="mobile" name="mobile"
+                                    (focusout)="checkIsMobileExist()"
                                     [ngClass]="{ 'is-invalid': formControl.mobile.touched && formControl.mobile.invalid }"
                                     placeholder="Mobile *">
                                 <div *ngIf="formControl.mobile.touched && formControl.mobile.invalid">
@@ -57,15 +57,20 @@
                                         {{validationMsgEnum.MobileRequired}}
                                     </span>
                                     <span class="validation-error"
-                                        *ngIf="!registrationForm.get('mobile').hasError('required') && (registrationForm.get('mobile').hasError('maxlength') || registrationForm.get('mobile').hasError('minlength'))">
+                                        *ngIf="!registrationForm.get('mobile').hasError('required') && registrationForm.get('mobile').hasError('pattern')">
                                         {{validationMsgEnum.MobileLength}}
                                     </span>
                                 </div>
+                                <span
+                                    *ngIf="!registrationForm.get('mobile').hasError('required') && !registrationForm.get('mobile').hasError('pattern') && isMobileExist"
+                                    class="validation-error">
+                                    {{validationMsgEnum.MobileAlreadyExist}}
+                                </span>
                             </div>
                             <div class="col-md-12 mb-5">
                                 <label for="email">Email Address<span class="text-denger">*</span></label>
-                                <input type="text" formControlName="email" class="df-control" id="email" name="email"
-                                    placeholder="Email *"
+                                <input type="text" formControlName="email" class="df-control" id="reg_email"
+                                    name="reg_email" (focusout)="checkIsEmailExist()" placeholder="Email *"
                                     [ngClass]="{ 'is-invalid': formControl.email.touched && formControl.email.invalid }">
                                 <div *ngIf="formControl.email.touched && formControl.email.invalid">
                                     <span class="validation-error"
@@ -80,12 +85,18 @@
                                         *ngIf="!registrationForm.get('email').hasError('required') && registrationForm.get('email').hasError('invalidEmailAddress')">
                                         {{validationMsgEnum.EmailInvalid}}
                                     </span>
+
                                 </div>
+                                <span
+                                    *ngIf="!registrationForm.get('email').hasError('required') && !registrationForm.get('email').hasError('invalidEmailAddress') && isEmailExist"
+                                    class="validation-error">
+                                    {{validationMsgEnum.EmailAlreadyExist}}
+                                </span>
                             </div>
                             <div class="col-md-12 mb-5">
                                 <label for="password">Password<span class="text-denger">*</span></label>
-                                <input type="password" class="df-control" formControlName="password" id="password"
-                                    name="password" placeholder="Password *"
+                                <input type="password" class="df-control" formControlName="password" id="reg_password"
+                                    name="reg_password" placeholder="Password *"
                                     [ngClass]="{ 'is-invalid': formControl.password.touched && formControl.password.invalid }">
                                 <div *ngIf="formControl.password.touched && formControl.password.invalid">
                                     <span class="validation-error"

@@ -11,11 +11,19 @@ export class CustomerRegistrationService {
   constructor(private _apiService: ApiService) { }
 
   registration(CustomerRegistrationReqModel: CustomerRegistrationReqModel): Observable<any> {
-    return this._apiService.CustomerLogin.create(CustomerRegistrationReqModel, null, null).map(response => response)
+    return this._apiService.CustomerRegistration.create(CustomerRegistrationReqModel, null, null).map(response => response)
   }
 
   getIPAddress() {
     return this._apiService.IPAddress.getAll().map(response => response)
+  }
+
+  checkIsEmailExist(email: string): Observable<any> {
+    return this._apiService.IsEmailExist(email).create(null, null, null).map(response => response)
+  }
+
+  checkIsMobileExist(mobile: string): Observable<any> {
+    return this._apiService.IsMobileNoExist(mobile).create(null, null, null).map(response => response)
   }
 
 }
