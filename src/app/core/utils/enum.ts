@@ -26,14 +26,31 @@ export enum ValidationMsg {
     FirstNameRequired = "First Name is required",
     FirstNameMaxLength = "First Name must be 50 characters or less",
 
+    //Name
+    NameRequired = "Name is required",
+    NameMaxLength = "Name must be 50 characters or less",
+
+    //date 
+    DateRequired = "Date is required",
+
+    //time 
+    TimeRequired = "Time is required",
+
+    //Seat 
+    SeatRequired = "Seat is required",
+
+
     //Last Name
     LastNameRequired = "Last Name is required",
     LastNameMaxLength = "Last Name must be 50 characters or less",
 
-    //FullName
+    //Mobile
     MobileRequired = "Mobile Number is required",
     MobileLength = "Please, Enter 10 digit Mobile Number",
     MobileAlreadyExist = "This mobile number already exists",
+
+    //Message 
+    MessageRequired = "Message is required",
 
 
 }

@@ -1,5 +1,5 @@
-   <!-- Breadcrumb Area -->
-   <section class="breadcrumb-area">
+<!-- Breadcrumb Area -->
+<section class="breadcrumb-area">
     <img src="assets/img/bg/innerpage-breadcrumb-bg-1.jpg" alt="" class="breadcrumb-bg">
     <div class="container">
         <div class="row">
@@ -23,61 +23,108 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="booking-form">
-                     
                     <div class="section-titleV2">
-                        <h3>Reserve your table online</h3> 
+                        <h3>Reserve your table online</h3>
                     </div>
                     <div class="bform">
-                        <form action="#">
+                        <form action="#" [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="text" class="df-control" id="name" name="name" placeholder="Name *">
+                                    <input type="text" class="df-control" formControlName="name" id="name" name="name"
+                                        placeholder="Name *"
+                                        [ngClass]="{ 'is-invalid': formControl.name.touched && formControl.name.invalid }">
+                                    <div *ngIf="formControl.name.touched && formControl.name.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="reservationForm.get('name').hasError('required')">
+                                            {{validationMsgEnum.NameRequired}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!reservationForm.get('name').hasError('required') && reservationForm.get('name').hasError('maxlength')">
+                                            {{validationMsgEnum.NameMaxLength}}
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" class="df-control" id="phone" name="phone" placeholder="Phone *">
+                                    <input type="text" class="df-control" formControlName="mobile" id="mobile"
+                                        [ngClass]="{ 'is-invalid': formControl.mobile.touched && formControl.mobile.invalid }"
+                                        name="mobile" placeholder="Mobile *">
+                                    <div *ngIf="formControl.mobile.touched && formControl.mobile.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="reservationForm.get('mobile').hasError('required')">
+                                            {{validationMsgEnum.MobileRequired}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!reservationForm.get('mobile').hasError('required') && reservationForm.get('mobile').hasError('pattern')">
+                                            {{validationMsgEnum.MobileLength}}
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="date" class="df-control" id="date" name="date">
+                                    <input type="date" class="df-control" id="date" name="date" formControlName="date"
+                                        [ngClass]="{ 'is-invalid': formControl.date.touched && formControl.date.invalid }">
+                                    <div *ngIf="formControl.date.touched && formControl.date.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="reservationForm.get('date').hasError('required')">
+                                            {{validationMsgEnum.DateRequired}}
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <select name="time" id="time" class="df-control">
-                                        <option value="0">00.00</option>
-                                        <option value="1">01.00</option>
-                                        <option value="2">02.00</option>
-                                        <option value="3">03.00</option>
-                                        <option value="4">04.00</option>
-                                        <option value="5">05.00</option>
-                                        <option value="6">06.00</option>
-                                        <option value="7">07.00</option>
-                                        <option value="8">08.00</option>
-                                        <option value="9">09.00</option>
-                                        <option value="10">10.00</option>
-                                        <option value="11">11.00</option>
-                                        <option value="12">12.00</option>
-                                        <option value="13">13.00</option>
-                                        <option value="14">14.00</option>
-                                        <option value="15">15.00</option>
-                                        <option value="16">16.00</option>
-                                        <option value="17">17.00</option>
-                                        <option value="18">18.00</option>
-                                        <option value="19">19.00</option>
-                                        <option value="20">20.00</option>
-                                        <option value="21">21.00</option>
-                                        <option value="22">22.00</option>
-                                        <option value="23">23.00</option>
+                                    <select name="time" id="time" class="df-control" formControlName="time">
+                                        <ng-container *ngFor="let timeObj of TimeList">
+                                            <option [value]="timeObj.value">{{timeObj.text}}</option>
+                                        </ng-container>
                                     </select>
+                                    <div *ngIf="formControl.time.touched && formControl.time.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="reservationForm.get('time').hasError('required')">
+                                            {{validationMsgEnum.TimeRequired}}
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" class="df-control" id="seat" name="seat" placeholder="Seat *">
+                                    <input type="text" class="df-control" id="seat" name="seat" formControlName="seat"
+                                        placeholder="Seat *"
+                                        [ngClass]="{ 'is-invalid': formControl.seat.touched && formControl.seat.invalid }">
+                                    <div *ngIf="formControl.seat.touched && formControl.seat.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="reservationForm.get('seat').hasError('required')">
+                                            {{validationMsgEnum.SeatRequired}}
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="email" class="df-control" id="email" name="email" placeholder="Email *">
+                                    <input type="email" class="df-control" id="email" name="email"
+                                        formControlName="email" placeholder="Email *"
+                                        [ngClass]="{ 'is-invalid': formControl.email.touched && formControl.email.invalid }">
+                                    <div *ngIf="formControl.email.touched && formControl.email.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="reservationForm.get('email').hasError('required')">
+                                            {{validationMsgEnum.EmailRequired}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!reservationForm.get('email').hasError('required') && reservationForm.get('email').hasError('maxlength')">
+                                            {{validationMsgEnum.EmailMaxLength}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!reservationForm.get('email').hasError('required') && reservationForm.get('email').hasError('invalidEmailAddress')">
+                                            {{validationMsgEnum.EmailInvalid}}
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <textarea name="msg" id="msg" class="df-control" placeholder="Message *"></textarea>
+                                    <textarea name="msg" id="msg" class="df-control" placeholder="Message *"
+                                        formControlName="message"
+                                        [ngClass]="{ 'is-invalid': formControl.message.touched && formControl.message.invalid }"></textarea>
+                                    <div *ngIf="formControl.message.touched && formControl.message.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="reservationForm.get('message').hasError('required')">
+                                            {{validationMsgEnum.MessageRequired}}
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="submit" class="bfs-btn" value="Submit Message" >
+                                    <input type="submit" class="bfs-btn" value="Submit Message">
                                 </div>
                             </div>
                         </form>

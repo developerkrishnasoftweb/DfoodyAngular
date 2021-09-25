@@ -49,8 +49,10 @@ export class LoginComponent implements OnInit {
       }
     }, errRes => {
       this.isBtnDisabled = false;
-      if (errRes.error && errRes.error.error && errRes.error.responseCode === HttpResponseStatusCode.NotFound) {
+      debugger
+      if (errRes.error && errRes.error.error && errRes.error.responseCode && errRes.error.responseCode.statusCode === HttpResponseStatusCode.NotFound) {
         this.apiErrorMsg = errRes.error.responseMessage;
+        console.log('this.apiErrorMsg ', this.apiErrorMsg);
       }
     });
 

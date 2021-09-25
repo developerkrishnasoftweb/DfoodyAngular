@@ -45,15 +45,13 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm.markAllAsTouched();
     if (this.registrationForm.invalid)
       return;
-    else if (this.isEmailExist)
+    else if (this.isEmailExist || this.isMobileExist)
       return;
     const model = this.createResModel();
     this.isSubmitDisable = false;
     this.customerRegistrationService.registration(model).subscribe(res => {
       console.log(res);
       this.isSubmitDisable = true;
-
-
     });
   }
 
