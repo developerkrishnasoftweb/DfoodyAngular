@@ -1,5 +1,5 @@
 <header class="header-area dfoody-header">
-    <div class="dfoody-top-header">
+    <div class="dfoody-top-header" style="display: block;" *ngIf="userLoginService.isLoggedIn()">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -42,7 +42,18 @@
                                 <li>
                                     <a href="#foodmenu">Menu</a>
                                 </li>
-                                <li class="d-lg-none my-4">
+                                <li class="dropdown" *ngIf="userLoginService.isLoggedIn()"> 
+                                    <a class="nav-link" data-toggle="dropdown" href="#" role="button"
+                                        aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user"
+                                            aria-hidden="true"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item">My Profile</a>
+                                        <a class="dropdown-item">Order</a>
+                                        <a class="dropdown-item" (click)="userLoginService.logout()">Logout</a>
+                                    </div>
+                                </li>
+                                <li class="d-lg-none my-4" *ngIf="!userLoginService.isLoggedIn()">
                                     <a href="#loginModal" class="btn-style-a smoothscroll d-inline" data-toggle="modal"
                                         data-animation="fadeInUp" data-delay="0.85s">Login</a>
                                     <a href="#consult" class="btn-style-b ml-3 smoothscroll d-inline"
@@ -52,9 +63,11 @@
                         </div>
                         <div class="mt-icons d-none d-lg-flex">
                             <a href="#loginModal" class="btn-style-a smoothscroll" data-toggle="modal"
-                                data-animation="fadeInUp" data-delay="0.85s">Login</a>
+                                data-animation="fadeInUp" data-delay="0.85s"
+                                *ngIf="!userLoginService.isLoggedIn()">Login</a>
                             <a href="#consult" class="btn-style-b ml-3 smoothscroll" data-toggle="modal"
-                                data-animation="fadeInUp" data-delay="0.85s">Register</a>
+                                data-animation="fadeInUp" data-delay="0.85s"
+                                *ngIf="!userLoginService.isLoggedIn()">Register</a>
                             <ul class="mti-list d-none">
                                 <li>
                                     <span class="searchIcon">

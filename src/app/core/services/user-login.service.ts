@@ -78,7 +78,7 @@ export class UserLoginService {
     this.jwtTokenValue = null;
     token = localStorage.getItem('Authorization');
     // let token = environment.tokenNAR;
-    this.storeJwtToken(token);
+   // this.storeJwtToken(token);
     if (!token)
       return false;
 

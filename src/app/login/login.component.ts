@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerLoginReqModel } from '@core/models/customer';
 import { CustomerLoginService } from '@core/services/customer/customer-login.service';
-import { UserLoginService } from '@core/services/user-login.service';
 import { ValidationService } from '@core/services/validation.service';
 import { HttpResponseStatusCode, ValidationMsg } from '@core/utils/enum';
 
@@ -19,6 +18,9 @@ export class LoginComponent implements OnInit {
   apiErrorMsg = "";
 
   isBtnDisabled: boolean = false;
+
+  @ViewChild('closeButton') private closeButton: ElementRef;
+
 
   constructor(private formBuilder: FormBuilder,
     private customerLoginService: CustomerLoginService) { }
@@ -46,13 +48,12 @@ export class LoginComponent implements OnInit {
       this.isBtnDisabled = false;
       if (res.email && res.token) {
         localStorage.setItem('Authorization', res.token);
+        this.closeButton.nativeElement.click();
       }
     }, errRes => {
       this.isBtnDisabled = false;
-      debugger
       if (errRes.error && errRes.error.error && errRes.error.responseCode && errRes.error.responseCode.statusCode === HttpResponseStatusCode.NotFound) {
         this.apiErrorMsg = errRes.error.responseMessage;
-        console.log('this.apiErrorMsg ', this.apiErrorMsg);
       }
     });
 

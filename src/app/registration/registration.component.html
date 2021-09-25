@@ -1,9 +1,10 @@
-<div class="modal fade" id="consult" tabindex="-1" role="dialog" aria-labelledby="consultTitle" aria-hidden="true">
+<div class="modal fade" id="consult" tabindex="-1" role="dialog" aria-labelledby="consultTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="consultTitle">Register</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetForm()">
+                <button type="button" class="close" data-dismiss="modal" #closeButton aria-label="Close" (click)="resetForm()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -110,7 +111,8 @@
                                 </div>
                             </div>
                             <div class="col-md-12 mb-5">
-                                <input type="submit" class="bfs-btn d-block w-100" value="Submit Message">
+                                <input type="submit" [disabled]="isSubmitDisable" class="bfs-btn d-block w-100"
+                                    value="Submit Message">
                             </div>
                         </div>
                     </form>

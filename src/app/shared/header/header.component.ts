@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserLoginService } from '@core/services/user-login.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public userLoginService: UserLoginService) { }
 
   ngOnInit(): void {
+    this.userLoginService.decodeJwt();
+    console.log(this.userLoginService.jwtTokenValue);
+  }
+
+  logout() {
+    
   }
 
 }

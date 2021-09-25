@@ -4,7 +4,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Login Now</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetForm()">
+                <button type="button" class="close" data-dismiss="modal" #closeButton aria-label="Close"
+                    (click)="resetForm()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -51,7 +52,7 @@
                                 </span>
                                 <div class="text-right mt-3"><a href="#">Forgot password?</a></div>
                             </div>
-                           
+
                             <div class="col-md-12 mb-5">
                                 <input type="submit" [disabled]="isBtnDisabled" class="bfs-btn d-block w-100"
                                     value="Submit Message">

@@ -47,6 +47,7 @@
               "src/assets/js/jquery.fancybox.min.js",
               "src/assets/js/wow.min.js",
               "src/assets/YoutubeVideoModalPlugin/jquery.yu2fvl.js",
+              "src/assets/js/popper.min.js",
               "src/assets/js/bootstrap.min.js",
               "src/assets/js/theme.js"
             ]

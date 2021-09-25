@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerRegistrationReqModel } from '@core/models/customer';
 import { CustomerRegistrationService } from '@core/services/customer/customer-registration.service';
@@ -20,6 +20,9 @@ export class RegistrationComponent implements OnInit {
   isMobileExist: boolean = false;
 
   isSubmitDisable: boolean = false;
+
+  @ViewChild('closeButton') private closeButton: ElementRef;
+
 
   constructor(private formBuilder: FormBuilder,
     private customerRegistrationService: CustomerRegistrationService) { }
@@ -48,10 +51,13 @@ export class RegistrationComponent implements OnInit {
     else if (this.isEmailExist || this.isMobileExist)
       return;
     const model = this.createResModel();
-    this.isSubmitDisable = false;
+    this.isSubmitDisable = true;
     this.customerRegistrationService.registration(model).subscribe(res => {
-      console.log(res);
-      this.isSubmitDisable = true;
+      this.isSubmitDisable = false;
+      if (res && res.id) {
+        this.closeButton.nativeElement.click();
+        this.resetForm();
+      }
     });
   }
 
@@ -71,12 +77,6 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm.reset();
   }
 
-  //get IP Address
-  getIPAddress(): void {
-    this.customerRegistrationService.getIPAddress().subscribe(res => {
-      console.log('res ', res);
-    })
-  }
 
   //Check email valid or not 
   checkIsEmailExist() {
@@ -85,8 +85,8 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
-   //Check email valid or not 
-   checkIsMobileExist() {
+  //Check email valid or not 
+  checkIsMobileExist() {
     this.customerRegistrationService.checkIsMobileExist(this.registrationForm.value.mobile).subscribe(res => {
       this.isMobileExist = res;
     });
