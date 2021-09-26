@@ -54,8 +54,8 @@
                             </div>
 
                             <div class="col-md-12 mb-5">
-                                <input type="submit" [disabled]="isBtnDisabled" class="bfs-btn d-block w-100"
-                                    value="Submit Message">
+                                <input type="submit" [ngClass]="isBtnDisabled ? 'diabled-class' : ''"
+                                    [disabled]="isBtnDisabled" class="bfs-btn d-block w-100" value="Submit Message">
                             </div>
                         </div>
                     </form>

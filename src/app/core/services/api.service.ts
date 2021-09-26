@@ -39,8 +39,12 @@ export class ApiService {
    /*Is Mobile No Exist*/
    IsMobileNoExist = (mobile) => new Api<any>(this.http, this.apiEndpointUrl + '​/api/Register/isMobileNoExist/' + mobile);
 
-   /*Is Mobile No Exist*/
+   /*My Profile */
    MyProfile = new Api<any>(this.http, this.apiEndpointUrl + '​/api/Customer/MyProfile');
+
+   /*My Profile */
+   UpdateProfile = new Api<any>(this.http, this.apiEndpointUrl + '​/api/Customer/UpdateProfile');
+
 
    /*IP Address*/
    IPAddress = new Api<any>(this.http, 'http://api.ipify.org/?format=json');

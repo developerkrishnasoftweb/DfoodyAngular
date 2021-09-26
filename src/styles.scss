@@ -38,3 +38,10 @@
 .is-invalid {
     border-color: #f44336 !important;
 }
+
+.diabled-class {
+  border: 1px solid #999999 !important;
+  background-color: #cccccc !important;
+  color: #666666 !important;
+  cursor:no-drop !important;
+}

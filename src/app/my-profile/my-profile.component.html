@@ -2,20 +2,24 @@
     <div class="tab-bar">
         <ul class="nav nav-pills container" id="pills-tab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="true">My Profile</a>
+                <a class="nav-link active" id="profile-tab" data-toggle="pill" href="#profile" role="tab"
+                    aria-controls="profile" aria-selected="true">My Profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="wallets-tab" data-toggle="pill" href="#wallets" role="tab" aria-controls="wallets" aria-selected="false">Wallets</a>
+                <a class="nav-link" id="wallets-tab" data-toggle="pill" href="#wallets" role="tab"
+                    aria-controls="wallets" aria-selected="false">Wallets</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="orders-tab" data-toggle="pill" href="#orders" role="tab" aria-controls="orders" aria-selected="false">Orders</a>
+                <a class="nav-link" id="orders-tab" data-toggle="pill" href="#orders" role="tab" aria-controls="orders"
+                    aria-selected="false">Orders</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="address-tab" data-toggle="pill" href="#address" role="tab" aria-controls="address" aria-selected="false">Address</a>
+                <a class="nav-link" id="address-tab" data-toggle="pill" href="#address" role="tab"
+                    aria-controls="address" aria-selected="false">Address</a>
             </li>
-          </ul>
+        </ul>
     </div>
-    
+
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="container">
@@ -31,24 +35,68 @@
                     </div>
                 </div>
                 <div class="profile-form">
-                    <form action="">
+                    <form id="frmUser" [formGroup]="userForm" (ngSubmit)="onSubmit()">
                         <h3 class="form-title">Personal Details</h3>
                         <div class="row mb-5">
                             <div class="col-md-6 mb-5">
-                                <label for="firstName">First Name</label>
-                                <input type="text" class="df-control" id="userfirstName" name="userfirstName" placeholder="John">
+                                <label for="userfirstName">First Name</label>
+                                <input type="text" formControlName="firstName" class="df-control" id="userfirstName"
+                                    name="userfirstName"
+                                    [ngClass]="{ 'is-invalid': formControl.firstName.touched && formControl.firstName.invalid }"
+                                    placeholder="First Name *">
+                                <div *ngIf="formControl.firstName.touched && formControl.firstName.invalid">
+                                    <span class="validation-error"
+                                        *ngIf="userForm.get('firstName').hasError('required')">
+                                        {{validationMsgEnum.FirstNameRequired}}
+                                    </span>
+                                    <span class="validation-error"
+                                        *ngIf="!userForm.get('firstName').hasError('required') && userForm.get('firstName').hasError('maxlength')">
+                                        {{validationMsgEnum.FirstNameMaxLength}}
+                                    </span>
+                                </div>
                             </div>
                             <div class="col-md-6 mb-5">
                                 <label for="lastName">Last Name</label>
-                                <input type="text" class="df-control" id="userlastName" name="userlastName" placeholder="Doe">
+                                <input type="text" formControlName="lastName" class="df-control" id="userlastName"
+                                    name="userlastName"
+                                    [ngClass]="{ 'is-invalid': formControl.lastName.touched && formControl.lastName.invalid }"
+                                    placeholder="Last Name *">
+                                <div *ngIf="formControl.lastName.touched && formControl.lastName.invalid">
+                                    <span class="validation-error"
+                                        *ngIf="userForm.get('lastName').hasError('required')">
+                                        {{validationMsgEnum.LastNameRequired}}
+                                    </span>
+                                    <span class="validation-error"
+                                        *ngIf="!userForm.get('lastName').hasError('required') && userForm.get('lastName').hasError('maxlength')">
+                                        {{validationMsgEnum.LastNameMaxLength}}
+                                    </span>
+                                </div>
                             </div>
                             <div class="col-md-6 mb-5">
                                 <label for="email">Email Address</label>
-                                <input type="text" class="df-control" id="useremail" name="useremail" placeholder="john.doe@gmail.com">
+                                <input type="text" class="df-control diabled-class" formControlName="email" id="useremail"
+                                    name="useremail" disabled>
                             </div>
                             <div class="col-md-6 mb-5">
-                                <label for="phoneNumber">Phone Number</label>
-                                <input type="text" class="df-control" id="phoneNumber" name="phoneNumber" placeholder="9123456789">
+                                <label for="phoneNumber">Mobile</label>
+                                <input type="text" formControlName="mobile" class="df-control" id="usermobile"
+                                    name="usermobile" (focusout)="checkIsMobileExist()"
+                                    [ngClass]="{ 'is-invalid': formControl.mobile.touched && formControl.mobile.invalid }"
+                                    placeholder="Mobile *">
+                                <div *ngIf="formControl.mobile.touched && formControl.mobile.invalid">
+                                    <span class="validation-error" *ngIf="userForm.get('mobile').hasError('required')">
+                                        {{validationMsgEnum.MobileRequired}}
+                                    </span>
+                                    <span class="validation-error"
+                                        *ngIf="!userForm.get('mobile').hasError('required') && userForm.get('mobile').hasError('pattern')">
+                                        {{validationMsgEnum.MobileLength}}
+                                    </span>
+                                </div>
+                                <span
+                                    *ngIf="!userForm.get('mobile').hasError('required') && !userForm.get('mobile').hasError('pattern') && isMobileExist"
+                                    class="validation-error">
+                                    {{validationMsgEnum.MobileAlreadyExist}}
+                                </span>
                             </div>
                             <!-- <div class="col-md-6 mb-5">
                                 <label for="password">Password</label>
@@ -59,7 +107,7 @@
                                 <input type="text" class="df-control" id="Cpassword" name="Cpassword" placeholder="******">
                             </div> -->
                         </div>
-                        <h3 class="form-title">Address Details</h3>
+                        <!-- <h3 class="form-title">Address Details</h3>
                         <div class="row mb-5">
                             <div class="col-md-6 mb-5">
                                 <label for="address-1">Address 1</label>
@@ -69,10 +117,11 @@
                                 <label for="address-2">Address 2</label>
                                 <input type="text" class="df-control" id="address-2" name="address-2" placeholder="Enter Address 2">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row justify-content-center">
                             <div class="col-md-6">
-                                <input type="submit" class="bfs-btn d-block w-100" value="Update Now">
+                                <input type="submit" [ngClass]="isSubmitDisable || isObjectChange() ? 'diabled-class' : ''"
+                                    [disabled]="isSubmitDisable || isObjectChange()" class="bfs-btn d-block w-100" value="Update Now">
                             </div>
                         </div>
                     </form>
@@ -95,7 +144,8 @@
                         <form class="form-inline justify-content-center align-items-end">
                             <div class="form-group mx-sm-3">
                                 <label for="addMoney" class="mb-3">Add money to wallet</label>
-                                <input type="number" class="df-control" id="addMoney" name="addMoney" placeholder="1000">
+                                <input type="number" class="df-control" id="addMoney" name="addMoney"
+                                    placeholder="1000">
                             </div>
                             <input type="submit" class="bfs-btn py-4" value="Add Money">
                         </form>
@@ -169,7 +219,7 @@
                             <div class="order-details">
                                 <div class="title">Lorem Ipsum</div>
                                 <div class="place">London</div>
-                                <div class="des">Order #1234567890   |   2 FEB 2021, 8:08 PM</div>
+                                <div class="des">Order #1234567890 | 2 FEB 2021, 8:08 PM</div>
                                 <a href="#">View Details</a>
                             </div>
                         </div>
@@ -180,7 +230,7 @@
                             <div class="order-details">
                                 <div class="title">Lorem Ipsum</div>
                                 <div class="place">London</div>
-                                <div class="des">Order #1234567890   |   2 FEB 2021, 8:08 PM</div>
+                                <div class="des">Order #1234567890 | 2 FEB 2021, 8:08 PM</div>
                                 <a href="#">View Details</a>
                             </div>
                         </div>
@@ -191,14 +241,17 @@
                             <div class="order-details">
                                 <div class="title">Lorem Ipsum</div>
                                 <div class="place">London</div>
-                                <div class="des">Order #1234567890   |   2 FEB 2021, 8:08 PM</div>
+                                <div class="des">Order #1234567890 | 2 FEB 2021, 8:08 PM</div>
                                 <a href="#">View Details</a>
                             </div>
                         </div>
                         <div class="order-bottom-box">
-                            <a href="#" class="btn-style-a py-4" data-animation="fadeInUp" data-delay="0.85s">Re-order</a>
-                            <a href="#loyalty" class="btn-style-b py-4 ml-3" data-toggle="modal" data-animation="fadeInUp" data-delay="0.85s">Loyalty</a>
-                            <a href="#" class="btn-style-b gray py-4 ml-3" data-animation="fadeInUp" data-delay="0.85s">Help</a>
+                            <a href="#" class="btn-style-a py-4" data-animation="fadeInUp"
+                                data-delay="0.85s">Re-order</a>
+                            <a href="#loyalty" class="btn-style-b py-4 ml-3" data-toggle="modal"
+                                data-animation="fadeInUp" data-delay="0.85s">Loyalty</a>
+                            <a href="#" class="btn-style-b gray py-4 ml-3" data-animation="fadeInUp"
+                                data-delay="0.85s">Help</a>
                         </div>
                     </div>
                 </div>
@@ -225,7 +278,7 @@
                             <span class="small">/ 30</span>
                         </div>
                         <p>You are 4 points away from earning 3 Pizza</p>
-                        <h4>You  Can REEDEEM Points</h4>
+                        <h4>You Can REEDEEM Points</h4>
                     </div>
                     <div class="loyalty-barcode">
                         <img src="assets/img/barcode.png" alt="">

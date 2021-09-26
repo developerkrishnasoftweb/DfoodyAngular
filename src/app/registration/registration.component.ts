@@ -91,15 +91,29 @@ export class RegistrationComponent implements OnInit {
 
   //Check email valid or not 
   checkIsEmailExist() {
-    this.customerRegistrationService.checkIsEmailExist(this.registrationForm.value.email).subscribe(res => {
-      this.isEmailExist = res;
+    this.customerRegistrationService.checkIsEmailExist(this.registrationForm.value.mobile)
+    .pipe(finalize(() => {
+     
+    })).subscribe(response => {
+      this.isEmailExist = response;
+    }, error => {
+      if (error instanceof HttpErrorResponse) {
+        console.log(error);
+      }
     });
   }
 
   //Check email valid or not 
   checkIsMobileExist() {
-    this.customerRegistrationService.checkIsMobileExist(this.registrationForm.value.mobile).subscribe(res => {
-      this.isMobileExist = res;
+    this.customerRegistrationService.checkIsMobileExist(this.registrationForm.value.mobile)
+    .pipe(finalize(() => {
+     
+    })).subscribe(response => {
+      this.isMobileExist = response;
+    }, error => {
+      if (error instanceof HttpErrorResponse) {
+        console.log(error);
+      }
     });
   }
 }

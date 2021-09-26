@@ -4,11 +4,15 @@ export class CustomerLoginReqModel {
 }
 
 
-export class CustomerRegistrationReqModel {
+export class MyProfileModel {
     firstName: string;
     lastName: string;
     mobile: string;
     email: string;
+}
+
+
+export class CustomerRegistrationReqModel extends MyProfileModel {
     registeredIp: string;
     password: string;
     registeredFrom: string;
@@ -47,31 +51,18 @@ export const TimeList = [
     { value: "23", text: "23.00" },
 ]
 
-export class CustomerInfo {
+export class CustomerInfo extends CustomerRegistrationReqModel {
     customertypeId: number;
-    defaultLatitude: string;
-    email: string;
     emailToken: string;
-    fcmToken: string;
-    firstName: string;
     id: number;
     isDelete: string;
     isEmailVerified: boolean;
     isMobileVerified: boolean;
     isSynced: string;
-    langPref: string;
-    lastName: string;
     lastOrder: number;
-    latitude: string;
-    longitude: string;
     loyaltyPoint: number;
-    mobile: string;
-    password: string;
     qrExpirationTime: string;
     qrtempCode: string;
-    registeredFrom: string;
-    registeredIp: string;
-    socialProfileId: string;
     status: string;
     walletBalance: number;
     fullName: string;

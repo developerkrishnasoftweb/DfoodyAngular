@@ -1,8 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { CustomerInfo } from '@core/models/customer';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CustomerInfo, MyProfileModel } from '@core/models/customer';
+import { CustomerRegistrationService } from '@core/services/customer/customer-registration.service';
 import { MyprofileService } from '@core/services/customer/myprofile.service';
-import { UserLoginService } from '@core/services/user-login.service';
+import { ValidationService } from '@core/services/validation.service';
+import { ValidationMsg } from '@core/utils/enum';
 import { finalize } from 'rxjs/operators';
 
 @Component({
@@ -14,10 +17,56 @@ export class MyProfileComponent implements OnInit {
 
   customerInfo: CustomerInfo;
 
-  constructor(private myprofileService: MyprofileService, private userLoginService: UserLoginService) { }
+  userForm: FormGroup;
+
+  validationMsgEnum = ValidationMsg;
+
+  isMobileExist: boolean = false;
+
+  isSubmitDisable: boolean = false;
+
+  modelBeforeEdit: MyProfileModel;
+  modelAfterEdit: MyProfileModel;
+
+
+  get formControl() { return this.userForm.controls; }
+
+  constructor(private myprofileService: MyprofileService, private formBuilder: FormBuilder,
+    private customerRegistrationService: CustomerRegistrationService) { }
 
   ngOnInit(): void {
+    this.createForm();
     this.getProfileData();
+    Object.keys(this.userForm.controls)
+      .forEach(key => {
+        if (key)
+          this.onValueChanges(key);
+      });
+  }
+
+
+  //for update model value after form value change
+  onValueChanges(key): void {
+    this.userForm.get(key).valueChanges.subscribe((value) => {
+      if (key && (this.userForm.controls[key].dirty || this.userForm.controls[key].touched)) {
+        this.modelAfterEdit[key] = value;
+      }
+    });
+  }
+
+  createForm(): void {
+    this.userForm = this.formBuilder.group({
+      email: ['', [Validators.required, ValidationService.emailValidator]],
+      mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      firstName: ['', [Validators.required, Validators.maxLength(50)]],
+      lastName: ['', [Validators.required, Validators.maxLength(50)]],
+    });
+  }
+
+
+  resetForm(): void {
+    this.userForm.markAsUntouched();
+    this.userForm.reset();
   }
 
   getProfileData(): void {
@@ -30,6 +79,7 @@ export class MyProfileComponent implements OnInit {
         if (this.customerInfo) {
           this.customerInfo.fullName = this.customerInfo.firstName + ' ' + this.customerInfo.lastName;
           this.myprofileService.userFullName = this.customerInfo.fullName;
+          this.setFormData();
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {
@@ -38,4 +88,61 @@ export class MyProfileComponent implements OnInit {
       });
   }
 
+  setFormData(): void {
+    this.userForm.controls.email.setValue(this.customerInfo.email);
+    this.userForm.controls.mobile.setValue(this.customerInfo.mobile);
+    this.userForm.controls.firstName.setValue(this.customerInfo.firstName);
+    this.userForm.controls.lastName.setValue(this.customerInfo.lastName);
+
+    //set model value
+    this.modelBeforeEdit = new MyProfileModel();
+    this.modelAfterEdit = new MyProfileModel();
+    this.modelBeforeEdit.mobile = this.customerInfo.mobile;
+    this.modelBeforeEdit.email = this.customerInfo.email;
+    this.modelBeforeEdit.firstName = this.customerInfo.firstName;
+    this.modelBeforeEdit.lastName = this.customerInfo.lastName;
+    this.modelAfterEdit = JSON.parse(JSON.stringify(this.modelBeforeEdit));
+  }
+
+  //Check email valid or not 
+  checkIsMobileExist(): void {
+    this.customerRegistrationService.checkIsMobileExist(this.userForm.value.mobile)
+      .pipe(finalize(() => {
+
+      })).subscribe(response => {
+        this.isMobileExist = response;
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
+  }
+
+  
+  //Check form value is changed or not
+  isObjectChange() {
+    return JSON.stringify(this.modelAfterEdit) === JSON.stringify(this.modelBeforeEdit);
+  }
+
+  onSubmit(): void {
+    this.userForm.markAllAsTouched();
+    if (this.userForm.invalid)
+      return;
+    else if (this.isMobileExist)
+      return;
+    this.isSubmitDisable = true;
+    this.myprofileService.updateProfileInfo(this.modelAfterEdit)
+      .pipe(finalize(() => {
+        this.isSubmitDisable = false;
+      })).subscribe(response => {
+        if (response && response.id) {
+          this.resetForm();
+          this.getProfileData();
+        }
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
+  }
 }
