@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ApiService } from '../api.service';
 
 @Injectable({
@@ -7,9 +8,11 @@ import { ApiService } from '../api.service';
 })
 export class MyprofileService {
 
+  userFullName: string = "";
+
   constructor(private _apiService: ApiService) { }
 
   getMyProfile(): Observable<any> {
-    return this._apiService.MyProfile.create(null, null, null).map(response => response)
+    return this._apiService.MyProfile.getAll(null, null).pipe(map(response => response));
   }
 }

@@ -1,9 +1,6 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 // import { Constants } from '../../client-maintenance/client-maintenance-contants';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { Api } from './api';
 import { ApiService } from './api.service';
 import { Observable, Subject } from 'rxjs';
 // import { UtilService } from './util.service';
@@ -20,6 +17,7 @@ export class UserLoginService {
   private isUserLoggedInFlag = new Subject();
   isUserLoggedInFlag_ = this.isUserLoggedInFlag.asObservable();
   userLoginDetails: any;
+
 
 
   constructor(private _apiService: ApiService, private _router: Router) {
@@ -40,6 +38,7 @@ export class UserLoginService {
   isLoggedIn() {
     this.decodeJwt();
     if (this.jwtTokenValue) {
+      this.userLoginUpdateBool(this.tokenIsExpired());
       return this.tokenIsExpired();
     } else {
       return false;
@@ -107,6 +106,7 @@ export class UserLoginService {
     localStorage.removeItem('userName');
     localStorage.removeItem('branchCode');
     this.jwtTokenValue = null;
+    this.userLoginUpdateBool(false);
     this.getCurrentUser();
     return false;
   }
@@ -115,12 +115,8 @@ export class UserLoginService {
     this._router.navigateByUrl('/login');
   }
 
-  userLoginUpdateBool() {
-    this.isUserLoggedInFlag.next(true);
-  }
-
-  userLoggedOutUpdateBool() {
-    this.isUserLoggedInFlag.next(false);
+  userLoginUpdateBool(value) {
+    this.isUserLoggedInFlag.next(value);
   }
 
 }

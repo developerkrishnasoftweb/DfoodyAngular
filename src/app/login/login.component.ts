@@ -1,9 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CustomerLoginReqModel } from '@core/models/customer';
 import { CustomerLoginService } from '@core/services/customer/customer-login.service';
+import { UserLoginService } from '@core/services/user-login.service';
 import { ValidationService } from '@core/services/validation.service';
 import { HttpResponseStatusCode, ValidationMsg } from '@core/utils/enum';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +27,8 @@ export class LoginComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,
+    private router: Router,
+    private userLoginService: UserLoginService,
     private customerLoginService: CustomerLoginService) { }
 
   ngOnInit(): void {
@@ -44,19 +50,24 @@ export class LoginComponent implements OnInit {
       return;
     const model = this.createResModel();
     this.isBtnDisabled = true;
-    this.customerLoginService.login(model).subscribe(res => {
-      this.isBtnDisabled = false;
-      if (res.email && res.token) {
-        localStorage.setItem('Authorization', res.token);
-        this.closeButton.nativeElement.click();
-      }
-    }, errRes => {
-      this.isBtnDisabled = false;
-      if (errRes.error && errRes.error.error && errRes.error.responseCode && errRes.error.responseCode.statusCode === HttpResponseStatusCode.NotFound) {
-        this.apiErrorMsg = errRes.error.responseMessage;
-      }
-    });
-
+    this.customerLoginService.login(model)
+      .pipe(finalize(() => {
+        this.isBtnDisabled = false;
+      })).subscribe(response => {
+        if (response.email && response.token) {
+          localStorage.setItem('Authorization', response.token);
+          this.customerLoginService
+          this.closeButton.nativeElement.click();
+          this.userLoginService.userLoginUpdateBool(true);
+        }
+        this.router.navigate(['myprofile']);
+      }, errRes => {
+        if (errRes instanceof HttpErrorResponse) {
+          if (errRes.error && errRes.error.error && errRes.error.responseCode && errRes.error.responseCode.statusCode === HttpResponseStatusCode.NotFound) {
+            this.apiErrorMsg = errRes.error.responseMessage;
+          }
+        }
+      });
   }
 
   createResModel(): CustomerLoginReqModel {

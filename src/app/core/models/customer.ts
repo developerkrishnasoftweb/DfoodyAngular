@@ -46,3 +46,33 @@ export const TimeList = [
     { value: "22", text: "22.00" },
     { value: "23", text: "23.00" },
 ]
+
+export class CustomerInfo {
+    customertypeId: number;
+    defaultLatitude: string;
+    email: string;
+    emailToken: string;
+    fcmToken: string;
+    firstName: string;
+    id: number;
+    isDelete: string;
+    isEmailVerified: boolean;
+    isMobileVerified: boolean;
+    isSynced: string;
+    langPref: string;
+    lastName: string;
+    lastOrder: number;
+    latitude: string;
+    longitude: string;
+    loyaltyPoint: number;
+    mobile: string;
+    password: string;
+    qrExpirationTime: string;
+    qrtempCode: string;
+    registeredFrom: string;
+    registeredIp: string;
+    socialProfileId: string;
+    status: string;
+    walletBalance: number;
+    fullName: string;
+}

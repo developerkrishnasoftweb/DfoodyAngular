@@ -1,9 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerRegistrationReqModel } from '@core/models/customer';
 import { CustomerRegistrationService } from '@core/services/customer/customer-registration.service';
 import { ValidationService } from '@core/services/validation.service';
 import { ValidationMsg } from '@core/utils/enum';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-registration',
@@ -44,6 +46,8 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
+
+
   onSubmit(): void {
     this.registrationForm.markAllAsTouched();
     if (this.registrationForm.invalid)
@@ -52,11 +56,18 @@ export class RegistrationComponent implements OnInit {
       return;
     const model = this.createResModel();
     this.isSubmitDisable = true;
-    this.customerRegistrationService.registration(model).subscribe(res => {
+
+    this.customerRegistrationService.registration(model)
+    .pipe(finalize(() => {
       this.isSubmitDisable = false;
-      if (res && res.id) {
+    })).subscribe(response => {
+      if (response && response.id) {
         this.closeButton.nativeElement.click();
         this.resetForm();
+      }
+    }, error => {
+      if (error instanceof HttpErrorResponse) {
+       console.log(error);
       }
     });
   }
