@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MyProfileReqModel } from '@core/models/customer';
 import { MyprofileService } from '@core/services/customer/myprofile.service';
 import { UserLoginService } from '@core/services/user-login.service';
 
@@ -21,13 +20,5 @@ export class MyProfileComponent implements OnInit {
       console.log('res ', res);
     });
   }
-
-  createResModel() {
-    this.userLoginService.decodeJwt();
-    let myProfileReqModel = new MyProfileReqModel();
-    myProfileReqModel.id = this.userLoginService.jwtTokenValue.nameid;
-    return myProfileReqModel;
-  }
-
 
 }

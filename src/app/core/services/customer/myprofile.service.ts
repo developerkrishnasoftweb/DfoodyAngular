@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MyProfileReqModel } from '@core/models/customer';
 import { Observable } from 'rxjs';
 import { ApiService } from '../api.service';
 
