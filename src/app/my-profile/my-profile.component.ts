@@ -56,7 +56,7 @@ export class MyProfileComponent implements OnInit {
 
   createForm(): void {
     this.userForm = this.formBuilder.group({
-      email: ['', [Validators.required, ValidationService.emailValidator]],
+      // email: ['', [Validators.required, ValidationService.emailValidator]],
       mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       firstName: ['', [Validators.required, Validators.maxLength(50)]],
       lastName: ['', [Validators.required, Validators.maxLength(50)]],
@@ -89,7 +89,7 @@ export class MyProfileComponent implements OnInit {
   }
 
   setFormData(): void {
-    this.userForm.controls.email.setValue(this.customerInfo.email);
+    // this.userForm.controls.email.setValue(this.customerInfo.email);
     this.userForm.controls.mobile.setValue(this.customerInfo.mobile);
     this.userForm.controls.firstName.setValue(this.customerInfo.firstName);
     this.userForm.controls.lastName.setValue(this.customerInfo.lastName);
@@ -98,7 +98,7 @@ export class MyProfileComponent implements OnInit {
     this.modelBeforeEdit = new MyProfileModel();
     this.modelAfterEdit = new MyProfileModel();
     this.modelBeforeEdit.mobile = this.customerInfo.mobile;
-    this.modelBeforeEdit.email = this.customerInfo.email;
+    // this.modelBeforeEdit.email = this.customerInfo.email;
     this.modelBeforeEdit.firstName = this.customerInfo.firstName;
     this.modelBeforeEdit.lastName = this.customerInfo.lastName;
     this.modelAfterEdit = JSON.parse(JSON.stringify(this.modelBeforeEdit));
@@ -118,7 +118,7 @@ export class MyProfileComponent implements OnInit {
       });
   }
 
-  
+
   //Check form value is changed or not
   isObjectChange() {
     return JSON.stringify(this.modelAfterEdit) === JSON.stringify(this.modelBeforeEdit);
@@ -135,9 +135,11 @@ export class MyProfileComponent implements OnInit {
       .pipe(finalize(() => {
         this.isSubmitDisable = false;
       })).subscribe(response => {
-        if (response && response.id) {
-          this.resetForm();
-          this.getProfileData();
+        if (response) {
+          // this.resetForm();
+          this.customerInfo = response.body;
+          this.customerInfo.fullName = this.customerInfo.firstName + ' ' + this.customerInfo.lastName;
+          this.myprofileService.userFullName = this.customerInfo.fullName;
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {

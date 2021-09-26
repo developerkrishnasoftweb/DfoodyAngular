@@ -9,6 +9,9 @@ export class MyProfileModel {
     lastName: string;
     mobile: string;
     email: string;
+    latitude:string;
+    longitude:string;
+    langPref: string;
 }
 
 
@@ -53,6 +56,8 @@ export const TimeList = [
 
 export class CustomerInfo extends CustomerRegistrationReqModel {
     customertypeId: number;
+    firstName: string;
+    lastName: string;
     emailToken: string;
     id: number;
     isDelete: string;
