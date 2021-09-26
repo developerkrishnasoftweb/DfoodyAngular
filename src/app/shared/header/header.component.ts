@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomerInfo } from '@core/models/customer';
+import { CustomerDataPreFillService } from '@core/services/customer/customer-data-pre-fill.service';
 import { MyprofileService } from '@core/services/customer/myprofile.service';
 import { UserLoginService } from '@core/services/user-login.service';
 import { finalize } from 'rxjs/operators';
@@ -16,7 +17,7 @@ export class HeaderComponent implements OnInit {
   isUserLogin;
 
   constructor(public userLoginService: UserLoginService,
-    public myprofileService: MyprofileService,
+    private preFillService: CustomerDataPreFillService,
     private router: Router) { }
 
   @ViewChild('loginButton') private loginButton: ElementRef;
@@ -25,11 +26,10 @@ export class HeaderComponent implements OnInit {
     this.userLoginService.isUserLoggedInFlag_.subscribe(value => {
       this.isUserLogin = value;
     });
-
   }
 
   menuClick() {
-    if (this.userLoginService.isLoggedIn())
+    if (this.isUserLogin)
       this.router.navigate(['/foodmenu']);
     else {
       if (this.loginButton)

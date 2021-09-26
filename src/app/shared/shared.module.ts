@@ -4,11 +4,12 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent],
+  declarations: [HeaderComponent, FooterComponent, SnackBarComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -17,7 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   exports:[
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SnackBarComponent
   ]
 })
 export class SharedModule { }

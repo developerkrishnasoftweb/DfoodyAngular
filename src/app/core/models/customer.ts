@@ -21,10 +21,7 @@ export class CustomerRegistrationReqModel extends MyProfileModel {
     registeredFrom: string;
     socialProfileId: string;
     defaultLatitude: string;
-    latitude: string;
-    longitude: string;
     fcmToken: string;
-    langPref: string;
 }
 
 export const TimeList = [
@@ -56,8 +53,6 @@ export const TimeList = [
 
 export class CustomerInfo extends CustomerRegistrationReqModel {
     customertypeId: number;
-    firstName: string;
-    lastName: string;
     emailToken: string;
     id: number;
     isDelete: string;

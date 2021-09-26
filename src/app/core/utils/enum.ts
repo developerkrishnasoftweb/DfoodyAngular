@@ -55,3 +55,9 @@ export enum ValidationMsg {
 
 }
 
+//snack bar class 
+export enum SnackBarCssClass {
+    success = "success",
+    danger = "danger"
+}
+

@@ -1,11 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerInfo, MyProfileModel } from '@core/models/customer';
+import { CustomerDataPreFillService } from '@core/services/customer/customer-data-pre-fill.service';
 import { CustomerRegistrationService } from '@core/services/customer/customer-registration.service';
 import { MyprofileService } from '@core/services/customer/myprofile.service';
-import { ValidationService } from '@core/services/validation.service';
 import { ValidationMsg } from '@core/utils/enum';
+import { SnackBarComponent } from '@shared/snack-bar/snack-bar.component';
+import { SnackBarService } from '@shared/snack-bar/snack-bar.service';
 import { finalize } from 'rxjs/operators';
 
 @Component({
@@ -32,7 +34,9 @@ export class MyProfileComponent implements OnInit {
   get formControl() { return this.userForm.controls; }
 
   constructor(private myprofileService: MyprofileService, private formBuilder: FormBuilder,
-    private customerRegistrationService: CustomerRegistrationService) { }
+    private customerRegistrationService: CustomerRegistrationService,
+    private snackBarService: SnackBarService,
+    private preFillService: CustomerDataPreFillService) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -56,7 +60,6 @@ export class MyProfileComponent implements OnInit {
 
   createForm(): void {
     this.userForm = this.formBuilder.group({
-      // email: ['', [Validators.required, ValidationService.emailValidator]],
       mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       firstName: ['', [Validators.required, Validators.maxLength(50)]],
       lastName: ['', [Validators.required, Validators.maxLength(50)]],
@@ -78,7 +81,7 @@ export class MyProfileComponent implements OnInit {
         this.customerInfo = response;
         if (this.customerInfo) {
           this.customerInfo.fullName = this.customerInfo.firstName + ' ' + this.customerInfo.lastName;
-          this.myprofileService.userFullName = this.customerInfo.fullName;
+          this.preFillService.userFullName = this.customerInfo.fullName;
           this.setFormData();
         }
       }, error => {
@@ -139,7 +142,9 @@ export class MyProfileComponent implements OnInit {
           // this.resetForm();
           this.customerInfo = response.body;
           this.customerInfo.fullName = this.customerInfo.firstName + ' ' + this.customerInfo.lastName;
-          this.myprofileService.userFullName = this.customerInfo.fullName;
+          this.preFillService.userFullName = this.customerInfo.fullName;
+          this.modelBeforeEdit = JSON.parse(JSON.stringify(this.modelAfterEdit));
+          this.snackBarService.show("Data is Updated Successfully");
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {
