@@ -103,13 +103,14 @@ export class ApiService {
    CustomerRegistration = new Api<any>(this.http, this.apiEndpointUrl + '/api/Register/add');
 
    /*Is Email Exist*/
-   IsEmailExist = (email) => new Api<any>(this.http, this.apiEndpointUrl + '​/api/Register/isEmailExist/'+email);
+   IsEmailExist = (email) => new Api<any>(this.http, this.apiEndpointUrl + '​/api/Register/isEmailExist/' + email);
 
-    /*Is Mobile No Exist*/
-    IsMobileNoExist = (mobile) => new Api<any>(this.http, this.apiEndpointUrl + '​/api/Register/isMobileNoExist/'+mobile);
+   /*Is Mobile No Exist*/
+   IsMobileNoExist = (mobile) => new Api<any>(this.http, this.apiEndpointUrl + '​/api/Register/isMobileNoExist/' + mobile);
 
+   /*Is Mobile No Exist*/
+   MyProfile = new Api<any>(this.http, this.apiEndpointUrl + '​/api/Customer/MyProfile');
 
    /*IP Address*/
    IPAddress = new Api<any>(this.http, 'http://api.ipify.org/?format=json');
-
 }

@@ -1,0 +1,237 @@
+<div class="profile-tab hero-area">
+    <div class="tab-bar">
+        <ul class="nav nav-pills container" id="pills-tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="true">My Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="wallets-tab" data-toggle="pill" href="#wallets" role="tab" aria-controls="wallets" aria-selected="false">Wallets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="orders-tab" data-toggle="pill" href="#orders" role="tab" aria-controls="orders" aria-selected="false">Orders</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="address-tab" data-toggle="pill" href="#address" role="tab" aria-controls="address" aria-selected="false">Address</a>
+            </li>
+          </ul>
+    </div>
+    
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="container">
+                <div class="profile-details">
+                    <div class="d-flex align-items-center w-100">
+                        <div class="profile-img">
+                            <img src="assets/img/profile.png" class="img-fluid" alt="">
+                        </div>
+                        <div class="details">
+                            <div class="profile-name">John Doe</div>
+                            <div class="profile-email">john.doe@gmail.com</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-form">
+                    <form action="">
+                        <h3 class="form-title">Personal Details</h3>
+                        <div class="row mb-5">
+                            <div class="col-md-6 mb-5">
+                                <label for="firstName">First Name</label>
+                                <input type="text" class="df-control" id="firstName" name="firstName" placeholder="John">
+                            </div>
+                            <div class="col-md-6 mb-5">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="df-control" id="lastName" name="lastName" placeholder="Doe">
+                            </div>
+                            <div class="col-md-6 mb-5">
+                                <label for="email">Email Address</label>
+                                <input type="text" class="df-control" id="email" name="email" placeholder="john.doe@gmail.com">
+                            </div>
+                            <div class="col-md-6 mb-5">
+                                <label for="phoneNumber">Phone Number</label>
+                                <input type="text" class="df-control" id="phoneNumber" name="phoneNumber" placeholder="9123456789">
+                            </div>
+                            <div class="col-md-6 mb-5">
+                                <label for="password">Password</label>
+                                <input type="text" class="df-control" id="password" name="password" placeholder="******">
+                            </div>
+                            <div class="col-md-6 mb-5">
+                                <label for="Cpassword">Confirm Password</label>
+                                <input type="text" class="df-control" id="Cpassword" name="Cpassword" placeholder="******">
+                            </div>
+                        </div>
+                        <h3 class="form-title">Address Details</h3>
+                        <div class="row mb-5">
+                            <div class="col-md-6 mb-5">
+                                <label for="address-1">Address 1</label>
+                                <input type="text" class="df-control" id="address-1" name="address-1" placeholder="Enter Address 1">
+                            </div>
+                            <div class="col-md-6 mb-5">
+                                <label for="address-2">Address 2</label>
+                                <input type="text" class="df-control" id="address-2" name="address-2" placeholder="Enter Address 2">
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <input type="submit" class="bfs-btn d-block w-100" value="Update Now">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="wallets" role="tabpanel" aria-labelledby="wallets-tab">
+            <div class="container">
+                <div class="body-box">
+                    <div class="wallet-details">
+                        <div class="wallet-icon">
+                            <img src="assets/img/wallet-icon.png" alt="">
+                        </div>
+                        <div class="details">
+                            <div class="wallet-total">$123.22</div>
+                            <div class="wallet-des">Wallet Balance</div>
+                        </div>
+                    </div>
+                    <div class="wallet-body">
+                        <form class="form-inline justify-content-center align-items-end">
+                            <div class="form-group mx-sm-3">
+                                <label for="addMoney" class="mb-3">Add money to wallet</label>
+                                <input type="number" class="df-control" id="addMoney" name="addMoney" placeholder="1000">
+                            </div>
+                            <input type="submit" class="bfs-btn py-4" value="Add Money">
+                        </form>
+                        <div class="wallet-table">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">TRANSACTIONS</th>
+                                            <th scope="col">AMOUNT</th>
+                                            <th scope="col">STATUS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h4 class="h4">OCTOBER 2020</h4>
+                                                <div class="wallet-details">
+                                                    <div class="wallet-icon">
+                                                        <img src="assets/img/wallet-icon.png" alt="">
+                                                    </div>
+                                                    <p>Sent to Lorem Ipson 8 OCT, 10:17 PM</p>
+                                                </div>
+                                            </td>
+                                            <td>-$45</td>
+                                            <td>SUCCESS</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h4 class="h4">OCTOBER 2020</h4>
+                                                <div class="wallet-details">
+                                                    <div class="wallet-icon">
+                                                        <img src="assets/img/wallet-icon.png" alt="">
+                                                    </div>
+                                                    <p>Sent to Lorem Ipson 8 OCT, 10:17 PM</p>
+                                                </div>
+                                            </td>
+                                            <td>-$45</td>
+                                            <td>SUCCESS</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h4 class="h4">OCTOBER 2020</h4>
+                                                <div class="wallet-details">
+                                                    <div class="wallet-icon">
+                                                        <img src="assets/img/wallet-icon.png" alt="">
+                                                    </div>
+                                                    <p>Sent to Lorem Ipson 8 OCT, 10:17 PM</p>
+                                                </div>
+                                            </td>
+                                            <td>-$45</td>
+                                            <td>SUCCESS</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+            <div class="container">
+                <div class="body-box">
+                    <div class="order-body">
+                        <h5 class="h5 mb-5">Past Orders</h5>
+                        <div class="order-box">
+                            <div class="order-thumb">
+                                <img src="assets/img/order-thum.png" alt="">
+                            </div>
+                            <div class="order-details">
+                                <div class="title">Lorem Ipsum</div>
+                                <div class="place">London</div>
+                                <div class="des">Order #1234567890   |   2 FEB 2021, 8:08 PM</div>
+                                <a href="#">View Details</a>
+                            </div>
+                        </div>
+                        <div class="order-box">
+                            <div class="order-thumb">
+                                <img src="assets/img/order-thum.png" alt="">
+                            </div>
+                            <div class="order-details">
+                                <div class="title">Lorem Ipsum</div>
+                                <div class="place">London</div>
+                                <div class="des">Order #1234567890   |   2 FEB 2021, 8:08 PM</div>
+                                <a href="#">View Details</a>
+                            </div>
+                        </div>
+                        <div class="order-box">
+                            <div class="order-thumb">
+                                <img src="assets/img/order-thum.png" alt="">
+                            </div>
+                            <div class="order-details">
+                                <div class="title">Lorem Ipsum</div>
+                                <div class="place">London</div>
+                                <div class="des">Order #1234567890   |   2 FEB 2021, 8:08 PM</div>
+                                <a href="#">View Details</a>
+                            </div>
+                        </div>
+                        <div class="order-bottom-box">
+                            <a href="#" class="btn-style-a py-4" data-animation="fadeInUp" data-delay="0.85s">Re-order</a>
+                            <a href="#loyalty" class="btn-style-b py-4 ml-3" data-toggle="modal" data-animation="fadeInUp" data-delay="0.85s">Loyalty</a>
+                            <a href="#" class="btn-style-b gray py-4 ml-3" data-animation="fadeInUp" data-delay="0.85s">Help</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">...</div>
+    </div>
+</div>
+
+<div class="modal fade" id="loyalty" tabindex="-1" role="dialog" aria-labelledby="loyaltyTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="loyaltyTitle">Register</h5> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body px-0">
+                <div class="loyalty-card">
+                    <div class="loyalty-details">
+                        <div class="loyalty-number">
+                            <span class="big">26</span>
+                            <span class="small">/ 30</span>
+                        </div>
+                        <p>You are 4 points away from earning 3 Pizza</p>
+                        <h4>You  Can REEDEEM Points</h4>
+                    </div>
+                    <div class="loyalty-barcode">
+                        <img src="assets/img/barcode.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

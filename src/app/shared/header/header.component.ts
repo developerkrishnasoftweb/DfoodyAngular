@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserLoginService } from '@core/services/user-login.service';
 
 @Component({
@@ -8,15 +9,23 @@ import { UserLoginService } from '@core/services/user-login.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public userLoginService: UserLoginService) { }
+  constructor(public userLoginService: UserLoginService,
+    private router: Router) { }
+
+  @ViewChild('loginButton') private loginButton: ElementRef;
 
   ngOnInit(): void {
     this.userLoginService.decodeJwt();
     console.log(this.userLoginService.jwtTokenValue);
   }
 
-  logout() {
-    
+  menuClick() {
+    if (this.userLoginService.isLoggedIn())
+      this.router.navigate(['/foodmenu']);
+    else {
+      if (this.loginButton)
+        this.loginButton.nativeElement.click();
+    }
   }
 
 }

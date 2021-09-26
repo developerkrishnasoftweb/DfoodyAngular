@@ -15,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { FoodmenuComponent } from './foodmenu/foodmenu.component';
+import { ShopComponent } from './shop/shop.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { FoodmenuComponent } from './foodmenu/foodmenu.component';
     ContactUsComponent,
     HomeComponent,
     ReservationComponent,
-    FoodmenuComponent
+    FoodmenuComponent,
+    ShopComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,

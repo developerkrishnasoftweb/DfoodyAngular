@@ -34,28 +34,33 @@
                                 <span class="dfoodyMenu-btn-icon"></span>
                             </label>
                             <ul id="dfoodyMenu" class="sm sm-simple dfoody-menu">
-                                <li><a href="#home">Home</a></li>
-                                <li><a href="#about">About</a></li>
                                 <li>
                                     <a href="#reservation">Reservation</a>
                                 </li>
                                 <li>
-                                    <a href="#foodmenu">Menu</a>
+                                    <a (click)="menuClick()">Menu</a>
                                 </li>
-                                <li class="dropdown" *ngIf="userLoginService.isLoggedIn()"> 
+                                <li *ngIf="userLoginService.isLoggedIn()">
+                                    <a href="#shop">Shop</a>
+                                </li>
+                                <li class="dropdown" *ngIf="userLoginService.isLoggedIn()">
                                     <a class="nav-link" data-toggle="dropdown" href="#" role="button"
                                         aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user"
                                             aria-hidden="true"></i>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item">My Profile</a>
-                                        <a class="dropdown-item">Order</a>
-                                        <a class="dropdown-item" (click)="userLoginService.logout()">Logout</a>
+                                        <a  routerLink="myprofile"  class="dropdown-item"><i class="fa fa-user-circle" aria-hidden="true"></i>
+                                            My Profile</a>
+                                        <a class="dropdown-item"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            Order</a>
+                                        <a class="dropdown-item" (click)="userLoginService.logout()"> <i
+                                                class="fa fa-sign-out" aria-hidden="true"></i>
+                                            Logout</a>
                                     </div>
                                 </li>
                                 <li class="d-lg-none my-4" *ngIf="!userLoginService.isLoggedIn()">
                                     <a href="#loginModal" class="btn-style-a smoothscroll d-inline" data-toggle="modal"
-                                        data-animation="fadeInUp" data-delay="0.85s">Login</a>
+                                        data-animation="fadeInUp" data-delay="0.85s" #loginButton>Login</a>
                                     <a href="#consult" class="btn-style-b ml-3 smoothscroll d-inline"
                                         data-toggle="modal" data-animation="fadeInUp" data-delay="0.85s">Register</a>
                                 </li>

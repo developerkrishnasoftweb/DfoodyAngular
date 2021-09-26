@@ -46,4 +46,3 @@ export const TimeList = [
     { value: "22", text: "22.00" },
     { value: "23", text: "23.00" },
 ]
-
