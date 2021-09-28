@@ -21,7 +21,9 @@
                 <div class="col-3 col-md-2 col-xl-3">
                     <div class="logo-wrapper">
                         <a href="index.html">
-                            <img src="assets/img/logo-1.png" alt="">
+                            <img [src]="preFillService?.configurationData?.enterpriseLogo"
+                                onerror="this.onerror = null;this.src = 'assets/img/logo-1.png'"
+                                [alt]="preFillService?.configurationData?.enterpriseLogo">
                         </a>
                     </div>
                 </div>
@@ -49,7 +51,8 @@
                                 <li class="dropdown" *ngIf="isUserLogin">
                                     <a class="nav-link" data-toggle="dropdown" href="#" role="button"
                                         aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user"
-                                            aria-hidden="true"></i> <span class="username">{{preFillService.userFullName}}</span>
+                                            aria-hidden="true"></i> <span
+                                            class="username">{{preFillService.userFullName}}</span>
                                     </a>
                                     <div class="dropdown-menu">
                                         <a routerLink="myprofile" class="dropdown-item"><i class="fa fa-user-circle"

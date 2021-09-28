@@ -17,6 +17,7 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { FoodmenuComponent } from './foodmenu/foodmenu.component';
 import { ShopComponent } from './shop/shop.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     ReservationComponent,
     FoodmenuComponent,
     ShopComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

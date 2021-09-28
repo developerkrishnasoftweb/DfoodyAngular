@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ConfigurationModel } from '@core/models/customer';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +7,8 @@ import { Injectable } from '@angular/core';
 export class CustomerDataPreFillService {
 
   private fullname: any;
+
+  private configurationData: ConfigurationModel;
 
   constructor() { }
 
@@ -15,5 +18,13 @@ export class CustomerDataPreFillService {
 
   get userFullName() {
     return this.fullname;
+  }
+
+  set userConfigurationData(value) {
+    this.configurationData = value;
+  }
+
+  get userConfigurationData() {
+    return this.configurationData;
   }
 }

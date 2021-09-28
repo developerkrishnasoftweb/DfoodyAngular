@@ -6,10 +6,6 @@
                     aria-controls="profile" aria-selected="true">My Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="wallets-tab" data-toggle="pill" href="#wallets" role="tab"
-                    aria-controls="wallets" aria-selected="false">Wallets</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" id="orders-tab" data-toggle="pill" href="#orders" role="tab" aria-controls="orders"
                     aria-selected="false">Orders</a>
             </li>
@@ -25,18 +21,35 @@
             <div class="container">
                 <div class="profile-details">
                     <div class="d-flex align-items-center w-100">
-                        <div class="profile-img">
-                            <img src="assets/img/profile.png" class="img-fluid" alt="">
+                        <div>
+                            <div class="profile-img">
+                                <img src="assets/img/profile.png" class="img-fluid" alt="">
+                            </div>
+                            <div class="details">
+                                <div class="profile-name">{{customerInfo?.fullName}}</div>
+                                <div class="profile-email">{{customerInfo?.email}}</div>
+                            </div>
+                            <a href="#changePasswordModal" data-toggle="modal"
+                                data-animation="fadeInUp" data-delay="0.85s"> <span class="change-password">Change
+                                    Password</span>
+                            </a>
                         </div>
-                        <div class="details">
-                            <div class="profile-name">{{customerInfo?.fullName}}</div>
-                            <div class="profile-email">{{customerInfo?.email}}</div>
+
+                        <div class="wallet-details user-wallet">
+                            <div class="wallet-icon">
+                                <img src="assets/img/wallet-icon.png" alt="">
+                            </div>
+                            <div class="details">
+                                <div class="wallet-total">${{customerInfo?.walletBalance}}</div>
+                                <div class="wallet-des">Wallet Balance</div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="profile-form">
                     <form id="frmUser" [formGroup]="userForm" (ngSubmit)="onSubmit()">
-                        <h3 class="form-title">Personal Details</h3>
+                        <h3 class="form-title">Personal Details
+                        </h3>
                         <div class="row mb-5">
                             <div class="col-md-6 mb-5">
                                 <label for="userfirstName">First Name</label>
@@ -74,15 +87,32 @@
                             </div>
                             <div class="col-md-6 mb-5">
                                 <label for="email">Email Address</label>
-                                <input type="text" class="df-control diabled-class" value="{{customerInfo?.email}}" id="useremail"
-                                    name="useremail" disabled>
+                                <div class="display-icon">
+                                    <input type="text" class="df-control diabled-class" value="{{customerInfo?.email}}"
+                                        id="useremail" name="useremail" disabled>
+                                    <span [hidden]="!customerInfo?.isEmailVerified" class="check-icon">
+                                        <i class="fa fa-check-circle-o fa-lg check-icon--green" aria-hidden="true"></i>
+                                    </span>
+                                    <span [hidden]="customerInfo?.isEmailVerified" class="check-icon">
+                                        <i class="fa fa-times-circle fa-lg check-icon--red" aria-hidden="true"></i>
+                                    </span>
+                                </div>
                             </div>
                             <div class="col-md-6 mb-5">
                                 <label for="phoneNumber">Mobile</label>
-                                <input type="text" formControlName="mobile" class="df-control" id="usermobile"
-                                    name="usermobile" (focusout)="checkIsMobileExist()"
-                                    [ngClass]="{ 'is-invalid': formControl.mobile.touched && formControl.mobile.invalid }"
-                                    placeholder="Mobile *">
+                                <div class="display-icon">
+                                    <input type="text" formControlName="mobile" class="df-control" id="usermobile"
+                                        name="usermobile" (focusout)="checkIsMobileExist()"
+                                        [ngClass]="{ 'is-invalid': formControl.mobile.touched && formControl.mobile.invalid }"
+                                        placeholder="Mobile *">
+                                    <span [hidden]="!customerInfo?.isMobileVerified" class="check-icon">
+                                        <i class="fa fa-check-circle-o fa-lg check-icon--green" aria-hidden="true"></i>
+                                    </span>
+                                    <span [hidden]="customerInfo?.isMobileVerified" class="check-icon">
+                                        <i class="fa fa-times-circle fa-lg check-icon--red" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+
                                 <div *ngIf="formControl.mobile.touched && formControl.mobile.invalid">
                                     <span class="validation-error" *ngIf="userForm.get('mobile').hasError('required')">
                                         {{validationMsgEnum.MobileRequired}}
@@ -120,8 +150,10 @@
                         </div> -->
                         <div class="row justify-content-center">
                             <div class="col-md-6">
-                                <input type="submit" [ngClass]="isSubmitDisable || isObjectChange() ? 'diabled-class' : ''"
-                                    [disabled]="isSubmitDisable || isObjectChange()" class="bfs-btn d-block w-100" value="Update Now">
+                                <input type="submit"
+                                    [ngClass]="isSubmitDisable || isObjectChange() ? 'diabled-class' : ''"
+                                    [disabled]="isSubmitDisable || isObjectChange()" class="bfs-btn d-block w-100"
+                                    value="Update Now">
                             </div>
                         </div>
                     </form>
@@ -288,4 +320,3 @@
         </div>
     </div>
 </div>
-

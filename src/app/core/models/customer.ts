@@ -9,8 +9,8 @@ export class MyProfileModel {
     lastName: string;
     mobile: string;
     email: string;
-    latitude:string;
-    longitude:string;
+    latitude: string;
+    longitude: string;
     langPref: string;
 }
 
@@ -66,4 +66,39 @@ export class CustomerInfo extends CustomerRegistrationReqModel {
     status: string;
     walletBalance: number;
     fullName: string;
+}
+
+export class ChangePasswordReqModel {
+    oldPassword: string;
+    newPassword: string;
+}
+
+
+export class ConfigurationModel {
+    id: number;
+    pointPercentage: number;
+    pointWorth: number;
+    maxRedeem: number;
+    maxRedeemDay: number;
+    minRedeem: number;
+    minWalletAmount: number;
+    maxWalletAmount: number;
+    isLoyaltyEnabled: boolean;
+    isWalletEnabled: boolean;
+    isTableBookingEnabled: boolean;
+    googleMapApikey: string;
+    qrexpireTime: number;
+    isGoogleTracking: boolean;
+    minimumOrderPrice: number;
+    defaultServiceCharge: number;
+    employeeNumber: number;
+    title: string;
+    arabicName: string;
+    displayName: string;
+    enterpriseLogo: string;
+    color1: string;
+    color2: string;
+    color3: string;
+    color4: string;
+    defaultLang: string;
 }

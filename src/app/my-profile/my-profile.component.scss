@@ -1,0 +1,26 @@
+.display-icon {
+    display: flex;
+
+    .check-icon {
+        margin-top: 10px;
+        margin-left: 10px;
+        font-size: 20px;
+        &--green {
+            color: #77af17;
+        }
+        &--red {
+            color: red;
+        }
+    }
+}
+
+.user-wallet {
+    position: absolute;
+    right: 0
+}
+
+.change-password {
+    color: #00A0D1;
+    font-size: 14px;
+    text-decoration: underline;
+}

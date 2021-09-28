@@ -48,4 +48,10 @@ export class ApiService {
 
    /*IP Address*/
    IPAddress = new Api<any>(this.http, 'http://api.ipify.org/?format=json');
+
+   /*Change Password*/
+   CustomerChangePassword = new Api<any>(this.http, this.apiEndpointUrl + '​/api/Customer/ChangePassword');
+
+   /*Change Password*/
+   GetConfiguration = new Api<any>(this.http, this.apiEndpointUrl + '​/api/Configuration/getConfiguration');
 }

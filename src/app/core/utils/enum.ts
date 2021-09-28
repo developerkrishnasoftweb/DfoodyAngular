@@ -22,6 +22,14 @@ export enum ValidationMsg {
     PasswordRequired = "Password is required",
     PasswordMaxLength = "Password must be 20 characters or less",
 
+    OldPasswordRequired = "Old Password is required",
+    OldPasswordMaxLength = "Old Password must be 20 characters or less",
+
+    ConfirmPasswordRequired = "Confirm Password is required",
+    ConfirmPasswordMaxLength = "Confirm Password must be 20 characters or less",
+
+    PasswordNotMatched = "Password and Confirm Password must be match",
+
     //First Name
     FirstNameRequired = "First Name is required",
     FirstNameMaxLength = "First Name must be 50 characters or less",
@@ -50,9 +58,12 @@ export enum ValidationMsg {
     MobileAlreadyExist = "This mobile number already exists",
 
     //Message 
-    MessageRequired = "Message is required",
+    MessageRequired = "Message is required"
+}
 
-
+export enum ConstantMessage {
+    oldPasswordNotMatched = "Old Password is not currect",
+    PasswordUpdated = "Password is updated successfully."
 }
 
 //snack bar class 

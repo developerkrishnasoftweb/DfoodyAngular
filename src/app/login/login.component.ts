@@ -3,6 +3,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerLoginReqModel } from '@core/models/customer';
+import { ConfigurationService } from '@core/services/customer/configuration.service';
+import { CustomerDataPreFillService } from '@core/services/customer/customer-data-pre-fill.service';
 import { CustomerLoginService } from '@core/services/customer/customer-login.service';
 import { UserLoginService } from '@core/services/user-login.service';
 import { ValidationService } from '@core/services/validation.service';
@@ -29,6 +31,8 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private userLoginService: UserLoginService,
+    private configurationService: ConfigurationService,
+    private preFillService: CustomerDataPreFillService,
     private customerLoginService: CustomerLoginService) { }
 
   ngOnInit(): void {
@@ -59,6 +63,7 @@ export class LoginComponent implements OnInit {
           this.customerLoginService
           this.closeButton.nativeElement.click();
           this.userLoginService.userLoginUpdateBool(true);
+          this.getConfiguration();
         }
         this.router.navigate(['myprofile']);
       }, errRes => {
@@ -67,6 +72,15 @@ export class LoginComponent implements OnInit {
             this.apiErrorMsg = errRes.error.responseMessage;
           }
         }
+      });
+  }
+
+  getConfiguration() {
+    this.configurationService.getConfiguration()
+      .pipe(finalize(() => {
+        this.isBtnDisabled = false;
+      })).subscribe(response => {
+        this.preFillService.userConfigurationData = response;
       });
   }
 
