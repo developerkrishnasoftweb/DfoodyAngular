@@ -8,7 +8,7 @@ export class CustomerDataPreFillService {
 
   private fullname: any;
 
-  private configurationData: ConfigurationModel;
+  public configurationData: ConfigurationModel;
 
   constructor() { }
 
