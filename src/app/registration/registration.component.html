@@ -105,7 +105,7 @@
                                         {{validationMsgEnum.PasswordRequired}}
                                     </span>
                                     <span class="validation-error"
-                                        *ngIf="!registrationForm.get('password').hasError('required') && registrationForm.get('password').hasError('maxlength')">
+                                        *ngIf="!registrationForm.get('password').hasError('required') && (registrationForm.get('password').hasError('maxlength') || registrationForm.get('password').hasError('minlength') )">
                                         {{validationMsgEnum.PasswordMaxLength}}
                                     </span>
                                 </div>

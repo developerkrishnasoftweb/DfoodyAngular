@@ -40,8 +40,8 @@ export class ChangePasswordComponent implements OnInit {
 
   createForm(): void {
     this.changePasswordForm = this.formBuilder.group({
-      oldpassword: ['', [Validators.required, Validators.maxLength(20)]],
-      newPassword: ['', [Validators.required, Validators.maxLength(20)]],
+      oldpassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+      newPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
       confirmPassword: ['', [Validators.required, Validators.maxLength(20)]]
     }, { validator: ConfirmedValidator('newPassword', 'confirmPassword') });
   }

@@ -42,7 +42,7 @@ export class RegistrationComponent implements OnInit {
       mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       firstName: ['', [Validators.required, Validators.maxLength(50)]],
       lastName: ['', [Validators.required, Validators.maxLength(50)]],
-      password: ['', [Validators.required, Validators.maxLength(20)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
     });
   }
 
@@ -58,18 +58,18 @@ export class RegistrationComponent implements OnInit {
     this.isSubmitDisable = true;
 
     this.customerRegistrationService.registration(model)
-    .pipe(finalize(() => {
-      this.isSubmitDisable = false;
-    })).subscribe(response => {
-      if (response && response.id) {
-        this.closeButton.nativeElement.click();
-        this.resetForm();
-      }
-    }, error => {
-      if (error instanceof HttpErrorResponse) {
-       console.log(error);
-      }
-    });
+      .pipe(finalize(() => {
+        this.isSubmitDisable = false;
+      })).subscribe(response => {
+        if (response && response.id) {
+          this.closeButton.nativeElement.click();
+          this.resetForm();
+        }
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
   }
 
   createResModel(): CustomerRegistrationReqModel {
@@ -92,28 +92,28 @@ export class RegistrationComponent implements OnInit {
   //Check email valid or not 
   checkIsEmailExist() {
     this.customerRegistrationService.checkIsEmailExist(this.registrationForm.value.mobile)
-    .pipe(finalize(() => {
-     
-    })).subscribe(response => {
-      this.isEmailExist = response;
-    }, error => {
-      if (error instanceof HttpErrorResponse) {
-        console.log(error);
-      }
-    });
+      .pipe(finalize(() => {
+
+      })).subscribe(response => {
+        this.isEmailExist = response;
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
   }
 
   //Check email valid or not 
   checkIsMobileExist() {
     this.customerRegistrationService.checkIsMobileExist(this.registrationForm.value.mobile)
-    .pipe(finalize(() => {
-     
-    })).subscribe(response => {
-      this.isMobileExist = response;
-    }, error => {
-      if (error instanceof HttpErrorResponse) {
-        console.log(error);
-      }
-    });
+      .pipe(finalize(() => {
+
+      })).subscribe(response => {
+        this.isMobileExist = response;
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
   }
 }
