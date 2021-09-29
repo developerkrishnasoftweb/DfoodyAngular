@@ -94,6 +94,7 @@ export class LoginComponent implements OnInit {
   resetForm(): void {
     this.loginForm.markAsUntouched();
     this.loginForm.reset();
+    this.apiErrorMsg = "";
   }
 
 }

@@ -102,3 +102,20 @@ export class ConfigurationModel {
     color4: string;
     defaultLang: string;
 }
+
+export class Brand {
+    display_name: string;
+    id: number;
+    pos_ref: string;
+    status: string;
+    title_arabic: string;
+    title_lang: string;
+}
+
+export class BrandRes {
+    items: Array<Brand>;
+    pageNumber: number;
+    pageSize: number;
+    totalPages: number;
+    totalRecords: number;
+}

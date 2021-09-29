@@ -57,6 +57,7 @@ export class ChangePasswordComponent implements OnInit {
         this.isBtnDisabled = false;
       })).subscribe(response => {
         if (response) {
+          this.resetForm();
           this.closeButton.nativeElement.click();
           this.snackBarService.show(ConstantMessage.PasswordUpdated);
         }
@@ -81,6 +82,7 @@ export class ChangePasswordComponent implements OnInit {
   resetForm(): void {
     this.changePasswordForm.markAsUntouched();
     this.changePasswordForm.reset();
+    this.apiErrorMsg = "";
   }
 
 

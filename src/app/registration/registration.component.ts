@@ -86,6 +86,8 @@ export class RegistrationComponent implements OnInit {
   resetForm(): void {
     this.registrationForm.markAsUntouched();
     this.registrationForm.reset();
+    this.isMobileExist = false;
+    this.isEmailExist = false;
   }
 
 

@@ -52,6 +52,13 @@ export class ApiService {
    /*Change Password*/
    CustomerChangePassword = new Api<any>(this.http, this.apiEndpointUrl + '​/api/Customer/ChangePassword');
 
-   /*Change Password*/
+   /*configuration*/
    GetConfiguration = new Api<any>(this.http, this.apiEndpointUrl + '​/api/Configuration/getConfiguration');
+
+   /*GetBrands*/
+   GetBrands = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Brand/getList');
+
+    /*GetBrands*/
+    GetBranches= new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Branches/getList');
+
 }
