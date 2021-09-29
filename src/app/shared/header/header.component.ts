@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   isUserLogin;
 
   constructor(public userLoginService: UserLoginService,
-    private preFillService: CustomerDataPreFillService,
+    public preFillService: CustomerDataPreFillService,
     private router: Router) { }
 
   @ViewChild('loginButton') private loginButton: ElementRef;
