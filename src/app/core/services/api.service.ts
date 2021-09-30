@@ -55,10 +55,13 @@ export class ApiService {
    /*configuration*/
    GetConfiguration = new Api<any>(this.http, this.apiEndpointUrl + '​/api/Configuration/getConfiguration');
 
-   /*GetBrands*/
+   /*Get Brands*/
    GetBrands = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Brand/getList');
 
-    /*GetBrands*/
+    /*Get Branches*/
     GetBranches= new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Branches/getList');
+
+    /*Get Categories*/
+    GetCategories= new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Categorie/getList');
 
 }

@@ -1,4 +1,4 @@
-<section class="most-popular-food-area">
+<section class="most-popular-food-area" [hidden]="displayBranch">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -9,8 +9,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4" *ngFor="let item of items">
-                <div class="item" (click)="displayBranch(item)">
+            <div class="col-md-4" *ngFor="let item of brandList">
+                <div class="item" (click)="itemClick(item.id)">
                     <div class="single-food-box">
                         <div class="sfb-img">
                             <img src="../../assets/img/food-menu/mpfood-1.jpg" alt="">
@@ -22,5 +22,16 @@
                 </div>
             </div>
         </div>
+        <div  class="pagination-icon" *ngIf="paginationModel.totalRecords > 0">
+             <button [ngClass]="paginationModel.pageNumber == 1 ? 'diabled-class' : ''" (click)="pagePrevious()">
+                <i class="fa fa-step-backward" aria-hidden="true"></i>
+            </button>
+            <button [ngClass]="paginationModel.pageNumber == this.paginationModel.totalPages ? 'diabled-class' : ''" (click)="pageNext()">
+                <i class="fa fa-step-forward" aria-hidden="true"></i>
+            </button>
+        </div>
     </div>
 </section>
+
+<app-branch-detail #branchDetail *ngIf="displayBranch">
+</app-branch-detail>

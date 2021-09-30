@@ -18,6 +18,7 @@ import { FoodmenuComponent } from './foodmenu/foodmenu.component';
 import { ShopComponent } from './shop/shop.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { BranchDetailComponent } from './branch-detail/branch-detail.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     FoodmenuComponent,
     ShopComponent,
     MyProfileComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    BranchDetailComponent
   ],
   imports: [
     BrowserModule,

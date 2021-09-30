@@ -112,10 +112,11 @@ export class Brand {
     title_lang: string;
 }
 
-export class BrandRes {
-    items: Array<Brand>;
+export class Pagination {
     pageNumber: number;
     pageSize: number;
     totalPages: number;
     totalRecords: number;
 }
+
+

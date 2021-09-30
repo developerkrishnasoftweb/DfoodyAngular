@@ -1,0 +1,61 @@
+<div [hidden]="isShowMenu">
+    <section class="hero-area heroV2">
+        <img src="assets/img/graphic/hero-2.png" alt="" class="hero-graphic-bg wow fadeInDown" data-delay=".99s"
+            data-wow-duration="2s">
+        <div class="container">
+            <div class="hero-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="hero-text">
+
+                            <h2 class="wow fadeInUp" data-delay=".5s">We belive good food offer great smile</h2>
+                            <p class="wow fadeInUp" data-wow-duration="2s" data-delay=".99s">The Dfoody is a
+                                neighborhood restaurant serving
+                                seasonal global cuisine driven by the faire.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="hero-img">
+                            <img src="assets/img/section-img/hero2.png" alt="" class="wow slideInUp"
+                                data-wow-duration="2s" data-delay=".99s">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="row">
+        <div class="col-md-4" *ngFor="let item of branchList">
+            <div class="item">
+                <div class="single-food-box">
+                    <div class="sfb-img">
+                        <img src="../../assets/img/food-menu/mpfood-1.jpg" alt="">
+                    </div>
+                    <div class="sbf-info">
+                        <h4>{{item.title_eng}}</h4>
+                    </div>
+                    <div class="sbf-info">
+                        <div>
+                            <b> Branch Preparetion Time</b>: <span>{{item.branchPrepTime}}</span>
+                        </div>
+                        <div>
+                            <b>deliveryOpen</b>: <span>{{item.deliveryOpen ? 'Yes' : 'No'}}</span>
+                        </div>
+                        <div>
+                            <b>pickupOpen</b>: <span>{{item.pickupOpen ? 'Yes' : 'No'}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="branch-btn">
+                    <a *ngIf="item.istablebookingAllowed" class="btn-style-a smoothscroll wow fadeInUp"
+                        data-delay="0.85s">BOOK A TABLE</a>
+                    <a (click)="showMenu(item.id)" class="btn-style-a smoothscroll wow fadeInUp" data-delay="0.85s">Menu</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-menu *ngIf="isShowMenu" #menu>
+</app-menu>

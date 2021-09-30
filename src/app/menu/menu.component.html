@@ -1,1 +1,235 @@
-<p>menu works!</p>
+<div class="container-fluid">
+    <div class="hero-area menu-area">
+        <div class="row">
+            <div class="col-md-3 col-lg-2">
+                <aside class="category-menu-sidebar">
+                    <div class="category-menu-title">Categories</div>
+                    <ul>
+                        <ng-container *ngFor="let category of categoriesList">
+                            <li>{{category.name1}}</li>
+                        </ng-container>
+                    </ul>
+                </aside>
+            </div>
+            <div class="col-md-5 col-lg-6">
+                <form class="form-inline justify-content-start align-items-end mb-5">
+                    <div class="form-group">
+                        <select name="" class="df-control" id="">
+                            <option value="">Lorem</option>
+                            <option value="">Ipsum</option>
+                            <option value="">Dolor</option>
+                            <option value="">Sit Amet</option>
+                        </select>
+                    </div>
+                    <div class="form-group mx-sm-3">
+                        <input type="text" class="df-control post-code" id="postCode" name="postCode" placeholder="Enter your address / postcode to order">
+                    </div>
+                    <input type="submit" class="bfs-btn py-4" value="Add Money">
+                </form>
+                <div class="pro-ratting">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="ratting-title">Lorem Ipsum</div>
+                            <div class="ratting-start">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="menu-address">345 Lewisham Road, London SE13 7AB, United Kingdom</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="menu-status open">We are open</div>
+                            <div class="menu-time">24 hours, 7 days.</div>
+                            <div class="delivery">Delivery and pick-up available</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-tab">
+                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="menu-tab" data-toggle="pill" href="#menu" role="tab" aria-controls="menu" aria-selected="true">Menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="reviews-tab" data-toggle="pill" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="info-tab" data-toggle="pill" href="#info" role="tab" aria-controls="info" aria-selected="false">Info</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="menu" role="tabpanel" aria-labelledby="menu-tab">
+                            <div class="tab-title">Lorem Ipsum</div>
+                            <div class="menu-items">
+                                <div class="menu-item">
+                                    <div class="d-flex flex-row">
+                                        <div class="menu-content flex-grow-1 mr-3">
+                                            <h6 class="menu-name">PUFF-PUFF</h6>
+                                            <p class="menu-desc text-muted mb-0">Traditional Nigerian donut ball, rolled in</p>
+                                        </div>
+                                        <div class="menu-detail align-self-start col-3 text-right p-0">
+                                            <span class="menu-price pr-sm-3">
+                                                <b>£4.99</b>
+                                            </span>
+                                            <span class="menu-button">
+                                                <button class="btn btn-light btn-sm btn-cart">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="d-flex flex-row">
+                                        <div class="menu-content flex-grow-1 mr-3">
+                                            <h6 class="menu-name">PUFF-PUFF</h6>
+                                            <p class="menu-desc text-muted mb-0">Traditional Nigerian donut ball, rolled in</p>
+                                        </div>
+                                        <div class="menu-detail align-self-start col-3 text-right p-0">
+                                            <span class="menu-price pr-sm-3">
+                                                <b>£4.99</b>
+                                            </span>
+                                            <span class="menu-button">
+                                                <button class="btn btn-light btn-sm btn-cart">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="d-flex flex-row">
+                                        <div class="menu-content flex-grow-1 mr-3">
+                                            <h6 class="menu-name">PUFF-PUFF</h6>
+                                            <p class="menu-desc text-muted mb-0">Traditional Nigerian donut ball, rolled in</p>
+                                        </div>
+                                        <div class="menu-detail align-self-start col-3 text-right p-0">
+                                            <span class="menu-price pr-sm-3">
+                                                <b>£4.99</b>
+                                            </span>
+                                            <span class="menu-button">
+                                                <button class="btn btn-light btn-sm btn-cart">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="pro-ratting">
+                                        <div class="ratting-title">Lorem Ipsum</div>
+                                        <div class="ratting-start">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <div class="menu-address">345 Lewisham Road, London SE13 7AB, United Kingdom</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="pro-ratting">
+                                        <div class="ratting-title">Lorem Ipsum</div>
+                                        <div class="ratting-start">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <div class="menu-address">345 Lewisham Road, London SE13 7AB, United Kingdom</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
+                            <div class="pro-ratting">
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="menu-status open">We are open</div>
+                                        <div class="menu-time">24 hours, 7 days.</div>
+                                        <div class="delivery">Delivery and pick-up available</div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="menu-status open">We are open</div>
+                                        <div class="menu-time">24 hours, 7 days.</div>
+                                        <div class="delivery">Delivery and pick-up available</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <div class="menu-cart">
+                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="delivery-tab" data-toggle="pill" href="#delivery" role="tab" aria-controls="delivery" aria-selected="true">
+                                <div class="title">Delivery</div>
+                                <span>in 15 min</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pickup-tab" data-toggle="pill" href="#pickup" role="tab" aria-controls="pickup" aria-selected="false">
+                                <div class="title">Pick-up</div>
+                                <span>in 15 min</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="delivery" role="tabpanel" aria-labelledby="delivery-tab">
+                            <div class="order-items">
+                                <div class="order-item">
+                                    <div class="menu-name">2 × Special Shrimp Deluxe </div>
+                                    <div class="order-price">$30.00</div>
+                                </div>
+                                <div class="order-item">
+                                    <div class="menu-name">RICE AND DODO </div>
+                                    <div class="order-price">$30.00</div>
+                                </div>
+                                <div class="order-item">
+                                    <div class="menu-name">2 × Special Shrimp Deluxe </div>
+                                    <div class="order-price">$30.00</div>
+                                </div>
+                            </div>
+                            <p>Vel facere quos est nemo expedita qui consequat Corrupti cupidatat dolore et modi nihil </p>
+                            <form class="form-inline justify-content-start align-items-end mb-5">
+                                <div class="form-group mx-sm-3">
+                                    <input type="text" class="df-control" id="couponCode" name="couponCode" placeholder="Enter coupon code">
+                                </div>
+                                <input type="submit" class="bfs-btn py-4" value="Submit">
+                            </form>
+                            <div class="order-items">
+                                <div class="order-item">
+                                    <div class="menu-name">2 × Special Shrimp Deluxe </div>
+                                    <div class="order-price">$30.00</div>
+                                </div>
+                                <div class="order-item">
+                                    <div class="menu-name">RICE AND DODO </div>
+                                    <div class="order-price">$30.00</div>
+                                </div>
+                                <div class="order-item">
+                                    <div class="menu-name">2 × Special Shrimp Deluxe </div>
+                                    <div class="order-price">$30.00</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pickup" role="tabpanel" aria-labelledby="pickup-tab">
+                            <div class="alert alert-danger">
+                                <p>No Min. Order Amount</p>
+                                <p>Add menu items to your cart.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

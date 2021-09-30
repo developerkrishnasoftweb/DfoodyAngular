@@ -72,3 +72,8 @@ export enum SnackBarCssClass {
     danger = "danger"
 }
 
+
+export enum PaginationValue {
+    pageNumber = 1,
+    pageSize = 10
+}
