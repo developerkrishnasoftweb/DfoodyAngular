@@ -9,7 +9,6 @@ export class MenuService {
   constructor(private _apiService: ApiService) { }
 
   getBrands(model) {
-    console.log(model);
     return this._apiService.GetBrands.getAll(model).map(response => response)
   }
 

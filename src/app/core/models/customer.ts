@@ -119,4 +119,8 @@ export class Pagination {
     totalRecords: number;
 }
 
+export const LangPreferences = [
+    { value: "English", text: "English" },
+    { value: "Urdu", text: "Urdu" }
+]
 

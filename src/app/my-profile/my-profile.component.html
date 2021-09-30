@@ -29,10 +29,25 @@
                                 <div class="profile-name">{{customerInfo?.fullName}}</div>
                                 <div class="profile-email">{{customerInfo?.email}}</div>
                             </div>
-                            <a href="#changePasswordModal" data-toggle="modal"
-                                data-animation="fadeInUp" data-delay="0.85s"> <span class="change-password">Change
+                            <a href="#changePasswordModal" data-toggle="modal" data-animation="fadeInUp"
+                                data-delay="0.85s"> <span class="change-password">Change
                                     Password</span>
                             </a>
+                        </div>
+
+                        <div class="language-div">
+                            <h3>
+                                Language preference
+                            </h3>
+                            <div class="form-group">
+                                <select name="" class="df-control" id="">
+                                    <ng-container *ngFor="let lang of langPreferences">
+                                        <option [value]="lang.text">{{lang.text}}</option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                            <!-- <button> <span class="change-password">Update</span>
+                            </button> -->
                         </div>
 
                         <div class="wallet-details user-wallet">

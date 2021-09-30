@@ -1,12 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CustomerInfo, MyProfileModel } from '@core/models/customer';
+import { CustomerInfo, LangPreferences, MyProfileModel } from '@core/models/customer';
 import { CustomerDataPreFillService } from '@core/services/customer/customer-data-pre-fill.service';
 import { CustomerRegistrationService } from '@core/services/customer/customer-registration.service';
 import { MyprofileService } from '@core/services/customer/myprofile.service';
 import { ValidationMsg } from '@core/utils/enum';
-import { SnackBarComponent } from '@shared/snack-bar/snack-bar.component';
 import { SnackBarService } from '@shared/snack-bar/snack-bar.service';
 import { finalize } from 'rxjs/operators';
 
@@ -29,6 +28,8 @@ export class MyProfileComponent implements OnInit {
 
   modelBeforeEdit: MyProfileModel;
   modelAfterEdit: MyProfileModel;
+
+  langPreferences = LangPreferences;
 
 
   get formControl() { return this.userForm.controls; }
@@ -77,7 +78,6 @@ export class MyProfileComponent implements OnInit {
       .pipe(finalize(() => {
         // tslint:disable-next-line: deprecation
       })).subscribe((response: CustomerInfo) => {
-        console.log(response);
         this.customerInfo = response;
         if (this.customerInfo) {
           this.customerInfo.fullName = this.customerInfo.firstName + ' ' + this.customerInfo.lastName;

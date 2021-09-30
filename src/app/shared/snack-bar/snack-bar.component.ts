@@ -18,10 +18,7 @@ export class SnackBarComponent implements OnInit, OnDestroy {
   constructor(private snackBarService: SnackBarService) { }
 
   ngOnInit(): void {
-    console.log('test');
     this.snackbarSubscription = this.snackBarService.snackbarState.subscribe(state => {
-      console.log('state ', state);
-
       if (state.type)
         this.type = state.type;
       else

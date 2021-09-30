@@ -40,7 +40,6 @@ export class AppComponent {
       .pipe(finalize(() => {
         // tslint:disable-next-line: deprecation
       })).subscribe((response: CustomerInfo) => {
-        console.log(response);
         if (response)
           this.preFillService.userFullName = response.firstName + ' ' + response.lastName;
 
