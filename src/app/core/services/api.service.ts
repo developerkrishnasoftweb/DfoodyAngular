@@ -58,10 +58,16 @@ export class ApiService {
    /*Get Brands*/
    GetBrands = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Brand/getList');
 
-    /*Get Branches*/
-    GetBranches= new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Branches/getList');
+   /*Get Branches*/
+   GetBranches = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Branches/getList');
 
-    /*Get Categories*/
-    GetCategories= new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Categorie/getList');
+   /*Get Categories*/
+   GetCategories = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Categorie/getList');
+
+   /*Get Combo meal*/
+   GetCombomeal = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Combomeal/getList');
+
+   /*Get menu item*/
+   GetMenuItem = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Item/getList');
 
 }

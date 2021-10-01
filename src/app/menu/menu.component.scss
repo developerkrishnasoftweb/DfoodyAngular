@@ -1,0 +1,15 @@
+.category-menu-sidebar {
+    li {
+        cursor: pointer;
+        padding: 5px;
+    }   
+
+    .cat-selected {
+        background-color: #f8f9fa;
+        border-radius: 14px;
+    }
+}
+
+.save-btn {
+    margin: 1% 0 0 41%
+}

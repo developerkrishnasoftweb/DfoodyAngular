@@ -19,4 +19,12 @@ export class MenuService {
   GetCategories(obj) {
     return this._apiService.GetCategories.getAll(obj).map(response => response)
   }
+
+  GetCombomeal(obj) {
+    return this._apiService.GetCombomeal.getAll(obj).map(response => response)
+  }
+
+  GetMenuItem(obj) {
+    return this._apiService.GetMenuItem.getAll(obj).map(response => response)
+  }
 }
