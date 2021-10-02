@@ -62,7 +62,9 @@ export class RegistrationComponent implements OnInit {
         this.isSubmitDisable = false;
       })).subscribe(response => {
         if (response && response.id) {
-          this.closeButton.nativeElement.click();
+          setTimeout(() => {
+            this.closeButton.nativeElement.click();
+          }, 300);
           this.resetForm();
         }
       }, error => {

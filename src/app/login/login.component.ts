@@ -60,10 +60,11 @@ export class LoginComponent implements OnInit {
       })).subscribe(response => {
         if (response.email && response.token) {
           localStorage.setItem('Authorization', response.token);
-          this.customerLoginService
-          this.closeButton.nativeElement.click();
           this.userLoginService.userLoginUpdateBool(true);
           this.getConfiguration();
+          setTimeout(() => {
+            this.closeButton.nativeElement.click();
+          }, 300);
         }
         this.router.navigate(['myprofile']);
       }, errRes => {

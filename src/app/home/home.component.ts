@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Brand, Pagination } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
+import { UserLoginService } from '@core/services/user-login.service';
 import { finalize } from 'rxjs/operators';
 import { BranchDetailComponent } from '../branch-detail/branch-detail.component';
 @Component({
@@ -16,26 +17,29 @@ export class HomeComponent implements OnInit {
 
   displayBranch: boolean = false;
 
-  selectedItemId: string = "";
+  selectedItem: any;
 
   private branchDetail: BranchDetailComponent;
 
   @ViewChild('branchDetail', { static: false }) set content(content: BranchDetailComponent) {
     if (content) {
       this.branchDetail = content;
-      if (this.selectedItemId) {
-        this.branchDetail.displayBranch(this.selectedItemId);
+      if (this.selectedItem) {
+        this.branchDetail.displayBranch(this.selectedItem);
       }
     }
   }
 
 
 
-  constructor(private menuService: MenuService) { }
+  constructor(private menuService: MenuService, public userLoginService: UserLoginService,
+  ) { }
 
   ngOnInit(): void {
-    this.setPaginationData();
-    this.getBrands();
+    if (this.userLoginService.isLoggedIn()) {
+      this.setPaginationData();
+      this.getBrands();
+    }
   }
 
   getBrands(): void {
@@ -53,9 +57,9 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  itemClick(itemId) {
+  itemClick(item) {
     this.displayBranch = true;
-    this.selectedItemId = itemId;
+    this.selectedItem = item;
   }
 
   setPaginationData() {

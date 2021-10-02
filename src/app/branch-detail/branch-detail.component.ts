@@ -20,6 +20,8 @@ export class BranchDetailComponent implements OnInit {
 
   isShowMenu: boolean = false;
 
+  brandDetail: any;
+
   private menu: MenuComponent;
 
   @ViewChild('menu', { static: false }) set content(content: MenuComponent) {
@@ -40,8 +42,9 @@ export class BranchDetailComponent implements OnInit {
 
 
 
-  displayBranch(itemId): void {
-    this.menuService.GetBranches({ 'brandId': itemId })
+  displayBranch(item): void {
+    this.brandDetail = item;
+    this.menuService.GetBranches({ 'brandId': item.id })
       .pipe(finalize(() => {
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {

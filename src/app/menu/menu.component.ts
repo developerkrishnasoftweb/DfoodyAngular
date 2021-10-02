@@ -40,7 +40,6 @@ export class MenuComponent implements OnInit {
   }
 
   menuItemClick(item, type): void {
-    debugger
     switch (type) {
       case this.tabType.menu:
         this.selectedItem = item;
