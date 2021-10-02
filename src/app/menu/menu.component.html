@@ -219,14 +219,17 @@
                                 <input type="checkbox" class="custom-control-input" id="set{{ set?.id}}">
                                 <label class="custom-control-label" for="set{{ set?.id}}">{{
                                     set[displayModal.ListItemKey]}}</label>
-                                <ng-container *ngIf="set?.condiments?.length > 0">
+                                <ng-container *ngIf="set[displayModal.SubListKey] && set[displayModal.SubListKey].length > 0">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item" *ngFor="let set1 of set[displayModal.SubListKey]">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input"
-                                                    id="set1{{ set1?.id}}">
-                                                <label class="custom-control-label" for="set1{{ set1?.id}}">{{
-                                                    set1[displayModal.SubListItemKey]}}</label>
+                                                    id="set1{{set1?.id}}">
+                                                <label class="custom-control-label" for="set1{{set1?.id}}">{{set1[displayModal.SubListItemKey]}}</label>
+                                                <div>
+                                                    <label for="set1_price{{set1?.id}}">Price:</label>&nbsp;
+                                                    <span id="set1_price{{set1?.id}}" class="order-price">${{set1[displayModal.Price]}}</span>
+                                                </div>
                                             </div>
                                         </li>
                                     </ul>

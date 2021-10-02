@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Pagination } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
 import { finalize } from 'rxjs/operators';
@@ -21,6 +21,8 @@ export class BranchDetailComponent implements OnInit {
   isShowMenu: boolean = false;
 
   brandDetail: any;
+
+  isAPIResponseCome: boolean = false;
 
   private menu: MenuComponent;
 
@@ -44,9 +46,11 @@ export class BranchDetailComponent implements OnInit {
 
   displayBranch(item): void {
     this.brandDetail = item;
+    this.isAPIResponseCome = false;
     this.menuService.GetBranches({ 'brandId': item.id })
       .pipe(finalize(() => {
         // tslint:disable-next-line: deprecation
+        this.isAPIResponseCome = true;
       })).subscribe((response: any) => {
         this.branchList = response.items;
         this.paginationModel.totalPages = response.totalPages;

@@ -17,8 +17,6 @@ export class MenuComponent implements OnInit {
   menuItemList = [];
   comboMealList = [];
 
-  condimentSets = [];
-
   tabType = TabType;
 
   selectedItem: any = null;
@@ -61,7 +59,6 @@ export class MenuComponent implements OnInit {
       default:
         break;
     }
-    this.condimentSets = item.condimentSets;
   }
 
   getMenuCategories(branchId): void {
@@ -119,6 +116,7 @@ export class DisplayModalClass {
   ListItemKey: string;
   SubListKey: string;
   SubListItemKey: string;
+  Price = "price"
 }
 
 export enum TabType {

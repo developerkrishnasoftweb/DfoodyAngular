@@ -1,15 +1,13 @@
-<section class="most-popular-food-area" [hidden]="isShowMenu">
+<section class="most-popular-food-area" *ngIf="!isShowMenu && isAPIResponseCome">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="section-titleV1">
+                <div class="section-titleV1" *ngIf="brandDetail">
                     <p>{{brandDetail?.display_name}}</p>
                     <h3>Branches</h3>
                 </div>
             </div>
         </div>
-
-        
     </div>
     <div class="row">
         <div class="col-md-4" *ngFor="let item of branchList">
