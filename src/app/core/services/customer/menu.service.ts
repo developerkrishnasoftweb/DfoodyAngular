@@ -27,4 +27,12 @@ export class MenuService {
   GetMenuItem(obj) {
     return this._apiService.GetMenuItem.getAll(obj).map(response => response)
   }
+
+  AddToCardMenuItem(obj) {
+    return this._apiService.AddItemToCart.create(obj).map(response => response)
+  }
+
+  AddCombomealToCart(obj) {
+    return this._apiService.AddCombomealToCart.create(obj).map(response => response)
+  }
 }

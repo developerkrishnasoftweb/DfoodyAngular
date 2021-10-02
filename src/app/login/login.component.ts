@@ -81,7 +81,12 @@ export class LoginComponent implements OnInit {
       .pipe(finalize(() => {
         this.isBtnDisabled = false;
       })).subscribe(response => {
-        this.preFillService.userConfigurationData = response;
+        if (response) {
+          this.preFillService.userConfigurationData = response;
+          this.preFillService.userConfigurationData.enterpriseLogo =  this.preFillService.userConfigurationData.enterpriseLogo+"?date="+new Date().toDateString();
+
+        }
+
       });
   }
 

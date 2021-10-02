@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AddToCartComoMealItemReq, AddToCartMenuItemReq, AddToCartReq, Condiment, DisplayModalClass, Sideset, TabType } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
 import { finalize } from 'rxjs/operators';
 
@@ -17,11 +18,17 @@ export class MenuComponent implements OnInit {
   menuItemList = [];
   comboMealList = [];
 
+  menuItemListBackUP = null;
+  comboMealListBackUP = null;
+
   tabType = TabType;
 
   selectedItem: any = null;
 
   displayModal = new DisplayModalClass();
+  branchId: number;
+
+  @ViewChild('closeButton') private closeButton: ElementRef;
 
 
   constructor(private menuService: MenuService) { }
@@ -46,6 +53,7 @@ export class MenuComponent implements OnInit {
         this.displayModal.ModalTitle = "Condiment Sets";
         this.displayModal.SubListKey = "condiments";
         this.displayModal.SubListItemKey = "displayName";
+        this.displayModal.ParentId = "condimentSetId";
         break;
       case this.tabType.combomeal:
         this.selectedItem = item;
@@ -54,6 +62,7 @@ export class MenuComponent implements OnInit {
         this.displayModal.ModalTitle = "Side Sets";
         this.displayModal.SubListKey = "sides";
         this.displayModal.SubListItemKey = "displayName";
+        this.displayModal.ParentId = "sidesetId";
         break;
 
       default:
@@ -62,6 +71,7 @@ export class MenuComponent implements OnInit {
   }
 
   getMenuCategories(branchId): void {
+    this.branchId = branchId;
     this.categoriesList = [];
     this.menuService.GetCategories({ 'branchId': branchId })
       .pipe(finalize(() => {
@@ -85,7 +95,16 @@ export class MenuComponent implements OnInit {
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {
         this.menuItemList = response.items;
-        console.log('menu ', response);
+        if (this.menuItemList && this.menuItemList.length > 0) {
+          this.menuItemList = this.menuItemList.map(data => ({
+            ...data, type: TabType.menu, condimentSets: data.condimentSets.map(data1 => ({
+              ...data1,
+              IsChecked: false,
+              condiments: data1.condiments && data1.condiments.length > 0 ? data1.condiments.map(data2 => ({ ...data2, IsChecked: false, })) : null
+            }))
+          }));
+          this.menuItemListBackUP = JSON.stringify(this.menuItemList);
+        }
       }, error => {
         if (error instanceof HttpErrorResponse) {
           console.log(error);
@@ -100,7 +119,16 @@ export class MenuComponent implements OnInit {
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {
         this.comboMealList = response.items;
-        console.log('comboMealList ', response);
+        if (this.comboMealList && this.comboMealList.length > 0) {
+          this.comboMealList = this.comboMealList.map(data => ({
+            ...data, type: TabType.combomeal, sidesets: data.sidesets.map(data1 => ({
+              ...data1,
+              IsChecked: false,
+              sides: data1.sides && data1.sides.length > 0 ? data1.sides.map(data2 => ({ ...data2, IsChecked: false, })) : null
+            }))
+          }));
+          this.comboMealListBackUP = JSON.stringify(this.comboMealList);
+        }
 
       }, error => {
         if (error instanceof HttpErrorResponse) {
@@ -108,18 +136,153 @@ export class MenuComponent implements OnInit {
         }
       });
   }
+
+  onSave(): void {
+    this.closeButton.nativeElement.click();
+    switch (this.selectedItem.type) {
+      case TabType.menu:
+        let index = this.menuItemList.findIndex(x => x.id == this.selectedItem.id);
+        this.menuItemList[index] = this.selectedItem;
+        break;
+      case TabType.combomeal:
+        let combomealindex = this.comboMealList.findIndex(x => x.id == this.selectedItem.id);
+        this.comboMealList[combomealindex] = this.selectedItem;
+        break;
+      default:
+        break;
+    }
+    this.menuItemListBackUP = this.menuItemList && this.menuItemList.length > 0 ? JSON.stringify(this.menuItemList) : null;
+    this.comboMealListBackUP = this.comboMealList && this.comboMealList.length > 0 ? JSON.stringify(this.comboMealList) : null;
+  }
+
+  onClose(): void {
+    this.menuItemList = JSON.parse(this.menuItemListBackUP);
+    this.comboMealList = JSON.parse(this.comboMealListBackUP);
+  }
+
+  addToCart(item): void {
+    switch (item.type) {
+      case TabType.menu:
+        this.addMenuItemToCart(item);
+        break;
+      case TabType.combomeal:
+        this.addComboMealToCart(item);
+        break;
+      default:
+        break;
+    }
+  }
+
+  addMenuItemToCart(item): void {
+    console.log(item);
+    const model = this.createMenuItemModel(item);
+    this.menuService.AddToCardMenuItem(model)
+      .pipe(finalize(() => {
+        // tslint:disable-next-line: deprecation
+      })).subscribe((response: any) => {
+        console.log('response ', response);
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
+  }
+
+  addComboMealToCart(item): void {
+    const model = this.createComboMealModel(item);
+    this.menuService.AddCombomealToCart(model)
+      .pipe(finalize(() => {
+        // tslint:disable-next-line: deprecation
+      })).subscribe((response: any) => {
+        console.log('response ', response);
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
+  }
+
+  createAddToCartModel(item): AddToCartReq {
+    const model = new AddToCartReq();
+    model.itemId = item.id;
+    model.branchId = this.branchId;
+    model.quantity = 1;
+    model.amount = item.price;
+    model.prepTime = item.prep_time;
+    return model;
+  }
+
+  createMenuItemModel(item): AddToCartMenuItemReq {
+    let model = new AddToCartMenuItemReq();
+    model = Object.assign(this.createAddToCartModel(item));
+    let condimentList = new Array<Condiment>();
+    if (item.condimentSets && item.condimentSets.length > 0) {
+      item.condimentSets.forEach(element => {
+        if (element.condiments && element.condiments.length > 0) {
+          const list = element.condiments.filter(x => x.IsChecked);
+          if (list && list.length > 0) {
+            list.forEach(condiment => {
+              let condimentModel = new Condiment();
+              condimentModel.condimentId = condiment.id;
+              condimentModel.condimentSetId = condiment.condimentSetId;
+              condimentModel.prepTime = condiment.prepTime;
+              condimentModel.amount = condiment.price;
+              condimentList.push(condimentModel);
+            });
+          }
+        }
+      });
+    }
+    model.condimentList = condimentList;
+    return model;
+  }
+
+  createComboMealModel(item): AddToCartComoMealItemReq {
+    let model = new AddToCartComoMealItemReq();
+    model = Object.assign(this.createAddToCartModel(item));
+    let sidesetList = new Array<Sideset>();
+    if (item.sidesets && item.sidesets.length > 0) {
+      item.sidesets.forEach(element => {
+        if (element.sides && element.sides.length > 0) {
+          const list = element.sides.filter(x => x.IsChecked);
+          if (list && list.length > 0) {
+            list.forEach(side => {
+              let sideSetModel = new Sideset();
+              sideSetModel.sideId = side.id;
+              sideSetModel.sidesetId = side.sidesetId;
+              sideSetModel.prepTime = side.prepTime;
+              sideSetModel.amount = side.price;
+              sidesetList.push(sideSetModel);
+            });
+          }
+        }
+      });
+    }
+    model.sidesetList = sidesetList;
+    return model;
+  }
+
+  onCheckboxChange(selectedSubItem, parent) {
+    if (this.selectedItem && this.selectedItem[this.displayModal.ListKey] && this.selectedItem[this.displayModal.ListKey].length > 0) {
+      let findKey = this.selectedItem[this.displayModal.ListKey].find(x => x.id === selectedSubItem[this.displayModal.ParentId]);
+      if (findKey) {
+        findKey.IsChecked = this.isChildChecked(parent)
+      }
+    }
+  }
+
+  isChildChecked(parent): boolean {
+    if (parent && parent[this.displayModal.SubListKey].length > 0)
+      return parent[this.displayModal.SubListKey].some(x => x.IsChecked);
+    return false;
+  }
+
+  onCheckboxItemChange(item) {
+    if (item.IsChecked)
+      item[this.displayModal.SubListKey][0].IsChecked = item.IsChecked;
+    else
+      item[this.displayModal.SubListKey] = item[this.displayModal.SubListKey].map(x => ({ ...x, IsChecked: false }));
+  }
+
 }
 
-export class DisplayModalClass {
-  ModalTitle: string;
-  ListKey: string;
-  ListItemKey: string;
-  SubListKey: string;
-  SubListItemKey: string;
-  Price = "price"
-}
-
-export enum TabType {
-  menu = "menu",
-  combomeal = "combomeal"
-}

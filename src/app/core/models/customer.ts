@@ -124,3 +124,50 @@ export const LangPreferences = [
     { value: "Urdu", text: "Urdu" }
 ]
 
+export class DisplayModalClass {
+    ModalTitle: string;
+    ListKey: string;
+    ListItemKey: string;
+    SubListKey: string;
+    SubListItemKey: string;
+    Price = "price"
+    ParentId: string;
+}
+
+export enum TabType {
+    menu = "menu",
+    combomeal = "combomeal"
+}
+
+export class Condiment {
+    condimentSetId: number;
+    condimentId: number;
+    amount: number;
+    prepTime: number;
+}
+
+export class Sideset {
+    sidesetId: number;
+    sideId: number;
+    amount: number;
+    prepTime: number;
+}
+
+export class AddToCartReq {
+    itemId: number;
+    branchId: number;
+    quantity: number;
+    amount: number;
+    prepTime: number;
+    comment: string;
+}
+
+export class AddToCartMenuItemReq extends AddToCartReq {
+    condimentList: Array<Condiment>;
+}
+
+
+
+export class AddToCartComoMealItemReq extends AddToCartReq {
+    sidesetList: Array<Sideset>;
+}

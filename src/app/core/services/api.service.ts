@@ -70,4 +70,10 @@ export class ApiService {
    /*Get menu item*/
    GetMenuItem = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Item/getList');
 
+   /*Add to card Combo meal*/
+   AddCombomealToCart = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Cart/AddCombomealToCart');
+
+   /*Add to card Menu meal*/
+   AddItemToCart = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Cart/AddItemToCart');
+
 }

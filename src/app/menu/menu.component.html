@@ -73,7 +73,7 @@
                                                 <b>£{{item.price}}</b>
                                             </span>
                                             <span class="menu-button">
-                                                <button class="btn btn-light btn-sm btn-cart">
+                                                <button class="btn btn-light btn-sm btn-cart" (click)="addToCart(item)">
                                                     <i class="fa fa-plus"></i>
                                                 </button>
                                             </span>
@@ -102,7 +102,7 @@
                                                 <b>£{{item.price}}</b>
                                             </span>
                                             <span class="menu-button">
-                                                <button class="btn btn-light btn-sm btn-cart">
+                                                <button class="btn btn-light btn-sm btn-cart" (click)="addToCart(item)">
                                                     <i class="fa fa-plus"></i>
                                                 </button>
                                             </span>
@@ -203,12 +203,14 @@
 </div>
 
 <ng-container>
-    <div class="modal fade" id="menuItemCondimentSets" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="menuItemCondimentSets" tabindex="-1" role="dialog" aria-hidden="true"
+        data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">{{displayModal.ModalTitle}}</h3>
-                    <button type="button" class="close" data-dismiss="modal" #closeButton aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" #closeButton aria-label="Close"
+                        (click)="onClose()">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -216,19 +218,24 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" *ngFor="let set of selectedItem[displayModal.ListKey]">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="set{{ set?.id}}">
+                                <input type="checkbox" [(ngModel)]="set.IsChecked" (change)="onCheckboxItemChange(set)" class="custom-control-input"
+                                    id="set{{ set?.id}}">
                                 <label class="custom-control-label" for="set{{ set?.id}}">{{
                                     set[displayModal.ListItemKey]}}</label>
-                                <ng-container *ngIf="set[displayModal.SubListKey] && set[displayModal.SubListKey].length > 0">
+                                <ng-container
+                                    *ngIf="set[displayModal.SubListKey] && set[displayModal.SubListKey].length > 0">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item" *ngFor="let set1 of set[displayModal.SubListKey]">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input"
+                                                <input type="checkbox" [(ngModel)]="set1.IsChecked"
+                                                    (change)="onCheckboxChange(set1, set)" class="custom-control-input"
                                                     id="set1{{set1?.id}}">
-                                                <label class="custom-control-label" for="set1{{set1?.id}}">{{set1[displayModal.SubListItemKey]}}</label>
+                                                <label class="custom-control-label"
+                                                    for="set1{{set1?.id}}">{{set1[displayModal.SubListItemKey]}}</label>
                                                 <div>
                                                     <label for="set1_price{{set1?.id}}">Price:</label>&nbsp;
-                                                    <span id="set1_price{{set1?.id}}" class="order-price">${{set1[displayModal.Price]}}</span>
+                                                    <span id="set1_price{{set1?.id}}"
+                                                        class="order-price">${{set1[displayModal.Price]}}</span>
                                                 </div>
                                             </div>
                                         </li>
@@ -238,7 +245,7 @@
                         </li>
                     </ul>
                     <div class="col-md-12 mb-5">
-                        <input type="submit" class="bfs-btn d-block save-btn" value="Save">
+                        <input type="submit" class="bfs-btn d-block save-btn" value="Save" (click)="onSave()">
                     </div>
                 </div>
             </div>
