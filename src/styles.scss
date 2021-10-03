@@ -45,3 +45,10 @@
   color: #666666 !important;
   cursor:no-drop !important;
 }
+
+a.anchor-disable {
+  color: black;
+  cursor: text;
+  pointer-events: none;
+  text-decoration: none;
+}

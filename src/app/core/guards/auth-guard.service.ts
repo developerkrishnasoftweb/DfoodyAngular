@@ -9,12 +9,13 @@ import { Observable } from 'rxjs';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private _router: Router,private _userLoginService: UserLoginService) { }
+  constructor(private _router: Router, private _userLoginService: UserLoginService) { }
 
-  canActivate( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|Promise<boolean>|boolean { 
-    if(this._userLoginService.isLoggedIn()) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    if (this._userLoginService.isLoggedIn()) {
       return true
-    }else{
+    } else {
+      this._router.navigate(['/home']);
       return false;
     }
   }

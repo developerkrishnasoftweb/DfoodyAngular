@@ -4,7 +4,8 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="consultTitle">Register</h5>
                 <button type="button" class="close" data-dismiss="modal" #closeButton aria-label="Close"
-                    (click)="resetForm()" [ngClass]="isSubmitDisable ? 'diabled-class' : ''" [disabled]="isSubmitDisable">
+                    (click)="resetForm()" [ngClass]="isSubmitDisable ? 'diabled-class' : ''"
+                    [disabled]="isSubmitDisable">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -125,7 +126,9 @@
                             <a href="#" class="social-login"><img src="assets/img/google-icon.png" alt=""> Google</a>
                         </div>
                     </div>
-                    <div class="form-bottom text-center">I have an account? <a href="#loginModal" id="register"
+                    <div class="form-bottom text-center">I have an account? <a (click)="signInLinkClick()"
+                            [attr.href]="isSubmitDisable ? null : '#loginModal'"
+                            [ngClass]="{'anchor-disable' : isSubmitDisable}" id="register"
                             data-toggle="modal">SignIn</a></div>
                 </div>
             </div>

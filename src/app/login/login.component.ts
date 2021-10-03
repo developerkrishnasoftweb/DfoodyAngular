@@ -76,6 +76,10 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  signUpLinkClick() {
+    this.closeButton.nativeElement.click();
+  }
+
   getConfiguration() {
     this.configurationService.getConfiguration()
       .pipe(finalize(() => {

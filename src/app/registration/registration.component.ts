@@ -74,6 +74,10 @@ export class RegistrationComponent implements OnInit {
       });
   }
 
+  signInLinkClick() {
+    this.closeButton.nativeElement.click();
+  }
+
   createResModel(): CustomerRegistrationReqModel {
     const model = new CustomerRegistrationReqModel();
     model.firstName = this.registrationForm.value.firstName;

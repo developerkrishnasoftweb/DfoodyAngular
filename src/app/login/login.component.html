@@ -68,7 +68,9 @@
                             <a href="#" class="social-login"><img src="assets/img/google-icon.png" alt=""> Google</a>
                         </div>
                     </div>
-                    <div class="form-bottom text-center">If don't have an account? <a href="#consult" id="login"
+                    <div class="form-bottom text-center">If don't have an account? <a
+                            [attr.href]="isBtnDisabled ? null : '#consult'"
+                            [ngClass]="{'anchor-disable' : isBtnDisabled}" (click)="signUpLinkClick()" id="login"
                             data-toggle="modal">SignUp</a></div>
                 </div>
             </div>
