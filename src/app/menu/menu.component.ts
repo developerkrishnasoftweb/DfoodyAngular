@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AddToCartComoMealItemReq, AddToCartMenuItemReq, AddToCartReq, Condiment, DisplayModalClass, Sideset, TabType } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
+import { LoaderService } from '@shared/loader/loader.service';
 import { finalize } from 'rxjs/operators';
 
 @Component({
@@ -31,7 +32,7 @@ export class MenuComponent implements OnInit {
   @ViewChild('closeButton') private closeButton: ElementRef;
 
 
-  constructor(private menuService: MenuService) { }
+  constructor(private menuService: MenuService, private loaderService: LoaderService) { }
 
   ngOnInit(): void {
   }
@@ -45,37 +46,40 @@ export class MenuComponent implements OnInit {
   }
 
   menuItemClick(item, type): void {
+    this.selectedItem = item;
     switch (type) {
       case this.tabType.menu:
-        this.selectedItem = item;
         this.displayModal.ListItemKey = "display_name";
         this.displayModal.ListKey = "condimentSets";
         this.displayModal.ModalTitle = "Condiment Sets";
         this.displayModal.SubListKey = "condiments";
         this.displayModal.SubListItemKey = "displayName";
         this.displayModal.ParentId = "condimentSetId";
+        this.displayModal.Min = "min";
+        this.displayModal.Max = "max";
         break;
       case this.tabType.combomeal:
-        this.selectedItem = item;
         this.displayModal.ListItemKey = "displayName";
         this.displayModal.ListKey = "sidesets";
         this.displayModal.ModalTitle = "Side Sets";
         this.displayModal.SubListKey = "sides";
         this.displayModal.SubListItemKey = "displayName";
         this.displayModal.ParentId = "sidesetId";
+        this.displayModal.Min = "minSideCount";
         break;
-
       default:
         break;
     }
+    console.log(this.selectedItem);
   }
 
   getMenuCategories(branchId): void {
+    this.loaderService.show();
     this.branchId = branchId;
     this.categoriesList = [];
     this.menuService.GetCategories({ 'branchId': branchId })
       .pipe(finalize(() => {
-        // tslint:disable-next-line: deprecation
+        this.loaderService.hide();
       })).subscribe((response: any) => {
         this.categoriesList = response.items;
         if (this.categoriesList && this.categoriesList.length > 0) {
@@ -100,6 +104,7 @@ export class MenuComponent implements OnInit {
             ...data, type: TabType.menu, condimentSets: data.condimentSets.map(data1 => ({
               ...data1,
               IsChecked: false,
+              IsValid: false,
               condiments: data1.condiments && data1.condiments.length > 0 ? data1.condiments.map(data2 => ({ ...data2, IsChecked: false, })) : null
             }))
           }));
@@ -124,6 +129,7 @@ export class MenuComponent implements OnInit {
             ...data, type: TabType.combomeal, sidesets: data.sidesets.map(data1 => ({
               ...data1,
               IsChecked: false,
+              IsValid: false,
               sides: data1.sides && data1.sides.length > 0 ? data1.sides.map(data2 => ({ ...data2, IsChecked: false, })) : null
             }))
           }));

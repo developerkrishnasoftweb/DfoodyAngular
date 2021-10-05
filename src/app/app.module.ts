@@ -19,6 +19,8 @@ import { ShopComponent } from './shop/shop.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { BranchDetailComponent } from './branch-detail/branch-detail.component';
+import { CustomerAddressComponent } from './customer-address/customer-address.component';
+import { LoaderModule } from '@shared/loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { BranchDetailComponent } from './branch-detail/branch-detail.component';
     ShopComponent,
     MyProfileComponent,
     ChangePasswordComponent,
-    BranchDetailComponent
+    BranchDetailComponent,
+    CustomerAddressComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { BranchDetailComponent } from './branch-detail/branch-detail.component';
     CoreModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    LoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

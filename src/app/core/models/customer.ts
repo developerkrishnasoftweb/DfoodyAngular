@@ -132,6 +132,8 @@ export class DisplayModalClass {
     SubListItemKey: string;
     Price = "price"
     ParentId: string;
+    Min: string;
+    Max: string;
 }
 
 export enum TabType {
@@ -170,4 +172,23 @@ export class AddToCartMenuItemReq extends AddToCartReq {
 
 export class AddToCartComoMealItemReq extends AddToCartReq {
     sidesetList: Array<Sideset>;
+}
+
+//address Add Request 
+export class AddressReqModel {
+    address1: string;         
+    address2: string;         
+    area: string;         
+    city: string;         
+    state: string;        
+    country: string;          
+    latitude: string;         
+    longitude: string;        
+    isdefault: string;        
+    type: string;         
+    landmark: string;         
+    contactPerson: string;        
+    contactNumber: string;        
+    contactAddress: string;           
+    remark: string;           
 }

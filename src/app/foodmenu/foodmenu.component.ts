@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Brand, Pagination } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
 import { UserLoginService } from '@core/services/user-login.service';
+import { LoaderService } from '@shared/loader/loader.service';
 import { finalize } from 'rxjs/operators';
 import { BranchDetailComponent } from '../branch-detail/branch-detail.component';
 @Component({
@@ -33,6 +34,7 @@ export class FoodmenuComponent implements OnInit {
 
 
   constructor(private menuService: MenuService, public userLoginService: UserLoginService,
+    private loaderService: LoaderService
   ) { }
 
   ngOnInit(): void {
@@ -43,13 +45,16 @@ export class FoodmenuComponent implements OnInit {
   }
 
   getBrands(): void {
+    this.loaderService.show();
     this.menuService.getBrands(this.paginationModel)
       .pipe(finalize(() => {
-        // tslint:disable-next-line: deprecation
+        this.loaderService.hide();
       })).subscribe((response: any) => {
-        this.brandList = response.items;
-        this.paginationModel.totalPages = response.totalPages;
-        this.paginationModel.totalRecords = response.totalRecords;
+        if (response) {
+          this.brandList = response.items;
+          this.paginationModel.totalPages = response.totalPages;
+          this.paginationModel.totalRecords = response.totalRecords;
+        }
       }, error => {
         if (error instanceof HttpErrorResponse) {
           console.log(error);
@@ -81,4 +86,10 @@ export class FoodmenuComponent implements OnInit {
     this.getBrands();
   }
 
+  ngOnDestroy(): void {
+    this.brandList = new Array<Brand>();
+    this.paginationModel = new Pagination();
+    this.displayBranch = false;
+    this.selectedItem = null;
+  }
 }

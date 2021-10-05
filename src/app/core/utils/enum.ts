@@ -58,7 +58,42 @@ export enum ValidationMsg {
     MobileAlreadyExist = "This mobile number already exists",
 
     //Message 
-    MessageRequired = "Message is required"
+    MessageRequired = "Message is required",
+
+    Address1MaxLength = "Address 1 must be 100 characters or less",
+    Address1Required = "Address 1 is required",
+
+    Address2MaxLength = "Address 2 must be 100 characters or less",
+    Address2Required = "Address 2 is required",
+
+    AreaMaxLength = "Area must be 100 characters or less",
+    AreaRequired = "Area is required",
+
+    CityMaxLength = "City must be 20 characters or less",
+    CityRequired = "City is required",
+
+    StateMaxLength = "State must be 20 characters or less",
+    StateRequired = "State is required",
+
+    CountryMaxLength = "Country must be 20 characters or less",
+    CountryRequired = "Country is required",
+
+    ContactPersonMaxLength = "Contact Person Detail must be 100 characters or less",
+    ContactPersonRequired = "Contact Person Detail is required",
+
+    LandmarkMaxLength = "Landmark must be 200 characters or less",
+    LandmarkRequired = "Landmark is required",
+
+    
+    ContactNumberMaxLength = "Please, Enter 10 digit Contact Number",
+    ContactNumberRequired = "Contact Number is required",
+
+    
+    RemarkMaxLength = "Remark must be 500 characters or less",
+    RemarkRequired = "Remark is required",
+
+    ContactAddressMaxLength = "Contact Address must be 500 characters or less",
+    ContactAddressRequired = "Contact Address is required",
 }
 
 export enum ConstantMessage {

@@ -53,9 +53,12 @@
                                                 <b>£{{item.price}}</b>
                                             </span>
                                             <span class="menu-button">
-                                                <button class="btn btn-light btn-sm btn-cart" (click)="addToCart(item)">
+                                                <a class="btn btn-light btn-sm btn-cart"
+                                                    (click)="menuItemClick(item, tabType.menu)"
+                                                    href="#menuItemCondimentSets" data-toggle="modal"
+                                                    data-animation="fadeInUp" data-delay="0.85s" title="Toppings">
                                                     <i class="fa fa-plus"></i>
-                                                </button>
+                                                </a>
                                             </span>
                                         </div>
                                     </div>
@@ -71,7 +74,7 @@
                                                 <a (click)="menuItemClick(item, tabType.combomeal)"
                                                     href="#menuItemCondimentSets" data-toggle="modal"
                                                     data-animation="fadeInUp" data-delay="0.85s"
-                                                    title="Toppings">{{item?.displayName}}</a>
+                                                    title="Add to cart">{{item?.displayName}}</a>
                                             </ng-container>
                                             <ng-template #noToppings>
                                                 <span>{{item?.displayName}}</span>
@@ -82,9 +85,13 @@
                                                 <b>£{{item.price}}</b>
                                             </span>
                                             <span class="menu-button">
-                                                <button class="btn btn-light btn-sm btn-cart" (click)="addToCart(item)">
+                                                <a class="btn btn-light btn-sm btn-cart"
+                                                    (click)="menuItemClick(item, tabType.combomeal)"
+                                                    href="#menuItemCondimentSets" data-toggle="modal"
+                                                    data-animation="fadeInUp" data-delay="0.85s" title="Add to cart">
                                                     <i class="fa fa-plus"></i>
-                                                </button>
+                                                </a>
+                                                
                                             </span>
                                         </div>
                                     </div>
@@ -198,10 +205,10 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" *ngFor="let set of selectedItem[displayModal.ListKey]">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" [(ngModel)]="set.IsChecked" (change)="onCheckboxItemChange(set)" class="custom-control-input"
-                                    id="set{{ set?.id}}">
+                                <input type="checkbox" [(ngModel)]="set.IsChecked" (change)="onCheckboxItemChange(set)"
+                                    class="custom-control-input" id="set{{ set?.id}}">
                                 <label class="custom-control-label" for="set{{ set?.id}}">{{
-                                    set[displayModal.ListItemKey]}}</label>
+                                    set[displayModal.ListItemKey]}} (min: {{set[displayModal.Min]}} <span *ngIf="set[displayModal.Max] >= 0"> max: {{set[displayModal.Max]}}) </span></label>
                                 <ng-container
                                     *ngIf="set[displayModal.SubListKey] && set[displayModal.SubListKey].length > 0">
                                     <ul class="list-group list-group-flush">

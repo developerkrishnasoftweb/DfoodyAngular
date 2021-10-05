@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Pagination } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
+import { LoaderService } from '@shared/loader/loader.service';
 import { finalize } from 'rxjs/operators';
 import { MenuComponent } from '../menu/menu.component';
 
@@ -36,7 +37,7 @@ export class BranchDetailComponent implements OnInit {
   }
 
 
-  constructor(private menuService: MenuService) { }
+  constructor(private menuService: MenuService, private loaderService: LoaderService) { }
 
   ngOnInit(): void {
     this.setPaginationData();
@@ -47,14 +48,18 @@ export class BranchDetailComponent implements OnInit {
   displayBranch(item): void {
     this.brandDetail = item;
     this.isAPIResponseCome = false;
+    this.loaderService.show();
     this.menuService.GetBranches({ 'brandId': item.id })
       .pipe(finalize(() => {
+        this.loaderService.hide();
         // tslint:disable-next-line: deprecation
         this.isAPIResponseCome = true;
       })).subscribe((response: any) => {
-        this.branchList = response.items;
-        this.paginationModel.totalPages = response.totalPages;
-        this.paginationModel.totalRecords = response.totalRecords;
+        if (response) {
+          this.branchList = response.items;
+          this.paginationModel.totalPages = response.totalPages;
+          this.paginationModel.totalRecords = response.totalRecords;
+        }
       }, error => {
         if (error instanceof HttpErrorResponse) {
           console.log(error);
@@ -71,6 +76,12 @@ export class BranchDetailComponent implements OnInit {
   setPaginationData() {
     this.paginationModel.pageNumber = 1;
     this.paginationModel.pageSize = 3;
+  }
+
+  ngOnDestroy() {
+    this.brandDetail = null;
+    this.selectedBranchId = null;
+    this.branchList = null;
   }
 
 }

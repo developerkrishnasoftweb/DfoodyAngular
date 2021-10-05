@@ -76,4 +76,12 @@ export class ApiService {
    /*Add to card Menu meal*/
    AddItemToCart = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Cart/AddItemToCart');
 
+   /*Get Customer Address*/
+   GetCustomerAddress = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Customer_address/getList');
+
+   /*Add Customer Address*/
+   AddCustomerAddress = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Customer_address/AddAddress');
+
+   /*Update Customer Address*/
+   UpdateCustomerAddress = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Customer_address/UpdateAddress​');
 }
