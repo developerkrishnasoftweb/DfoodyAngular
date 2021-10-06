@@ -2,9 +2,8 @@
     <div class="body-box">
         <div class="order-body">
             <h5 class="h5 mb-5">Customer Address
-                <a class="btn btn-light btn-sm btn-cart add-btn" href="#addressModal"
-                     data-toggle="modal" data-animation="fadeInUp"
-                    data-delay="0.85s" #loginButton>
+                <a class="btn btn-light btn-sm btn-cart add-btn" href="#addressModal" data-toggle="modal"
+                    data-animation="fadeInUp" data-delay="0.85s" #loginButton>
                     <i class="fa fa-plus"></i>
                 </a>
             </h5>
@@ -20,7 +19,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="Add Address" aria-hidden="true">
+<div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="Add Address" aria-hidden="true"
+    data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -199,7 +199,8 @@
 
                             <div class="col-md-12 mb-5">
                                 <label for="remark">Remark<span class="text-denger">*</span></label>
-                                <textarea name="remark" id="remark" class="df-control"
+                                <textarea name="remark" id="remark" class="df-control" formControlName="remark"
+                                    [ngClass]="{ 'is-invalid': formControl.address2.touched && formControl.address2.invalid }"
                                     placeholder="Remark *"></textarea>
                                 <div *ngIf="formControl.remark.touched && formControl.remark.invalid">
                                     <span class="validation-error"

@@ -5,9 +5,8 @@ import { Router } from '@angular/router';
 import { ChangePasswordReqModel, CustomerLoginReqModel } from '@core/models/customer';
 import { CustomerLoginService } from '@core/services/customer/customer-login.service';
 import { MyprofileService } from '@core/services/customer/myprofile.service';
-import { UserLoginService } from '@core/services/user-login.service';
-import { ConfirmedValidator, ValidationService } from '@core/services/validation.service';
-import { ConstantMessage, HttpResponseStatusCode, SnackBarCssClass, ValidationMsg } from '@core/utils/enum';
+import { ConfirmedValidator } from '@core/services/validation.service';
+import { ConstantMessage, ValidationMsg } from '@core/utils/enum';
 import { SnackBarService } from '@shared/snack-bar/snack-bar.service';
 import { finalize } from 'rxjs/operators';
 

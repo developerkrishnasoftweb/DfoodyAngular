@@ -84,4 +84,8 @@ export class ApiService {
 
    /*Update Customer Address*/
    UpdateCustomerAddress = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Customer_address/UpdateAddress​');
+
+   
+   /*Address delete*/
+   DeleteCustomerAddress = (addressId) => new Api<any>(this.http, this.apiEndpointUrl + '​/api/Customer_address/RemoveAddress/' + addressId);
 }

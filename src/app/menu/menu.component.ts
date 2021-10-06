@@ -104,8 +104,8 @@ export class MenuComponent implements OnInit {
             ...data, type: TabType.menu, condimentSets: data.condimentSets.map(data1 => ({
               ...data1,
               IsChecked: false,
-              IsValid: false,
-              condiments: data1.condiments && data1.condiments.length > 0 ? data1.condiments.map(data2 => ({ ...data2, IsChecked: false, })) : null
+              IsDisabled: false,
+              condiments: data1.condiments && data1.condiments.length > 0 ? data1.condiments.map(data2 => ({ ...data2, IsChecked: false, IsDisabled: false })) : null
             }))
           }));
           this.menuItemListBackUP = JSON.stringify(this.menuItemList);
@@ -129,8 +129,8 @@ export class MenuComponent implements OnInit {
             ...data, type: TabType.combomeal, sidesets: data.sidesets.map(data1 => ({
               ...data1,
               IsChecked: false,
-              IsValid: false,
-              sides: data1.sides && data1.sides.length > 0 ? data1.sides.map(data2 => ({ ...data2, IsChecked: false, })) : null
+              IsDisabled: false,
+              sides: data1.sides && data1.sides.length > 0 ? data1.sides.map(data2 => ({ ...data2, IsChecked: false, IsDisabled: false })) : null
             }))
           }));
           this.comboMealListBackUP = JSON.stringify(this.comboMealList);
@@ -271,10 +271,17 @@ export class MenuComponent implements OnInit {
   onCheckboxChange(selectedSubItem, parent) {
     if (this.selectedItem && this.selectedItem[this.displayModal.ListKey] && this.selectedItem[this.displayModal.ListKey].length > 0) {
       let findKey = this.selectedItem[this.displayModal.ListKey].find(x => x.id === selectedSubItem[this.displayModal.ParentId]);
-      if (findKey) {
-        findKey.IsChecked = this.isChildChecked(parent)
-      }
+      if (findKey)
+        findKey.IsChecked = this.isChildChecked(parent);
     }
+    this.checkValidation(parent);
+  }
+
+  getCount(parent): number {
+    if (parent && parent[this.displayModal.SubListKey].length > 0)
+      return parent[this.displayModal.SubListKey].filter(x => x.IsChecked).length;
+    else
+      return 0;
   }
 
   isChildChecked(parent): boolean {
@@ -288,7 +295,36 @@ export class MenuComponent implements OnInit {
       item[this.displayModal.SubListKey][0].IsChecked = item.IsChecked;
     else
       item[this.displayModal.SubListKey] = item[this.displayModal.SubListKey].map(x => ({ ...x, IsChecked: false }));
+    this.checkValidation(item);
   }
 
+  checkValidation(item) {
+    let count = this.getCount(item);
+    switch (this.selectedItem.type) {
+      case TabType.menu:
+        item.IsDisabled = count >= item[this.displayModal.Max] || count <= item[this.displayModal.Min] ? true : false;
+        break;
+      case TabType.combomeal:
+        item.IsDisabled = item[this.displayModal.Min] <= this.getCount(item) ? true : false;
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  isAddToCartDisabled() {
+    console.log('this.selectedItem[this.displayModal.ListItemKey] ', this.selectedItem[this.displayModal.ListKey]);
+    if(this.selectedItem[this.displayModal.ListKey] && this.selectedItem[this.displayModal.ListKey].length > 0) {
+      let result = this.selectedItem[this.displayModal.ListKey].every(function (e) {
+        return e.IsDisabled == false || e.IsChecked == false;
+      });
+      let result1 = this.selectedItem[this.displayModal.ListKey].any(function (e) {
+        return e.IsChecked == false;
+      });
+      return result;
+    } else 
+      return false;
+  }
 }
 

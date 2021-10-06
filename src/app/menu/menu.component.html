@@ -91,7 +91,7 @@
                                                     data-animation="fadeInUp" data-delay="0.85s" title="Add to cart">
                                                     <i class="fa fa-plus"></i>
                                                 </a>
-                                                
+
                                             </span>
                                         </div>
                                     </div>
@@ -207,14 +207,24 @@
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" [(ngModel)]="set.IsChecked" (change)="onCheckboxItemChange(set)"
                                     class="custom-control-input" id="set{{ set?.id}}">
-                                <label class="custom-control-label" for="set{{ set?.id}}">{{
-                                    set[displayModal.ListItemKey]}} (min: {{set[displayModal.Min]}} <span *ngIf="set[displayModal.Max] >= 0"> max: {{set[displayModal.Max]}}) </span></label>
+                                <label class="custom-control-label" for="set{{ set?.id}}" [disabled]="!set.IsDisabled">
+                                    <span class="popup-span">
+                                        {{set[displayModal.ListItemKey]}} (min: {{set[displayModal.Min]}}
+                                        <ng-container *ngIf="set[displayModal.Max] >= 0 else noMaxView"> max:
+                                            {{set[displayModal.Max]}})
+                                        </ng-container>
+                                        <ng-template #noMaxView>
+                                            )
+                                        </ng-template>
+                                    </span>
+                                </label>
                                 <ng-container
                                     *ngIf="set[displayModal.SubListKey] && set[displayModal.SubListKey].length > 0">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item" *ngFor="let set1 of set[displayModal.SubListKey]">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" [(ngModel)]="set1.IsChecked"
+                                                    [disabled]="set.IsDisabled && !set1.IsChecked && getCount(set) > 0 ? true : false"
                                                     (change)="onCheckboxChange(set1, set)" class="custom-control-input"
                                                     id="set1{{set1?.id}}">
                                                 <label class="custom-control-label"
@@ -232,7 +242,9 @@
                         </li>
                     </ul>
                     <div class="col-md-12 mb-5">
-                        <input type="submit" class="bfs-btn d-block save-btn" value="Add to cart" (click)="onSave()">
+                        <input type="submit" [ngClass]="isAddToCartDisabled() ? 'diabled-class' : ''"
+                            [disabled]="isAddToCartDisabled()" class="bfs-btn d-block save-btn"
+                            value="Add to cart" (click)="onSave()">
                     </div>
                 </div>
             </div>
