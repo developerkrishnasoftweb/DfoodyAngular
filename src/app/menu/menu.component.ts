@@ -319,9 +319,6 @@ export class MenuComponent implements OnInit {
       let result = this.selectedItem[this.displayModal.ListKey].every(function (e) {
         return e.IsDisabled == false || e.IsChecked == false;
       });
-      let result1 = this.selectedItem[this.displayModal.ListKey].any(function (e) {
-        return e.IsChecked == false;
-      });
       return result;
     } else 
       return false;
