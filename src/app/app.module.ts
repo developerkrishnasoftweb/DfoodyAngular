@@ -21,6 +21,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { BranchDetailComponent } from './branch-detail/branch-detail.component';
 import { CustomerAddressComponent } from './customer-address/customer-address.component';
 import { LoaderModule } from '@shared/loader/loader.module';
+import { ConfirmDialogModule } from '@shared/confirm-dialog/confirm-dialog.module';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { LoaderModule } from '@shared/loader/loader.module';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    LoaderModule
+    LoaderModule,
+    ConfirmDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

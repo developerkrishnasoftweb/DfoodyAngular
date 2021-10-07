@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddressDisplayModel, AddressModel } from '@core/models/customer';
 import { AddressService } from '@core/services/customer/address.service';
 import { ConstantMessage, ValidationMsg } from '@core/utils/enum';
+import { ConfirmDialogService } from '@shared/confirm-dialog/confirm-dialog.service';
 import { SnackBarService } from '@shared/snack-bar/snack-bar.service';
 import { finalize } from 'rxjs/operators';
 
@@ -26,10 +27,6 @@ export class CustomerAddressComponent implements OnInit {
 
   addressList = new Array<AddressDisplayModel>();
 
-
-  constructor(private addressService: AddressService, private formBuilder: FormBuilder,
-    private snackBarService: SnackBarService) { }
-
   get formControl() { return this.addressForm.controls; }
 
   modelBeforeEdit: AddressModel = new AddressModel();
@@ -37,6 +34,22 @@ export class CustomerAddressComponent implements OnInit {
 
   isEdit: boolean = false;
   addressId: string = "";
+
+  constructor(private addressService: AddressService, private formBuilder: FormBuilder,
+    private snackBarService: SnackBarService, private confirmDialogService: ConfirmDialogService) { }
+
+
+  ngOnInit(): void {
+    this.createForm();
+    this.getLocation();
+    this.getAddressList();
+    Object.keys(this.addressForm.controls)
+      .forEach(key => {
+        if (key)
+          this.onValueChanges(key);
+      });
+  }
+
 
   getLocation() {
     if (navigator.geolocation) {
@@ -52,17 +65,6 @@ export class CustomerAddressComponent implements OnInit {
     } else {
       alert("Geolocation is not supported by this browser.");
     }
-  }
-
-  ngOnInit(): void {
-    this.createForm();
-    this.getLocation();
-    this.getAddressList();
-    Object.keys(this.addressForm.controls)
-      .forEach(key => {
-        if (key)
-          this.onValueChanges(key);
-      });
   }
 
 
@@ -178,7 +180,6 @@ export class CustomerAddressComponent implements OnInit {
   }
 
   resetForm() {
-    console.log('closeButton');
     this.addressForm.reset();
     this.modelAfterEdit = new AddressModel();
     this.modelBeforeEdit = new AddressModel();
@@ -186,6 +187,44 @@ export class CustomerAddressComponent implements OnInit {
     this.addressForm.markAsUntouched();
     this.isEdit = false;
     this.addressId = "";
+  }
+
+
+  //Check form value is changed or not
+  isObjectChange() {
+    return JSON.stringify(this.modelAfterEdit) === JSON.stringify(this.modelBeforeEdit);
+  }
+
+  deleteConfirmDialog(id) {
+    this.confirmDialogService.confirmThis(ConstantMessage.DeleteConfirm,  () => {
+      //yes click
+      this.deleteAddress(id)
+    },  () => {
+      //No click
+    })
+  }
+
+  deleteAddress(id) {
+    this.addressService.deleteAddress(id)
+    .pipe(finalize(() => {
+      // tslint:disable-next-line: deprecation
+    })).subscribe((response) => {
+      if (response) {
+        this.getAddressList();
+        this.snackBarService.show(ConstantMessage.AddressDeleted);
+      }
+    }, error => {
+      if (error instanceof HttpErrorResponse) {
+        console.log(error);
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.modelAfterEdit = null;
+    this.modelBeforeEdit = null;
+    this.addressId = null;
+    this.isEdit = null;
   }
 
 }

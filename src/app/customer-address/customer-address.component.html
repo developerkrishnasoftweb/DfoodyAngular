@@ -12,8 +12,8 @@
                     <div class="address-type">
                         <div class="title">{{address.type}}</div>
                         <div class="action-item">
-                            <span> <i class="fa fa-edit" (click)="onEdit(address)"></i></span>
-                            <span> <i class="fa fa-trash"></i></span>
+                            <span class="edit"> <i class="fa fa-edit" (click)="onEdit(address)"></i></span>
+                            <span class="delete"> <i class="fa fa-trash" (click)="deleteConfirmDialog(address.id)"></i></span>
                         </div>
                     </div>
                     <div class="place">{{address.contactPerson}}</div>
@@ -242,8 +242,8 @@
                             </div>
 
                             <div class="col-md-12 mb-5">
-                                <input type="submit" [ngClass]="isBtnDisabled ? 'diabled-class' : ''"
-                                    [disabled]="isBtnDisabled" class="bfs-btn d-block w-100"
+                                <input type="submit" [ngClass]="isBtnDisabled || isObjectChange() ? 'diabled-class' : ''"
+                                    [disabled]="isBtnDisabled || isObjectChange()" class="bfs-btn d-block w-100"
                                     [value]="isEdit ? 'Edit Address' : 'Add Address'">
                             </div>
                         </div>
@@ -253,3 +253,4 @@
         </div>
     </div>
 </div>
+<app-confirm-dialog></app-confirm-dialog>  

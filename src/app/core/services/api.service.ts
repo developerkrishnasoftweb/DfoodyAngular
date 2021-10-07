@@ -87,5 +87,5 @@ export class ApiService {
 
    
    /*Address delete*/
-   DeleteCustomerAddress = (addressId) => new Api<any>(this.http, this.apiEndpointUrl + '​/api/Customer_address/RemoveAddress/' + addressId);
+   DeleteCustomerAddress = new Api<any>(this.http, this.apiEndpointUrl + '​/api/Customer_address/RemoveAddress/');
 }

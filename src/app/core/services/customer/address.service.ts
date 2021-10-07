@@ -24,6 +24,6 @@ export class AddressService {
   }
 
   deleteAddress(addressId: string): Observable<any> {
-    return this._apiService.DeleteCustomerAddress(addressId).remove(null, null).map(response => response)
+    return this._apiService.DeleteCustomerAddress.remove(addressId).map(response => response)
   }
 }
