@@ -17,25 +17,25 @@ export class BranchDetailComponent implements OnInit {
 
   paginationModel = new Pagination();
 
-  selectedBranchId: string = "";
 
   isShowMenu: boolean = false;
 
-  brandDetail: any;
 
   isAPIResponseCome: boolean = false;
+
+  branchDetail: any = null;
 
   private menu: MenuComponent;
 
   @ViewChild('menu', { static: false }) set content(content: MenuComponent) {
     if (content) {
       this.menu = content;
-      if (this.selectedBranchId) {
-        this.menu.getMenuCategories(this.selectedBranchId);
+      if (this.branchDetail) {
+        this.menu.branchDetail = this.branchDetail;
+        this.menu.getMenuCategories(this.branchDetail);
       }
     }
   }
-
 
   constructor(private menuService: MenuService, private loaderService: LoaderService) { }
 
@@ -43,10 +43,8 @@ export class BranchDetailComponent implements OnInit {
     this.setPaginationData();
   }
 
-
-
   displayBranch(item): void {
-    this.brandDetail = item;
+    this.branchDetail = item;
     this.isAPIResponseCome = false;
     this.loaderService.show();
     this.menuService.GetBranches({ 'brandId': item.id })
@@ -67,11 +65,10 @@ export class BranchDetailComponent implements OnInit {
       });
   }
 
-  showMenu(id) {
+  showMenu(item) {
+    this.branchDetail = item;
     this.isShowMenu = true;
-    this.selectedBranchId = id;
   }
-
 
   setPaginationData() {
     this.paginationModel.pageNumber = 1;
@@ -79,9 +76,7 @@ export class BranchDetailComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.brandDetail = null;
-    this.selectedBranchId = null;
+    this.branchDetail = null;
     this.branchList = null;
   }
-
 }

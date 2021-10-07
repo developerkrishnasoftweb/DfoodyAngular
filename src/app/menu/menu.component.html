@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="branchDetail">
     <div class="hero-area menu-area">
         <div class="row">
             <div class="col-md-3 col-lg-2">
@@ -127,6 +127,66 @@
                                         <div class="delivery">Delivery and pick-up available</div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <div class="menu-cart" *ngIf="cartList && cartList?.length > 0">
+                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                        <li class="nav-item" *ngIf="branchDetail?.deliveryOpen">
+                            <a class="nav-link active" id="delivery-tab" data-toggle="pill" href="#delivery" role="tab"
+                                aria-controls="delivery" aria-selected="true">
+                                <div class="title">Delivery</div>
+                                <span>in 15 min</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" *ngIf="branchDetail?.pickupOpen">
+                            <a class="nav-link" id="pickup-tab" data-toggle="pill" href="#pickup" role="tab"
+                                aria-controls="pickup" aria-selected="false">
+                                <div class="title">Pick-up</div>
+                                <span>in 15 min</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="delivery" role="tabpanel"
+                            aria-labelledby="delivery-tab">
+                            <div class="order-items" *ngFor="let cart of cartList">
+                                <div class="order-item">
+                                    <div class="menu-name">{{cart?.quantity}} × {{cart.title_lang}}</div>
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <div class="order-price">${{cart.amount}}</div>
+                                        <div class="display-icons">
+                                            <span (click)="updateCartQuantity(cart, false)"><i
+                                                    class="fa fa-minus-circle" aria-hidden="true"></i>
+                                            </span>
+                                            <span (click)="updateCartQuantity(cart, true)">
+                                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="delete"> <i class="fa fa-trash"
+                                                    (click)="deleteConfirmDialog(cart.cartId)"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <ng-container *ngIf="cart?.cartDetails.length > 0">
+                                    <div class="order-item" *ngFor="let detail of cart.cartDetails">
+                                        <div class="menu-name">{{detail?.quantity}} × {{detail?.title_lang}} </div>
+                                        <div class="order-price">${{detail?.amount}}</div>
+                                    </div>
+                                </ng-container> -->
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pickup" role="tabpanel" aria-labelledby="pickup-tab">
+                            <div class="alert alert-danger">
+                                <p>No Min. Order Amount</p>
+                                <p>Add menu items to your cart.</p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <input type="submit" class="bfs-btn d-block w-70" value="Confirm Now">
                             </div>
                         </div>
                     </div>
@@ -266,3 +326,5 @@
         </div>
     </div>
 </ng-container>
+
+<app-confirm-dialog></app-confirm-dialog>

@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AddToCartComoMealItemReq, AddToCartMenuItemReq, AddToCartReq, Condiment, DisplayModalClass, Sideset, TabType } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
 import { ConstantMessage } from '@core/utils/enum';
+import { ConfirmDialogService } from '@shared/confirm-dialog/confirm-dialog.service';
 import { LoaderService } from '@shared/loader/loader.service';
 import { SnackBarService } from '@shared/snack-bar/snack-bar.service';
 import { finalize } from 'rxjs/operators';
@@ -29,12 +30,14 @@ export class MenuComponent implements OnInit {
   selectedItem: any = null;
 
   displayModal = new DisplayModalClass();
-  branchId: number;
+  branchDetail: any;
 
   @ViewChild('closeButton') private closeButton: ElementRef;
 
+  cartList = [];
 
-  constructor(private menuService: MenuService, private loaderService: LoaderService, private snackBarService: SnackBarService) { }
+
+  constructor(private menuService: MenuService, private loaderService: LoaderService, private snackBarService: SnackBarService, private confirmDialogService: ConfirmDialogService) { }
 
   ngOnInit(): void {
   }
@@ -45,6 +48,7 @@ export class MenuComponent implements OnInit {
     this.selectedCategoryId = category.id;
     this.getMenuItem();
     this.getCombomeal();
+    this.getCartList();
   }
 
   menuItemClick(item, type): void {
@@ -74,11 +78,12 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  getMenuCategories(branchId): void {
+  getMenuCategories(branchDetail): void {
     this.loaderService.show();
-    this.branchId = branchId;
+    this.branchDetail = branchDetail;
+    console.log(branchDetail);
     this.categoriesList = [];
-    this.menuService.GetCategories({ 'branchId': branchId })
+    this.menuService.GetCategories({ 'branchId': branchDetail.id })
       .pipe(finalize(() => {
         this.loaderService.hide();
       })).subscribe((response: any) => {
@@ -146,6 +151,19 @@ export class MenuComponent implements OnInit {
       });
   }
 
+  updateCartQuantity(cart, isAdd) {
+    if (isAdd) {
+      cart.quantity += 1;
+    } else {
+      if (cart.quantity > 1)
+        cart.quantity -= 1;
+      else
+        return;
+    }
+    let cartIndex = this.cartList.findIndex(x => x.cartId == cart.cartId);
+    this.cartList[cartIndex] = cart;
+  }
+
   onSave(): void {
     this.closeButton.nativeElement.click();
     switch (this.selectedItem.type) {
@@ -178,6 +196,7 @@ export class MenuComponent implements OnInit {
       })).subscribe((response: any) => {
         if (response) {
           this.snackBarService.show(ConstantMessage.ItemSaved);
+          this.getCartList();
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {
@@ -194,6 +213,7 @@ export class MenuComponent implements OnInit {
       })).subscribe((response: any) => {
         if (response) {
           this.snackBarService.show(ConstantMessage.ItemSaved);
+          this.getCartList();
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {
@@ -205,7 +225,7 @@ export class MenuComponent implements OnInit {
   createAddToCartModel(item): AddToCartReq {
     const model = new AddToCartReq();
     model.itemId = item.id;
-    model.branchId = this.branchId;
+    model.branchId = this.branchDetail.id;
     model.quantity = 1;
     model.amount = item.price;
     model.prepTime = item.prep_time;
@@ -302,7 +322,7 @@ export class MenuComponent implements OnInit {
         item.IsValid = count && count <= item[this.displayModal.Max] || count >= item[this.displayModal.Min] ? true : false;
         break;
       case TabType.combomeal:
-        item.IsDisabled = count  <= item[this.displayModal.Min] ? true : false;
+        item.IsDisabled = count <= item[this.displayModal.Min] ? true : false;
         item.IsValid = count && count >= item[this.displayModal.Min] ? true : false;
         break;
       default:
@@ -319,5 +339,45 @@ export class MenuComponent implements OnInit {
     } else
       return false;
   }
+
+  deleteConfirmDialog(id) {
+    this.confirmDialogService.confirmThis(ConstantMessage.DeleteConfirm,  () => {
+      //yes click
+      this.deleteCart(id)
+    },  () => {
+      //No click
+    });
+  }
+
+  deleteCart(id) {
+    this.menuService.deleteCartItem(id)
+    .pipe(finalize(() => {
+      // tslint:disable-next-line: deprecation
+    })).subscribe((response) => {
+      if (response) {
+        this.getCartList();
+        this.snackBarService.show(ConstantMessage.AddressDeleted);
+      }
+    }, error => {
+      if (error instanceof HttpErrorResponse) {
+        console.log(error);
+      }
+    });
+  }
+
+  getCartList(): void {
+    this.menuService.GetCartItem()
+      .pipe(finalize(() => {
+        // tslint:disable-next-line: deprecation
+      })).subscribe((response: any) => {
+        console.log('response ', response);
+        this.cartList = response.items;
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
+  }
+
 }
 

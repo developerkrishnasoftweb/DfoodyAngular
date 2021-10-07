@@ -22,3 +22,14 @@
 .no-popup {
     cursor: none !important;
 }
+
+.delete {
+    color: red;
+}
+
+.display-icons {
+    span {
+        margin-right: 5px;
+        cursor: pointer !important;
+    }
+}

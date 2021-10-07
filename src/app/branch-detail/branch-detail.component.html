@@ -32,15 +32,16 @@
                     </div>
                 </div>
                 <div class="branch-btn">
-                    <a *ngIf="item.istablebookingAllowed" routerLink="reservation" class="btn-style-a smoothscroll wow fadeInUp"
-                        data-delay="0.85s">BOOK A TABLE</a>
-                    <a (click)="showMenu(item.id)" class="btn-style-a smoothscroll wow fadeInUp"
+                    <a *ngIf="item.istablebookingAllowed" routerLink="reservation"
+                        class="btn-style-a smoothscroll wow fadeInUp" data-delay="0.85s">BOOK A TABLE</a>
+                    <a (click)="showMenu(item)" class="btn-style-a smoothscroll wow fadeInUp"
                         data-delay="0.85s">Menu</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-<app-menu *ngIf="isShowMenu" #menu>
-</app-menu>
+<div *ngIf="isShowMenu && branchDetail">
+    <app-menu #menu>
+    </app-menu>
+</div>
