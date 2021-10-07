@@ -107,6 +107,8 @@ export enum ConstantMessage {
     AddressUpdated = "Address updated successfully.",
     AddressDeleted = "Address deleted successfully.",
     DeleteConfirm = "Are you sure to delete?",
+    OrderPlaced = "Order placed successfully.",
+
 }
 
 //snack bar class 

@@ -31,7 +31,6 @@ export class BranchDetailComponent implements OnInit {
     if (content) {
       this.menu = content;
       if (this.branchDetail) {
-        this.menu.branchDetail = this.branchDetail;
         this.menu.getMenuCategories(this.branchDetail);
       }
     }

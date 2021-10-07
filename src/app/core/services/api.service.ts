@@ -94,4 +94,8 @@ export class ApiService {
 
    /*Delete Cart Item*/
    DeleteCartItem = new Api<any>(this.http, this.apiEndpointUrl + '​/api/Cart/Delete/');
+
+   /*Add to card Menu meal*/
+   AddOrder = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Order/AddOrder');
+
 }

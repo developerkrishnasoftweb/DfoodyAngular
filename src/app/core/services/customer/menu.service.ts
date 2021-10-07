@@ -44,4 +44,8 @@ export class MenuService {
   deleteCartItem(addressId: string): Observable<any> {
     return this._apiService.DeleteCartItem.remove(addressId).map(response => response)
   }
+
+  AddOrder(obj) {
+    return this._apiService.AddOrder.create(obj).map(response => response);
+  }
 }

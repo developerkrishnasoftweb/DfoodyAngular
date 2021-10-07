@@ -197,3 +197,20 @@ export class AddressModel {
 export class AddressDisplayModel extends AddressModel {
     fullAddress: string;
 }
+
+//Add Order Request model 
+export class AddOrderReqModel {
+    branchId: number;
+    address_id: number;
+    orderIp: "";
+    channel = ChannelType.Web;
+    serviceCharge: number = 0;
+    isFutureOrder: boolean = true;
+    orderdate: any;
+    paymentTypeId: number = 0;
+    comments: string = "";
+}
+
+export enum ChannelType {
+    Web = "Web"
+}

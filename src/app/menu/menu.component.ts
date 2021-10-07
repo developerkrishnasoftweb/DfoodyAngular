@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AddToCartComoMealItemReq, AddToCartMenuItemReq, AddToCartReq, Condiment, DisplayModalClass, Sideset, TabType } from '@core/models/customer';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AddOrderReqModel, AddressDisplayModel, AddToCartComoMealItemReq, AddToCartMenuItemReq, AddToCartReq, Condiment, DisplayModalClass, Sideset, TabType } from '@core/models/customer';
+import { AddressService } from '@core/services/customer/address.service';
 import { MenuService } from '@core/services/customer/menu.service';
 import { ConstantMessage } from '@core/utils/enum';
 import { ConfirmDialogService } from '@shared/confirm-dialog/confirm-dialog.service';
@@ -34,12 +35,25 @@ export class MenuComponent implements OnInit {
 
   @ViewChild('closeButton') private closeButton: ElementRef;
 
+  @ViewChild('closeButton1') private closeButton1: ElementRef;
+
+
   cartList = [];
 
+  addressList = [];
 
-  constructor(private menuService: MenuService, private loaderService: LoaderService, private snackBarService: SnackBarService, private confirmDialogService: ConfirmDialogService) { }
+  addressId = null;
+
+  constructor(private menuService: MenuService,
+    private loaderService: LoaderService,
+    private snackBarService: SnackBarService,
+    private confirmDialogService: ConfirmDialogService,
+    private addressService: AddressService,
+    private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.getCartList();
+    this.getAddressList();
   }
 
   categoryClick(category): void {
@@ -48,7 +62,6 @@ export class MenuComponent implements OnInit {
     this.selectedCategoryId = category.id;
     this.getMenuItem();
     this.getCombomeal();
-    this.getCartList();
   }
 
   menuItemClick(item, type): void {
@@ -81,6 +94,7 @@ export class MenuComponent implements OnInit {
   getMenuCategories(branchDetail): void {
     this.loaderService.show();
     this.branchDetail = branchDetail;
+    this.cdr.detectChanges();
     console.log(branchDetail);
     this.categoriesList = [];
     this.menuService.GetCategories({ 'branchId': branchDetail.id })
@@ -341,28 +355,28 @@ export class MenuComponent implements OnInit {
   }
 
   deleteConfirmDialog(id) {
-    this.confirmDialogService.confirmThis(ConstantMessage.DeleteConfirm,  () => {
+    this.confirmDialogService.confirmThis(ConstantMessage.DeleteConfirm, () => {
       //yes click
       this.deleteCart(id)
-    },  () => {
+    }, () => {
       //No click
     });
   }
 
   deleteCart(id) {
     this.menuService.deleteCartItem(id)
-    .pipe(finalize(() => {
-      // tslint:disable-next-line: deprecation
-    })).subscribe((response) => {
-      if (response) {
-        this.getCartList();
-        this.snackBarService.show(ConstantMessage.AddressDeleted);
-      }
-    }, error => {
-      if (error instanceof HttpErrorResponse) {
-        console.log(error);
-      }
-    });
+      .pipe(finalize(() => {
+        // tslint:disable-next-line: deprecation
+      })).subscribe((response) => {
+        if (response) {
+          this.getCartList();
+          this.snackBarService.show(ConstantMessage.AddressDeleted);
+        }
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
   }
 
   getCartList(): void {
@@ -379,5 +393,74 @@ export class MenuComponent implements OnInit {
       });
   }
 
+  //address 
+  getAddressList(): void {
+    this.addressService.getAddressList()
+      .pipe(finalize(() => {
+        // tslint:disable-next-line: deprecation
+      })).subscribe((response) => {
+        console.log('address ', response);
+        if (response && response.items && response.items.length > 0) {
+          this.addressList = response.items;
+          this.addressList = this.addressList.map(data => ({
+            ...data, fullAddress: this.getFullAddress(data), IsChecked: false
+          }))
+        }
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
+  }
+
+  getFullAddress(address: AddressDisplayModel): string {
+    let fullAddress = "";
+    if (address) {
+      fullAddress = address.address1 + ", " + address.address2 + ", " + address.area + ", " + address.city + ", " + address.state + ", " + address.country;
+    }
+    return fullAddress;
+  }
+
+  onConfirmCartItem() {
+    document.getElementById("openModalButton").click();
+  }
+
+  onSaveAddress() :void {
+    this.addOrder();
+  }
+
+  AddressSelected(id) {
+    this.addressId = id;
+  }
+
+  addOrder(): void {
+    const model = this.createOrderModel();
+    this.menuService.AddOrder(model)
+      .pipe(finalize(() => {
+        // tslint:disable-next-line: deprecation
+      })).subscribe((response: any) => {
+        if (response) {
+          this.snackBarService.show(ConstantMessage.ItemSaved);
+          this.getCartList();
+          this.closeButton1.nativeElement.click();
+        }
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
+  }
+
+  createOrderModel() : AddOrderReqModel {
+    const model = new AddOrderReqModel();
+    model.branchId = this.branchDetail.id;
+    model.address_id = this.addressId;
+    model.orderdate = new Date();
+    return model;
+  }
+
+  onCloseAddressPopup() {
+    this.addressId = null;
+  }
 }
 
