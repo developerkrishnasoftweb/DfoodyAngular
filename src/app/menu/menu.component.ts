@@ -106,6 +106,7 @@ export class MenuComponent implements OnInit {
               ...data1,
               IsChecked: false,
               IsDisabled: true,
+              IsValid: false,
               condiments: data1.condiments && data1.condiments.length > 0 ? data1.condiments.map(data2 => ({ ...data2, IsChecked: false, IsDisabled: false })) : null
             }))
           }));
@@ -131,6 +132,7 @@ export class MenuComponent implements OnInit {
               ...data1,
               IsChecked: false,
               IsDisabled: true,
+              IsValid: false,
               sides: data1.sides && data1.sides.length > 0 ? data1.sides.map(data2 => ({ ...data2, IsChecked: false })) : null
             }))
           }));
@@ -283,11 +285,13 @@ export class MenuComponent implements OnInit {
   }
 
   onCheckboxItemChange(item) {
-    if (item.IsChecked)
-      item[this.displayModal.SubListKey][0].IsChecked = item.IsChecked;
-    else
-      item[this.displayModal.SubListKey] = item[this.displayModal.SubListKey].map(x => ({ ...x, IsChecked: false }));
-    this.checkValidation(item);
+    if (item[this.displayModal.SubListKey] && item[this.displayModal.SubListKey].length > 0) {
+      if (item.IsChecked)
+        item[this.displayModal.SubListKey][0].IsChecked = item.IsChecked;
+      else
+        item[this.displayModal.SubListKey] = item[this.displayModal.SubListKey].map(x => ({ ...x, IsChecked: false }));
+      this.checkValidation(item);
+    }
   }
 
   checkValidation(item) {
@@ -295,9 +299,11 @@ export class MenuComponent implements OnInit {
     switch (this.selectedItem.type) {
       case TabType.menu:
         item.IsDisabled = count >= item[this.displayModal.Max] || count <= item[this.displayModal.Min] ? true : false;
+        item.IsValid = count && count <= item[this.displayModal.Max] || count >= item[this.displayModal.Min] ? true : false;
         break;
       case TabType.combomeal:
-        item.IsDisabled = count <= item[this.displayModal.Min] ? true : false;
+        item.IsDisabled = count  <= item[this.displayModal.Min] ? true : false;
+        item.IsValid = count && count >= item[this.displayModal.Min] ? true : false;
         break;
       default:
         break;
@@ -307,12 +313,9 @@ export class MenuComponent implements OnInit {
   isAddToCartDisabled() {
     if (this.selectedItem[this.displayModal.ListKey] && this.selectedItem[this.displayModal.ListKey].length > 0) {
       let result = this.selectedItem[this.displayModal.ListKey].every(function (e) {
-        return e.IsDisabled === true;
+        return e.IsValid === true;
       });
-      let result1 = this.selectedItem[this.displayModal.ListKey].every(function (e) {
-        return e.IsChecked === false;
-      });
-      return result || result1;
+      return !result;
     } else
       return false;
   }

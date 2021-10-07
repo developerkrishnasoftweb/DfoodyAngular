@@ -53,12 +53,20 @@
                                                 <b>£{{item.price}}</b>
                                             </span>
                                             <span class="menu-button">
-                                                <a class="btn btn-light btn-sm btn-cart"
-                                                    (click)="menuItemClick(item, tabType.menu)"
-                                                    href="#menuItemCondimentSets" data-toggle="modal"
-                                                    data-animation="fadeInUp" data-delay="0.85s" title="Toppings">
-                                                    <i class="fa fa-plus"></i>
-                                                </a>
+                                                <ng-container
+                                                    *ngIf="item?.condimentSets?.length > 0 else noToppingsIcon">
+                                                    <a class="btn btn-light btn-sm btn-cart"
+                                                        (click)="menuItemClick(item, tabType.menu)"
+                                                        href="#menuItemCondimentSets" data-toggle="modal"
+                                                        data-animation="fadeInUp" data-delay="0.85s" title="Toppings">
+                                                        <i class="fa fa-plus"></i>
+                                                    </a>
+                                                </ng-container>
+                                                <ng-template #noToppingsIcon>
+                                                    <span class="btn btn-light btn-sm btn-cart no-popup">
+                                                        <i class="fa fa-plus"></i>
+                                                    </span>
+                                                </ng-template>
                                             </span>
                                         </div>
                                     </div>
@@ -85,13 +93,20 @@
                                                 <b>£{{item.price}}</b>
                                             </span>
                                             <span class="menu-button">
-                                                <a class="btn btn-light btn-sm btn-cart"
-                                                    (click)="menuItemClick(item, tabType.combomeal)"
-                                                    href="#menuItemCondimentSets" data-toggle="modal"
-                                                    data-animation="fadeInUp" data-delay="0.85s" title="Add to cart">
-                                                    <i class="fa fa-plus"></i>
-                                                </a>
-
+                                                <ng-container *ngIf="item?.sidesets?.length > 0 else noToppingsIcon">
+                                                    <a class="btn btn-light btn-sm btn-cart"
+                                                        (click)="menuItemClick(item, tabType.combomeal)"
+                                                        href="#menuItemCondimentSets" data-toggle="modal"
+                                                        data-animation="fadeInUp" data-delay="0.85s"
+                                                        title="Add to cart">
+                                                        <i class="fa fa-plus"></i>
+                                                    </a>
+                                                </ng-container>
+                                                <ng-template #noToppingsIcon>
+                                                    <span class="btn btn-light btn-sm btn-cart no-popup">
+                                                        <i class="fa fa-plus"></i>
+                                                    </span>
+                                                </ng-template>
                                             </span>
                                         </div>
                                     </div>
