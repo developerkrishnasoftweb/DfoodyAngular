@@ -27,8 +27,25 @@ export class CustomerAddressComponent implements OnInit {
   modelBeforeEdit: AddressReqModel = new AddressReqModel();
   modelAfterEdit: AddressReqModel = new AddressReqModel();
 
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        if (position) {
+          console.log("Latitude: " + position.coords.latitude +
+            "Longitude: " + position.coords.longitude);
+          this.modelAfterEdit.latitude = position.coords.latitude;
+          this.modelAfterEdit.longitude = position.coords.longitude;
+        }
+      },
+        (error) => console.log(error));
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
   ngOnInit(): void {
     this.createForm();
+    this.getLocation();
     this.getAddressList();
     Object.keys(this.addressForm.controls)
       .forEach(key => {

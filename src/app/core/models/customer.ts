@@ -182,8 +182,8 @@ export class AddressReqModel {
     city: string;         
     state: string;        
     country: string;          
-    latitude: string;         
-    longitude: string;        
+    latitude: number;         
+    longitude: number;        
     isdefault: string;        
     type: string;         
     landmark: string;         

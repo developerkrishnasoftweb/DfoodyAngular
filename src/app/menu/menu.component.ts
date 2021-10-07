@@ -317,9 +317,12 @@ export class MenuComponent implements OnInit {
     console.log('this.selectedItem[this.displayModal.ListItemKey] ', this.selectedItem[this.displayModal.ListKey]);
     if(this.selectedItem[this.displayModal.ListKey] && this.selectedItem[this.displayModal.ListKey].length > 0) {
       let result = this.selectedItem[this.displayModal.ListKey].every(function (e) {
-        return e.IsDisabled == false || e.IsChecked == false;
+        return e.IsDisabled === true; 
       });
-      return result;
+      let result1 = this.selectedItem[this.displayModal.ListKey].every(function (e) {
+        return e.IsChecked === false; 
+      });
+      return result || result1;
     } else 
       return false;
   }
