@@ -161,7 +161,7 @@ export class AddToCartReq {
     quantity: number;
     amount: number;
     prepTime: number;
-    comment: string;
+    comment: string = "";
 }
 
 export class AddToCartMenuItemReq extends AddToCartReq {
@@ -175,20 +175,25 @@ export class AddToCartComoMealItemReq extends AddToCartReq {
 }
 
 //address Add Request 
-export class AddressReqModel {
-    address1: string;         
-    address2: string;         
-    area: string;         
-    city: string;         
-    state: string;        
-    country: string;          
-    latitude: string;         
-    longitude: string;        
-    isdefault: string;        
-    type: string;         
-    landmark: string;         
-    contactPerson: string;        
-    contactNumber: string;        
-    contactAddress: string;           
-    remark: string;           
+export class AddressModel {
+    address1: string;
+    address2: string;
+    area: string;
+    city: string;
+    state: string;
+    country: string;
+    latitude: string;
+    longitude: string;
+    isdefault: string;
+    type: string;
+    landmark: string;
+    contactPerson: string;
+    contactNumber: string;
+    contactAddress: string;
+    remark: string;
+}
+
+//address Add Request 
+export class AddressDisplayModel extends AddressModel {
+    fullAddress: string;
 }

@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AddressReqModel } from '@core/models/customer';
+import { AddressDisplayModel, AddressModel } from '@core/models/customer';
 import { AddressService } from '@core/services/customer/address.service';
-import { ValidationMsg } from '@core/utils/enum';
+import { ConstantMessage, ValidationMsg } from '@core/utils/enum';
+import { SnackBarService } from '@shared/snack-bar/snack-bar.service';
 import { finalize } from 'rxjs/operators';
 
 @Component({
@@ -20,12 +21,22 @@ export class CustomerAddressComponent implements OnInit {
 
   isBtnDisabled: boolean = false;
 
-  constructor(private addressService: AddressService, private formBuilder: FormBuilder) { }
+  @ViewChild('closeButton') private closeButton: ElementRef;
+  @ViewChild('addButton') private addButton: ElementRef;
+
+  addressList = new Array<AddressDisplayModel>();
+
+
+  constructor(private addressService: AddressService, private formBuilder: FormBuilder,
+    private snackBarService: SnackBarService) { }
 
   get formControl() { return this.addressForm.controls; }
 
-  modelBeforeEdit: AddressReqModel = new AddressReqModel();
-  modelAfterEdit: AddressReqModel = new AddressReqModel();
+  modelBeforeEdit: AddressModel = new AddressModel();
+  modelAfterEdit: AddressModel = new AddressModel();
+
+  isEdit: boolean = false;
+  addressId: string = "";
 
   getLocation() {
     if (navigator.geolocation) {
@@ -69,7 +80,12 @@ export class CustomerAddressComponent implements OnInit {
       .pipe(finalize(() => {
         // tslint:disable-next-line: deprecation
       })).subscribe((response) => {
-        console.log(response);
+        if (response && response.items) {
+          this.addressList = response.items;
+          this.addressList = this.addressList.map(data => ({
+            ...data, fullAddress: this.getFullAddress(data)
+          }))
+        }
       }, error => {
         if (error instanceof HttpErrorResponse) {
           console.log(error);
@@ -77,11 +93,32 @@ export class CustomerAddressComponent implements OnInit {
       });
   }
 
+  getFullAddress(address: AddressDisplayModel): string {
+    let fullAddress = "";
+    if (address) {
+      fullAddress = address.address1 + ", " + address.address2 + ", " + address.area + ", " + address.city + ", " + address.state + ", " + address.country;
+    }
+    return fullAddress;
+  }
+
+  onEdit(address) {
+    this.isEdit = true;
+    this.modelAfterEdit = new AddressModel();
+    this.modelBeforeEdit = new AddressModel();
+    this.modelBeforeEdit = Object.assign(address);
+    this.modelAfterEdit = JSON.parse(JSON.stringify(this.modelBeforeEdit));
+    this.addressId = address.id;
+    if (this.addButton)
+      this.addButton.nativeElement.click();
+    this.addressForm.patchValue(this.modelBeforeEdit);
+  }
+
   createForm(): void {
     this.addressForm = this.formBuilder.group({
       address1: ['', [Validators.required, Validators.maxLength(100)]],
       address2: ['', [Validators.required, Validators.maxLength(100)]],
       area: ['', [Validators.required, Validators.maxLength(100)]],
+      type: ['', [Validators.required, Validators.maxLength(50)]],
       city: ['', [Validators.required, Validators.maxLength(20)]],
       state: ['', [Validators.required, Validators.maxLength(20)]],
       country: ['', [Validators.required, Validators.maxLength(20)]],
@@ -94,15 +131,45 @@ export class CustomerAddressComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('AddressReqModel ', this.modelAfterEdit);
     this.addressForm.markAllAsTouched();
     if (this.addressForm.invalid)
       return;
+    this.isBtnDisabled = true;
+    if (this.isEdit)
+      this.updateAddress();
+    else
+      this.addAddress();
+  }
+
+  addAddress() {
     this.addressService.addAddress(this.modelAfterEdit)
       .pipe(finalize(() => {
         // tslint:disable-next-line: deprecation
       })).subscribe((response) => {
-        console.log(response);
+        if (response) {
+          this.isBtnDisabled = false;
+          this.closeButton.nativeElement.click();
+          this.getAddressList();
+          this.snackBarService.show(ConstantMessage.AddressSaved);
+        }
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
+  }
+
+  updateAddress() {
+    this.addressService.updateAddress(this.modelAfterEdit, this.addressId)
+      .pipe(finalize(() => {
+        // tslint:disable-next-line: deprecation
+      })).subscribe((response) => {
+        if (response) {
+          this.isBtnDisabled = false;
+          this.getAddressList();
+          this.closeButton.nativeElement.click();
+          this.snackBarService.show(ConstantMessage.AddressUpdated);
+        }
       }, error => {
         if (error instanceof HttpErrorResponse) {
           console.log(error);
@@ -111,7 +178,14 @@ export class CustomerAddressComponent implements OnInit {
   }
 
   resetForm() {
+    console.log('closeButton');
     this.addressForm.reset();
+    this.modelAfterEdit = new AddressModel();
+    this.modelBeforeEdit = new AddressModel();
+    this.addressForm.markAsPristine();
+    this.addressForm.markAsUntouched();
+    this.isEdit = false;
+    this.addressId = "";
   }
 
 }

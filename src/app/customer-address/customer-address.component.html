@@ -3,17 +3,28 @@
         <div class="order-body">
             <h5 class="h5 mb-5">Customer Address
                 <a class="btn btn-light btn-sm btn-cart add-btn" href="#addressModal" data-toggle="modal"
-                    data-animation="fadeInUp" data-delay="0.85s" #loginButton>
+                    data-animation="fadeInUp" data-delay="0.85s" #addButton>
                     <i class="fa fa-plus"></i>
                 </a>
             </h5>
-            <div class="order-box">
+            <div class="order-box" *ngFor="let address of addressList">
                 <div class="order-details">
-                    <div class="title">Lorem Ipsum</div>
-                    <div class="place">London</div>
-                    <div class="des">Order #1234567890 | 2 FEB 2021, 8:08 PM</div>
-                    <a href="#">View Details</a>
+                    <div class="address-type">
+                        <div class="title">{{address.type}}</div>
+                        <div class="action-item">
+                            <span> <i class="fa fa-edit" (click)="onEdit(address)"></i></span>
+                            <span> <i class="fa fa-trash"></i></span>
+                        </div>
+                    </div>
+                    <div class="place">{{address.contactPerson}}</div>
+                    <div class="place">{{address.contactNumber}}</div>
+                    <div class="place">{{address.contactAddress}}</div>
+                    <div class="des">{{address.fullAddress}}</div>
+                    <div class="place">{{address.landmark}}</div>
+                    <div class="place">{{address.area}}</div>
+                    <div class="place">{{address.remark}}</div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -24,9 +35,9 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Add Address</h5>
-                <button type="button" class="close" data-dismiss="modal" #closeButton aria-label="Close"
-                    (click)="resetForm()" [ngClass]="isBtnDisabled ? 'diabled-class' : ''" [disabled]="isBtnDisabled">
+                <h5 class="modal-title" id="exampleModalLongTitle">{{isEdit ? 'Edit' : 'Add'}} Address</h5>
+                <button #closeButton type="button" class="close" data-dismiss="modal"  aria-label="Close"
+                    (click)="resetForm()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -63,6 +74,22 @@
                                     <span class="validation-error"
                                         *ngIf="!addressForm.get('address2').hasError('required') && addressForm.get('address2').hasError('maxlength')">
                                         {{validationMsgEnum.Address2MaxLength}}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mb-5">
+                                <label for="type">Address Type<span class="text-denger">*</span></label>
+                                <input type="text" formControlName="type" class="df-control" id="type" name="type"
+                                    placeholder="Address Type *"
+                                    [ngClass]="{ 'is-invalid': formControl.type.touched && formControl.type.invalid }">
+                                <div *ngIf="formControl.type.touched && formControl.type.invalid">
+                                    <span class="validation-error" *ngIf="addressForm.get('type').hasError('required')">
+                                        {{validationMsgEnum.AddressTypeRequired}}
+                                    </span>
+                                    <span class="validation-error"
+                                        *ngIf="!addressForm.get('type').hasError('required') && addressForm.get('type').hasError('maxlength')">
+                                        {{validationMsgEnum.AddressTypeMaxLength}}
                                     </span>
                                 </div>
                             </div>
@@ -216,7 +243,8 @@
 
                             <div class="col-md-12 mb-5">
                                 <input type="submit" [ngClass]="isBtnDisabled ? 'diabled-class' : ''"
-                                    [disabled]="isBtnDisabled" class="bfs-btn d-block w-100" value="Submit Message">
+                                    [disabled]="isBtnDisabled" class="bfs-btn d-block w-100"
+                                    [value]="isEdit ? 'Edit Address' : 'Add Address'">
                             </div>
                         </div>
                     </form>

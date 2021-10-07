@@ -66,6 +66,9 @@ export enum ValidationMsg {
     Address2MaxLength = "Address 2 must be 100 characters or less",
     Address2Required = "Address 2 is required",
 
+    AddressTypeMaxLength = "Address Type must be 50 characters or less",
+    AddressTypeRequired = "Address Type is required",
+
     AreaMaxLength = "Area must be 100 characters or less",
     AreaRequired = "Area is required",
 
@@ -98,7 +101,11 @@ export enum ValidationMsg {
 
 export enum ConstantMessage {
     oldPasswordNotMatched = "Old Password is not currect",
-    PasswordUpdated = "Password is updated successfully."
+    PasswordUpdated = "Password is updated successfully.",
+    ItemSaved = "Item Added to cart successfully.",
+    AddressSaved = "Address saved successfully.",
+    AddressUpdated = "Address updated successfully."
+
 }
 
 //snack bar class 

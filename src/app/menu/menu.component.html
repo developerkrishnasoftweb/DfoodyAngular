@@ -242,8 +242,9 @@
                         </li>
                     </ul>
                     <div class="col-md-12 mb-5">
-                        <input type="submit" class="bfs-btn d-block save-btn"
-                            value="Add to cart" (click)="onSave()">
+                        <input type="submit" class="bfs-btn d-block save-btn" value="Add to cart"
+                            [ngClass]="isAddToCartDisabled() ? 'diabled-class' : ''" [disabled]="isAddToCartDisabled()"
+                            (click)="onSave()">
                     </div>
                 </div>
             </div>

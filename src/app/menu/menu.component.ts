@@ -2,7 +2,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AddToCartComoMealItemReq, AddToCartMenuItemReq, AddToCartReq, Condiment, DisplayModalClass, Sideset, TabType } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
+import { ConstantMessage } from '@core/utils/enum';
 import { LoaderService } from '@shared/loader/loader.service';
+import { SnackBarService } from '@shared/snack-bar/snack-bar.service';
 import { finalize } from 'rxjs/operators';
 
 @Component({
@@ -32,7 +34,7 @@ export class MenuComponent implements OnInit {
   @ViewChild('closeButton') private closeButton: ElementRef;
 
 
-  constructor(private menuService: MenuService, private loaderService: LoaderService) { }
+  constructor(private menuService: MenuService, private loaderService: LoaderService, private snackBarService: SnackBarService) { }
 
   ngOnInit(): void {
   }
@@ -70,7 +72,6 @@ export class MenuComponent implements OnInit {
       default:
         break;
     }
-    console.log(this.selectedItem);
   }
 
   getMenuCategories(branchId): void {
@@ -130,7 +131,7 @@ export class MenuComponent implements OnInit {
               ...data1,
               IsChecked: false,
               IsDisabled: true,
-              sides: data1.sides && data1.sides.length > 0 ? data1.sides.map(data2 => ({ ...data2, IsChecked: false})) : null
+              sides: data1.sides && data1.sides.length > 0 ? data1.sides.map(data2 => ({ ...data2, IsChecked: false })) : null
             }))
           }));
           this.comboMealListBackUP = JSON.stringify(this.comboMealList);
@@ -149,15 +150,16 @@ export class MenuComponent implements OnInit {
       case TabType.menu:
         let index = this.menuItemList.findIndex(x => x.id == this.selectedItem.id);
         this.menuItemList[index] = this.selectedItem;
+        this.addMenuItemToCart(this.selectedItem);
         break;
       case TabType.combomeal:
         let combomealindex = this.comboMealList.findIndex(x => x.id == this.selectedItem.id);
         this.comboMealList[combomealindex] = this.selectedItem;
+        this.addComboMealToCart(this.selectedItem);
         break;
       default:
         break;
     }
-    this.addToCart();
   }
 
   onClose(): void {
@@ -165,27 +167,16 @@ export class MenuComponent implements OnInit {
     this.comboMealList = JSON.parse(this.comboMealListBackUP);
   }
 
-  addToCart(item = this.selectedItem): void {
-    switch (item.type) {
-      case TabType.menu:
-        this.addMenuItemToCart(item);
-        break;
-      case TabType.combomeal:
-        this.addComboMealToCart(item);
-        break;
-      default:
-        break;
-    }
-  }
 
   addMenuItemToCart(item): void {
-    console.log(item);
     const model = this.createMenuItemModel(item);
     this.menuService.AddToCardMenuItem(model)
       .pipe(finalize(() => {
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {
-        console.log('response ', response);
+        if (response) {
+          this.snackBarService.show(ConstantMessage.ItemSaved);
+        }
       }, error => {
         if (error instanceof HttpErrorResponse) {
           console.log(error);
@@ -199,7 +190,9 @@ export class MenuComponent implements OnInit {
       .pipe(finalize(() => {
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {
-        console.log('response ', response);
+        if (response) {
+          this.snackBarService.show(ConstantMessage.ItemSaved);
+        }
       }, error => {
         if (error instanceof HttpErrorResponse) {
           console.log(error);
@@ -304,25 +297,23 @@ export class MenuComponent implements OnInit {
         item.IsDisabled = count >= item[this.displayModal.Max] || count <= item[this.displayModal.Min] ? true : false;
         break;
       case TabType.combomeal:
-        item.IsDisabled = item[this.displayModal.Min] <= this.getCount(item) ? true : false;
+        item.IsDisabled = count <= item[this.displayModal.Min] ? true : false;
         break;
-
       default:
         break;
     }
   }
 
   isAddToCartDisabled() {
-    console.log('this.selectedItem[this.displayModal.ListItemKey] ', this.selectedItem[this.displayModal.ListKey]);
-    if(this.selectedItem[this.displayModal.ListKey] && this.selectedItem[this.displayModal.ListKey].length > 0) {
+    if (this.selectedItem[this.displayModal.ListKey] && this.selectedItem[this.displayModal.ListKey].length > 0) {
       let result = this.selectedItem[this.displayModal.ListKey].every(function (e) {
-        return e.IsDisabled === true; 
+        return e.IsDisabled === true;
       });
       let result1 = this.selectedItem[this.displayModal.ListKey].every(function (e) {
-        return e.IsChecked === false; 
+        return e.IsChecked === false;
       });
       return result || result1;
-    } else 
+    } else
       return false;
   }
 }

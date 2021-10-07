@@ -2,3 +2,19 @@
     font-size: 15px;
     background-color: #F7C639;
 }
+
+.address-type {
+    display: inline-block; 
+    width: 100%;
+    .title {
+        float: left;
+    }
+    .action-item {
+        float: right;
+        span {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+    }
+}
+
