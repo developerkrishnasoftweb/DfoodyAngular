@@ -104,7 +104,7 @@ export class MenuComponent implements OnInit {
             ...data, type: TabType.menu, condimentSets: data.condimentSets.map(data1 => ({
               ...data1,
               IsChecked: false,
-              IsDisabled: false,
+              IsDisabled: true,
               condiments: data1.condiments && data1.condiments.length > 0 ? data1.condiments.map(data2 => ({ ...data2, IsChecked: false, IsDisabled: false })) : null
             }))
           }));
@@ -129,8 +129,8 @@ export class MenuComponent implements OnInit {
             ...data, type: TabType.combomeal, sidesets: data.sidesets.map(data1 => ({
               ...data1,
               IsChecked: false,
-              IsDisabled: false,
-              sides: data1.sides && data1.sides.length > 0 ? data1.sides.map(data2 => ({ ...data2, IsChecked: false, IsDisabled: false })) : null
+              IsDisabled: true,
+              sides: data1.sides && data1.sides.length > 0 ? data1.sides.map(data2 => ({ ...data2, IsChecked: false})) : null
             }))
           }));
           this.comboMealListBackUP = JSON.stringify(this.comboMealList);
@@ -157,8 +157,7 @@ export class MenuComponent implements OnInit {
       default:
         break;
     }
-    this.menuItemListBackUP = this.menuItemList && this.menuItemList.length > 0 ? JSON.stringify(this.menuItemList) : null;
-    this.comboMealListBackUP = this.comboMealList && this.comboMealList.length > 0 ? JSON.stringify(this.comboMealList) : null;
+    this.addToCart();
   }
 
   onClose(): void {
@@ -166,7 +165,7 @@ export class MenuComponent implements OnInit {
     this.comboMealList = JSON.parse(this.comboMealListBackUP);
   }
 
-  addToCart(item): void {
+  addToCart(item = this.selectedItem): void {
     switch (item.type) {
       case TabType.menu:
         this.addMenuItemToCart(item);

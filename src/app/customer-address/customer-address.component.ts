@@ -33,8 +33,8 @@ export class CustomerAddressComponent implements OnInit {
         if (position) {
           console.log("Latitude: " + position.coords.latitude +
             "Longitude: " + position.coords.longitude);
-          this.modelAfterEdit.latitude = position.coords.latitude;
-          this.modelAfterEdit.longitude = position.coords.longitude;
+          this.modelAfterEdit.latitude = position.coords.latitude.toString();
+          this.modelAfterEdit.longitude = position.coords.longitude.toString();
         }
       },
         (error) => console.log(error));
