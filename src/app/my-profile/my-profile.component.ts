@@ -26,8 +26,8 @@ export class MyProfileComponent implements OnInit {
 
   isSubmitDisable: boolean = false;
 
-  modelBeforeEdit: MyProfileModel;
-  modelAfterEdit: MyProfileModel;
+  modelBeforeEdit: MyProfileModel = new MyProfileModel();
+  modelAfterEdit: MyProfileModel = new MyProfileModel();
 
   langPreferences = LangPreferences;
 
