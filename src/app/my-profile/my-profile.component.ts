@@ -82,6 +82,8 @@ export class MyProfileComponent implements OnInit {
         if (this.customerInfo) {
           this.customerInfo.fullName = this.customerInfo.firstName + ' ' + this.customerInfo.lastName;
           this.preFillService.userFullName = this.customerInfo.fullName;
+          this.preFillService.id = this.customerInfo.id;
+
           this.setFormData();
         }
       }, error => {

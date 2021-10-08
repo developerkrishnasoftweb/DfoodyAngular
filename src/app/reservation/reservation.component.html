@@ -45,9 +45,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" class="df-control" formControlName="mobile" id="mobile"
+                                    <input type="text" class="df-control" formControlName="mobile" id="usermobile"
                                         [ngClass]="{ 'is-invalid': formControl.mobile.touched && formControl.mobile.invalid }"
-                                        name="mobile" placeholder="Mobile *">
+                                        name="usermobile" placeholder="Mobile *">
                                     <div *ngIf="formControl.mobile.touched && formControl.mobile.invalid">
                                         <span class="validation-error"
                                             *ngIf="reservationForm.get('mobile').hasError('required')">
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="email" class="df-control" id="email" name="email"
+                                    <input type="email" class="df-control" id="useremail" name="useremail"
                                         formControlName="email" placeholder="Email *"
                                         [ngClass]="{ 'is-invalid': formControl.email.touched && formControl.email.invalid }">
                                     <div *ngIf="formControl.email.touched && formControl.email.invalid">
@@ -124,7 +124,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="submit" class="bfs-btn" value="Submit Message">
+                                    <input type="submit"
+                                        [ngClass]="isSubmitDisable  ? 'diabled-class' : ''"
+                                        [disabled]="isSubmitDisable" class="bfs-btn"
+                                        value="Submit Message">
                                 </div>
                             </div>
                         </form>

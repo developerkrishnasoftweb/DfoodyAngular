@@ -6,7 +6,8 @@ import { ConfigurationModel } from '@core/models/customer';
 })
 export class CustomerDataPreFillService {
 
-  private fullname: any;
+  private fullname: string;
+  private userId: number;
 
   public configurationData: ConfigurationModel;
 
@@ -18,6 +19,14 @@ export class CustomerDataPreFillService {
 
   get userFullName() {
     return this.fullname;
+  }
+
+  set id(value) {
+    this.userId = value;
+  }
+
+  get id() {
+    return this.userId;
   }
 
   set userConfigurationData(value) {

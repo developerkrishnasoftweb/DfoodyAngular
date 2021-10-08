@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="branch-btn">
-                    <a *ngIf="item.istablebookingAllowed" routerLink="reservation"
+                    <a *ngIf="item.istablebookingAllowed" [routerLink]="['/reservation']" [queryParams]="{branchId: item.id}"
                         class="btn-style-a smoothscroll wow fadeInUp" data-delay="0.85s">BOOK A TABLE</a>
                     <a (click)="showMenu(item)" class="btn-style-a smoothscroll wow fadeInUp"
                         data-delay="0.85s">Menu</a>

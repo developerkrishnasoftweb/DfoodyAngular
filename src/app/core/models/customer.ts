@@ -214,3 +214,13 @@ export class AddOrderReqModel {
 export enum ChannelType {
     Web = "Web"
 }
+
+export class ReservationReqModel {
+    branchId: number = null;
+    tableId: number;
+    timeSlotId: number;
+    customerId: number;
+    charge: number = 0;
+    paymentTypeId: number = 0;
+    date: any;
+}
