@@ -1,23 +1,25 @@
 <div class="profile-tab hero-area">
     <div class="tab-bar">
         <ul class="nav nav-pills container" id="pills-tab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="profile-tab" data-toggle="pill" href="#profile" role="tab"
-                    aria-controls="profile" aria-selected="true">My Profile</a>
+            <li class="nav-item" (click)="selectedTabId = 'profile'">
+                <a class="nav-link" [ngClass]="{ 'active': selectedTabId === 'profile' }" id="profile-tab" 
+                    data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="true">My
+                    Profile</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" id="orders-tab" data-toggle="pill" href="#orders" role="tab" aria-controls="orders"
-                    aria-selected="false">Orders</a>
+            <li class="nav-item" (click)="selectedTabId = 'orders'">
+                <a class="nav-link" [ngClass]="{ 'active': selectedTabId === 'orders' }" id="orders-tab"
+                    data-toggle="pill" href="#orders" role="tab" aria-controls="orders" aria-selected="false">Orders</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" id="address-tab" data-toggle="pill" href="#address" role="tab"
-                    aria-controls="address" aria-selected="false">Address</a>
+            <li class="nav-item" (click)="selectedTabId = 'address'">
+                <a class="nav-link" [ngClass]="{ 'active': selectedTabId === 'address' }" id="address-tab"
+                    data-toggle="pill" href="#address" role="tab" aria-controls="address"
+                    aria-selected="false">Address</a>
             </li>
         </ul>
     </div>
 
     <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="tab-pane fade" [ngClass]="{ 'show active': selectedTabId === 'profile' }" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="container">
                 <div class="profile-details">
                     <div class="d-flex align-items-center w-100">
@@ -254,10 +256,10 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+        <div class="tab-pane fade" [ngClass]="{ 'show active': selectedTabId === 'orders' }" id="orders" role="tabpanel" aria-labelledby="orders-tab">
             <app-order></app-order>
         </div>
-        <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
+        <div class="tab-pane fade" [ngClass]="{ 'show active': selectedTabId === 'address' }" id="address" role="tabpanel" aria-labelledby="address-tab">
             <app-customer-address></app-customer-address>
         </div>
     </div>

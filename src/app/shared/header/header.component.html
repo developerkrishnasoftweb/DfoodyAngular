@@ -37,7 +37,7 @@
                             </label>
                             <ul id="dfoodyMenu" class="sm sm-simple dfoody-menu">
                                 <li>
-                                    <a routerLink="home" >Home</a>
+                                    <a routerLink="home">Home</a>
                                 </li>
                                 <li>
                                     <a (click)="menuClick()">Menu</a>
@@ -52,7 +52,9 @@
                                         <a routerLink="myprofile" class="dropdown-item"><i class="fa fa-user-circle"
                                                 aria-hidden="true"></i>
                                             My Profile</a>
-                                        <a class="dropdown-item"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                        <a class="dropdown-item" [routerLink]="['/myprofile']"
+                                            [queryParams]="{id: 'orders'}"><i class="fa fa-shopping-cart"
+                                                aria-hidden="true"></i>
                                             Order</a>
                                         <a class="dropdown-item" (click)="logout()"> <i class="fa fa-sign-out"
                                                 aria-hidden="true"></i>

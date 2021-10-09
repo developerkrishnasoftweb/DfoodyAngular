@@ -78,11 +78,12 @@ export class CustomerAddressComponent implements OnInit {
   }
 
   getAddressList(): void {
+    this.addressList = new Array<AddressDisplayModel>();
     this.addressService.getAddressList()
       .pipe(finalize(() => {
         // tslint:disable-next-line: deprecation
       })).subscribe((response) => {
-        if (response && response.items) {
+        if (response && response.items && response.items.length > 0) {
           this.addressList = response.items;
           this.addressList = this.addressList.map(data => ({
             ...data, fullAddress: this.getFullAddress(data)

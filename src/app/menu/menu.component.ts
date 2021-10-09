@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AddOrderReqModel, AddressDisplayModel, AddToCartComoMealItemReq, AddToCartMenuItemReq, AddToCartReq, Condiment, DisplayModalClass, Sideset, TabType } from '@core/models/customer';
+import { AddOrderReqModel, AddressDisplayModel, AddToCartComoMealItemReq, AddToCartMenuItemReq, AddToCartReq, Condiment, DisplayModalClass, Sideset, TabType, UpdateQuntityModel } from '@core/models/customer';
 import { AddressService } from '@core/services/customer/address.service';
 import { MenuService } from '@core/services/customer/menu.service';
 import { ConstantMessage } from '@core/utils/enum';
@@ -43,6 +43,8 @@ export class MenuComponent implements OnInit {
   addressList = [];
 
   addressId = null;
+
+  disableCart: boolean = false;
 
   constructor(private menuService: MenuService,
     private loaderService: LoaderService,
@@ -166,6 +168,7 @@ export class MenuComponent implements OnInit {
   }
 
   updateCartQuantity(cart, isAdd) {
+    console.log('cart ', cart);
     if (isAdd) {
       cart.quantity += 1;
     } else {
@@ -174,8 +177,7 @@ export class MenuComponent implements OnInit {
       else
         return;
     }
-    let cartIndex = this.cartList.findIndex(x => x.cartId == cart.cartId);
-    this.cartList[cartIndex] = cart;
+    this.updateQuntity(cart);
   }
 
   onSave(): void {
@@ -196,7 +198,7 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  onClose(): void {
+  resetCartItem(): void {
     this.menuItemList = JSON.parse(this.menuItemListBackUP);
     this.comboMealList = JSON.parse(this.comboMealListBackUP);
   }
@@ -211,6 +213,7 @@ export class MenuComponent implements OnInit {
         if (response) {
           this.snackBarService.show(ConstantMessage.ItemSaved);
           this.getCartList();
+          this.resetCartItem();
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {
@@ -228,6 +231,7 @@ export class MenuComponent implements OnInit {
         if (response) {
           this.snackBarService.show(ConstantMessage.ItemSaved);
           this.getCartList();
+          this.resetCartItem();
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {
@@ -332,8 +336,8 @@ export class MenuComponent implements OnInit {
     let count = this.getCount(item);
     switch (this.selectedItem.type) {
       case TabType.menu:
-        item.IsDisabled = count >= item[this.displayModal.Max] || count <= item[this.displayModal.Min] ? true : false;
-        item.IsValid = count && count <= item[this.displayModal.Max] || count >= item[this.displayModal.Min] ? true : false;
+        item.IsDisabled = count >= item[this.displayModal.Max] && count <= item[this.displayModal.Min] ? true : false;
+        item.IsValid = count && count <= item[this.displayModal.Max] && count >= item[this.displayModal.Min] ? true : false;
         break;
       case TabType.combomeal:
         item.IsDisabled = count <= item[this.displayModal.Min] ? true : false;
@@ -370,7 +374,7 @@ export class MenuComponent implements OnInit {
       })).subscribe((response) => {
         if (response) {
           this.getCartList();
-          this.snackBarService.show(ConstantMessage.AddressDeleted);
+          this.snackBarService.show(ConstantMessage.CartItemDeleted);
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {
@@ -384,7 +388,6 @@ export class MenuComponent implements OnInit {
       .pipe(finalize(() => {
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {
-        console.log('response ', response);
         this.cartList = response.items;
       }, error => {
         if (error instanceof HttpErrorResponse) {
@@ -425,7 +428,7 @@ export class MenuComponent implements OnInit {
     document.getElementById("openModalButton").click();
   }
 
-  onSaveAddress() :void {
+  onSaveAddress(): void {
     this.addOrder();
   }
 
@@ -451,7 +454,7 @@ export class MenuComponent implements OnInit {
       });
   }
 
-  createOrderModel() : AddOrderReqModel {
+  createOrderModel(): AddOrderReqModel {
     const model = new AddOrderReqModel();
     model.branchId = this.branchDetail.id;
     model.address_id = this.addressId;
@@ -461,6 +464,38 @@ export class MenuComponent implements OnInit {
 
   onCloseAddressPopup() {
     this.addressId = null;
+  }
+
+  updateQuntity(cart): void {
+    this.disableCart = true;
+    const model = this.getUpdateQuntityModel(cart);
+    this.menuService.UpdateQuantity(model)
+      .pipe(finalize(() => {
+        this.disableCart = false;
+        // tslint:disable-next-line: deprecation
+      })).subscribe((response: any) => {
+        if (response) {
+         this.getCartList();
+        } else {
+          this.snackBarService.show(ConstantMessage.UnableToUpdateQuntity);
+        }
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
+  }
+
+  getUpdateQuntityModel(cart: any): UpdateQuntityModel {
+    const model = new UpdateQuntityModel();
+    model.cartId = cart.cartId;
+    model.quantity = cart.quantity;
+    return model;
+  }
+
+
+  closeAddressModel(): void {
+    this.closeButton1.nativeElement.click();
   }
 }
 

@@ -95,6 +95,9 @@ export class ApiService {
    /*Delete Cart Item*/
    DeleteCartItem = new Api<any>(this.http, this.apiEndpointUrl + '​/api/Cart/Delete/');
 
+   /*Update Quantity*/
+   UpdateQuantity = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Cart/UpdateQuantity');
+
    /*Add order*/
    AddOrder = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Order/AddOrder');
 
@@ -105,6 +108,9 @@ export class ApiService {
    BookaTable = new Api<any>(this.http, this.apiEndpointUrl + '​/api/BookaTable/Add');
 
    /*get Time Slot*/
-   TimeSlot =  (id) => new Api<any>(this.http, this.apiEndpointUrl + '​/api/TimeSlot/getListById/'+  id);
+   TimeSlot = (id) => new Api<any>(this.http, this.apiEndpointUrl + '​/api/TimeSlot/getListById/' + id);
+
+   /*get Time Slot*/
+   GetTableList = (id) => new Api<any>(this.http, this.apiEndpointUrl + '​/api/Table/getFullList/' + id);
 }
 

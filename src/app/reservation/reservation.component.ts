@@ -39,12 +39,10 @@ export class ReservationComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.querySubcription = this.route.queryParams.subscribe(params => {
-      let id = params["branchId"];
       this.branchId = params['branchId'];
-      console.log('params ', params);
-      console.log('this.branchId ', this.branchId);
     });
     this.getTimeSlot();
+    this.GetTableList();
   }
 
   get formControl() { return this.reservationForm.controls; }
@@ -99,6 +97,21 @@ export class ReservationComponent implements OnInit {
       })).subscribe((response: any) => {
         if (response) {
          console.log('response ', response);
+        }
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
+  }
+
+  GetTableList(): void {
+    this.reservationService.GetTableList(this.branchId)
+      .pipe(finalize(() => {
+        // tslint:disable-next-line: deprecation
+      })).subscribe((response: any) => {
+        if (response) {
+         console.log('table response ', response);
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {

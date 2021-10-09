@@ -7,25 +7,30 @@
                     <i class="fa fa-plus"></i>
                 </a>
             </h5>
-            <div class="order-box" *ngFor="let address of addressList">
-                <div class="order-details">
-                    <div class="address-type">
-                        <div class="title">{{address.type}}</div>
-                        <div class="action-item">
-                            <span class="edit"> <i class="fa fa-edit" (click)="onEdit(address)"></i></span>
-                            <span class="delete"> <i class="fa fa-trash" (click)="deleteConfirmDialog(address.id)"></i></span>
+            <ng-container *ngIf="addressList && addressList?.length > 0 else noaddress">
+                <div class="order-box" *ngFor="let address of addressList">
+                    <div class="order-details">
+                        <div class="address-type">
+                            <div class="title">{{address.type}}</div>
+                            <div class="action-item">
+                                <span class="edit"> <i class="fa fa-edit" (click)="onEdit(address)"></i></span>
+                                <span class="delete"> <i class="fa fa-trash"
+                                        (click)="deleteConfirmDialog(address.id)"></i></span>
+                            </div>
                         </div>
+                        <div class="place">{{address.contactPerson}}</div>
+                        <div class="place">{{address.contactNumber}}</div>
+                        <div class="place">{{address.contactAddress}}</div>
+                        <div class="des">{{address.fullAddress}}</div>
+                        <div class="place">{{address.landmark}}</div>
+                        <div class="place">{{address.area}}</div>
+                        <div class="place">{{address.remark}}</div>
                     </div>
-                    <div class="place">{{address.contactPerson}}</div>
-                    <div class="place">{{address.contactNumber}}</div>
-                    <div class="place">{{address.contactAddress}}</div>
-                    <div class="des">{{address.fullAddress}}</div>
-                    <div class="place">{{address.landmark}}</div>
-                    <div class="place">{{address.area}}</div>
-                    <div class="place">{{address.remark}}</div>
                 </div>
-
-            </div>
+            </ng-container>
+            <ng-template #noaddress>
+                <h5 class="h5 mb-5" style="color: red;">Address not Added yet.</h5>
+            </ng-template>
         </div>
     </div>
 </div>
@@ -36,7 +41,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">{{isEdit ? 'Edit' : 'Add'}} Address</h5>
-                <button #closeButton type="button" class="close" data-dismiss="modal"  aria-label="Close"
+                <button #closeButton type="button" class="close" data-dismiss="modal" aria-label="Close"
                     (click)="resetForm()">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -242,7 +247,8 @@
                             </div>
 
                             <div class="col-md-12 mb-5">
-                                <input type="submit" [ngClass]="isBtnDisabled || isObjectChange() ? 'diabled-class' : ''"
+                                <input type="submit"
+                                    [ngClass]="isBtnDisabled || isObjectChange() ? 'diabled-class' : ''"
                                     [disabled]="isBtnDisabled || isObjectChange()" class="bfs-btn d-block w-100"
                                     [value]="isEdit ? 'Edit Address' : 'Add Address'">
                             </div>
@@ -253,4 +259,4 @@
         </div>
     </div>
 </div>
-<app-confirm-dialog></app-confirm-dialog>  
+<app-confirm-dialog></app-confirm-dialog>

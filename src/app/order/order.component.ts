@@ -18,19 +18,19 @@ export class OrderComponent implements OnInit {
     this.getOrderList();
   }
 
-  getOrderList() : void {
+  getOrderList(): void {
+    this.orderList = [];
     this.orderService.getOrderList()
-    .pipe(finalize(() => {
-      // tslint:disable-next-line: deprecation
-    })).subscribe((response) => {
-      console.log('response ', response);
-      this.orderList = response.items;
-      
-    }, error => {
-      if (error instanceof HttpErrorResponse) {
-        console.log(error);
-      }
-    });
+      .pipe(finalize(() => {
+        // tslint:disable-next-line: deprecation
+      })).subscribe((response) => {
+        if (response && response.items && response.items.length > 0)
+          this.orderList = response.items;
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
   }
 
 }

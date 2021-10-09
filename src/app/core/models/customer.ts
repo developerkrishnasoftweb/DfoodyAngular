@@ -224,3 +224,8 @@ export class ReservationReqModel {
     paymentTypeId: number = 0;
     date: any;
 }
+
+export class UpdateQuntityModel {
+    cartId: number;
+    quantity: number;
+}

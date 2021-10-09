@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UpdateQuntityModel } from '@core/models/customer';
 import { Observable } from 'rxjs';
 import { ApiService } from '../api.service';
 
@@ -33,6 +34,10 @@ export class MenuService {
     return this._apiService.AddItemToCart.create(obj).map(response => response);
   }
 
+  AddOrder(obj) {
+    return this._apiService.AddOrder.create(obj).map(response => response);
+  }
+
   AddCombomealToCart(obj) {
     return this._apiService.AddCombomealToCart.create(obj).map(response => response);
   }
@@ -45,7 +50,7 @@ export class MenuService {
     return this._apiService.DeleteCartItem.remove(addressId).map(response => response)
   }
 
-  AddOrder(obj) {
-    return this._apiService.AddOrder.create(obj).map(response => response);
+  UpdateQuantity(obj : UpdateQuntityModel) {
+    return this._apiService.UpdateQuantity.update(obj).map(response => response);
   }
 }

@@ -1,12 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { CustomerInfo, LangPreferences, MyProfileModel } from '@core/models/customer';
 import { CustomerDataPreFillService } from '@core/services/customer/customer-data-pre-fill.service';
 import { CustomerRegistrationService } from '@core/services/customer/customer-registration.service';
 import { MyprofileService } from '@core/services/customer/myprofile.service';
 import { ValidationMsg } from '@core/utils/enum';
 import { SnackBarService } from '@shared/snack-bar/snack-bar.service';
+import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 @Component({
@@ -30,18 +32,26 @@ export class MyProfileComponent implements OnInit {
   modelAfterEdit: MyProfileModel = new MyProfileModel();
 
   langPreferences = LangPreferences;
+  querySubcription: Subscription;
 
+  selectedTabId: string = "profile";
 
   get formControl() { return this.userForm.controls; }
 
   constructor(private myprofileService: MyprofileService, private formBuilder: FormBuilder,
     private customerRegistrationService: CustomerRegistrationService,
-    private snackBarService: SnackBarService,
+    private snackBarService: SnackBarService, private route: ActivatedRoute,
     private preFillService: CustomerDataPreFillService) { }
 
   ngOnInit(): void {
     this.createForm();
     this.getProfileData();
+
+    this.querySubcription = this.route.queryParams.subscribe(params => {
+      if (params['id'])
+        this.selectedTabId = params['id'];
+    });
+
     Object.keys(this.userForm.controls)
       .forEach(key => {
         if (key)

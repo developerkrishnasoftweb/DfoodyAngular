@@ -17,4 +17,8 @@ export class ReservationService {
   GetTimeSlot(id) {
     return this._apiService.TimeSlot(id).getAll().map(response => response);
   }
+
+  GetTableList(id) {
+    return this._apiService.GetTableList(id).getAll().map(response => response);
+  }
 }
