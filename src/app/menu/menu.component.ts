@@ -336,11 +336,11 @@ export class MenuComponent implements OnInit {
     let count = this.getCount(item);
     switch (this.selectedItem.type) {
       case TabType.menu:
-        item.IsDisabled = count >= item[this.displayModal.Max] && count <= item[this.displayModal.Min] ? true : false;
-        item.IsValid = count && count <= item[this.displayModal.Max] && count >= item[this.displayModal.Min] ? true : false;
+        item.IsDisabled = count >= item[this.displayModal.Max] || count < item[this.displayModal.Min] ? true : false;
+        item.IsValid = count && count <= item[this.displayModal.Max] || count > item[this.displayModal.Min] ? true : false;
         break;
       case TabType.combomeal:
-        item.IsDisabled = count <= item[this.displayModal.Min] ? true : false;
+        item.IsDisabled = count < item[this.displayModal.Min] ? true : false;
         item.IsValid = count && count >= item[this.displayModal.Min] ? true : false;
         break;
       default:
