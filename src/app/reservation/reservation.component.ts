@@ -2,10 +2,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ReservationReqModel, TimeList } from '@core/models/customer';
+import { ReservationReqModel } from '@core/models/customer';
 import { CustomerDataPreFillService } from '@core/services/customer/customer-data-pre-fill.service';
 import { ReservationService } from '@core/services/customer/reservation.service';
-import { ValidationService } from '@core/services/validation.service';
 import { ValidationMsg } from '@core/utils/enum';
 import { SnackBarService } from '@shared/snack-bar/snack-bar.service';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -23,7 +22,9 @@ export class ReservationComponent implements OnInit {
 
   validationMsgEnum = ValidationMsg;
 
-  TimeList = TimeList;
+  TimeList = [];
+  paymentList = [];
+
 
   branchId: number = null;
 
@@ -40,20 +41,20 @@ export class ReservationComponent implements OnInit {
     this.createForm();
     this.querySubcription = this.route.queryParams.subscribe(params => {
       this.branchId = params['branchId'];
+      console.log('params ', params);
+      console.log('this.branchId ', this.branchId);
     });
     this.getTimeSlot();
     this.GetTableList();
+    this.getPaymentType();
   }
 
   get formControl() { return this.reservationForm.controls; }
 
   createForm(): void {
     this.reservationForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(50)]],
-      email: ['', [Validators.required, ValidationService.emailValidator]],
-      mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
-      seat: ['', [Validators.required, Validators.maxLength(15)]],
-      message: ['', [Validators.required]],
+      seat: ['', [Validators.required]],
+      paymentType: ['', [Validators.required]],
       date: ['', [Validators.required]],
       time: ['', [Validators.required]]
     });
@@ -69,6 +70,7 @@ export class ReservationComponent implements OnInit {
     model.tableId = +this.reservationForm.value.seat;
     model.timeSlotId = +this.reservationForm.value.time;
     model.date = new Date(this.reservationForm.value.date);
+    model.paymentTypeId = +this.reservationForm.value.paymentType;
     model.customerId = this.preFillService.id;
     this.reservationService.booATable(model).
       pipe(finalize(() => {
@@ -96,7 +98,24 @@ export class ReservationComponent implements OnInit {
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {
         if (response) {
-         console.log('response ', response);
+          if (response)
+            this.TimeList = response;
+        }
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
+  }
+
+  getPaymentType(): void {
+    this.reservationService.GetPaymentType()
+      .pipe(finalize(() => {
+        // tslint:disable-next-line: deprecation
+      })).subscribe((response: any) => {
+        if (response) {
+          if (response)
+            this.paymentList = response;
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {
@@ -106,12 +125,12 @@ export class ReservationComponent implements OnInit {
   }
 
   GetTableList(): void {
-    this.reservationService.GetTableList(this.branchId)
+    this.reservationService.GetTableList({ branchId: this.branchId })
       .pipe(finalize(() => {
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {
         if (response) {
-         console.log('table response ', response);
+          console.log('table response ', response);
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {
@@ -119,7 +138,6 @@ export class ReservationComponent implements OnInit {
         }
       });
   }
-
 
   ngOnDestroy(): void {
     this.querySubcription.unsubscribe();

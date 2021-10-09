@@ -111,6 +111,9 @@ export class ApiService {
    TimeSlot = (id) => new Api<any>(this.http, this.apiEndpointUrl + '​/api/TimeSlot/getListById/' + id);
 
    /*get Time Slot*/
-   GetTableList = (id) => new Api<any>(this.http, this.apiEndpointUrl + '​/api/Table/getFullList/' + id);
-}
+   GetTableList = new Api<any>(this.http, this.apiEndpointUrl + '​/api/Table/getFullList');
 
+   
+   /*Payment Type*/
+   GetPaymentType = new Api<any>(this.http, this.apiEndpointUrl + '​/api/PaymentType/getList');
+}

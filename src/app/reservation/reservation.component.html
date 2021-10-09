@@ -30,36 +30,6 @@
                         <form action="#" [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="text" class="df-control" formControlName="name" id="name" name="name"
-                                        placeholder="Name *"
-                                        [ngClass]="{ 'is-invalid': formControl.name.touched && formControl.name.invalid }">
-                                    <div *ngIf="formControl.name.touched && formControl.name.invalid">
-                                        <span class="validation-error"
-                                            *ngIf="reservationForm.get('name').hasError('required')">
-                                            {{validationMsgEnum.NameRequired}}
-                                        </span>
-                                        <span class="validation-error"
-                                            *ngIf="!reservationForm.get('name').hasError('required') && reservationForm.get('name').hasError('maxlength')">
-                                            {{validationMsgEnum.NameMaxLength}}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" class="df-control" formControlName="mobile" id="usermobile"
-                                        [ngClass]="{ 'is-invalid': formControl.mobile.touched && formControl.mobile.invalid }"
-                                        name="usermobile" placeholder="Mobile *">
-                                    <div *ngIf="formControl.mobile.touched && formControl.mobile.invalid">
-                                        <span class="validation-error"
-                                            *ngIf="reservationForm.get('mobile').hasError('required')">
-                                            {{validationMsgEnum.MobileRequired}}
-                                        </span>
-                                        <span class="validation-error"
-                                            *ngIf="!reservationForm.get('mobile').hasError('required') && reservationForm.get('mobile').hasError('pattern')">
-                                            {{validationMsgEnum.MobileLength}}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
                                     <input type="date" class="df-control" id="date" name="date" formControlName="date"
                                         [ngClass]="{ 'is-invalid': formControl.date.touched && formControl.date.invalid }">
                                     <div *ngIf="formControl.date.touched && formControl.date.invalid">
@@ -70,9 +40,11 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <select name="time" id="time" class="df-control" formControlName="time">
+                                    <select name="time" id="time" class="df-control" formControlName="time"
+                                        placeholder="Select Time">
                                         <ng-container *ngFor="let timeObj of TimeList">
-                                            <option [value]="timeObj.value">{{timeObj.text}}</option>
+                                            <option [value]="timeObj.id">{{timeObj.startTime}} - {{timeObj.closeTime}}
+                                            </option>
                                         </ng-container>
                                     </select>
                                     <div *ngIf="formControl.time.touched && formControl.time.invalid">
@@ -94,40 +66,23 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="email" class="df-control" id="useremail" name="useremail"
-                                        formControlName="email" placeholder="Email *"
-                                        [ngClass]="{ 'is-invalid': formControl.email.touched && formControl.email.invalid }">
-                                    <div *ngIf="formControl.email.touched && formControl.email.invalid">
+                                    <select name="paymentType" id="paymentType" class="df-control"
+                                        formControlName="paymentType" placeholder="Select Payment Type">
+                                        <ng-container *ngFor="let payment of paymentList">
+                                            <option [value]="payment.id">{{payment.titleEng}}
+                                            </option>
+                                        </ng-container>
+                                    </select>
+                                    <div *ngIf="formControl.paymentType.touched && formControl.paymentType.invalid">
                                         <span class="validation-error"
-                                            *ngIf="reservationForm.get('email').hasError('required')">
-                                            {{validationMsgEnum.EmailRequired}}
-                                        </span>
-                                        <span class="validation-error"
-                                            *ngIf="!reservationForm.get('email').hasError('required') && reservationForm.get('email').hasError('maxlength')">
-                                            {{validationMsgEnum.EmailMaxLength}}
-                                        </span>
-                                        <span class="validation-error"
-                                            *ngIf="!reservationForm.get('email').hasError('required') && reservationForm.get('email').hasError('invalidEmailAddress')">
-                                            {{validationMsgEnum.EmailInvalid}}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <textarea name="msg" id="msg" class="df-control" placeholder="Message *"
-                                        formControlName="message"
-                                        [ngClass]="{ 'is-invalid': formControl.message.touched && formControl.message.invalid }"></textarea>
-                                    <div *ngIf="formControl.message.touched && formControl.message.invalid">
-                                        <span class="validation-error"
-                                            *ngIf="reservationForm.get('message').hasError('required')">
-                                            {{validationMsgEnum.MessageRequired}}
+                                            *ngIf="reservationForm.get('paymentType').hasError('required')">
+                                            {{validationMsgEnum.TimeRequired}}
                                         </span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="submit"
-                                        [ngClass]="isSubmitDisable  ? 'diabled-class' : ''"
-                                        [disabled]="isSubmitDisable" class="bfs-btn"
-                                        value="Submit Message">
+                                    <input type="submit" [ngClass]="isSubmitDisable  ? 'diabled-class' : ''"
+                                        [disabled]="isSubmitDisable" class="bfs-btn" value="Submit Message">
                                 </div>
                             </div>
                         </form>

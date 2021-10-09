@@ -1,4 +1,5 @@
-<div class="modal fade" id="consult" tabindex="-1" role="dialog" aria-labelledby="consultTitle" aria-hidden="true">
+<div class="modal fade" id="consult" tabindex="-1" role="dialog" aria-labelledby="consultTitle" aria-hidden="true"
+    data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -64,7 +65,7 @@
                                     </span>
                                 </div>
                                 <span
-                                    *ngIf="!registrationForm.get('mobile').hasError('required') && !registrationForm.get('mobile').hasError('pattern') && isMobileExist"
+                                    *ngIf="!registrationForm.get('mobile').hasError('required') && !registrationForm.get('mobile').hasError('pattern') && isMobileExist && isEmailExistApiCall"
                                     class="validation-error">
                                     {{validationMsgEnum.MobileAlreadyExist}}
                                 </span>
@@ -90,7 +91,7 @@
 
                                 </div>
                                 <span
-                                    *ngIf="!registrationForm.get('email').hasError('required') && !registrationForm.get('email').hasError('invalidEmailAddress') && isEmailExist"
+                                    *ngIf="!registrationForm.get('email').hasError('required') && !registrationForm.get('email').hasError('invalidEmailAddress') && isEmailExist && isEmailExistApiCall"
                                     class="validation-error">
                                     {{validationMsgEnum.EmailAlreadyExist}}
                                 </span>

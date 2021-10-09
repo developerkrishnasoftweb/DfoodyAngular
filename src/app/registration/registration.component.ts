@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CustomerRegistrationReqModel } from '@core/models/customer';
 import { CustomerRegistrationService } from '@core/services/customer/customer-registration.service';
 import { ValidationService } from '@core/services/validation.service';
@@ -18,8 +19,11 @@ export class RegistrationComponent implements OnInit {
 
   validationMsgEnum = ValidationMsg;
 
-  isEmailExist: boolean = false;
-  isMobileExist: boolean = false;
+  isEmailExist: boolean = true;
+  isMobileExist: boolean = true;
+
+  isEmailExistApiCall: boolean = false;
+  isMobileExistApiCall: boolean = false;
 
   isSubmitDisable: boolean = false;
 
@@ -27,6 +31,7 @@ export class RegistrationComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,
+    private router: Router,
     private customerRegistrationService: CustomerRegistrationService) { }
 
   ngOnInit(): void {
@@ -65,6 +70,7 @@ export class RegistrationComponent implements OnInit {
           setTimeout(() => {
             this.closeButton.nativeElement.click();
           }, 300);
+          this.router.navigateByUrl('/home');
           this.resetForm();
         }
       }, error => {
@@ -99,9 +105,10 @@ export class RegistrationComponent implements OnInit {
 
   //Check email valid or not 
   checkIsEmailExist() {
+    this.isEmailExistApiCall = false;
     this.customerRegistrationService.checkIsEmailExist(this.registrationForm.value.mobile)
       .pipe(finalize(() => {
-
+        this.isEmailExistApiCall = true;
       })).subscribe(response => {
         this.isEmailExist = response;
       }, error => {
@@ -113,9 +120,10 @@ export class RegistrationComponent implements OnInit {
 
   //Check email valid or not 
   checkIsMobileExist() {
+    this.isMobileExistApiCall = false;
     this.customerRegistrationService.checkIsMobileExist(this.registrationForm.value.mobile)
       .pipe(finalize(() => {
-
+        this.isMobileExistApiCall = true;
       })).subscribe(response => {
         this.isMobileExist = response;
       }, error => {
