@@ -44,6 +44,7 @@ export class ReservationComponent implements OnInit {
       console.log('params ', params);
       console.log('this.branchId ', this.branchId);
     });
+    this.getTimeSlot();
   }
 
   get formControl() { return this.reservationForm.controls; }
@@ -90,6 +91,22 @@ export class ReservationComponent implements OnInit {
   resetForm() {
     this.reservationForm.reset();
   }
+
+  getTimeSlot(): void {
+    this.reservationService.GetTimeSlot(this.branchId)
+      .pipe(finalize(() => {
+        // tslint:disable-next-line: deprecation
+      })).subscribe((response: any) => {
+        if (response) {
+         console.log('response ', response);
+        }
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
+  }
+
 
   ngOnDestroy(): void {
     this.querySubcription.unsubscribe();

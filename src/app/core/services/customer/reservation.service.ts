@@ -13,4 +13,8 @@ export class ReservationService {
   booATable(ReservationReqModel: ReservationReqModel): Observable<any> {
     return this._apiService.BookaTable.create(ReservationReqModel, null, null).map(response => response)
   }
+
+  GetTimeSlot(id) {
+    return this._apiService.TimeSlot(id).getAll().map(response => response);
+  }
 }

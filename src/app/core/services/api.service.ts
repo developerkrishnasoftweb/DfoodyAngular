@@ -104,4 +104,7 @@ export class ApiService {
    /*book table*/
    BookaTable = new Api<any>(this.http, this.apiEndpointUrl + '​/api/BookaTable/Add');
 
+   /*get Time Slot*/
+   TimeSlot =  (id) => new Api<any>(this.http, this.apiEndpointUrl + '​/api/TimeSlot/getListById/'+  id);
 }
+
