@@ -2,7 +2,7 @@
     <div class="body-box">
         <div class="order-body">
             <h5 class="h5 mb-5">Customer Address
-                <a class="btn btn-light btn-sm btn-cart add-btn" href="#addressModal" data-toggle="modal"
+                <a class="btn btn-light btn-sm btn-cart add-btn" href="#addressModal" data-toggle="modal" (click)="handlePermission();"
                     data-animation="fadeInUp" data-delay="0.85s" #addButton>
                     <i class="fa fa-plus"></i>
                 </a>
@@ -47,214 +47,225 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="login-form">
-                    <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
-                        <div class="row">
-                            <div class="col-md-12 mb-5">
-                                <label for="address1">Address 1<span class="text-denger">*</span></label>
-                                <input type="text" formControlName="address1" class="df-control" id="address1"
-                                    name="address1" placeholder="Address1 *"
-                                    [ngClass]="{ 'is-invalid': formControl.address1.touched && formControl.address1.invalid }">
-                                <div *ngIf="formControl.address1.touched && formControl.address1.invalid">
-                                    <span class="validation-error"
-                                        *ngIf="addressForm.get('address1').hasError('required')">
-                                        {{validationMsgEnum.Address1Required}}
-                                    </span>
-                                    <span class="validation-error"
-                                        *ngIf="!addressForm.get('address1').hasError('required') && addressForm.get('address1').hasError('maxlength')">
-                                        {{validationMsgEnum.Address1MaxLength}}
-                                    </span>
+                <ng-container *ngIf="locationState === 'granted' else locationDenied">
+                    <div class="login-form">
+                        <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-12 mb-5">
+                                    <label for="address1">Address 1<span class="text-denger">*</span></label>
+                                    <input type="text" formControlName="address1" class="df-control" id="address1"
+                                        name="address1" placeholder="Address1 *"
+                                        [ngClass]="{ 'is-invalid': formControl.address1.touched && formControl.address1.invalid }">
+                                    <div *ngIf="formControl.address1.touched && formControl.address1.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="addressForm.get('address1').hasError('required')">
+                                            {{validationMsgEnum.Address1Required}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!addressForm.get('address1').hasError('required') && addressForm.get('address1').hasError('maxlength')">
+                                            {{validationMsgEnum.Address1MaxLength}}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12 mb-5">
-                                <label for="address2">Address 2<span class="text-denger">*</span></label>
-                                <input type="text" formControlName="address2" class="df-control" id="address2"
-                                    name="address2" placeholder="Address 2 *"
-                                    [ngClass]="{ 'is-invalid': formControl.address2.touched && formControl.address2.invalid }">
-                                <div *ngIf="formControl.address2.touched && formControl.address2.invalid">
-                                    <span class="validation-error"
-                                        *ngIf="addressForm.get('address2').hasError('required')">
-                                        {{validationMsgEnum.Address2Required}}
-                                    </span>
-                                    <span class="validation-error"
-                                        *ngIf="!addressForm.get('address2').hasError('required') && addressForm.get('address2').hasError('maxlength')">
-                                        {{validationMsgEnum.Address2MaxLength}}
-                                    </span>
+                                <div class="col-md-12 mb-5">
+                                    <label for="address2">Address 2<span class="text-denger">*</span></label>
+                                    <input type="text" formControlName="address2" class="df-control" id="address2"
+                                        name="address2" placeholder="Address 2 *"
+                                        [ngClass]="{ 'is-invalid': formControl.address2.touched && formControl.address2.invalid }">
+                                    <div *ngIf="formControl.address2.touched && formControl.address2.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="addressForm.get('address2').hasError('required')">
+                                            {{validationMsgEnum.Address2Required}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!addressForm.get('address2').hasError('required') && addressForm.get('address2').hasError('maxlength')">
+                                            {{validationMsgEnum.Address2MaxLength}}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-12 mb-5">
-                                <label for="type">Address Type<span class="text-denger">*</span></label>
-                                <input type="text" formControlName="type" class="df-control" id="type" name="type"
-                                    placeholder="Address Type *"
-                                    [ngClass]="{ 'is-invalid': formControl.type.touched && formControl.type.invalid }">
-                                <div *ngIf="formControl.type.touched && formControl.type.invalid">
-                                    <span class="validation-error" *ngIf="addressForm.get('type').hasError('required')">
-                                        {{validationMsgEnum.AddressTypeRequired}}
-                                    </span>
-                                    <span class="validation-error"
-                                        *ngIf="!addressForm.get('type').hasError('required') && addressForm.get('type').hasError('maxlength')">
-                                        {{validationMsgEnum.AddressTypeMaxLength}}
-                                    </span>
+                                <div class="col-md-12 mb-5">
+                                    <label for="type">Address Type<span class="text-denger">*</span></label>
+                                    <input type="text" formControlName="type" class="df-control" id="type" name="type"
+                                        placeholder="Address Type *"
+                                        [ngClass]="{ 'is-invalid': formControl.type.touched && formControl.type.invalid }">
+                                    <div *ngIf="formControl.type.touched && formControl.type.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="addressForm.get('type').hasError('required')">
+                                            {{validationMsgEnum.AddressTypeRequired}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!addressForm.get('type').hasError('required') && addressForm.get('type').hasError('maxlength')">
+                                            {{validationMsgEnum.AddressTypeMaxLength}}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-12 mb-5">
-                                <label for="area">Area<span class="text-denger">*</span></label>
-                                <input type="text" formControlName="area" class="df-control" id="area" name="area"
-                                    placeholder="Area *"
-                                    [ngClass]="{ 'is-invalid': formControl.area.touched && formControl.area.invalid }">
-                                <div *ngIf="formControl.area.touched && formControl.area.invalid">
-                                    <span class="validation-error" *ngIf="addressForm.get('area').hasError('required')">
-                                        {{validationMsgEnum.AreaRequired}}
-                                    </span>
-                                    <span class="validation-error"
-                                        *ngIf="!addressForm.get('area').hasError('required') && addressForm.get('area').hasError('maxlength')">
-                                        {{validationMsgEnum.AreaMaxLength}}
-                                    </span>
+                                <div class="col-md-12 mb-5">
+                                    <label for="area">Area<span class="text-denger">*</span></label>
+                                    <input type="text" formControlName="area" class="df-control" id="area" name="area"
+                                        placeholder="Area *"
+                                        [ngClass]="{ 'is-invalid': formControl.area.touched && formControl.area.invalid }">
+                                    <div *ngIf="formControl.area.touched && formControl.area.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="addressForm.get('area').hasError('required')">
+                                            {{validationMsgEnum.AreaRequired}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!addressForm.get('area').hasError('required') && addressForm.get('area').hasError('maxlength')">
+                                            {{validationMsgEnum.AreaMaxLength}}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12 mb-5">
-                                <label for="city">City<span class="text-denger">*</span></label>
-                                <input type="text" formControlName="city" class="df-control" id="city" name="city"
-                                    placeholder="City *"
-                                    [ngClass]="{ 'is-invalid': formControl.city.touched && formControl.city.invalid }">
-                                <div *ngIf="formControl.city.touched && formControl.city.invalid">
-                                    <span class="validation-error" *ngIf="addressForm.get('city').hasError('required')">
-                                        {{validationMsgEnum.CityRequired}}
-                                    </span>
-                                    <span class="validation-error"
-                                        *ngIf="!addressForm.get('city').hasError('required') && addressForm.get('city').hasError('maxlength')">
-                                        {{validationMsgEnum.CityMaxLength}}
-                                    </span>
+                                <div class="col-md-12 mb-5">
+                                    <label for="city">City<span class="text-denger">*</span></label>
+                                    <input type="text" formControlName="city" class="df-control" id="city" name="city"
+                                        placeholder="City *"
+                                        [ngClass]="{ 'is-invalid': formControl.city.touched && formControl.city.invalid }">
+                                    <div *ngIf="formControl.city.touched && formControl.city.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="addressForm.get('city').hasError('required')">
+                                            {{validationMsgEnum.CityRequired}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!addressForm.get('city').hasError('required') && addressForm.get('city').hasError('maxlength')">
+                                            {{validationMsgEnum.CityMaxLength}}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-12 mb-5">
-                                <label for="state">State<span class="text-denger">*</span></label>
-                                <input type="text" formControlName="state" class="df-control" id="state" name="state"
-                                    placeholder="State *"
-                                    [ngClass]="{ 'is-invalid': formControl.state.touched && formControl.state.invalid }">
-                                <div *ngIf="formControl.state.touched && formControl.state.invalid">
-                                    <span class="validation-error"
-                                        *ngIf="addressForm.get('state').hasError('required')">
-                                        {{validationMsgEnum.StateRequired}}
-                                    </span>
-                                    <span class="validation-error"
-                                        *ngIf="!addressForm.get('state').hasError('required') && addressForm.get('state').hasError('maxlength')">
-                                        {{validationMsgEnum.StateMaxLength}}
-                                    </span>
+                                <div class="col-md-12 mb-5">
+                                    <label for="state">State<span class="text-denger">*</span></label>
+                                    <input type="text" formControlName="state" class="df-control" id="state"
+                                        name="state" placeholder="State *"
+                                        [ngClass]="{ 'is-invalid': formControl.state.touched && formControl.state.invalid }">
+                                    <div *ngIf="formControl.state.touched && formControl.state.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="addressForm.get('state').hasError('required')">
+                                            {{validationMsgEnum.StateRequired}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!addressForm.get('state').hasError('required') && addressForm.get('state').hasError('maxlength')">
+                                            {{validationMsgEnum.StateMaxLength}}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12 mb-5">
-                                <label for="country">Country<span class="text-denger">*</span></label>
-                                <input type="text" formControlName="country" class="df-control" id="country"
-                                    name="country" placeholder="Country *"
-                                    [ngClass]="{ 'is-invalid': formControl.country.touched && formControl.country.invalid }">
-                                <div *ngIf="formControl.country.touched && formControl.country.invalid">
-                                    <span class="validation-error"
-                                        *ngIf="addressForm.get('country').hasError('required')">
-                                        {{validationMsgEnum.CountryRequired}}
-                                    </span>
-                                    <span class="validation-error"
-                                        *ngIf="!addressForm.get('country').hasError('required') && addressForm.get('country').hasError('maxlength')">
-                                        {{validationMsgEnum.CountryMaxLength}}
-                                    </span>
+                                <div class="col-md-12 mb-5">
+                                    <label for="country">Country<span class="text-denger">*</span></label>
+                                    <input type="text" formControlName="country" class="df-control" id="country"
+                                        name="country" placeholder="Country *"
+                                        [ngClass]="{ 'is-invalid': formControl.country.touched && formControl.country.invalid }">
+                                    <div *ngIf="formControl.country.touched && formControl.country.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="addressForm.get('country').hasError('required')">
+                                            {{validationMsgEnum.CountryRequired}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!addressForm.get('country').hasError('required') && addressForm.get('country').hasError('maxlength')">
+                                            {{validationMsgEnum.CountryMaxLength}}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-12 mb-5">
-                                <label for="landmark">Landmark<span class="text-denger">*</span></label>
-                                <input type="text" formControlName="landmark" class="df-control" id="landmark"
-                                    name="landmark" placeholder="Landmark *"
-                                    [ngClass]="{ 'is-invalid': formControl.landmark.touched && formControl.landmark.invalid }">
-                                <div *ngIf="formControl.landmark.touched && formControl.landmark.invalid">
-                                    <span class="validation-error"
-                                        *ngIf="addressForm.get('landmark').hasError('required')">
-                                        {{validationMsgEnum.Landmark}}
-                                    </span>
-                                    <span class="validation-error"
-                                        *ngIf="!addressForm.get('landmark').hasError('required') && addressForm.get('landmark').hasError('maxlength')">
-                                        {{validationMsgEnum.LandmarkMaxLength}}
-                                    </span>
+                                <div class="col-md-12 mb-5">
+                                    <label for="landmark">Landmark<span class="text-denger">*</span></label>
+                                    <input type="text" formControlName="landmark" class="df-control" id="landmark"
+                                        name="landmark" placeholder="Landmark *"
+                                        [ngClass]="{ 'is-invalid': formControl.landmark.touched && formControl.landmark.invalid }">
+                                    <div *ngIf="formControl.landmark.touched && formControl.landmark.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="addressForm.get('landmark').hasError('required')">
+                                            {{validationMsgEnum.Landmark}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!addressForm.get('landmark').hasError('required') && addressForm.get('landmark').hasError('maxlength')">
+                                            {{validationMsgEnum.LandmarkMaxLength}}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12 mb-5">
-                                <label for="contactPerson">Contact Person<span class="text-denger">*</span></label>
-                                <input type="text" formControlName="contactPerson" class="df-control" id="contactPerson"
-                                    name="contactPerson" placeholder="Contact Person *"
-                                    [ngClass]="{ 'is-invalid': formControl.contactPerson.touched && formControl.contactPerson.invalid }">
-                                <div *ngIf="formControl.contactPerson.touched && formControl.contactPerson.invalid">
-                                    <span class="validation-error"
-                                        *ngIf="addressForm.get('contactPerson').hasError('required')">
-                                        {{validationMsgEnum.ContactPersonRequired}}
-                                    </span>
-                                    <span class="validation-error"
-                                        *ngIf="!addressForm.get('contactPerson').hasError('required') && addressForm.get('contactPerson').hasError('maxlength')">
-                                        {{validationMsgEnum.ContactPersonMaxLength}}
-                                    </span>
+                                <div class="col-md-12 mb-5">
+                                    <label for="contactPerson">Contact Person<span class="text-denger">*</span></label>
+                                    <input type="text" formControlName="contactPerson" class="df-control"
+                                        id="contactPerson" name="contactPerson" placeholder="Contact Person *"
+                                        [ngClass]="{ 'is-invalid': formControl.contactPerson.touched && formControl.contactPerson.invalid }">
+                                    <div *ngIf="formControl.contactPerson.touched && formControl.contactPerson.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="addressForm.get('contactPerson').hasError('required')">
+                                            {{validationMsgEnum.ContactPersonRequired}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!addressForm.get('contactPerson').hasError('required') && addressForm.get('contactPerson').hasError('maxlength')">
+                                            {{validationMsgEnum.ContactPersonMaxLength}}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-12 mb-5">
-                                <label for="contactNumber">Contact Number<span class="text-denger">*</span></label>
-                                <input type="text" formControlName="contactNumber" class="df-control" id="contactNumber"
-                                    name="contactNumber" placeholder="Contact Number *"
-                                    [ngClass]="{ 'is-invalid': formControl.contactNumber.touched && formControl.contactNumber.invalid }">
-                                <div *ngIf="formControl.contactNumber.touched && formControl.contactNumber.invalid">
-                                    <span class="validation-error"
-                                        *ngIf="addressForm.get('contactNumber').hasError('required')">
-                                        {{validationMsgEnum.ContactNumberRequired}}
-                                    </span>
-                                    <span class="validation-error"
-                                        *ngIf="!addressForm.get('contactNumber').hasError('required') && addressForm.get('contactNumber').hasError('pattern')">
-                                        {{validationMsgEnum.ContactNumberMaxLength}}
-                                    </span>
+                                <div class="col-md-12 mb-5">
+                                    <label for="contactNumber">Contact Number<span class="text-denger">*</span></label>
+                                    <input type="text" formControlName="contactNumber" class="df-control"
+                                        id="contactNumber" name="contactNumber" placeholder="Contact Number *"
+                                        [ngClass]="{ 'is-invalid': formControl.contactNumber.touched && formControl.contactNumber.invalid }">
+                                    <div *ngIf="formControl.contactNumber.touched && formControl.contactNumber.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="addressForm.get('contactNumber').hasError('required')">
+                                            {{validationMsgEnum.ContactNumberRequired}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!addressForm.get('contactNumber').hasError('required') && addressForm.get('contactNumber').hasError('pattern')">
+                                            {{validationMsgEnum.ContactNumberMaxLength}}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12 mb-5">
-                                <label for="contactAddress">Contact Address<span class="text-denger">*</span></label>
-                                <input type="text" formControlName="contactAddress" class="df-control"
-                                    id="contactAddress" name="contactAddress" placeholder="Contact Address *"
-                                    [ngClass]="{ 'is-invalid': formControl.contactAddress.touched && formControl.contactAddress.invalid }">
-                                <div *ngIf="formControl.contactAddress.touched && formControl.contactAddress.invalid">
-                                    <span class="validation-error"
-                                        *ngIf="addressForm.get('contactAddress').hasError('required')">
-                                        {{validationMsgEnum.ContactAddressRequired}}
-                                    </span>
-                                    <span class="validation-error"
-                                        *ngIf="!addressForm.get('contactAddress').hasError('required') && addressForm.get('contactAddress').hasError('maxlength')">
-                                        {{validationMsgEnum.ContactAddressMaxLength}}
-                                    </span>
+                                <div class="col-md-12 mb-5">
+                                    <label for="contactAddress">Contact Address<span
+                                            class="text-denger">*</span></label>
+                                    <input type="text" formControlName="contactAddress" class="df-control"
+                                        id="contactAddress" name="contactAddress" placeholder="Contact Address *"
+                                        [ngClass]="{ 'is-invalid': formControl.contactAddress.touched && formControl.contactAddress.invalid }">
+                                    <div
+                                        *ngIf="formControl.contactAddress.touched && formControl.contactAddress.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="addressForm.get('contactAddress').hasError('required')">
+                                            {{validationMsgEnum.ContactAddressRequired}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!addressForm.get('contactAddress').hasError('required') && addressForm.get('contactAddress').hasError('maxlength')">
+                                            {{validationMsgEnum.ContactAddressMaxLength}}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-12 mb-5">
-                                <label for="remark">Remark<span class="text-denger">*</span></label>
-                                <textarea name="remark" id="remark" class="df-control" formControlName="remark"
-                                    [ngClass]="{ 'is-invalid': formControl.address2.touched && formControl.address2.invalid }"
-                                    placeholder="Remark *"></textarea>
-                                <div *ngIf="formControl.remark.touched && formControl.remark.invalid">
-                                    <span class="validation-error"
-                                        *ngIf="addressForm.get('remark').hasError('required')">
-                                        {{validationMsgEnum.RemarkRequired}}
-                                    </span>
-                                    <span class="validation-error"
-                                        *ngIf="!addressForm.get('remark').hasError('required') && addressForm.get('remark').hasError('maxlength')">
-                                        {{validationMsgEnum.RemarkMaxLength}}
-                                    </span>
+                                <div class="col-md-12 mb-5">
+                                    <label for="remark">Remark<span class="text-denger">*</span></label>
+                                    <textarea name="remark" id="remark" class="df-control" formControlName="remark"
+                                        [ngClass]="{ 'is-invalid': formControl.address2.touched && formControl.address2.invalid }"
+                                        placeholder="Remark *"></textarea>
+                                    <div *ngIf="formControl.remark.touched && formControl.remark.invalid">
+                                        <span class="validation-error"
+                                            *ngIf="addressForm.get('remark').hasError('required')">
+                                            {{validationMsgEnum.RemarkRequired}}
+                                        </span>
+                                        <span class="validation-error"
+                                            *ngIf="!addressForm.get('remark').hasError('required') && addressForm.get('remark').hasError('maxlength')">
+                                            {{validationMsgEnum.RemarkMaxLength}}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mb-5">
+                                    <input type="submit"
+                                        [ngClass]="isBtnDisabled || isObjectChange() ? 'diabled-class' : ''"
+                                        [disabled]="isBtnDisabled || isObjectChange()" class="bfs-btn d-block w-100"
+                                        [value]="isEdit ? 'Edit Address' : 'Add Address'">
                                 </div>
                             </div>
-
-                            <div class="col-md-12 mb-5">
-                                <input type="submit"
-                                    [ngClass]="isBtnDisabled || isObjectChange() ? 'diabled-class' : ''"
-                                    [disabled]="isBtnDisabled || isObjectChange()" class="bfs-btn d-block w-100"
-                                    [value]="isEdit ? 'Edit Address' : 'Add Address'">
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
+                </ng-container>
+                <ng-template #locationDenied>
+                    Geolocation is not enabled. Please enable to use this feature. 
+                    You can enable it from browser site setting.
+                </ng-template>
             </div>
         </div>
     </div>

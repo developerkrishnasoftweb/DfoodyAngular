@@ -67,9 +67,7 @@ export class RegistrationComponent implements OnInit {
         this.isSubmitDisable = false;
       })).subscribe(response => {
         if (response && response.id) {
-          setTimeout(() => {
-            this.closeButton.nativeElement.click();
-          }, 300);
+          this.closeButton.nativeElement.click();
           this.router.navigateByUrl('/home');
           this.resetForm();
         }
@@ -105,8 +103,10 @@ export class RegistrationComponent implements OnInit {
 
   //Check email valid or not 
   checkIsEmailExist() {
+    if (this.registrationForm.controls.email.invalid)
+      return;
     this.isEmailExistApiCall = false;
-    this.customerRegistrationService.checkIsEmailExist(this.registrationForm.value.mobile)
+    this.customerRegistrationService.checkIsEmailExist(this.registrationForm.value.email)
       .pipe(finalize(() => {
         this.isEmailExistApiCall = true;
       })).subscribe(response => {
@@ -120,6 +120,8 @@ export class RegistrationComponent implements OnInit {
 
   //Check email valid or not 
   checkIsMobileExist() {
+    if (this.registrationForm.controls.mobile.invalid)
+      return;
     this.isMobileExistApiCall = false;
     this.customerRegistrationService.checkIsMobileExist(this.registrationForm.value.mobile)
       .pipe(finalize(() => {

@@ -62,9 +62,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('Authorization', response.token);
           this.userLoginService.userLoginUpdateBool(true);
           this.getConfiguration();
-          setTimeout(() => {
-            this.closeButton.nativeElement.click();
-          }, 300);
+          this.closeButton.nativeElement.click();
         }
         this.router.navigate(['myprofile']);
       }, errRes => {
@@ -87,7 +85,7 @@ export class LoginComponent implements OnInit {
       })).subscribe(response => {
         if (response) {
           this.preFillService.userConfigurationData = response;
-          this.preFillService.userConfigurationData.enterpriseLogo =  this.preFillService.userConfigurationData.enterpriseLogo+"?date="+new Date().toDateString();
+          this.preFillService.userConfigurationData.enterpriseLogo = this.preFillService.userConfigurationData.enterpriseLogo + "?date=" + new Date().toDateString();
 
         }
 

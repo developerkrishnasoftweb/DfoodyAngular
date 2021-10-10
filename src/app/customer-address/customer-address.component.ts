@@ -35,6 +35,8 @@ export class CustomerAddressComponent implements OnInit {
   isEdit: boolean = false;
   addressId: string = "";
 
+  locationState;
+
   constructor(private addressService: AddressService, private formBuilder: FormBuilder,
     private snackBarService: SnackBarService, private confirmDialogService: ConfirmDialogService) { }
 
@@ -43,11 +45,19 @@ export class CustomerAddressComponent implements OnInit {
     this.createForm();
     this.getLocation();
     this.getAddressList();
+    this.handlePermission();
     Object.keys(this.addressForm.controls)
       .forEach(key => {
         if (key)
           this.onValueChanges(key);
       });
+  }
+
+  handlePermission() {
+    navigator.permissions.query({ name: 'geolocation' }).then((result: PermissionStatus) => {
+      console.log('result ', result);
+      this.locationState = result.state;
+    });
   }
 
 
@@ -105,6 +115,7 @@ export class CustomerAddressComponent implements OnInit {
   }
 
   onEdit(address) {
+    this.handlePermission();
     this.isEdit = true;
     this.modelAfterEdit = new AddressModel();
     this.modelBeforeEdit = new AddressModel();
@@ -197,28 +208,28 @@ export class CustomerAddressComponent implements OnInit {
   }
 
   deleteConfirmDialog(id) {
-    this.confirmDialogService.confirmThis(ConstantMessage.DeleteConfirm,  () => {
+    this.confirmDialogService.confirmThis(ConstantMessage.DeleteConfirm, () => {
       //yes click
       this.deleteAddress(id)
-    },  () => {
+    }, () => {
       //No click
     })
   }
 
   deleteAddress(id) {
     this.addressService.deleteAddress(id)
-    .pipe(finalize(() => {
-      // tslint:disable-next-line: deprecation
-    })).subscribe((response) => {
-      if (response) {
-        this.getAddressList();
-        this.snackBarService.show(ConstantMessage.AddressDeleted);
-      }
-    }, error => {
-      if (error instanceof HttpErrorResponse) {
-        console.log(error);
-      }
-    });
+      .pipe(finalize(() => {
+        // tslint:disable-next-line: deprecation
+      })).subscribe((response) => {
+        if (response) {
+          this.getAddressList();
+          this.snackBarService.show(ConstantMessage.AddressDeleted);
+        }
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
   }
 
   ngOnDestroy() {
@@ -227,5 +238,4 @@ export class CustomerAddressComponent implements OnInit {
     this.addressId = null;
     this.isEdit = null;
   }
-
 }

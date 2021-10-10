@@ -46,6 +46,10 @@ export class MenuComponent implements OnInit {
 
   disableCart: boolean = false;
 
+  isAddressBtnDisable: boolean = false;
+
+
+
   constructor(private menuService: MenuService,
     private loaderService: LoaderService,
     private snackBarService: SnackBarService,
@@ -182,6 +186,15 @@ export class MenuComponent implements OnInit {
 
   onSave(): void {
     this.closeButton.nativeElement.click();
+    this.callAPI();
+  }
+
+  addToCartWithoutToppings(item) : void {
+    this.selectedItem = item;
+    this.callAPI();
+  }
+
+  callAPI() {
     switch (this.selectedItem.type) {
       case TabType.menu:
         let index = this.menuItemList.findIndex(x => x.id == this.selectedItem.id);
@@ -437,9 +450,11 @@ export class MenuComponent implements OnInit {
   }
 
   addOrder(): void {
+    this.isAddressBtnDisable = true;
     const model = this.createOrderModel();
     this.menuService.AddOrder(model)
       .pipe(finalize(() => {
+        this.isAddressBtnDisable = false;
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {
         if (response) {

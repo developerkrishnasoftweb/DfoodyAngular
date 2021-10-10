@@ -205,7 +205,7 @@ export class AddOrderReqModel {
     orderIp: "";
     channel = ChannelType.Web;
     serviceCharge: number = 0;
-    isFutureOrder: boolean = true;
+    isFutureOrder: boolean = false;
     orderdate: any;
     paymentTypeId: number = 0;
     comments: string = "";
