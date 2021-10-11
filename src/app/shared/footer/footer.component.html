@@ -6,20 +6,25 @@
                     <div class="f-widget footer-logo-info">
                         <img src="assets/img/logo-2.png" alt="">
                         <div class="fw-contact">
-                            <p><i class="fa fa-map-marker" aria-hidden="true"></i>Materfront avenue, street 
+                            <p><i class="fa fa-map-marker" aria-hidden="true"></i>Materfront avenue, street
                                 2005F, USA</p>
-                            <a routerLink="/home"><i class="fa fa-phone" aria-hidden="true"></i>+1  888.387.5000</a>
-                            <a routerLink="/home">+1  888.387.5000</a>
-                           <a routerLink="/home" class="fmail"><i class="fa fa-envelope" aria-hidden="true"></i>info@medhelp.com</a>
+                            <a routerLink="/home"><i class="fa fa-phone" aria-hidden="true"></i>+1 888.387.5000</a>
+                            <a routerLink="/home">+1 888.387.5000</a>
+                            <a routerLink="/home" class="fmail"><i class="fa fa-envelope"
+                                    aria-hidden="true"></i>info@medhelp.com</a>
                         </div>
                     </div>
                     <div class="footer-social-widget">
                         <h4>Follow Us :</h4>
                         <ul class="footer-social">
-                            <li><a href="https://twitter.com/voidcoders"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            <li><a href="https://www.facebook.com/voidcoders/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href="https://www.instagram.com/voidcoders/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            <li><a href="https://www.linkedin.com/company/voidcoders/about/"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="https://twitter.com/voidcoders"><i class="fa fa-twitter"
+                                        aria-hidden="true"></i></a></li>
+                            <li><a href="https://www.facebook.com/voidcoders/"><i class="fa fa-facebook"
+                                        aria-hidden="true"></i></a></li>
+                            <li><a href="https://www.instagram.com/voidcoders/"><i class="fa fa-instagram"
+                                        aria-hidden="true"></i></a></li>
+                            <li><a href="https://www.linkedin.com/company/voidcoders/about/"><i class="fa fa-linkedin"
+                                        aria-hidden="true"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -33,7 +38,7 @@
                                     <li><a routerLink="/home">About</a></li>
                                     <li><a routerLink="/home">reservation</a></li>
                                     <li><a routerLink="/home">Contacts</a></li>
-                                    <li><a routerLink="/menu">Our Menu</a></li>
+                                    <li><a routerLink="/foodmenu">Our Menu</a></li>
                                     <li><a routerLink="/home">Blog</a></li>
                                 </ul>
                             </div>
@@ -42,7 +47,8 @@
                             <div class="f-widget">
                                 <h4>Extras</h4>
                                 <ul class="fw-links">
-                                    <li><a routerLink="/home">My Order</a></li>
+                                    <li><a [routerLink]="['/myprofile']" [queryParams]="{id: 'orders'}">My Order</a>
+                                    </li>
                                     <li><a routerLink="/home">Checkout</a></li>
                                     <li><a routerLink="/home">Catering</a></li>
                                     <li><a routerLink="/home">Our Locations</a></li>
@@ -56,12 +62,18 @@
                     <div class="f-widget f-instawiget">
                         <h4>Instagram</h4>
                         <ul class="fw-instagram">
-                            <li><a data-fancybox="gallery" href="assets/img/gallery/insta-1.jpg"><img src="assets/img/gallery/insta-1.jpg" alt=""></a></li>
-                            <li><a data-fancybox="gallery" href="assets/img/gallery/insta-2.jpg"><img src="assets/img/gallery/insta-2.jpg" alt=""></a></li>
-                            <li><a data-fancybox="gallery" href="assets/img/gallery/insta-3.jpg"><img src="assets/img/gallery/insta-3.jpg" alt=""></a></li>
-                            <li><a data-fancybox="gallery" href="assets/img/gallery/insta-4.jpg"><img src="assets/img/gallery/insta-4.jpg" alt=""></a></li>
-                            <li><a data-fancybox="gallery" href="assets/img/gallery/insta-5.jpg"><img src="assets/img/gallery/insta-5.jpg" alt=""></a></li>
-                            <li><a data-fancybox="gallery" href="assets/img/gallery/insta-6.jpg"><img src="assets/img/gallery/insta-6.jpg" alt=""></a></li>
+                            <li><a data-fancybox="gallery" href="assets/img/gallery/insta-1.jpg"><img
+                                        src="assets/img/gallery/insta-1.jpg" alt=""></a></li>
+                            <li><a data-fancybox="gallery" href="assets/img/gallery/insta-2.jpg"><img
+                                        src="assets/img/gallery/insta-2.jpg" alt=""></a></li>
+                            <li><a data-fancybox="gallery" href="assets/img/gallery/insta-3.jpg"><img
+                                        src="assets/img/gallery/insta-3.jpg" alt=""></a></li>
+                            <li><a data-fancybox="gallery" href="assets/img/gallery/insta-4.jpg"><img
+                                        src="assets/img/gallery/insta-4.jpg" alt=""></a></li>
+                            <li><a data-fancybox="gallery" href="assets/img/gallery/insta-5.jpg"><img
+                                        src="assets/img/gallery/insta-5.jpg" alt=""></a></li>
+                            <li><a data-fancybox="gallery" href="assets/img/gallery/insta-6.jpg"><img
+                                        src="assets/img/gallery/insta-6.jpg" alt=""></a></li>
                         </ul>
                     </div>
                 </div>
@@ -73,11 +85,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="copyright-text">
-                        <p>© 2020 APPCODER! All Rights Reserved By <a href="http://krishnasoftweb.com/">Krishna Softweb</a></p>
+                        <p>© 2020 APPCODER! All Rights Reserved By <a href="http://krishnasoftweb.com/">Krishna
+                                Softweb</a></p>
                     </div>
                 </div>
-                
-                
+
+
             </div>
         </div>
     </div>

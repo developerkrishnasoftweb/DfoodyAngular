@@ -37,6 +37,9 @@ export class CustomerAddressComponent implements OnInit {
 
   locationState;
 
+  isAPIResponseCome: boolean = false;
+
+
   constructor(private addressService: AddressService, private formBuilder: FormBuilder,
     private snackBarService: SnackBarService, private confirmDialogService: ConfirmDialogService) { }
 
@@ -55,7 +58,6 @@ export class CustomerAddressComponent implements OnInit {
 
   handlePermission() {
     navigator.permissions.query({ name: 'geolocation' }).then((result: PermissionStatus) => {
-      console.log('result ', result);
       this.locationState = result.state;
     });
   }
@@ -88,9 +90,11 @@ export class CustomerAddressComponent implements OnInit {
   }
 
   getAddressList(): void {
+    this.isAPIResponseCome = false;
     this.addressList = new Array<AddressDisplayModel>();
     this.addressService.getAddressList()
       .pipe(finalize(() => {
+        this.isAPIResponseCome = true;
         // tslint:disable-next-line: deprecation
       })).subscribe((response) => {
         if (response && response.items && response.items.length > 0) {

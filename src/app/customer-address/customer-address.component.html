@@ -2,8 +2,8 @@
     <div class="body-box">
         <div class="order-body">
             <h5 class="h5 mb-5">Customer Address
-                <a class="btn btn-light btn-sm btn-cart add-btn" href="#addressModal" data-toggle="modal" (click)="handlePermission();"
-                    data-animation="fadeInUp" data-delay="0.85s" #addButton>
+                <a class="btn btn-light btn-sm btn-cart add-btn" href="#addressModal" data-toggle="modal"
+                    (click)="handlePermission();" data-animation="fadeInUp" data-delay="0.85s" #addButton>
                     <i class="fa fa-plus"></i>
                 </a>
             </h5>
@@ -29,7 +29,7 @@
                 </div>
             </ng-container>
             <ng-template #noaddress>
-                <h5 class="h5 mb-5" style="color: red;">Address not Added yet.</h5>
+                <h5 *ngIf="isAPIResponseCome" class="h5 mb-5" style="color: red;">Address not Added yet.</h5>
             </ng-template>
         </div>
     </div>
@@ -263,7 +263,7 @@
                     </div>
                 </ng-container>
                 <ng-template #locationDenied>
-                    Geolocation is not enabled. Please enable to use this feature. 
+                    Geolocation is not enabled. Please enable to use this feature.
                     You can enable it from browser site setting.
                 </ng-template>
             </div>

@@ -11,6 +11,7 @@ import { finalize } from 'rxjs/operators';
 export class OrderComponent implements OnInit {
 
   orderList = [];
+  isAPIResponseCome: boolean = false;
 
   constructor(private orderService: OrderService) { }
 
@@ -20,9 +21,10 @@ export class OrderComponent implements OnInit {
 
   getOrderList(): void {
     this.orderList = [];
+    this.isAPIResponseCome = false;
     this.orderService.getOrderList()
       .pipe(finalize(() => {
-        // tslint:disable-next-line: deprecation
+        this.isAPIResponseCome = true;
       })).subscribe((response) => {
         if (response && response.items && response.items.length > 0)
           this.orderList = response.items;
