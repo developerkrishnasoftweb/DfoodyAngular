@@ -35,31 +35,18 @@ export class MenuComponent implements OnInit {
 
   @ViewChild('closeButton') private closeButton: ElementRef;
 
-  @ViewChild('closeButton1') private closeButton1: ElementRef;
-
-
   cartList = [];
 
-  addressList = [];
-
-  addressId = null;
-
   disableCart: boolean = false;
-
-  isAddressBtnDisable: boolean = false;
-
-
 
   constructor(private menuService: MenuService,
     private loaderService: LoaderService,
     private snackBarService: SnackBarService,
     private confirmDialogService: ConfirmDialogService,
-    private addressService: AddressService,
     private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.getCartList();
-    this.getAddressList();
   }
 
   categoryClick(category): void {
@@ -101,7 +88,6 @@ export class MenuComponent implements OnInit {
     this.loaderService.show();
     this.branchDetail = branchDetail;
     this.cdr.detectChanges();
-    console.log(branchDetail);
     this.categoriesList = [];
     this.menuService.GetCategories({ 'branchId': branchDetail.id })
       .pipe(finalize(() => {
@@ -409,78 +395,12 @@ export class MenuComponent implements OnInit {
       });
   }
 
-  //address 
-  getAddressList(): void {
-    this.addressService.getAddressList()
-      .pipe(finalize(() => {
-        // tslint:disable-next-line: deprecation
-      })).subscribe((response) => {
-        console.log('address ', response);
-        if (response && response.items && response.items.length > 0) {
-          this.addressList = response.items;
-          this.addressList = this.addressList.map(data => ({
-            ...data, fullAddress: this.getFullAddress(data), IsChecked: false
-          }))
-        }
-      }, error => {
-        if (error instanceof HttpErrorResponse) {
-          console.log(error);
-        }
-      });
-  }
-
-  getFullAddress(address: AddressDisplayModel): string {
-    let fullAddress = "";
-    if (address) {
-      fullAddress = address.address1 + ", " + address.address2 + ", " + address.area + ", " + address.city + ", " + address.state + ", " + address.country;
-    }
-    return fullAddress;
-  }
-
+ 
   onConfirmCartItem() {
     document.getElementById("openModalButton").click();
   }
 
-  onSaveAddress(): void {
-    this.addOrder();
-  }
-
-  AddressSelected(id) {
-    this.addressId = id;
-  }
-
-  addOrder(): void {
-    this.isAddressBtnDisable = true;
-    const model = this.createOrderModel();
-    this.menuService.AddOrder(model)
-      .pipe(finalize(() => {
-        this.isAddressBtnDisable = false;
-        // tslint:disable-next-line: deprecation
-      })).subscribe((response: any) => {
-        if (response) {
-          this.snackBarService.show(ConstantMessage.ItemSaved);
-          this.getCartList();
-          this.closeButton1.nativeElement.click();
-        }
-      }, error => {
-        if (error instanceof HttpErrorResponse) {
-          console.log(error);
-        }
-      });
-  }
-
-  createOrderModel(): AddOrderReqModel {
-    const model = new AddOrderReqModel();
-    model.branchId = this.branchDetail.id;
-    model.address_id = this.addressId;
-    model.orderdate = new Date();
-    return model;
-  }
-
-  onCloseAddressPopup() {
-    this.addressId = null;
-  }
-
+ 
   updateQuntity(cart): void {
     this.disableCart = true;
     const model = this.getUpdateQuntityModel(cart);
@@ -506,11 +426,6 @@ export class MenuComponent implements OnInit {
     model.cartId = cart.cartId;
     model.quantity = cart.quantity;
     return model;
-  }
-
-
-  closeAddressModel(): void {
-    this.closeButton1.nativeElement.click();
   }
 }
 

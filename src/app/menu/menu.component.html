@@ -332,74 +332,7 @@
 
 <app-confirm-dialog></app-confirm-dialog>
 
-<div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false"
-    data-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <ng-container *ngIf="addressList && addressList.length > 0 else noaddressView">
-                <div class="modal-header">
-                    <h3 class="modal-title">Please Select Address</h3>
-                    <button type="button" class="close" data-dismiss="modal" #closeButton1 aria-label="Close"
-                        (click)="onCloseAddressPopup()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <a class="read-more-btn-1" style="padding: 10px;" [routerLink]="['/myprofile']"
-                    [queryParams]="{id: 'address'}" (click)="closeAddressModel()">
-                    <span>
-                        Click here for add or edit Address.
-                    </span>
-                </a>
-                <div class="modal-body">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" *ngFor="let address of addressList">
-                            <div>
-                                <input type="radio" id={{address.id}} name="address_Name" value="{{address.id}}"
-                                    (click)="AddressSelected(address.id)">
-                                <label style="margin-left: 5px;" for="address{{ address?.id}}">
-                                    {{address.type}}
-                                </label>
-                                <div class="order-details">
-                                    <div class="place">{{address.contactPerson}}</div>
-                                    <div class="place">{{address.contactNumber}}</div>
-                                    <div class="place">{{address.contactAddress}}</div>
-                                    <div class="des">{{address.fullAddress}}</div>
-                                    <div class="place">{{address.landmark}}</div>
-                                    <div class="place">{{address.area}}</div>
-                                    <div class="place">{{address.remark}}</div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="col-md-12 mb-5">
-                        <input type="submit" [ngClass]="!addressId ? 'diabled-class' : ''"
-                            class="bfs-btn d-block save-btn" value="Confirm Order"
-                            [disabled]="!addressId || isAddressBtnDisable" (click)="onSaveAddress()">
-                    </div>
-                </div>
-            </ng-container>
-            <ng-template #noaddressView>
-                <div class="modal-header">
-                    <h3 class="modal-title">Address not added yet for this profile, please add it for confirm order.
-                    </h3>
-                    <button type="button" class="close" data-dismiss="modal" #closeButton1 aria-label="Close"
-                        (click)="onCloseAddressPopup()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="col-md-12 mb-5">
-                        <div style="float: right; width: 39% !important;">
-                            <a class="bfs-btn d-block save-btn" [routerLink]="['/myprofile']"
-                                [queryParams]="{id: 'address'}" (click)="closeAddressModel()">
-                                <span>
-                                    Add Address
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-        </div>
-    </div>
-</div>
+<ng-container *ngIf="branchDetail">
+    <app-confirm-order-address-modal [branchDetail]="branchDetail" (getCartListEmit)="getCartList()">
+    </app-confirm-order-address-modal>
+</ng-container>

@@ -23,6 +23,8 @@ import { CustomerAddressComponent } from './customer-address/customer-address.co
 import { LoaderModule } from '@shared/loader/loader.module';
 import { ConfirmDialogModule } from '@shared/confirm-dialog/confirm-dialog.module';
 import { OrderComponent } from './order/order.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { ConfirmOrderAddressModalComponent } from './confirm-order-address-modal/confirm-order-address-modal.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { OrderComponent } from './order/order.component';
     ChangePasswordComponent,
     BranchDetailComponent,
     CustomerAddressComponent,
-    OrderComponent
+    OrderComponent,
+    OrderDetailComponent,
+    ConfirmOrderAddressModalComponent
   ],
   imports: [
     BrowserModule,

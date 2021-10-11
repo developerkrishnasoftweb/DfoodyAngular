@@ -104,6 +104,9 @@ export class ApiService {
    /*get order list*/
    GetOrderList = new Api<any>(this.http, this.apiEndpointUrl + '​​/api/Order/getList');
 
+   /*get order Detail*/
+   GetOrderDetail = (id) => new Api<any>(this.http, this.apiEndpointUrl + '​/api/Order/getOrderDetails/' + id);
+
    /*book table*/
    BookaTable = new Api<any>(this.http, this.apiEndpointUrl + '​/api/BookaTable/Add');
 

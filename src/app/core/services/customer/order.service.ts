@@ -13,4 +13,8 @@ export class OrderService {
   getOrderList(): Observable<any> {
     return this._apiService.GetOrderList.getAll(null, null).pipe(map(response => response));
   }
+
+  getOrderDetail(id: number): Observable<any> {
+    return this._apiService.GetOrderDetail(id).getAll().pipe(map(response => response));
+  }
 }

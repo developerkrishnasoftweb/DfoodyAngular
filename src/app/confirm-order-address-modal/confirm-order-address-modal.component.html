@@ -1,0 +1,100 @@
+<div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false"
+    data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <ng-container *ngIf="addressList && addressList.length > 0 else noaddressView">
+                <div class="modal-header">
+                    <h3 class="modal-title">Please Select Address</h3>
+                    <button type="button" class="close" data-dismiss="modal" #closeButton1 aria-label="Close"
+                        (click)="closeAddressModel()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <a class="read-more-btn-1" style="padding: 10px;" [routerLink]="['/myprofile']"
+                    [queryParams]="{id: 'address'}" (click)="closeAddressModel()">
+                    <span>
+                        Click here for add or edit Address.
+                    </span>
+                </a>
+                <div class="modal-body">
+                    <form [formGroup]="confirmOrderForm" (ngSubmit)="onSaveAddress()">
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item" *ngFor="let address of addressList">
+                                    <div>
+                                        <input type="radio" formControlName="address_id" name="address_id" [value]="address.id">
+                                        <label style="margin-left: 5px;">
+                                            {{address.type}}
+                                        </label>
+                                        <div class="order-details">
+                                            <div class="place">{{address.contactPerson}}</div>
+                                            <div class="place">{{address.contactNumber}}</div>
+                                            <div class="place">{{address.contactAddress}}</div>
+                                            <div class="des">{{address.fullAddress}}</div>
+                                            <div class="place">{{address.landmark}}</div>
+                                            <div class="place">{{address.area}}</div>
+                                            <div class="place">{{address.remark}}</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6 radio-btn">
+                            <div>
+                                <input type="radio" formControlName="isFutureDate" name="isFutureDate" [value]="true">
+                                <label style="margin-left: 5px;">
+                                    Yes
+                                </label>
+                            </div>
+                            <div>
+                                <input type="radio" formControlName="isFutureDate" name="isFutureDate" [value]="false">
+                                <label style="margin-left: 5px;">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" *ngIf="confirmOrderForm.value.isFutureDate">
+                            <input type="date" class="df-control" id="date" name="date" formControlName="date">
+                            <div *ngIf="formControl.date.touched && formControl.date.invalid">
+                                <span class="validation-error"
+                                    *ngIf="confirmOrderForm.get('date').hasError('required')">
+                                    {{validationMsgEnum.DateRequired}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-5" style="margin-top: 5%;">
+                            <input type="submit" [ngClass]="isAddressBtnDisable ? 'diabled-class' : ''"
+                                class="bfs-btn d-block save-btn" value="Confirm Order"
+                                [disabled]="isAddressBtnDisable">
+                        </div>
+                    </form>
+                </div>
+            </ng-container>
+            <ng-template #noaddressView>
+                <div class="modal-header">
+                    <h3 class="modal-title">Address not added yet for this profile, please add it for confirm order.
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal" #closeButton1 aria-label="Close"
+                        (click)="closeAddressModel()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12 mb-5">
+                        <div style="float: right; width: 39% !important;">
+                            <a class="bfs-btn d-block save-btn" [routerLink]="['/myprofile']"
+                                [queryParams]="{id: 'address'}" (click)="closeAddressModel()">
+                                <span>
+                                    Add Address
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

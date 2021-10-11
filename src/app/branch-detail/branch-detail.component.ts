@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Pagination } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
 import { LoaderService } from '@shared/loader/loader.service';

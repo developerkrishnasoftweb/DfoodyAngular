@@ -12,7 +12,8 @@
                     <div class="place">{{order.city}}</div>
                     <div class="des">Order #{{order.orderTypeId}} | {{order.orderDate | date:' d MMM y, h:mm a'}}
                     </div>
-                    <a href="#">View Details</a>
+                    <a href="#order-detail" data-toggle="modal"
+                        data-animation="fadeInUp" data-delay="0.85s">View Details</a>
                 </div>
             </div>
             <!-- <div class="order-box">
@@ -51,3 +52,5 @@
         </h5>
     </div>
 </div>
+
+<app-order-detail></app-order-detail>
