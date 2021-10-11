@@ -42,6 +42,7 @@
                                 <div class="col-md-6">
                                     <select name="time" id="time" class="df-control" formControlName="time"
                                         placeholder="Select Time">
+                                        <option value="" disabled selected>Select Time</option>
                                         <ng-container *ngFor="let timeObj of TimeList">
                                             <option [value]="timeObj.id">{{timeObj.startTime}} - {{timeObj.closeTime}}
                                             </option>
@@ -67,7 +68,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <select name="paymentType" id="paymentType" class="df-control"
-                                        formControlName="paymentType" placeholder="Select Payment Type">
+                                        formControlName="paymentType">
+                                        <option value="" disabled selected>Select Payment Type</option>
                                         <ng-container *ngFor="let payment of paymentList">
                                             <option [value]="payment.id">{{payment.titleEng}}
                                             </option>

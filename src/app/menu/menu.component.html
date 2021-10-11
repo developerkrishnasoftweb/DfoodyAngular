@@ -269,68 +269,66 @@
     </div>
 </div>
 
-<ng-container>
-    <div class="modal fade" id="menuItemCondimentSets" tabindex="-1" role="dialog" aria-hidden="true"
-        data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">{{displayModal.ModalTitle}}</h3>
-                    <button type="button" class="close" data-dismiss="modal" #closeButton aria-label="Close"
-                        (click)="resetCartItem()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" *ngIf="selectedItem">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" *ngFor="let set of selectedItem[displayModal.ListKey]">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" [(ngModel)]="set.IsChecked" (change)="onCheckboxItemChange(set)"
-                                    class="custom-control-input" id="set{{ set?.id}}">
-                                <label class="custom-control-label" for="set{{ set?.id}}" [disabled]="!set.IsDisabled">
-                                    <span class="popup-span">
-                                        {{set[displayModal.ListItemKey]}} (min: {{set[displayModal.Min]}}
-                                        <ng-container *ngIf="set[displayModal.Max] >= 0 else noMaxView"> max:
-                                            {{set[displayModal.Max]}})
-                                        </ng-container>
-                                        <ng-template #noMaxView>
-                                            )
-                                        </ng-template>
-                                    </span>
-                                </label>
-                                <ng-container
-                                    *ngIf="set[displayModal.SubListKey] && set[displayModal.SubListKey].length > 0">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item" *ngFor="let set1 of set[displayModal.SubListKey]">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" [(ngModel)]="set1.IsChecked"
-                                                    [disabled]="set.IsDisabled && !set1.IsChecked && getCount(set) > 0 ? true : false"
-                                                    (change)="onCheckboxChange(set1, set)" class="custom-control-input"
-                                                    id="set1{{set1?.id}}">
-                                                <label class="custom-control-label"
-                                                    for="set1{{set1?.id}}">{{set1[displayModal.SubListItemKey]}}</label>
-                                                <div>
-                                                    <label for="set1_price{{set1?.id}}">Price:</label>&nbsp;
-                                                    <span id="set1_price{{set1?.id}}"
-                                                        class="order-price">${{set1[displayModal.Price]}}</span>
-                                                </div>
+<div class="modal fade" id="menuItemCondimentSets" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false"
+    data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">{{displayModal.ModalTitle}}</h3>
+                <button type="button" class="close" data-dismiss="modal" #closeButton aria-label="Close"
+                    (click)="resetCartItem()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" *ngIf="selectedItem">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" *ngFor="let set of selectedItem[displayModal.ListKey]">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" [(ngModel)]="set.IsChecked" (change)="onCheckboxItemChange(set)"
+                                class="custom-control-input" id="set{{ set?.id}}">
+                            <label class="custom-control-label" for="set{{ set?.id}}" [disabled]="!set.IsDisabled">
+                                <span class="popup-span">
+                                    {{set[displayModal.ListItemKey]}} (min: {{set[displayModal.Min]}}
+                                    <ng-container *ngIf="set[displayModal.Max] >= 0 else noMaxView"> max:
+                                        {{set[displayModal.Max]}})
+                                    </ng-container>
+                                    <ng-template #noMaxView>
+                                        )
+                                    </ng-template>
+                                </span>
+                            </label>
+                            <ng-container
+                                *ngIf="set[displayModal.SubListKey] && set[displayModal.SubListKey].length > 0">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" *ngFor="let set1 of set[displayModal.SubListKey]">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" [(ngModel)]="set1.IsChecked"
+                                                [disabled]="set.IsDisabled && !set1.IsChecked && getCount(set) > 0 ? true : false"
+                                                (change)="onCheckboxChange(set1, set)" class="custom-control-input"
+                                                id="set1{{set1?.id}}">
+                                            <label class="custom-control-label"
+                                                for="set1{{set1?.id}}">{{set1[displayModal.SubListItemKey]}}</label>
+                                            <div>
+                                                <label for="set1_price{{set1?.id}}">Price:</label>&nbsp;
+                                                <span id="set1_price{{set1?.id}}"
+                                                    class="order-price">${{set1[displayModal.Price]}}</span>
                                             </div>
-                                        </li>
-                                    </ul>
-                                </ng-container>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="col-md-12 mb-5">
-                        <input type="submit" class="bfs-btn d-block save-btn" value="Add to cart"
-                            [ngClass]="isAddToCartDisabled() ? 'diabled-class' : ''" [disabled]="isAddToCartDisabled()"
-                            (click)="onSave()">
-                    </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </ng-container>
+                        </div>
+                    </li>
+                </ul>
+                <div class="col-md-12 mb-5">
+                    <input type="submit" class="bfs-btn d-block save-btn" value="Add to cart"
+                        [ngClass]="isAddToCartDisabled() ? 'diabled-class' : ''" [disabled]="isAddToCartDisabled()"
+                        (click)="onSave()">
                 </div>
             </div>
         </div>
     </div>
-</ng-container>
+</div>
 
 <app-confirm-dialog></app-confirm-dialog>
 
