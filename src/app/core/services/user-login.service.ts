@@ -100,11 +100,7 @@ export class UserLoginService {
   }
 
   logout() {
-    localStorage.removeItem('Authorization');
-    localStorage.removeItem('displayName');
-    localStorage.removeItem('country');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('branchCode');
+    localStorage.clear();
     this.jwtTokenValue = null;
     this.userLoginUpdateBool(false);
     this.getCurrentUser();

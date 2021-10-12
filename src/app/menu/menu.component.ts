@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { AddOrderReqModel, AddressDisplayModel, AddToCartComoMealItemReq, AddToCartMenuItemReq, AddToCartReq, Condiment, DisplayModalClass, Sideset, TabType, UpdateQuntityModel } from '@core/models/customer';
 import { AddressService } from '@core/services/customer/address.service';
 import { MenuService } from '@core/services/customer/menu.service';
@@ -41,11 +42,19 @@ export class MenuComponent implements OnInit {
 
   constructor(private menuService: MenuService,
     private loaderService: LoaderService,
+    private router: Router,
     private snackBarService: SnackBarService,
     private confirmDialogService: ConfirmDialogService,
     private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    const item = localStorage.getItem('branchDetail');
+    if (item) {
+      this.branchDetail = JSON.parse(item);
+      this.getMenuCategories();
+    } else {
+      this.router.navigateByUrl('/branch');
+    }
     this.getCartList();
   }
 
@@ -84,12 +93,11 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  getMenuCategories(branchDetail): void {
+  getMenuCategories(): void {
     this.loaderService.show();
-    this.branchDetail = branchDetail;
     this.cdr.detectChanges();
     this.categoriesList = [];
-    this.menuService.GetCategories({ 'branchId': branchDetail.id })
+    this.menuService.GetCategories({ 'branchId': this.branchDetail.id })
       .pipe(finalize(() => {
         this.loaderService.hide();
       })).subscribe((response: any) => {

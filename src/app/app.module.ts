@@ -14,17 +14,16 @@ import { CoreModule } from '@core/core.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { ReservationComponent } from './reservation/reservation.component';
-import { FoodmenuComponent } from './foodmenu/foodmenu.component';
 import { ShopComponent } from './shop/shop.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { BranchDetailComponent } from './branch-detail/branch-detail.component';
 import { CustomerAddressComponent } from './customer-address/customer-address.component';
 import { LoaderModule } from '@shared/loader/loader.module';
 import { ConfirmDialogModule } from '@shared/confirm-dialog/confirm-dialog.module';
 import { OrderComponent } from './order/order.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { ConfirmOrderAddressModalComponent } from './confirm-order-address-modal/confirm-order-address-modal.component';
+import { BranchComponent } from './branch/branch.component';
 
 @NgModule({
   declarations: [
@@ -36,15 +35,14 @@ import { ConfirmOrderAddressModalComponent } from './confirm-order-address-modal
     ContactUsComponent,
     HomeComponent,
     ReservationComponent,
-    FoodmenuComponent,
     ShopComponent,
     MyProfileComponent,
     ChangePasswordComponent,
-    BranchDetailComponent,
     CustomerAddressComponent,
     OrderComponent,
     OrderDetailComponent,
-    ConfirmOrderAddressModalComponent
+    ConfirmOrderAddressModalComponent,
+    BranchComponent
   ],
   imports: [
     BrowserModule,

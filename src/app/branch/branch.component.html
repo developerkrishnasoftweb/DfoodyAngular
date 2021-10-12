@@ -1,8 +1,8 @@
-<section class="most-popular-food-area" *ngIf="!isShowMenu && isAPIResponseCome">
+<section class="most-popular-food-area" *ngIf="isAPIResponseCome">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="section-titleV1" *ngIf="brandDetail">
+                <div class="section-titleV1">
                     <p>{{brandDetail?.display_name}}</p>
                     <h3>Branches</h3>
                 </div>
@@ -41,7 +41,3 @@
         </div>
     </div>
 </section>
-<div *ngIf="isShowMenu && branchDetail">
-    <app-menu #menu>
-    </app-menu>
-</div>
