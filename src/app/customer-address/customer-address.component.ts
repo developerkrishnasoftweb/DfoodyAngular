@@ -112,9 +112,9 @@ export class CustomerAddressComponent implements OnInit {
 
   getFullAddress(address: AddressDisplayModel): string {
     let fullAddress = "";
-    if (address) {
+    if (address)
       fullAddress = address.address1 + ", " + address.address2 + ", " + address.area + ", " + address.city + ", " + address.state + ", " + address.country;
-    }
+
     return fullAddress;
   }
 

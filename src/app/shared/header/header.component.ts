@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
 
   menuClick() {
     if (this.isUserLogin)
-      this.router.navigate(['/foodmenu']);
+      this.router.navigate(['/brands']);
     else {
       if (this.loginButton)
         this.loginButton.nativeElement.click();

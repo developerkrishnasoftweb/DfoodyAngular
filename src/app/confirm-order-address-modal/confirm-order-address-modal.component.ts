@@ -1,4 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddOrderReqModel, AddressDisplayModel } from '@core/models/customer';
@@ -34,7 +35,6 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('branchDetail ', this.branchDetail);
     this.createForm();
     this.getAddressList();
     this.formControlValueChanged();
@@ -57,8 +57,10 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
     dateCtrl.setValue(new Date());
     this.confirmOrderForm.get('isFutureDate').valueChanges.subscribe(
       (mode: boolean) => {
-        if (mode)
+        if (mode) {
           dateCtrl.setValidators([Validators.required]);
+          this.confirmOrderForm.controls.date.setValue(null);
+        }
         else {
           dateCtrl.clearValidators();
           this.confirmOrderForm.controls.date.setValue(new Date());
@@ -80,6 +82,7 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
           this.addressList = this.addressList.map(data => ({
             ...data, fullAddress: this.getFullAddress(data), IsChecked: false
           }));
+          this.setFormDefaultValue();
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {
@@ -135,7 +138,7 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
     const model = new AddOrderReqModel();
     model.branchId = this.branchDetail.id;
     model.address_id = +this.confirmOrderForm.value.address_id;
-    model.orderdate = this.confirmOrderForm.value.date;
+    model.orderdate = this.confirmOrderForm.value.isFutureDate ? new Date(this.confirmOrderForm.value.date) : this.confirmOrderForm.value.date;
     model.isFutureOrder = this.confirmOrderForm.value.isFutureDate;
     return model;
   }
