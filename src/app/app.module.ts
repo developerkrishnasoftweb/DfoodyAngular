@@ -24,6 +24,7 @@ import { OrderComponent } from './order/order.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { ConfirmOrderAddressModalComponent } from './confirm-order-address-modal/confirm-order-address-modal.component';
 import { BranchComponent } from './branch/branch.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { BranchComponent } from './branch/branch.component';
     OrderComponent,
     OrderDetailComponent,
     ConfirmOrderAddressModalComponent,
-    BranchComponent
+    BranchComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

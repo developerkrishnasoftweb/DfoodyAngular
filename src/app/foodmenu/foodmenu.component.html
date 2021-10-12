@@ -1,4 +1,4 @@
-<section class="most-popular-food-area">
+<section class="most-popular-food-area" *ngIf="brandList?.length > 0 else error">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -32,6 +32,8 @@
         </div>
     </div>
 </section>
-<!-- 
-<app-branch-detail #branchDetail *ngIf="displayBranch">
-</app-branch-detail> -->
+
+
+<ng-template #error>
+    <app-error></app-error>
+</ng-template>

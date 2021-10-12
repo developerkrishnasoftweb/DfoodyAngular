@@ -1,7 +1,6 @@
-<div class="container">
+<div class="container" *ngIf="isAPIResponseCome">
     <div class="body-box">
-
-        <div class="order-body" *ngIf="orderList?.length > 0 && isAPIResponseCome">
+        <div class="order-body" *ngIf="orderList?.length > 0">
             <h5 class="h5 mb-5">Past Orders</h5>
             <div class="order-box" *ngFor="let order of orderList">
                 <div class="order-thumb">
@@ -12,8 +11,8 @@
                     <div class="place">{{order.city}}</div>
                     <div class="des">Order #{{order.orderTypeId}} | {{order.orderDate | date:' d MMM y, h:mm a'}}
                     </div>
-                    <a href="#order-detail" data-toggle="modal"
-                        data-animation="fadeInUp" data-delay="0.85s">View Details</a>
+                    <a href="#order-detail" data-toggle="modal" data-animation="fadeInUp" data-delay="0.85s">View
+                        Details</a>
                 </div>
             </div>
             <!-- <div class="order-box">
@@ -48,9 +47,13 @@
             </div> -->
         </div>
 
-        <h5 *ngIf="isAPIResponseCome && orderList?.length === 0" class="h5 mb-5" style="color: red;">No order placed yet
+        <h5 *ngIf="orderList?.length === 0" class="h5 mb-5" style="color: red;">No order placed yet
         </h5>
     </div>
 </div>
+
+<!-- <ng-template #loader>
+    <div class="loader" id="preloader"></div>
+</ng-template> -->
 
 <app-order-detail></app-order-detail>

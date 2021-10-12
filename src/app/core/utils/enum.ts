@@ -109,7 +109,9 @@ export enum ConstantMessage {
     DeleteConfirm = "Are you sure to delete?",
     OrderPlaced = "Order placed successfully.",
     CartItemDeleted = "Cart Item Deleted successfully.",
-    UnableToUpdateQuntity = "Unable to update quntity"
+    UnableToUpdateQuntity = "Unable to update quntity",
+    PageNotFound = "Sorry We Can't Find That Page!",
+    BranchNotFound = "Sorry We Can't Find Branch!"
 }
 
 //snack bar class 

@@ -1,8 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AddOrderReqModel, AddressDisplayModel, AddToCartComoMealItemReq, AddToCartMenuItemReq, AddToCartReq, Condiment, DisplayModalClass, Sideset, TabType, UpdateQuntityModel } from '@core/models/customer';
-import { AddressService } from '@core/services/customer/address.service';
+import { AddToCartComoMealItemReq, AddToCartMenuItemReq, AddToCartReq, Condiment, DisplayModalClass, Sideset, TabType, UpdateQuntityModel } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
 import { ConstantMessage } from '@core/utils/enum';
 import { ConfirmDialogService } from '@shared/confirm-dialog/confirm-dialog.service';

@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Pagination } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
+import { ConstantMessage } from '@core/utils/enum';
 import { LoaderService } from '@shared/loader/loader.service';
 import { finalize } from 'rxjs/operators';
 import { MenuComponent } from '../menu/menu.component';
@@ -21,6 +22,8 @@ export class BranchComponent implements OnInit {
   isAPIResponseCome: boolean = false;
 
   brandDetail: any = null;
+
+  errorMsg = ConstantMessage.BranchNotFound;
 
 
   constructor(private menuService: MenuService, private loaderService: LoaderService,

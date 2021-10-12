@@ -1,4 +1,4 @@
-<section class="most-popular-food-area" *ngIf="isAPIResponseCome">
+<section class="most-popular-food-area" *ngIf="isAPIResponseCome && branchList?.length > 0 else error">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -41,3 +41,7 @@
         </div>
     </div>
 </section>
+
+<ng-template #error>
+    <app-error [errorMsg]="errorMsg"></app-error>
+</ng-template>
