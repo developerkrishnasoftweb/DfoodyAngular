@@ -7,7 +7,9 @@ import { CustomerRegistrationService } from '@core/services/customer/customer-re
 import { ValidationService } from '@core/services/validation.service';
 import { ValidationMsg } from '@core/utils/enum';
 import { finalize } from 'rxjs/operators';
-
+import { ConfigurationService } from '@core/services/customer/configuration.service';
+import { CustomerDataPreFillService } from '@core/services/customer/customer-data-pre-fill.service';
+import { UserLoginService } from '@core/services/user-login.service';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -32,6 +34,9 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
+    private userLoginService: UserLoginService, 
+    private configurationService: ConfigurationService,
+    private preFillService: CustomerDataPreFillService,
     private customerRegistrationService: CustomerRegistrationService) { }
 
   ngOnInit(): void {
@@ -66,15 +71,31 @@ export class RegistrationComponent implements OnInit {
       .pipe(finalize(() => {
         this.isSubmitDisable = false;
       })).subscribe(response => {
-        if (response && response.id) {
+        if (response.token) {
+          localStorage.setItem('Authorization', response.token);
+          this.userLoginService.userLoginUpdateBool(true);
+          this.getConfiguration();
           this.closeButton.nativeElement.click();
-          this.router.navigateByUrl('/home');
           this.resetForm();
         }
+        
       }, error => {
         if (error instanceof HttpErrorResponse) {
           console.log(error);
         }
+      });
+  }
+
+  getConfiguration() {
+    this.configurationService.getConfiguration()
+      .pipe(finalize(() => {
+      })).subscribe(response => {
+        if (response) {
+          this.preFillService.userConfigurationData = response;
+          this.preFillService.userConfigurationData.enterpriseLogo = this.preFillService.userConfigurationData.enterpriseLogo + "?date=" + new Date().toDateString();
+
+        }
+
       });
   }
 
