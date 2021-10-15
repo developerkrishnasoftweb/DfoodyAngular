@@ -111,7 +111,8 @@ export enum ConstantMessage {
     CartItemDeleted = "Cart Item Deleted successfully.",
     UnableToUpdateQuntity = "Unable to update quntity",
     PageNotFound = "Sorry We Can't Find That Page!",
-    BranchNotFound = "Sorry We Can't Find Branch!"
+    BranchNotFound = "Sorry We Can't Find Branch!",
+    BranchEntry = "You are adding diffrent branch item. so previous added items will be removed"
 }
 
 //snack bar class 

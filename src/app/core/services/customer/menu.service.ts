@@ -53,4 +53,8 @@ export class MenuService {
   UpdateQuantity(obj : UpdateQuntityModel) {
     return this._apiService.UpdateQuantity.update(obj).map(response => response);
   }
+
+  CheckSameBranchEntry() {
+    return this._apiService.CheckSameBranchEntry.getAll().map(response => response);
+  }
 }

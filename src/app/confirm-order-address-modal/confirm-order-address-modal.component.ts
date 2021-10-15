@@ -6,6 +6,8 @@ import { AddOrderReqModel, AddressDisplayModel } from '@core/models/customer';
 import { AddressService } from '@core/services/customer/address.service';
 import { MenuService } from '@core/services/customer/menu.service';
 import { ConstantMessage, ValidationMsg } from '@core/utils/enum';
+import { ConfirmDialogService } from '@shared/confirm-dialog/confirm-dialog.service';
+import { LoaderService } from '@shared/loader/loader.service';
 import { SnackBarService } from '@shared/snack-bar/snack-bar.service';
 import { finalize } from 'rxjs/operators';
 
@@ -31,6 +33,8 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
   validationMsgEnum = ValidationMsg;
 
   constructor(private menuService: MenuService, private snackBarService: SnackBarService,
+    private confirmDialogService: ConfirmDialogService,
+    private loaderService: LoaderService,
     private addressService: AddressService, private formBuilder: FormBuilder
   ) { }
 
@@ -91,7 +95,7 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
       });
   }
 
-  setFormDefaultValue() :void {
+  setFormDefaultValue(): void {
     if (this.addressList && this.addressList.length > 0) {
       this.confirmOrderForm.controls.address_id.setValue(this.addressList[0].id);
     }
@@ -111,21 +115,53 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
     this.confirmOrderForm.markAllAsTouched();
     if (this.confirmOrderForm.invalid)
       return;
-    this.addOrder();
+    this.closeAddressModel();
+    this.checkSameBranchEntry();
   }
 
+  checkSameBranchEntry(): void {
+    this.loaderService.show();
+    this.menuService.CheckSameBranchEntry()
+      .pipe(finalize(() => {
+        this.loaderService.hide();
+        // tslint:disable-next-line: deprecation
+      })).subscribe((response: boolean) => {
+        if (response) {
+          this.addOrder();
+        } else {
+          this.branchEntryConfirmDialog();
+        }
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
+  }
+
+  branchEntryConfirmDialog() {
+    this.confirmDialogService.confirmThis(ConstantMessage.BranchEntry, () => {
+      //yes click
+      this.addOrder();
+    }, () => {
+      //No click
+      this.isAddressBtnDisable = false;
+    });
+  }
+
+
   addOrder(): void {
-    this.isAddressBtnDisable = true;
+    this.loaderService.show();
     const model = this.createOrderModel();
     this.menuService.AddOrder(model)
       .pipe(finalize(() => {
+        this.loaderService.hide();
         this.isAddressBtnDisable = false;
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {
         if (response) {
           this.snackBarService.show(ConstantMessage.ItemSaved);
           this.getCartListEmit.emit();
-          this.closeAddressModel();
+          
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {

@@ -119,4 +119,6 @@ export class ApiService {
    
    /*Payment Type*/
    GetPaymentType = new Api<any>(this.http, this.apiEndpointUrl + '​/api/PaymentType/getList');
+
+   CheckSameBranchEntry = new Api<any>(this.http, this.apiEndpointUrl + '​/api/Cart/CheckSameBranchEntry');
 }

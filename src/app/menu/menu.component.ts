@@ -182,7 +182,7 @@ export class MenuComponent implements OnInit {
     this.callAPI();
   }
 
-  addToCartWithoutToppings(item) : void {
+  addToCartWithoutToppings(item): void {
     this.selectedItem = item;
     this.callAPI();
   }
@@ -402,12 +402,13 @@ export class MenuComponent implements OnInit {
       });
   }
 
- 
+  
+
   onConfirmCartItem() {
     document.getElementById("openModalButton").click();
   }
 
- 
+
   updateQuntity(cart): void {
     this.disableCart = true;
     const model = this.getUpdateQuntityModel(cart);
@@ -417,7 +418,7 @@ export class MenuComponent implements OnInit {
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {
         if (response) {
-         this.getCartList();
+          this.getCartList();
         } else {
           this.snackBarService.show(ConstantMessage.UnableToUpdateQuntity);
         }
