@@ -51,10 +51,10 @@ export class MenuComponent implements OnInit {
     if (item) {
       this.branchDetail = JSON.parse(item);
       this.getMenuCategories();
+      this.getCartList();
     } else {
       this.router.navigateByUrl('/branch');
     }
-    this.getCartList();
   }
 
   categoryClick(category): void {
