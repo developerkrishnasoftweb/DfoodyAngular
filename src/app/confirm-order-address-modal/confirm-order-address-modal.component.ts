@@ -125,7 +125,7 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
       .pipe(finalize(() => {
         this.loaderService.hide();
         // tslint:disable-next-line: deprecation
-      })).subscribe((response: boolean) => {
+      })).subscribe((response: any) => {
         if (response) {
           this.addOrder();
         } else {
