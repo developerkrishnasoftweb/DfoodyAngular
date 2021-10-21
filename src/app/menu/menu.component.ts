@@ -179,7 +179,35 @@ export class MenuComponent implements OnInit {
 
   onSave(): void {
     this.closeButton.nativeElement.click();
-    this.callAPI();
+    this.checkSameBranchEntry();
+  }
+
+  checkSameBranchEntry(): void {
+    this.loaderService.show();
+    this.menuService.CheckSameBranchEntry()
+      .pipe(finalize(() => {
+        this.loaderService.hide();
+        // tslint:disable-next-line: deprecation
+      })).subscribe((response: any) => {
+        if (response)
+          this.callAPI();
+        else
+          this.branchEntryConfirmDialog();
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
+  }
+
+
+  branchEntryConfirmDialog() {
+    this.confirmDialogService.confirmThis(ConstantMessage.BranchEntry, () => {
+      //yes click
+      this.callAPI();
+    }, () => {
+      //No click
+    });
   }
 
   addToCartWithoutToppings(item): void {
@@ -402,7 +430,7 @@ export class MenuComponent implements OnInit {
       });
   }
 
-  
+
 
   onConfirmCartItem() {
     document.getElementById("openModalButton").click();

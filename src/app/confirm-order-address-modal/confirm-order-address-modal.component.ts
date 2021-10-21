@@ -116,38 +116,8 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
     if (this.confirmOrderForm.invalid)
       return;
     this.closeAddressModel();
-    this.checkSameBranchEntry();
+    this.addOrder();
   }
-
-  checkSameBranchEntry(): void {
-    this.loaderService.show();
-    this.menuService.CheckSameBranchEntry()
-      .pipe(finalize(() => {
-        this.loaderService.hide();
-        // tslint:disable-next-line: deprecation
-      })).subscribe((response: any) => {
-        if (response) {
-          this.addOrder();
-        } else {
-          this.branchEntryConfirmDialog();
-        }
-      }, error => {
-        if (error instanceof HttpErrorResponse) {
-          console.log(error);
-        }
-      });
-  }
-
-  branchEntryConfirmDialog() {
-    this.confirmDialogService.confirmThis(ConstantMessage.BranchEntry, () => {
-      //yes click
-      this.addOrder();
-    }, () => {
-      //No click
-      this.isAddressBtnDisable = false;
-    });
-  }
-
 
   addOrder(): void {
     this.loaderService.show();
