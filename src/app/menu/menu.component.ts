@@ -189,7 +189,7 @@ export class MenuComponent implements OnInit {
         this.loaderService.hide();
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {
-        if (response)
+        if (!response)
           this.callAPI();
         else
           this.branchEntryConfirmDialog();
