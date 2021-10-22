@@ -8,6 +8,7 @@ import { ConfirmDialogService } from '@shared/confirm-dialog/confirm-dialog.serv
 import { LoaderService } from '@shared/loader/loader.service';
 import { SnackBarService } from '@shared/snack-bar/snack-bar.service';
 import { finalize } from 'rxjs/operators';
+import { ConfirmOrderAddressModalComponent } from '../confirm-order-address-modal/confirm-order-address-modal.component';
 
 @Component({
   selector: 'app-menu',
@@ -44,6 +45,9 @@ export class MenuComponent implements OnInit {
 
   disableCart: boolean = false;
 
+  @ViewChild('addressmodal') private addressmodal: ConfirmOrderAddressModalComponent;
+
+
   isAPIResponseCome: boolean = false;
 
   constructor(private menuService: MenuService,
@@ -66,6 +70,10 @@ export class MenuComponent implements OnInit {
     } else {
       this.router.navigateByUrl('/branch');
     }
+  }
+
+  changeTab(tab) {
+    this.selectedTabType = tab;
   }
 
   categoryClick(category): void {
@@ -478,6 +486,10 @@ export class MenuComponent implements OnInit {
     model.cartId = cart.cartId;
     model.quantity = cart.quantity;
     return model;
+  }
+
+  addCoupon() {
+
   }
 }
 

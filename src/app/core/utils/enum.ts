@@ -47,6 +47,11 @@ export enum ValidationMsg {
     //Seat 
     SeatRequired = "Seat is required",
 
+    //payement type
+    PayementTypeRequired = "Payement type is required",
+
+    TableRequired = "Table is required",
+
 
     //Last Name
     LastNameRequired = "Last Name is required",

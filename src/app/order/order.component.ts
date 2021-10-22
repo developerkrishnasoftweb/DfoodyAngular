@@ -26,7 +26,6 @@ export class OrderComponent implements OnInit {
   }
 
   onclickOrderDetail(order) {
-    console.log(order);
     this.orderDetail.getOrderDetail(order.id);
   }
 

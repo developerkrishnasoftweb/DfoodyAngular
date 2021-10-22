@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AddOrderReqModel, AddressDisplayModel } from '@core/models/customer';
+import { AddOrderReqModel, AddressDisplayModel, TabType } from '@core/models/customer';
 import { AddressService } from '@core/services/customer/address.service';
 import { MenuService } from '@core/services/customer/menu.service';
 import { ConstantMessage, ValidationMsg } from '@core/utils/enum';
@@ -23,6 +23,8 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
   @ViewChild('closeButton1') private closeButton1: ElementRef;
 
   @Input('branchDetail') branchDetail: any;
+  @Input('selectedTab') selectedTab: any;
+
 
   @Output() getCartListEmit = new EventEmitter<any>();
 
@@ -33,7 +35,6 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
   validationMsgEnum = ValidationMsg;
 
   constructor(private menuService: MenuService, private snackBarService: SnackBarService,
-    private confirmDialogService: ConfirmDialogService,
     private loaderService: LoaderService,
     private addressService: AddressService, private formBuilder: FormBuilder
   ) { }
@@ -115,6 +116,7 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
     this.confirmOrderForm.markAllAsTouched();
     if (this.confirmOrderForm.invalid)
       return;
+    console.log(this.selectedTab);
     this.closeAddressModel();
     this.addOrder();
   }
@@ -131,7 +133,7 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
         if (response) {
           this.snackBarService.show(ConstantMessage.ItemSaved);
           this.getCartListEmit.emit();
-          
+
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {
@@ -146,6 +148,7 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
     model.address_id = +this.confirmOrderForm.value.address_id;
     model.orderdate = this.confirmOrderForm.value.isFutureDate ? new Date(this.confirmOrderForm.value.date) : this.confirmOrderForm.value.date;
     model.isFutureOrder = this.confirmOrderForm.value.isFutureDate;
+    model.isPickup = this.selectedTab === TabType.pickup ? true : false;
     return model;
   }
 

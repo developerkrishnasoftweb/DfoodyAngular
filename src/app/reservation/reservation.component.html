@@ -43,7 +43,7 @@
                                     <select name="time" id="time" class="df-control" formControlName="time"
                                         placeholder="Select Time">
                                         <option value="" disabled selected>Select Time</option>
-                                        <ng-container *ngFor="let timeObj of TimeList">
+                                        <ng-container *ngFor="let timeObj of timeList">
                                             <option [value]="timeObj.id">{{timeObj.startTime}} - {{timeObj.closeTime}}
                                             </option>
                                         </ng-container>
@@ -55,14 +55,20 @@
                                         </span>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
-                                    <input type="text" class="df-control" id="seat" name="seat" formControlName="seat"
-                                        placeholder="Seat *"
-                                        [ngClass]="{ 'is-invalid': formControl.seat.touched && formControl.seat.invalid }">
-                                    <div *ngIf="formControl.seat.touched && formControl.seat.invalid">
+                                    <select name="table" id="table" class="df-control" formControlName="table">
+                                        <option value="" disabled selected>Select Table</option>
+                                        <ng-container *ngFor="let table of timeList">
+                                            <option [value]="table.id">{{table.display_name}}
+                                            </option>
+                                        </ng-container>
+                                    </select>
+                                    <div *ngIf="formControl.table.touched && formControl.table.invalid">
                                         <span class="validation-error"
-                                            *ngIf="reservationForm.get('seat').hasError('required')">
-                                            {{validationMsgEnum.SeatRequired}}
+                                            *ngIf="reservationForm.get('table').hasError('required')">
+                                            {{validationMsgEnum.TableRequired}}
                                         </span>
                                     </div>
                                 </div>
@@ -78,10 +84,12 @@
                                     <div *ngIf="formControl.paymentType.touched && formControl.paymentType.invalid">
                                         <span class="validation-error"
                                             *ngIf="reservationForm.get('paymentType').hasError('required')">
-                                            {{validationMsgEnum.TimeRequired}}
+                                            {{validationMsgEnum.PayementTypeRequired}}
                                         </span>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <input type="submit" [ngClass]="isSubmitDisable  ? 'diabled-class' : ''"
                                         [disabled]="isSubmitDisable" class="bfs-btn" value="Submit Message">

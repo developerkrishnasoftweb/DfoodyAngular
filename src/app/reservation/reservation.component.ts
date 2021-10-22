@@ -22,9 +22,9 @@ export class ReservationComponent implements OnInit {
 
   validationMsgEnum = ValidationMsg;
 
-  TimeList = [];
+  timeList = [];
   paymentList = [];
-
+  tableList = [];
 
   branchId: number = null;
 
@@ -41,8 +41,6 @@ export class ReservationComponent implements OnInit {
     this.createForm();
     this.querySubcription = this.route.queryParams.subscribe(params => {
       this.branchId = params['branchId'];
-      console.log('params ', params);
-      console.log('this.branchId ', this.branchId);
     });
     this.getTimeSlot();
     this.GetTableList();
@@ -53,7 +51,7 @@ export class ReservationComponent implements OnInit {
 
   createForm(): void {
     this.reservationForm = this.formBuilder.group({
-      seat: ['', [Validators.required]],
+      table: ['', [Validators.required]],
       paymentType: ['', [Validators.required]],
       date: ['', [Validators.required]],
       time: ['', [Validators.required]]
@@ -67,7 +65,7 @@ export class ReservationComponent implements OnInit {
     this.isSubmitDisable = true;
     const model = new ReservationReqModel();
     model.branchId = +this.branchId;
-    model.tableId = +this.reservationForm.value.seat;
+    model.tableId = +this.reservationForm.value.table;
     model.timeSlotId = +this.reservationForm.value.time;
     model.date = new Date(this.reservationForm.value.date);
     model.paymentTypeId = +this.reservationForm.value.paymentType;
@@ -99,7 +97,7 @@ export class ReservationComponent implements OnInit {
       })).subscribe((response: any) => {
         if (response) {
           if (response)
-            this.TimeList = response;
+            this.timeList = response;
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {
@@ -130,7 +128,7 @@ export class ReservationComponent implements OnInit {
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {
         if (response) {
-          console.log('table response ', response);
+          this.tableList = response;
         }
       }, error => {
         if (error instanceof HttpErrorResponse) {

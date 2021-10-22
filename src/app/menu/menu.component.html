@@ -60,13 +60,15 @@
                                                                 (click)="menuItemClick(item, menuTabType.menu)"
                                                                 href="#menuItemCondimentSets" data-toggle="modal"
                                                                 data-animation="fadeInUp" data-delay="0.85s"
-                                                                title="Toppings">
+                                                                title="Toppings"
+                                                                [hidden]="!branchDetail?.pickupOpen && !branchDetail?.deliveryOpen">
                                                                 <i class="fa fa-plus"></i>
                                                             </a>
                                                         </ng-container>
                                                         <ng-template #noToppingsIcon>
                                                             <span class="btn btn-light btn-sm btn-cart"
-                                                                (click)="addToCartWithoutToppings(item)">
+                                                                (click)="addToCartWithoutToppings(item)"
+                                                                [hidden]="!branchDetail?.pickupOpen && !branchDetail?.deliveryOpen">
                                                                 <i class="fa fa-plus"></i>
                                                             </span>
                                                         </ng-template>
@@ -92,6 +94,7 @@
                                                             <a (click)="menuItemClick(item, menuTabType.combomeal)"
                                                                 href="#menuItemCondimentSets" data-toggle="modal"
                                                                 data-animation="fadeInUp" data-delay="0.85s"
+                                                                [hidden]="!branchDetail?.pickupOpen && !branchDetail?.deliveryOpen"
                                                                 title="Add to cart">{{item?.displayName}}</a>
                                                         </ng-container>
                                                         <ng-template #nocomboToppings>
@@ -116,6 +119,7 @@
                                                         </ng-container>
                                                         <ng-template #noToppingsComboIcon>
                                                             <span class="btn btn-light btn-sm btn-cart"
+                                                                [hidden]="!branchDetail?.pickupOpen && !branchDetail?.deliveryOpen"
                                                                 (click)="addToCartWithoutToppings(item)">
                                                                 <i class="fa fa-plus"></i>
                                                             </span>
@@ -135,13 +139,17 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-4">
                                             <div class="menu-status open">We are open</div>
-                                            <div class="menu-time">24 hours, 7 days.</div>
-                                            <div class="delivery">Delivery and pick-up available</div>
-                                        </div>
-                                        <div class="col-md-6 mb-4">
-                                            <div class="menu-status open">We are open</div>
-                                            <div class="menu-time">24 hours, 7 days.</div>
-                                            <div class="delivery">Delivery and pick-up available</div>
+                                            <div class="menu-time">{{branchDetail.openingTime }} -
+                                                {{branchDetail.closingTime}}</div>
+                                            <div class="delivery"
+                                                *ngIf="branchDetail?.deliveryOpen && branchDetail?.pickupOpen">Delivery
+                                                and pick-up available</div>
+                                            <div class="delivery"
+                                                *ngIf="branchDetail?.deliveryOpen && !branchDetail?.pickupOpen">Delivery
+                                                available</div>
+                                            <div class="delivery"
+                                                *ngIf="!branchDetail?.deliveryOpen && branchDetail?.pickupOpen">pick-up
+                                                available</div>
                                         </div>
                                     </div>
                                 </div>
@@ -161,20 +169,20 @@
             <div class="col-md-4 col-lg-4">
                 <div class="menu-cart" *ngIf="cartList && cartList?.length > 0">
                     <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                        <li class="nav-item" *ngIf="branchDetail?.deliveryOpen">
+                        <li class="nav-item" *ngIf="branchDetail?.deliveryOpen" (click)="changeTab(tabType.delivery)">
                             <a class="nav-link" [ngClass]="{ 'active': selectedTabType === tabType.delivery }"
                                 id="delivery-tab" data-toggle="pill" href="#delivery" role="tab"
                                 aria-controls="delivery" aria-selected="true">
                                 <div class="title">Delivery</div>
-                                <span>in 15 min</span>
+                                <!-- <span>in 15 min</span> -->
                             </a>
                         </li>
-                        <li class="nav-item" *ngIf="branchDetail?.pickupOpen">
+                        <li class="nav-item" *ngIf="branchDetail?.pickupOpen" (click)="changeTab(tabType.pickup)">
                             <a class="nav-link" [ngClass]="{ 'active': selectedTabType === tabType.pickup }"
                                 id="pickup-tab" data-toggle="pill" href="#pickup" role="tab" aria-controls="pickup"
                                 aria-selected="false">
                                 <div class="title">Pick-up</div>
-                                <span>in 15 min</span>
+                                <!-- <span>in 15 min</span> -->
                             </a>
                         </li>
                     </ul>
@@ -204,10 +212,6 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="pickup" role="tabpanel" aria-labelledby="pickup-tab">
-                            <!-- <div class="alert alert-danger">
-                                <p>No Min. Order Amount</p>
-                                <p>Add menu items to your cart.</p>
-                            </div> -->
                             <div class="order-items" *ngFor="let cart of cartList">
                                 <div class="order-item">
                                     <div class="menu-name">{{cart?.quantity}} × {{cart.title_lang}}</div>
@@ -230,87 +234,31 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row justify-content-center" *ngIf="cartList && cartList?.length > 0">
-                            <div class="col-md-6">
-                                <button [disabled]="disableCart" [ngClass]="disableCart ? 'diabled-class' : ''"
-                                    type="button" class="bfs-btn d-block w-70" (click)="onConfirmCartItem()">Confirm
-                                    Now</button>
-                                <button id="openModalButton" [hidden]="true" data-toggle="modal"
-                                    data-target="#addressModal">Open Modal</button>
+                        <ng-container *ngIf="cartList && cartList?.length > 0">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" class="df-control" id="Coupon" name="userfirstName"
+                                        placeholder="Add Coupon Code*">
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="bfs-btn d-block w-20"
+                                        (click)="addCoupon()">Add</button>
 
+                                </div>
                             </div>
-                        </div>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <button [disabled]="disableCart" [ngClass]="disableCart ? 'diabled-class' : ''"
+                                        type="button" class="bfs-btn d-block w-70" (click)="onConfirmCartItem()">Confirm
+                                        Now</button>
+                                    <button id="openModalButton" [hidden]="true" data-toggle="modal"
+                                        data-target="#addressModal">Open Modal</button>
+                                </div>
+                            </div>
+                        </ng-container>
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-md-4 col-lg-4">
-                <div class="menu-cart">
-                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="delivery-tab" data-toggle="pill" href="#delivery" role="tab"
-                                aria-controls="delivery" aria-selected="true">
-                                <div class="title">Delivery</div>
-                                <span>in 15 min</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pickup-tab" data-toggle="pill" href="#pickup" role="tab"
-                                aria-controls="pickup" aria-selected="false">
-                                <div class="title">Pick-up</div>
-                                <span>in 15 min</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="delivery" role="tabpanel"
-                            aria-labelledby="delivery-tab">
-                            <div class="order-items">
-                                <div class="order-item">
-                                    <div class="menu-name">2 × Special Shrimp Deluxe </div>
-                                    <div class="order-price">$30.00</div>
-                                </div>
-                                <div class="order-item">
-                                    <div class="menu-name">RICE AND DODO </div>
-                                    <div class="order-price">$30.00</div>
-                                </div>
-                                <div class="order-item">
-                                    <div class="menu-name">2 × Special Shrimp Deluxe </div>
-                                    <div class="order-price">$30.00</div>
-                                </div>
-                            </div>
-                            <p>Vel facere quos est nemo expedita qui consequat Corrupti cupidatat dolore et modi nihil
-                            </p>
-                            <form class="form-inline justify-content-start align-items-end mb-5">
-                                <div class="form-group mx-sm-3">
-                                    <input type="text" class="df-control" id="couponCode" name="couponCode"
-                                        placeholder="Enter coupon code">
-                                </div>
-                                <input type="submit" class="bfs-btn py-4" value="Submit">
-                            </form>
-                            <div class="order-items">
-                                <div class="order-item">
-                                    <div class="menu-name">2 × Special Shrimp Deluxe </div>
-                                    <div class="order-price">$30.00</div>
-                                </div>
-                                <div class="order-item">
-                                    <div class="menu-name">RICE AND DODO </div>
-                                    <div class="order-price">$30.00</div>
-                                </div>
-                                <div class="order-item">
-                                    <div class="menu-name">2 × Special Shrimp Deluxe </div>
-                                    <div class="order-price">$30.00</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="pickup" role="tabpanel" aria-labelledby="pickup-tab">
-                            <div class="alert alert-danger">
-                                <p>No Min. Order Amount</p>
-                                <p>Add menu items to your cart.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
 </div>
@@ -379,6 +327,7 @@
 <app-confirm-dialog></app-confirm-dialog>
 
 <ng-container *ngIf="branchDetail">
-    <app-confirm-order-address-modal [branchDetail]="branchDetail" (getCartListEmit)="getCartList()">
+    <app-confirm-order-address-modal [branchDetail]="branchDetail" [selectedTab]="selectedTabType"
+        (getCartListEmit)="getCartList()" #addressmodal>
     </app-confirm-order-address-modal>
 </ng-container>

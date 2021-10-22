@@ -121,7 +121,7 @@ export class Pagination {
 
 export const LangPreferences = [
     { value: "English", text: "English" },
-    { value: "Urdu", text: "Urdu" }
+    { value: "Arabic", text: "Arabic" }
 ]
 
 export class DisplayModalClass {
@@ -215,6 +215,7 @@ export class AddOrderReqModel {
     orderdate: any;
     paymentTypeId: number = 0;
     comments: string = "";
+    isPickup: boolean;
 }
 
 export enum ChannelType {
