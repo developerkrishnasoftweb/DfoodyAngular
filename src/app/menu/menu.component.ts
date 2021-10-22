@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AddToCartComoMealItemReq, AddToCartMenuItemReq, AddToCartReq, Condiment, DisplayModalClass, Sideset, TabType, UpdateQuntityModel } from '@core/models/customer';
+import { AddToCartComoMealItemReq, AddToCartMenuItemReq, AddToCartReq, Condiment, DisplayModalClass, MenuTabType, Sideset, TabType, UpdateQuntityModel } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
 import { ConstantMessage } from '@core/utils/enum';
 import { ConfirmDialogService } from '@shared/confirm-dialog/confirm-dialog.service';
@@ -21,12 +21,17 @@ export class MenuComponent implements OnInit {
   selectedCategoryId: string = null;
 
   menuItemList = [];
+  isMenuResponseCome: boolean = false;
+
   comboMealList = [];
+  isComboMealResponseCome: boolean = false;
 
   menuItemListBackUP = null;
   comboMealListBackUP = null;
 
+  menuTabType = MenuTabType;
   tabType = TabType;
+  selectedTabType: string = null;
 
   selectedItem: any = null;
 
@@ -38,6 +43,8 @@ export class MenuComponent implements OnInit {
   cartList = [];
 
   disableCart: boolean = false;
+
+  isAPIResponseCome: boolean = false;
 
   constructor(private menuService: MenuService,
     private loaderService: LoaderService,
@@ -52,6 +59,10 @@ export class MenuComponent implements OnInit {
       this.branchDetail = JSON.parse(item);
       this.getMenuCategories();
       this.getCartList();
+      if (this.branchDetail.deliveryOpen)
+        this.selectedTabType = TabType.delivery;
+      if (!this.branchDetail.deliveryOpen && this.branchDetail.pickupOpen)
+        this.selectedTabType = TabType.pickup;
     } else {
       this.router.navigateByUrl('/branch');
     }
@@ -68,7 +79,7 @@ export class MenuComponent implements OnInit {
   menuItemClick(item, type): void {
     this.selectedItem = item;
     switch (type) {
-      case this.tabType.menu:
+      case MenuTabType.menu:
         this.displayModal.ListItemKey = "display_name";
         this.displayModal.ListKey = "condimentSets";
         this.displayModal.ModalTitle = "Condiment Sets";
@@ -78,7 +89,7 @@ export class MenuComponent implements OnInit {
         this.displayModal.Min = "min";
         this.displayModal.Max = "max";
         break;
-      case this.tabType.combomeal:
+      case MenuTabType.combomeal:
         this.displayModal.ListItemKey = "displayName";
         this.displayModal.ListKey = "sidesets";
         this.displayModal.ModalTitle = "Side Sets";
@@ -96,9 +107,11 @@ export class MenuComponent implements OnInit {
     this.loaderService.show();
     this.cdr.detectChanges();
     this.categoriesList = [];
+    this.isAPIResponseCome = false;
     this.menuService.GetCategories({ 'branchId': this.branchDetail.id })
       .pipe(finalize(() => {
         this.loaderService.hide();
+        this.isAPIResponseCome = true;
       })).subscribe((response: any) => {
         this.categoriesList = response.items;
         if (this.categoriesList && this.categoriesList.length > 0) {
@@ -113,14 +126,15 @@ export class MenuComponent implements OnInit {
 
   getMenuItem(): void {
     this.menuItemList = [];
+    this.isMenuResponseCome = false;
     this.menuService.GetMenuItem({ 'branchCategoryId': this.selectedCategoryId })
       .pipe(finalize(() => {
-        // tslint:disable-next-line: deprecation
+        this.isMenuResponseCome = true;
       })).subscribe((response: any) => {
         this.menuItemList = response.items;
         if (this.menuItemList && this.menuItemList.length > 0) {
           this.menuItemList = this.menuItemList.map(data => ({
-            ...data, type: TabType.menu, condimentSets: data.condimentSets.map(data1 => ({
+            ...data, type: MenuTabType.menu, condimentSets: data.condimentSets.map(data1 => ({
               ...data1,
               IsChecked: false,
               IsDisabled: true,
@@ -139,14 +153,15 @@ export class MenuComponent implements OnInit {
 
   getCombomeal(): void {
     this.comboMealList = [];
+    this.isComboMealResponseCome = false;
     this.menuService.GetCombomeal({ 'branchCategoryId': this.selectedCategoryId })
       .pipe(finalize(() => {
-        // tslint:disable-next-line: deprecation
+        this.isComboMealResponseCome = true;
       })).subscribe((response: any) => {
         this.comboMealList = response.items;
         if (this.comboMealList && this.comboMealList.length > 0) {
           this.comboMealList = this.comboMealList.map(data => ({
-            ...data, type: TabType.combomeal, sidesets: data.sidesets.map(data1 => ({
+            ...data, type: MenuTabType.combomeal, sidesets: data.sidesets.map(data1 => ({
               ...data1,
               IsChecked: false,
               IsDisabled: true,
@@ -184,12 +199,12 @@ export class MenuComponent implements OnInit {
 
   checkSameBranchEntry(): void {
     this.loaderService.show();
-    this.menuService.CheckSameBranchEntry()
+    this.menuService.CheckSameBranchEntry(this.branchDetail.id)
       .pipe(finalize(() => {
         this.loaderService.hide();
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {
-        if (!response)
+        if (response)
           this.callAPI();
         else
           this.branchEntryConfirmDialog();
@@ -212,17 +227,17 @@ export class MenuComponent implements OnInit {
 
   addToCartWithoutToppings(item): void {
     this.selectedItem = item;
-    this.callAPI();
+    this.checkSameBranchEntry();
   }
 
   callAPI() {
     switch (this.selectedItem.type) {
-      case TabType.menu:
+      case MenuTabType.menu:
         let index = this.menuItemList.findIndex(x => x.id == this.selectedItem.id);
         this.menuItemList[index] = this.selectedItem;
         this.addMenuItemToCart(this.selectedItem);
         break;
-      case TabType.combomeal:
+      case MenuTabType.combomeal:
         let combomealindex = this.comboMealList.findIndex(x => x.id == this.selectedItem.id);
         this.comboMealList[combomealindex] = this.selectedItem;
         this.addComboMealToCart(this.selectedItem);
@@ -369,11 +384,11 @@ export class MenuComponent implements OnInit {
   checkValidation(item) {
     let count = this.getCount(item);
     switch (this.selectedItem.type) {
-      case TabType.menu:
+      case MenuTabType.menu:
         item.IsDisabled = count >= item[this.displayModal.Max] || count < item[this.displayModal.Min] ? true : false;
         item.IsValid = count && count <= item[this.displayModal.Max] || count > item[this.displayModal.Min] ? true : false;
         break;
-      case TabType.combomeal:
+      case MenuTabType.combomeal:
         item.IsDisabled = count < item[this.displayModal.Min] ? true : false;
         item.IsValid = count && count >= item[this.displayModal.Min] ? true : false;
         break;
@@ -423,6 +438,7 @@ export class MenuComponent implements OnInit {
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {
         this.cartList = response.items;
+        console.log('response.items ', response.items);
       }, error => {
         if (error instanceof HttpErrorResponse) {
           console.log(error);

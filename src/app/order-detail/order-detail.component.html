@@ -2,71 +2,45 @@
     data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <h1> Order Detail </h1>
-            <!-- <ng-container *ngIf="addressList && addressList.length > 0 else noaddressView">
-                <div class="modal-header">
-                    <h3 class="modal-title">Please Select Address</h3>
-                    <button type="button" class="close" data-dismiss="modal" #closeButton1 aria-label="Close"
-                        (click)="onCloseAddressPopup()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <a class="read-more-btn-1" style="padding: 10px;" [routerLink]="['/myprofile']"
-                    [queryParams]="{id: 'address'}" (click)="closeAddressModel()">
-                    <span>
-                        Click here for add or edit Address.
-                    </span>
-                </a>
-                <div class="modal-body">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" *ngFor="let address of addressList">
-                            <div>
-                                <input type="radio" id={{address.id}} name="address_Name" value="{{address.id}}"
-                                    (click)="AddressSelected(address.id)">
-                                <label style="margin-left: 5px;" for="address{{ address?.id}}">
-                                    {{address.type}}
-                                </label>
-                                <div class="order-details">
-                                    <div class="place">{{address.contactPerson}}</div>
-                                    <div class="place">{{address.contactNumber}}</div>
-                                    <div class="place">{{address.contactAddress}}</div>
-                                    <div class="des">{{address.fullAddress}}</div>
-                                    <div class="place">{{address.landmark}}</div>
-                                    <div class="place">{{address.area}}</div>
-                                    <div class="place">{{address.remark}}</div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="col-md-12 mb-5">
-                        <input type="submit" [ngClass]="!addressId ? 'diabled-class' : ''"
-                            class="bfs-btn d-block save-btn" value="Confirm Order"
-                            [disabled]="!addressId || isAddressBtnDisable" (click)="onSaveAddress()">
+            <div class="modal-header">
+                <h3 class="modal-title">Order Detail</h3>
+                <button type="button" class="close" data-dismiss="modal" #closeButton1 aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div [hidden]="isAPIResponseCome">
+                <app-small-loader></app-small-loader>
+            </div>
+            <div class="modal-body" *ngIf="orderDetail && isAPIResponseCome">
+                <div>
+                    <div class="address-type">
+                        <div class="title">{{orderDetail.orderDate | date:' d MMM y, h:mm a'}}</div>
+                    </div>
+                    <div class="order-details">
+                        <div class="place"> <span class="order-lable-text">Type:</span> {{orderDetail.orderType}}</div>
+                        <div class="place"> <span class="order-lable-text">Status:</span> {{orderDetail.orderStatus}}
+                        </div>
+                        <div class="place"> <span class="order-lable-text">Order Discount:</span>
+                            ${{orderDetail.orderDiscount}}</div>
+                        <div class="des"> <span class="order-lable-text">Address:</span> {{orderDetail.fullAddress}}
+                        </div>
+                        <div class="place"> <span class="order-lable-text">landmark:</span> {{orderDetail.landmark}}
+                        </div>
+                        <div class="place"> <span class="order-lable-text">Area:</span> {{orderDetail.area}}</div>
                     </div>
                 </div>
-            </ng-container>
-            <ng-template #noaddressView>
-                <div class="modal-header">
-                    <h3 class="modal-title">Address not added yet for this profile, please add it for confirm order.
-                    </h3>
-                    <button type="button" class="close" data-dismiss="modal" #closeButton1 aria-label="Close"
-                        (click)="onCloseAddressPopup()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="col-md-12 mb-5">
-                        <div style="float: right; width: 39% !important;">
-                            <a class="bfs-btn d-block save-btn" [routerLink]="['/myprofile']"
-                                [queryParams]="{id: 'address'}" (click)="closeAddressModel()">
-                                <span>
-                                    Add Address
-                                </span>
-                            </a>
+                <ng-container *ngIf="orderDetail?.listOrderDetails?.length">
+                    <span class="order-lable-text">Order Items</span>
+                    <div class="order-items" *ngFor="let cart of orderDetail?.listOrderDetails">
+                        <div class="order-item" style="display: flex; justify-content: space-between;">
+                            <div class="menu-name">{{cart?.quantity}} × {{cart.title_eng}}</div>
+                            <div class="menu-name">
+                                <div class="order-price">${{cart.total}}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </ng-template> -->
+                </ng-container>
+            </div>
         </div>
     </div>
 </div>

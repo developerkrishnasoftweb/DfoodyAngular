@@ -136,10 +136,16 @@ export class DisplayModalClass {
     Max: string;
 }
 
-export enum TabType {
+export enum MenuTabType {
     menu = "menu",
     combomeal = "combomeal"
 }
+
+export enum TabType {
+    delivery = "delivery",
+    pickup = "pickup"
+}
+
 
 export class Condiment {
     condimentSetId: number;

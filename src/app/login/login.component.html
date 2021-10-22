@@ -47,7 +47,7 @@
                                         {{validationMsgEnum.PasswordMaxLength}}
                                     </span>
                                 </div>
-                                <span class="validation-error">
+                                <span class="validation-error" *ngIf="!loginForm.get('password').hasError('required') && !(loginForm.get('password').hasError('maxlength') || loginForm.get('password').hasError('minlength'))">
                                     {{apiErrorMsg}}
                                 </span>
                                 <div class="text-right mt-3"><a href="#">Forgot password?</a></div>

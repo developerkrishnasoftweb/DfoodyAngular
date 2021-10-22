@@ -54,7 +54,7 @@ export class MenuService {
     return this._apiService.UpdateQuantity.update(obj).map(response => response);
   }
 
-  CheckSameBranchEntry() {
-    return this._apiService.CheckSameBranchEntry.getAll().map(response => response);
+  CheckSameBranchEntry(id) {
+    return this._apiService.CheckSameBranchEntry.getAll({branchId: id}).map(response => response);
   }
 }

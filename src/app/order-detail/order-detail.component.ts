@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { OrderService } from '@core/services/customer/order.service';
 import { finalize } from 'rxjs/operators';
 
@@ -16,23 +16,30 @@ export class OrderDetailComponent implements OnInit {
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
-    this.getOrderDetail();
   }
 
-  getOrderDetail(): void {
+  getOrderDetail(id): void {
     this.orderDetail = null;
     this.isAPIResponseCome = false;
-    this.orderService.getOrderDetail(22)
+    this.orderService.getOrderDetail(id)
       .pipe(finalize(() => {
         this.isAPIResponseCome = true;
       })).subscribe((response) => {
-        console.log('response');
-        if (response && response.items && response.items.length > 0)
-          this.orderDetail = response.items;
+        this.orderDetail = response;
+        if (this.orderDetail)
+          this.orderDetail.fullAddress = this.getFullAddress(response);
       }, error => {
         if (error instanceof HttpErrorResponse) {
           console.log(error);
         }
       });
+  }
+
+  getFullAddress(address): string {
+    let fullAddress = "";
+    if (address)
+      fullAddress = address.address1 + ", " + address.address2 + ", " + address.area + ", " + address.city + ", " + address.state + ", " + address.country;
+
+    return fullAddress;
   }
 }
