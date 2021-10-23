@@ -188,7 +188,6 @@ export class MenuComponent implements OnInit {
   }
 
   updateCartQuantity(cart, isAdd) {
-    console.log('cart ', cart);
     if (isAdd) {
       cart.quantity += 1;
     } else {
@@ -446,7 +445,6 @@ export class MenuComponent implements OnInit {
         // tslint:disable-next-line: deprecation
       })).subscribe((response: any) => {
         this.cartList = response.items;
-        console.log('response.items ', response.items);
       }, error => {
         if (error instanceof HttpErrorResponse) {
           console.log(error);

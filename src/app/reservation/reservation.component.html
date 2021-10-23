@@ -58,16 +58,16 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <select name="table" id="table" class="df-control" formControlName="table">
+                                    <select name="table" id="tableList" class="df-control" formControlName="tableData">
                                         <option value="" disabled selected>Select Table</option>
-                                        <ng-container *ngFor="let table of timeList">
-                                            <option [value]="table.id">{{table.display_name}}
+                                        <ng-container *ngFor="let data of tableList">
+                                            <option style="color: black;" [value]="data.id">{{data.display_name}}
                                             </option>
                                         </ng-container>
                                     </select>
-                                    <div *ngIf="formControl.table.touched && formControl.table.invalid">
+                                    <div *ngIf="formControl.tableData.touched && formControl.tableData.invalid">
                                         <span class="validation-error"
-                                            *ngIf="reservationForm.get('table').hasError('required')">
+                                            *ngIf="reservationForm.get('tableData').hasError('required')">
                                             {{validationMsgEnum.TableRequired}}
                                         </span>
                                     </div>

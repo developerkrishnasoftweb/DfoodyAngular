@@ -51,7 +51,7 @@ export class ReservationComponent implements OnInit {
 
   createForm(): void {
     this.reservationForm = this.formBuilder.group({
-      table: ['', [Validators.required]],
+      tableData: ['', [Validators.required]],
       paymentType: ['', [Validators.required]],
       date: ['', [Validators.required]],
       time: ['', [Validators.required]]
@@ -65,7 +65,7 @@ export class ReservationComponent implements OnInit {
     this.isSubmitDisable = true;
     const model = new ReservationReqModel();
     model.branchId = +this.branchId;
-    model.tableId = +this.reservationForm.value.table;
+    model.tableId = +this.reservationForm.value.tableData;
     model.timeSlotId = +this.reservationForm.value.time;
     model.date = new Date(this.reservationForm.value.date);
     model.paymentTypeId = +this.reservationForm.value.paymentType;
@@ -88,6 +88,9 @@ export class ReservationComponent implements OnInit {
 
   resetForm() {
     this.reservationForm.reset();
+    this.reservationForm.controls.paymentType.setValue('');
+    this.reservationForm.controls.tableData.setValue('');
+    this.reservationForm.controls.time.setValue('');
   }
 
   getTimeSlot(): void {

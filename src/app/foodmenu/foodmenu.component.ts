@@ -25,7 +25,6 @@ export class FoodmenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('displayBranch');
     if (this.userLoginService.isLoggedIn()) {
       this.setPaginationData();
       this.getBrands();

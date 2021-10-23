@@ -66,9 +66,7 @@ export class CustomerAddressComponent implements OnInit {
   getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        if (position) {
-          console.log("Latitude: " + position.coords.latitude +
-            "Longitude: " + position.coords.longitude);
+        if (position) {;
           this.modelAfterEdit.latitude = position.coords.latitude.toString();
           this.modelAfterEdit.longitude = position.coords.longitude.toString();
         }

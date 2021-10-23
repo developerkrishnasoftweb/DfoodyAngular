@@ -81,7 +81,6 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
       .pipe(finalize(() => {
         // tslint:disable-next-line: deprecation
       })).subscribe((response) => {
-        console.log('address ', response);
         if (response && response.items && response.items.length > 0) {
           this.addressList = response.items;
           this.addressList = this.addressList.map(data => ({
@@ -116,7 +115,6 @@ export class ConfirmOrderAddressModalComponent implements OnInit {
     this.confirmOrderForm.markAllAsTouched();
     if (this.confirmOrderForm.invalid)
       return;
-    console.log(this.selectedTab);
     this.closeAddressModel();
     this.addOrder();
   }

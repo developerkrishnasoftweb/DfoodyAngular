@@ -20,6 +20,9 @@
                         <div class="place"> <span class="order-lable-text">Type:</span> {{orderDetail.orderType}}</div>
                         <div class="place"> <span class="order-lable-text">Status:</span> {{orderDetail.orderStatus}}
                         </div>
+                        <div class="place"> <span class="order-lable-text">Is Pickup order:</span>
+                            {{orderDetail.isPickupOrder ? 'Yes' : 'No'}}
+                        </div>
                         <div class="place"> <span class="order-lable-text">Order Discount:</span>
                             ${{orderDetail.orderDiscount}}</div>
                         <div class="des"> <span class="order-lable-text">Address:</span> {{orderDetail.fullAddress}}
