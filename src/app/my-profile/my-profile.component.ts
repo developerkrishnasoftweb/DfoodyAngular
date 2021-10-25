@@ -89,6 +89,7 @@ export class MyProfileComponent implements OnInit {
         // tslint:disable-next-line: deprecation
       })).subscribe((response: CustomerInfo) => {
         this.customerInfo = response;
+        console.log('customerInfo ', this.customerInfo);
         if (this.customerInfo) {
           this.customerInfo.fullName = this.customerInfo.firstName + ' ' + this.customerInfo.lastName;
           this.preFillService.userFullName = this.customerInfo.fullName;

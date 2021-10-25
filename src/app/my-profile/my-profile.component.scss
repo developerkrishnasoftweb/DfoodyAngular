@@ -14,9 +14,15 @@
     }
 }
 
+
+
 .user-wallet {
     position: absolute;
-    right: 0
+    right: 0;
+
+    img {
+        max-width: 40px !important;
+    }
 }
 
 .change-password {

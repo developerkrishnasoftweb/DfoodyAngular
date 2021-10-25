@@ -54,14 +54,26 @@
                         </div>
 
                         <div class="wallet-details user-wallet">
-                            <div class="wallet-icon">
-                                <img src="assets/img/wallet-icon.png" alt="">
+                            <div>
+                                <div class="wallet-icon">
+                                    <img src="assets/img/wallet-icon.png" alt="">
+                                </div>
+                                <div class="details">
+                                    <div class="wallet-total">${{customerInfo?.walletBalance}}</div>
+                                    <div class="wallet-des">Wallet Balance</div>
+                                </div>
                             </div>
-                            <div class="details">
-                                <div class="wallet-total">${{customerInfo?.walletBalance}}</div>
-                                <div class="wallet-des">Wallet Balance</div>
+                            <div>
+                                <div class="wallet-icon">
+                                    <img src="assets/img/loyalty_icon.png" alt="">
+                                </div>
+                                <div class="details">
+                                    <div class="wallet-total">${{customerInfo?.loyaltyPoint}}</div>
+                                    <div class="wallet-des">loyalty Point</div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <div class="profile-form">
