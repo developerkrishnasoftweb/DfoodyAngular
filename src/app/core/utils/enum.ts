@@ -102,6 +102,9 @@ export enum ValidationMsg {
 
     ContactAddressMaxLength = "Contact Address must be 500 characters or less",
     ContactAddressRequired = "Contact Address is required",
+
+    InValidCouponCode = "Coupon Code must be Alphabet",
+    CouponCodeRequired = "Coupon Code is required",
 }
 
 export enum ConstantMessage {

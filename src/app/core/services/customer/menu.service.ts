@@ -57,4 +57,12 @@ export class MenuService {
   CheckSameBranchEntry(id) {
     return this._apiService.CheckSameBranchEntry.getAll({branchId: id}).map(response => response);
   }
+
+  GetCouponList() {
+    return this._apiService.CouponList.getAll().map(response => response);
+  }
+
+  ApplyCouponCode(code) {
+    return this._apiService.CouponList.getAll({CouponCode: code}).map(response => response);
+  }
 }

@@ -235,17 +235,36 @@
                             </div>
                         </div>
                         <ng-container *ngIf="cartList && cartList?.length > 0">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input type="text" class="df-control" id="Coupon" name="userfirstName"
-                                        placeholder="Add Coupon Code*">
+                            <form [formGroup]="couponForm" (ngSubmit)="applyCoupon()">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" class="df-control" id="Coupon" name="couponCode" formControlName="couponCode"
+                                            placeholder="Add Coupon Code*" (input)="forceUppercaseConditionally($event);"                                            >
+                                        <div *ngIf="formControl.couponCode.touched && formControl.couponCode.invalid">
+                                            <span class="validation-error"
+                                                *ngIf="couponForm.get('couponCode').hasError('required')">
+                                                {{validationMsgEnum.CouponCodeRequired}}
+                                            </span>
+                                            <span class="validation-error"
+                                                *ngIf="!couponForm.get('couponCode').hasError('required') && couponForm.get('couponCode').hasError('pattern')">
+                                                {{validationMsgEnum.InValidCouponCode}}
+                                            </span>
+                                        </div>
+                                        <span class="validation-error">
+                                            {{apiErrorMsg}}
+                                        </span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="submit" class="bfs-btn d-block w-20"
+                                            style="margin-left: 48%">Add</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <button type="button" class="bfs-btn d-block w-20" style="margin-left: 48%"
-                                        (click)="addCoupon()">Add</button>
-
+                                <div class="row">
+                                    <a href="#coupanListModal" data-toggle="modal" data-animation="fadeInUp"
+                                        data-delay="0.85s"> <span class="coupan-link">view coupan</span>
+                                    </a>
                                 </div>
-                            </div>
+                            </form>
                             <div class="row justify-content-center">
                                 <div class="col-md-6">
                                     <button [disabled]="disableCart" [ngClass]="disableCart ? 'diabled-class' : ''"
@@ -331,3 +350,47 @@
         (getCartListEmit)="getCartList()" #addressmodal>
     </app-confirm-order-address-modal>
 </ng-container>
+
+<div class="modal fade" id="coupanListModal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false"
+    data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Coupon Code</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" *ngIf="couponList?.length else noCoupon">
+                <div>
+                    <div class="order-details">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Title
+                                    </th>
+                                    <th>
+                                        Code
+                                    </th>
+                                </tr>
+                                <tr *ngFor="let coupan of couponList">
+                                    <td>
+                                        {{coupan.title}}
+                                    </td>
+                                    <td>
+                                        {{coupan.code}}
+                                    </td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <ng-template #noCoupon>
+                Coupon Code not available
+            </ng-template>
+
+        </div>
+    </div>
+</div>

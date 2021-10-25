@@ -29,7 +29,7 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private snackBarService: SnackBarService,
-    private router: Router, private myprofileService: MyprofileService) { }
+    private myprofileService: MyprofileService) { }
 
   ngOnInit(): void {
     this.createForm();

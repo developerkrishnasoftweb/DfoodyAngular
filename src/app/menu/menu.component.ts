@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AddToCartComoMealItemReq, AddToCartMenuItemReq, AddToCartReq, Condiment, DisplayModalClass, MenuTabType, Sideset, TabType, UpdateQuntityModel } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
-import { ConstantMessage } from '@core/utils/enum';
+import { ConstantMessage, ValidationMsg } from '@core/utils/enum';
 import { ConfirmDialogService } from '@shared/confirm-dialog/confirm-dialog.service';
 import { LoaderService } from '@shared/loader/loader.service';
 import { SnackBarService } from '@shared/snack-bar/snack-bar.service';
@@ -50,8 +51,17 @@ export class MenuComponent implements OnInit {
 
   isAPIResponseCome: boolean = false;
 
+  //for coupon
+  couponForm: FormGroup;
+  couponList = [];
+  apiErrorMsg: string = "";
+
+  validationMsgEnum = ValidationMsg;
+
+
   constructor(private menuService: MenuService,
     private loaderService: LoaderService,
+    private formBuilder: FormBuilder,
     private router: Router,
     private snackBarService: SnackBarService,
     private confirmDialogService: ConfirmDialogService,
@@ -59,10 +69,12 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     const item = localStorage.getItem('branchDetail');
+    this.createCouponForm();
     if (item) {
       this.branchDetail = JSON.parse(item);
       this.getMenuCategories();
       this.getCartList();
+      this.getCouponList();
       if (this.branchDetail.deliveryOpen)
         this.selectedTabType = TabType.delivery;
       if (!this.branchDetail.deliveryOpen && this.branchDetail.pickupOpen)
@@ -486,8 +498,57 @@ export class MenuComponent implements OnInit {
     return model;
   }
 
-  addCoupon() {
 
+  createCouponForm(): void {
+    this.couponForm = this.formBuilder.group({
+      couponCode: ['', [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]]
+    });
+  }
+
+  get formControl() { return this.couponForm.controls; }
+
+
+  //coupon
+  applyCoupon() {
+    this.couponForm.markAllAsTouched();
+    this.couponForm.markAsDirty();
+    if (this.couponForm.invalid)
+      return;
+    this.menuService.ApplyCouponCode(this.couponForm.value.couponCode)
+      .pipe(finalize(() => {
+      })).subscribe((response: any) => {
+        this.resetCouponForm();
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
+  }
+
+  resetCouponForm() {
+    this.couponForm.reset();
+    this.getCouponList();
+    this.couponForm.markAsUntouched();
+    this.couponForm.markAsPristine();
+  }
+
+
+  forceUppercaseConditionally(event) {
+    this.couponForm.get('couponCode').setValue(event.target.value.toUpperCase());
+  }
+
+  getCouponList() {
+    this.couponList = [];
+    this.menuService.GetCouponList()
+      .pipe(finalize(() => {
+      })).subscribe((response: any) => {
+        console.log('coupon ', response);
+        this.couponList = response.items;
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          console.log(error);
+        }
+      });
   }
 }
 

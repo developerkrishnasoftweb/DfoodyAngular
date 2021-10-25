@@ -121,4 +121,9 @@ export class ApiService {
    GetPaymentType = new Api<any>(this.http, this.apiEndpointUrl + '​/api/PaymentType/getList');
 
    CheckSameBranchEntry = new Api<any>(this.http, this.apiEndpointUrl + '​/api/Cart/CheckSameBranchEntry');
+
+   //coupon
+   CouponList = new Api<any>(this.http, this.apiEndpointUrl + '​/api/Coupon/CouponList');
+
+   ApplyCoupon = new Api<any>(this.http, this.apiEndpointUrl + '/api/Coupon/ApplyCoupon');
 }
