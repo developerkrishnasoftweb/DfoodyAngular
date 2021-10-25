@@ -1,5 +1,5 @@
-<div class="container" *ngIf="isAPIResponseCome">
-    <div class="body-box">
+<div class="container">
+    <div class="body-box" *ngIf="isAPIResponseCome">
         <div class="order-body" *ngIf="orderList?.length > 0">
             <h5 class="h5 mb-5">Past Orders</h5>
             <div class="order-box" *ngFor="let order of orderList">
@@ -11,7 +11,8 @@
                     <div class="place">{{order.city}}</div>
                     <div class="des">Order #{{order.orderTypeId}} | {{order.orderDate | date:' d MMM y, h:mm a'}}
                     </div>
-                    <a href="#order-detail" (click)="onclickOrderDetail(order)" data-toggle="modal" data-animation="fadeInUp" data-delay="0.85s">View
+                    <a href="#order-detail" (click)="onclickOrderDetail(order)" data-toggle="modal"
+                        data-animation="fadeInUp" data-delay="0.85s">View
                         Details</a>
                 </div>
             </div>
@@ -19,10 +20,19 @@
         <h5 *ngIf="orderList?.length === 0" class="h5 mb-5" style="color: red;">No order placed yet
         </h5>
     </div>
+    <div [hidden]="isAPIResponseCome">
+        <app-small-loader></app-small-loader>
+    </div>
+    <div style="margin-left: 50%;" class="pagination-icon" *ngIf="paginationModel.totalRecords > 0">
+        <button [ngClass]="paginationModel.pageNumber == 1 ? 'diabled-class' : ''" (click)="pagePrevious()">
+            <i class="fa fa-step-backward" aria-hidden="true"></i>
+        </button>
+        <button [ngClass]="paginationModel.pageNumber == this.paginationModel.totalPages ? 'diabled-class' : ''"
+            (click)="pageNext()">
+            <i class="fa fa-step-forward" aria-hidden="true"></i>
+        </button>
+    </div>
 </div>
 
-<!-- <ng-template #loader>
-    <div class="loader" id="preloader"></div>
-</ng-template> -->
 
 <app-order-detail #orderDetail></app-order-detail>

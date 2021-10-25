@@ -21,7 +21,7 @@ export class FoodmenuComponent implements OnInit {
 
 
   constructor(private menuService: MenuService, public userLoginService: UserLoginService,
-    private loaderService: LoaderService, private router: Router
+      private loaderService: LoaderService, private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -41,10 +41,11 @@ export class FoodmenuComponent implements OnInit {
           this.brandList = response.items;
           this.paginationModel.totalPages = response.totalPages;
           this.paginationModel.totalRecords = response.totalRecords;
-        }
+          }
       }, error => {
         if (error instanceof HttpErrorResponse) {
           console.log(error);
+          this.paginationModel = new Pagination();
         }
       });
   }
@@ -62,7 +63,7 @@ export class FoodmenuComponent implements OnInit {
   }
 
   pagePrevious(): void {
-    if (this.paginationModel.pageNumber == 0)
+     if (this.paginationModel.pageNumber == 0)
       return
     this.paginationModel.pageNumber -= 1;
     this.getBrands();

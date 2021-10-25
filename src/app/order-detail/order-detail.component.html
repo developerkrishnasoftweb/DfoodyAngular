@@ -36,10 +36,17 @@
                     <span class="order-lable-text">Order Items</span>
                     <div class="order-items" *ngFor="let cart of orderDetail?.listOrderDetails">
                         <div class="order-item" style="display: flex; justify-content: space-between;">
-                            <div class="menu-name">{{cart?.quantity}} × {{cart.title_eng}}</div>
+                            <div class="menu-name">{{cart?.quantity}} × {{cart.title_eng}}
+                                <ul *ngIf="cart.itemIncluded.length">
+                                    <ng-container *ngFor="let item of cart.itemIncluded">
+                                        <li>{{item.title_lang}}: ${{item.amount}}</li>
+                                    </ng-container>
+                                </ul>
+                            </div>
                             <div class="menu-name">
                                 <div class="order-price">${{cart.total}}</div>
                             </div>
+                           
                         </div>
                     </div>
                 </ng-container>

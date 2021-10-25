@@ -10,8 +10,8 @@ export class OrderService {
 
   constructor(private _apiService: ApiService) { }
 
-  getOrderList(): Observable<any> {
-    return this._apiService.GetOrderList.getAll(null, null).pipe(map(response => response));
+  getOrderList(model): Observable<any> {
+    return this._apiService.GetOrderList.getAll(model).pipe(map(response => response));
   }
 
   getOrderDetail(id: number): Observable<any> {
