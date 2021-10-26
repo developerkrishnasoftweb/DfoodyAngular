@@ -63,6 +63,6 @@ export class MenuService {
   }
 
   ApplyCouponCode(code) {
-    return this._apiService.CouponList.getAll({CouponCode: code}).map(response => response);
+    return this._apiService.ApplyCoupon.getAll({CouponCode: code}).map(response => response);
   }
 }

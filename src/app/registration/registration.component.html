@@ -98,7 +98,7 @@
                             <div class="col-md-12 mb-5">
                                 <label for="password">Password<span class="text-denger">*</span></label>
                                 <input type="password" class="df-control" formControlName="password" id="reg_password"
-                                    name="reg_password" placeholder="Password *"
+                                    autocomplete="on" name="reg_password" placeholder="Password *"
                                     [ngClass]="{ 'is-invalid': formControl.password.touched && formControl.password.invalid }">
                                 <div *ngIf="formControl.password.touched && formControl.password.invalid">
                                     <span class="validation-error"

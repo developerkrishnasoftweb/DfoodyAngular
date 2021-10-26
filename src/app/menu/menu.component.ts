@@ -46,17 +46,14 @@ export class MenuComponent implements OnInit {
 
   disableCart: boolean = false;
 
-  @ViewChild('addressmodal') private addressmodal: ConfirmOrderAddressModalComponent;
-
-
   isAPIResponseCome: boolean = false;
 
   //for coupon
   couponForm: FormGroup;
   couponList = [];
   apiErrorMsg: string = "";
-
   validationMsgEnum = ValidationMsg;
+  couponCodeValue = localStorage.getItem('couponCode');
 
 
   constructor(private menuService: MenuService,
@@ -517,7 +514,11 @@ export class MenuComponent implements OnInit {
     this.menuService.ApplyCouponCode(this.couponForm.value.couponCode)
       .pipe(finalize(() => {
       })).subscribe((response: any) => {
-        this.resetCouponForm();
+        if (response.success) {
+          localStorage.setItem('couponCode', this.couponForm.value.couponCode);
+          this.resetCouponForm();
+        }
+        this.snackBarService.show(response.message);
       }, error => {
         if (error instanceof HttpErrorResponse) {
           console.log(error);
@@ -526,10 +527,13 @@ export class MenuComponent implements OnInit {
   }
 
   resetCouponForm() {
-    this.couponForm.reset();
     this.getCouponList();
     this.couponForm.markAsUntouched();
     this.couponForm.markAsPristine();
+  }
+
+  disabledApplyCodeBtn() {
+    return localStorage.getItem('couponCode') ? true : false;
   }
 
 
@@ -549,6 +553,10 @@ export class MenuComponent implements OnInit {
           console.log(error);
         }
       });
+  }
+
+  disableCoupon() {
+    return localStorage.getItem('couponCode') ? true : false;
   }
 }
 

@@ -10,7 +10,6 @@ import { AuthGuard } from './guards/auth-guard.service';
 
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     FormsModule

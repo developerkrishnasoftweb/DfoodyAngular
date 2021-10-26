@@ -238,8 +238,9 @@
                             <form [formGroup]="couponForm" (ngSubmit)="applyCoupon()">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="text" class="df-control" id="Coupon" name="couponCode" formControlName="couponCode"
-                                            placeholder="Add Coupon Code*" (input)="forceUppercaseConditionally($event);"                                            >
+                                        <input type="text" class="df-control" id="Coupon" name="couponCode"
+                                            formControlName="couponCode" placeholder="Add Coupon Code*"
+                                            (input)="forceUppercaseConditionally($event);" [readonly]="disableCoupon()">
                                         <div *ngIf="formControl.couponCode.touched && formControl.couponCode.invalid">
                                             <span class="validation-error"
                                                 *ngIf="couponForm.get('couponCode').hasError('required')">
@@ -256,6 +257,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <button type="submit" class="bfs-btn d-block w-20"
+                                            [ngClass]="disableCoupon() ? 'diabled-class' : ''"
+                                            [disabled]="disableCoupon()"
                                             style="margin-left: 48%">Add</button>
                                     </div>
                                 </div>
