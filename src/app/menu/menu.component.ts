@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AddToCartComoMealItemReq, AddToCartMenuItemReq, AddToCartReq, Condiment, DisplayModalClass, MenuTabType, Sideset, TabType, UpdateQuntityModel } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
-import { ConstantMessage, ValidationMsg } from '@core/utils/enum';
+import { ConstantMessage, SnackBarCssClass, ValidationMsg } from '@core/utils/enum';
 import { ConfirmDialogService } from '@shared/confirm-dialog/confirm-dialog.service';
 import { LoaderService } from '@shared/loader/loader.service';
 import { SnackBarService } from '@shared/snack-bar/snack-bar.service';
@@ -478,6 +478,7 @@ export class MenuComponent implements OnInit {
       })).subscribe((response: any) => {
         if (response) {
           this.getCartList();
+          this.applyCoupon();
         } else {
           this.snackBarService.show(ConstantMessage.UnableToUpdateQuntity);
         }
@@ -497,8 +498,9 @@ export class MenuComponent implements OnInit {
 
 
   createCouponForm(): void {
+    const code = localStorage.getItem('couponCode') ? localStorage.getItem('couponCode') : '';
     this.couponForm = this.formBuilder.group({
-      couponCode: ['', [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]]
+      couponCode: [code, [Validators.required, Validators.pattern('^[a-zA-Z0-9]+')]]
     });
   }
 
@@ -517,8 +519,10 @@ export class MenuComponent implements OnInit {
         if (response.success) {
           localStorage.setItem('couponCode', this.couponForm.value.couponCode);
           this.resetCouponForm();
+        } else {
+          localStorage.removeItem('couponCode');
         }
-        this.snackBarService.show(response.message);
+        this.snackBarService.show(response.message, response.success ? SnackBarCssClass.success : SnackBarCssClass.danger);
       }, error => {
         if (error instanceof HttpErrorResponse) {
           console.log(error);
@@ -527,7 +531,6 @@ export class MenuComponent implements OnInit {
   }
 
   resetCouponForm() {
-    this.getCouponList();
     this.couponForm.markAsUntouched();
     this.couponForm.markAsPristine();
   }
@@ -546,8 +549,7 @@ export class MenuComponent implements OnInit {
     this.menuService.GetCouponList()
       .pipe(finalize(() => {
       })).subscribe((response: any) => {
-        console.log('coupon ', response);
-        this.couponList = response.items;
+        this.couponList = response;
       }, error => {
         if (error instanceof HttpErrorResponse) {
           console.log(error);
