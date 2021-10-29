@@ -172,6 +172,12 @@ export class MyProfileComponent implements OnInit {
   //onLanguageChange
   onLanguageChange(event) {
     console.log('event ', event.target.value);
+    const lang = event.target.value;
     this.translate.use(event.target.value);
+    // if (lang !== 'ar' && document.getElementsByTagName('html')[0].hasAttribute('dir')) {
+    //   document.getElementsByTagName('html')[0].removeAttribute('dir');
+    // } else if (lang === 'ar' && !document.getElementsByTagName('html')[0].hasAttribute('dir')) {
+    //   document.getElementsByTagName('html')[0].setAttribute('dir', 'rtl');
+    // }
   }
 }
