@@ -1,0 +1,16 @@
+{
+    "WebData" : {
+        "LanguagePreference": "تفضيل اللغات",
+        "ChangePassword": "تغيير كلمة المرور",
+        "PersonalDetails": "تفاصيل شخصية",
+        "BrandItemTitle": "title_arabic",
+        "BranchItemTitle": "title_arb",
+        "MostPopularBrands": "أشهر الماركات",
+        "PopularMenu": "قائمة شعبية",
+        "Branches": "الفروع",
+        "Categories": "فئات",
+        "CategoryName": "name2",
+        "MenuItemTitle": "title_arabic",
+        "CartItemTitle": "title_arabic"
+    }
+}

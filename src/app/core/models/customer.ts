@@ -120,8 +120,8 @@ export class Pagination {
 }
 
 export const LangPreferences = [
-    { value: "English", text: "English" },
-    { value: "Arabic", text: "Arabic" }
+    { value: "en", text: "English" },
+    { value: "ar", text: "Arabic" }
 ]
 
 export class DisplayModalClass {

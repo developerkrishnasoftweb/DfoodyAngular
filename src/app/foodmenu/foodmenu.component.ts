@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Brand, Pagination } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
 import { UserLoginService } from '@core/services/user-login.service';
+import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from '@shared/loader/loader.service';
 import { finalize } from 'rxjs/operators';
 @Component({
@@ -21,7 +22,8 @@ export class FoodmenuComponent implements OnInit {
 
 
   constructor(private menuService: MenuService, public userLoginService: UserLoginService,
-      private loaderService: LoaderService, private router: Router
+      private loaderService: LoaderService, private router: Router,
+      public translate: TranslateService,
   ) { }
 
   ngOnInit(): void {

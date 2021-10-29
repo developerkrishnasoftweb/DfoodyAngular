@@ -7,6 +7,7 @@ import { CustomerDataPreFillService } from '@core/services/customer/customer-dat
 import { CustomerRegistrationService } from '@core/services/customer/customer-registration.service';
 import { MyprofileService } from '@core/services/customer/myprofile.service';
 import { ValidationMsg } from '@core/utils/enum';
+import { TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from '@shared/snack-bar/snack-bar.service';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -41,7 +42,9 @@ export class MyProfileComponent implements OnInit {
   constructor(private myprofileService: MyprofileService, private formBuilder: FormBuilder,
     private customerRegistrationService: CustomerRegistrationService,
     private snackBarService: SnackBarService, private route: ActivatedRoute,
-    private preFillService: CustomerDataPreFillService) { }
+    private translate: TranslateService,
+    private preFillService: CustomerDataPreFillService) {
+  }
 
   ngOnInit(): void {
     this.createForm();
@@ -164,5 +167,11 @@ export class MyProfileComponent implements OnInit {
           console.log(error);
         }
       });
+  }
+
+  //onLanguageChange
+  onLanguageChange(event) {
+    console.log('event ', event.target.value);
+    this.translate.use(event.target.value);
   }
 }

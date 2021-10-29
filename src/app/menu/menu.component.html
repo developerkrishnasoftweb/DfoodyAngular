@@ -4,11 +4,11 @@
             <ng-container *ngIf="categoriesList?.length > 0 && isAPIResponseCome else noCategoryView">
                 <div class="col-md-3 col-lg-2">
                     <aside class="category-menu-sidebar">
-                        <div class="category-menu-title">Categories</div>
+                        <div class="category-menu-title">{{ 'WebData.Categories' | translateKey }}</div>
                         <ul>
                             <ng-container *ngFor="let category of categoriesList">
                                 <li [ngClass]="{ 'cat-selected': category?.id === selectedCategoryId }"
-                                    (click)="categoryClick(category)">{{category?.name1}}</li>
+                                    (click)="categoryClick(category)">{{ 'WebData.CategoryName' | translateKey : category }}</li>
                             </ng-container>
                         </ul>
                     </aside>
@@ -42,10 +42,10 @@
                                                             <a (click)="menuItemClick(item, menuTabType.menu)"
                                                                 href="#menuItemCondimentSets" data-toggle="modal"
                                                                 data-animation="fadeInUp" data-delay="0.85s"
-                                                                title="Toppings">{{item?.display_name}}</a>
+                                                                title="Toppings">{{ 'WebData.MenuItemTitle' | translateKey : item }}</a>
                                                         </ng-container>
                                                         <ng-template #noToppings>
-                                                            <span>{{item?.display_name}}</span>
+                                                            <span>{{ 'WebData.MenuItemTitle' | translateKey : item }}</span>
                                                         </ng-template>
                                                     </h6>
                                                 </div>
@@ -95,10 +95,10 @@
                                                                 href="#menuItemCondimentSets" data-toggle="modal"
                                                                 data-animation="fadeInUp" data-delay="0.85s"
                                                                 [hidden]="!branchDetail?.pickupOpen && !branchDetail?.deliveryOpen"
-                                                                title="Add to cart">{{item?.displayName}}</a>
+                                                                title="Add to cart">{{ 'WebData.MenuItemTitle' | translateKey : item }}</a>
                                                         </ng-container>
                                                         <ng-template #nocomboToppings>
-                                                            <a>{{item?.displayName}}</a>
+                                                            <a>{{ 'WebData.MenuItemTitle' | translateKey : item }}</a>
                                                         </ng-template>
                                                     </h6>
                                                 </div>
@@ -191,7 +191,7 @@
                             aria-labelledby="delivery-tab" *ngIf="cartList && cartList?.length > 0">
                             <div class="order-items" *ngFor="let cart of cartList">
                                 <div class="order-item">
-                                    <div class="menu-name">{{cart?.quantity}} × {{cart.title_lang}}</div>
+                                    <div class="menu-name">{{cart?.quantity}} × {{ 'WebData.CartItemTitle' | translateKey : cart }}</div>
                                     <div style="display: flex; justify-content: space-between;">
                                         <div class="order-price">${{cart.total}}</div>
                                         <div class="display-icons">

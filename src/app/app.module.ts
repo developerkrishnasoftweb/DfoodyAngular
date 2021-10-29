@@ -26,6 +26,10 @@ import { ConfirmOrderAddressModalComponent } from './confirm-order-address-modal
 import { BranchComponent } from './branch/branch.component';
 import { ErrorComponent } from './error/error.component';
 import { SmallLoaderComponent } from './small-loader/small-loader.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateKeyModule } from '@core/pipes/translate-key/translate-key.module';
 
 @NgModule({
   declarations: [
@@ -57,9 +61,23 @@ import { SmallLoaderComponent } from './small-loader/small-loader.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     LoaderModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    HttpClientModule,
+    TranslateKeyModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

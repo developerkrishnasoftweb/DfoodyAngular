@@ -33,19 +33,20 @@
                                 <div class="profile-email">{{customerInfo?.email}}</div>
                             </div>
                             <a href="#changePasswordModal" data-toggle="modal" data-animation="fadeInUp"
-                                data-delay="0.85s"> <span class="change-password">Change
-                                    Password</span>
+                                data-delay="0.85s"> <span class="change-password">
+                                    {{ 'WebData.ChangePassword' | translate }}
+                                </span>
                             </a>
                         </div>
 
                         <div class="language-div">
                             <h3>
-                                Language preference
+                                {{ 'WebData.LanguagePreference' | translate }}
                             </h3>
                             <div class="form-group">
-                                <select name="" class="df-control" id="">
+                                <select name="" class="df-control" id="" (change)='onLanguageChange($event)'>
                                     <ng-container *ngFor="let lang of langPreferences">
-                                        <option [value]="lang.text">{{lang.text}}</option>
+                                        <option [value]="lang.value">{{lang.text}}</option>
                                     </ng-container>
                                 </select>
                             </div>

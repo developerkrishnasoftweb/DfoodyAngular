@@ -5,7 +5,9 @@ import { ConfigurationService } from '@core/services/customer/configuration.serv
 import { CustomerDataPreFillService } from '@core/services/customer/customer-data-pre-fill.service';
 import { MyprofileService } from '@core/services/customer/myprofile.service';
 import { UserLoginService } from '@core/services/user-login.service';
+import { TranslateService } from '@ngx-translate/core';
 import { finalize } from 'rxjs/operators';
+import defaultLanguage from "../assets/i18n/en.json";
 
 @Component({
   selector: 'app-root',
@@ -19,8 +21,11 @@ export class AppComponent {
     private configurationService: ConfigurationService,
     private myprofileService: MyprofileService,
     public userLoginService: UserLoginService,
+    private translate: TranslateService,
     private preFillService: CustomerDataPreFillService) {
-    if(this.userLoginService.isLoggedIn()) {
+    translate.setTranslation('en', defaultLanguage);
+    translate.setDefaultLang('en');
+    if (this.userLoginService.isLoggedIn()) {
       this.getProfileData();
       this.getConfiguration();
     }

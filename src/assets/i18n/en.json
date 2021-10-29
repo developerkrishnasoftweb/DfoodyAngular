@@ -1,0 +1,16 @@
+{
+    "WebData" : {
+        "LanguagePreference": "Language preference",
+        "ChangePassword": "Change Password",
+        "PersonalDetails": "Personal Details",
+        "BrandItemTitle": "title_lang",
+        "MostPopularBrands": "Most Popular Brands",
+        "PopularMenu": "Popular Menu",
+        "BranchItemTitle": "title_eng",
+        "Branches": "Branches",
+        "Categories": "Categories",
+        "CategoryName": "name1",
+        "MenuItemTitle": "title_lang",
+        "CartItemTitle": "title_lang"
+    }
+}

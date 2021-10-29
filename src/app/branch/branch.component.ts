@@ -1,12 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Pagination } from '@core/models/customer';
 import { MenuService } from '@core/services/customer/menu.service';
 import { ConstantMessage } from '@core/utils/enum';
 import { LoaderService } from '@shared/loader/loader.service';
 import { finalize } from 'rxjs/operators';
-import { MenuComponent } from '../menu/menu.component';
 
 @Component({
   selector: 'app-branch',

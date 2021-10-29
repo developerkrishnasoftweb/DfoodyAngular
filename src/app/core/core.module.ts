@@ -8,7 +8,6 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
 import { AuthGuard } from './guards/auth-guard.service';
 
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -27,6 +26,7 @@ import { AuthGuard } from './guards/auth-guard.service';
     UserLoginService,
     AuthGuard,
   //  PreFillService
-  ]
+  ],
+  declarations: []
 })
 export class CoreModule { }
